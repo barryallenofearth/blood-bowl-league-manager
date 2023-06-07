@@ -9,6 +9,7 @@ class League(db.Model):
     # store logo on disk not in database
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False, unique=True)
+    short_name = db.Column(db.String, nullable=False, unique=True)
 
 
 class Season(db.Model):
