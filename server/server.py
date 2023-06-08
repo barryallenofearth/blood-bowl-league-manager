@@ -39,7 +39,8 @@ def persist_league(league: League, content):
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='images/vnd.microsoft.icon')
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',
+                               mimetype='images/vnd.microsoft.icon')
 
 
 @app.route('/')
@@ -53,12 +54,19 @@ def persist_and_redirect_home(entity):
     return redirect(url_for("home"))
 
 
-@app.route("/<string:entity>/create", methods=["GET", "POST"])
-def create(entity: str):
+@app.route("/<string:entity_type>/create", methods=["GET", "POST"])
+def create(entity_type: str):
     form: FlaskForm
     title: str
-    if entity == League.__tablename__:
+    title_row = []
+    table = []  # list of lists (every internal list contains entity information)
+
+    if entity_type == League.__tablename__:
         title = "League"
+
+        title_row = ["Name", "Short name"]
+        for league in db.session.query(League).all():
+            table.append([league.title, league.short_name, league.id])
         form = forms.AddLeagueForm()
         if form.validate_on_submit():
             new_league = League()
@@ -67,16 +75,26 @@ def create(entity: str):
 
             return persist_and_redirect_home(new_league)
 
-    elif entity == Race.__tablename__:
+    elif entity_type == Race.__tablename__:
         title = "Race"
+
+        title_row = ["Name"]
+        for race in db.session.query(Race).all():
+            table.append([race.name, race.id])
+
         form = forms.AddRaceForm()
         if form.validate_on_submit():
             race = Race()
             race.title = form.name.data
 
             return persist_and_redirect_home(race)
-    elif entity == Coach.__tablename__:
+    elif entity_type == Coach.__tablename__:
         title = "Coach"
+
+        title_row = ["First Name", "Last Name", "Display Name"]
+        for coach in db.session.query(Coach).all():
+            table.append([coach.first_name, coach.last_name, coach.display_name, coach.id])
+
         form = forms.AddCoachForm()
         if form.validate_on_submit():
             coach = Coach()
@@ -86,11 +104,16 @@ def create(entity: str):
 
             return persist_and_redirect_home(coach)
 
-    return render_template("add-or-update-entity.html", form=form, title=title)
+    return render_template("add-or-update-entity.html", form=form, title=title, title_row=title_row, table=table)
 
 
-@app.route("/<string:entity>/update/<int:league_id>", methods=["GET", "POST"])
-def update(entity: str, id: int):
+@app.route("/<string:entity_type>/update/<int:league_id>", methods=["GET", "POST"])
+def update(entity_type: str, id: int):
+    pass
+
+
+@app.route("/<string:entity_type>/delete/<int:league_id>", methods=["POST"])
+def delete(entity_type: str, id: int):
     pass
 
 
@@ -98,8 +121,8 @@ def jsonify_league(league: League):
     return {"id": league.id, "title": league.title, "short_name": league.short_name}
 
 
-@app.route("/<string:entity>/get")
-def get_all(entity: str) -> list:
+@app.route("/<string:entity_type>/get")
+def get_all(entity_type: str) -> list:
     all_leagues = db.session.query(League).all()
     leagues_json = {"leagues": []}
     for league in all_leagues:
@@ -110,8 +133,8 @@ def get_all(entity: str) -> list:
     return json.loads(string)
 
 
-@app.route("/<string:entity>/get/<int:id>")
-def get(entity: str, id: int) -> League:
+@app.route("/<string:entity_type>/get/<int:id>")
+def get(entity_type: str, id: int) -> League:
     league = db.session.query(League).filter_by(id=id).first()
     league_json = jsonify_league(league)
 
