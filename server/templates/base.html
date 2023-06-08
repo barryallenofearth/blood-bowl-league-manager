@@ -1,0 +1,85 @@
+{% extends 'bootstrap/base.html' %}
+{%block styles %}
+{{super()}}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link rel="stylesheet" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+{%endblock %}
+{%block scripts%}
+{{super()}}
+<script>
+    $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+        if (!$(this).next().hasClass('show')) {
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+        }
+        var $subMenu = $(this).next('.dropdown-menu');
+        $subMenu.toggleClass('show');
+
+
+        $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+            $('.dropdown-submenu .show').removeClass('show');
+        });
+
+        return false;
+    });
+    let backdrop = document.querySelector('.backdrop');
+    let spinner = document.querySelector('.spinner-border');
+    let modalDeleteChild = document.getElementById('delete-child-dialog');
+    let modalDeleteEntry = document.getElementById('delete-entry-dialog');
+
+
+    function dismissModal() {
+        if (!spinner.style.display) {
+            modalDeleteChild.style.display = 'none';
+            modalDeleteEntry.style.display = 'none';
+            backdrop.style.display = 'none';
+        }
+    }
+
+    backdrop.addEventListener('click', dismissModal);
+    document.getElementById('reject-child-deleted').addEventListener('click', dismissModal);
+
+</script>
+{%endblock%}
+
+{% block content %}
+<div class="backdrop"></div>
+<div class="spinner-border text-warning" role="status"></div>
+<div id="delete-child-dialog" class="delete-modal">
+    <h1 class="modal__title">Wirklich löschen?</h1>
+    <p id="delete-child-message" data-text="Möchten Sie '{name}' und alle zugehörigend Daten tatsächlich löschen?"
+       class="lead delete-message"></p>
+    <div class="row modal__actions">
+        <button id="confirm-child-deleted" class="btn btn-outline-warning col-lg-3 col-sm-6">Ja</button>
+        <button id="reject-child-deleted" class="btn btn-warning modal-dismiss col-lg-3 col-sm-6" type="button">Nein
+        </button>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <a class="navbar-brand" href="{{url_for('home')}}">
+        <img src="{{url_for('static', filename='favicon.ico')}}" width="30" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" id="children-selection">
+                <a class="nav-link dropdown-toggle" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"
+                   href="#">
+                    <i class="bi bi-person-circle"></i> Leagues </a>
+                <ul class="dropdown-menu">
+                </ul>
+            </li>
+            <li class="nav-item" id="data-display">
+                <a class="nav-link" href="{{url_for('create',entity='coach')}}">
+                    <i class="bi bi-table"></i> Coaches</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}

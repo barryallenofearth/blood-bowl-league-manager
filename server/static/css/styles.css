@@ -1,0 +1,315 @@
+/* This CSS file will need to be added to the styling of 
+your web pages for the styles to be rendered. */
+
+:root {
+    --background: #333;
+    --main-headline: #FF785A;
+    --sub-headline: #799496;
+    --link-focus-background: #f8f9fa;
+    --nav-background: #222;
+    --table-border: #666;
+    --dark-yellow: #b58803;
+}
+
+body {
+    background-color: var(--background);
+    color: white;
+}
+
+h1 {
+    color: var(--main-headline);
+}
+
+h4 {
+    color: var(--sub-headline);
+    margin: 1rem;
+}
+
+h5 {
+    margin: 1rem;
+}
+
+.dropdown-menu {
+    background-color: var(--nav-background);
+}
+
+.dropdown-item {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu a::after {
+    transform: rotate(-90deg);
+    position: absolute;
+    right: 6px;
+    top: .8rem;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-left: .1rem;
+    margin-right: .1rem;
+    padding: 0;
+}
+
+div.headline-container {
+    padding-bottom: 0;
+}
+
+.navbar {
+    background-color: var(--nav-background);
+}
+
+.navbar-toggler {
+    background-color: var(--yellow);
+}
+
+.nav-item-right {
+    color: var(--main-headline);
+    display: block;
+    margin-left: auto;
+    padding: 0;
+}
+
+.nav-item {
+    padding-right: 1rem;
+    font-size: 1.2rem;
+}
+
+a,
+.navbar-light .navbar-nav .nav-link,
+.dropdown .dropdown-item,
+.dropdown .dropdown-item {
+    color: var(--yellow);
+}
+
+a:hover,
+a:focus,
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus,
+.dropdown .dropdown-item:hover,
+.dropdown .dropdown-item:focus,
+.navbar-light .navbar-nav .show > .nav-link {
+    color: var(--dark-yellow);
+    background-color: var(--link-focus-background);
+}
+
+.bordered {
+    width: 100%;
+    background-color: var(--background);
+}
+
+.bordered, .bordered th, .bordered td {
+    border: 1px solid var(--table-border);
+    padding: 0.2rem;
+}
+
+.bordered th, .bordered td {
+    text-align: center;
+}
+
+@media only screen and (max-width: 990px) {
+    .bordered {
+        font-size: 0.8rem;
+    }
+}
+
+.col-12 {
+    padding: 0;
+}
+
+.data-analysis--section {
+    text-align: center;
+    margin: 1rem;
+}
+
+@media only screen and (min-width: 990px) {
+    .data-analysis--weight {
+        margin-left: auto;
+    }
+
+    .data-analysis--height {
+        margin-right: auto;
+    }
+}
+
+.data-analysis--title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.custom-select {
+    margin: 1rem;
+}
+
+.data-analysis--image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.link-btn:hover, .link-btn:focus {
+    color: var(--dark-yellow);
+}
+
+.invalid-feedback {
+    display: block;
+    font-size: 1rem;
+}
+
+.center {
+    text-align: center;
+}
+
+/*button styles*/
+.btn::before {
+    vertical-align: -0.125em;
+    font-family: bootstrap-icons !important;
+}
+
+.btn-add::before {
+    content: "\f4fd  ";
+}
+
+.btn-query::before {
+    content: "\F52A  ";
+}
+
+.btn-edit::before {
+    content: "\F4CB  ";
+}
+
+.btn-delete::before {
+    content: "\F78B  ";
+}
+
+.btn-home::before {
+    content: "\F425  ";
+}
+
+/*pagination*/
+.pagination > li > a, .page-item.disabled .page-link {
+    background-color: var(--background);
+    color: var(--dark-yellow);
+    border-color: var(--dark-yellow);
+}
+
+
+.page-item.disabled .page-link {
+    opacity: .45;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {
+    color: var(--link-focus-background);
+    background-color: var(--dark-yellow);
+    border-color: var(--link-focus-background);
+}
+
+.pagination > li > a:focus {
+    box-shadow: 0 0 0 0.2rem rgb(255 193 7 / 50%)
+}
+
+.pagination > .page-item.active > a {
+    color: var(--background);
+    background-color: var(--yellow) !important;
+    border: solid 1px var(--yellow) !important;
+}
+
+.pagination > .page-item.active > a:hover {
+    color: var(--dark-yellow);
+    background-color: var(--link-focus-background) !important;
+    border: solid 1px var(--dark-yellow) !important;
+}
+
+.container {
+    padding-bottom: 16px;
+}
+
+.row > a,
+.row > button {
+    margin-right: 0.2rem;
+}
+
+.row {
+    margin: 1rem 0;
+}
+
+.backdrop {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.delete-modal {
+    position: fixed;
+    display: none;
+    z-index: 2200;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    background: var(--background);
+    padding: 1rem;
+    border: 1px solid var(--table-border);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 768px) {
+    .delete-modal {
+        left: 10%;
+        width: 80%;
+    }
+}
+
+.delete-message {
+    text-align: center;
+}
+
+.modal__title {
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+
+#confirm-entry-deleted,
+#confirm-child-deleted,
+#reject-entry-deleted,
+#reject-child-deleted {
+    margin: auto;
+}
+
+@keyframes spinner-border {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-border {
+    position: fixed;
+    z-index: 50000;
+    display: none;
+    margin-top: -20vmin;
+    margin-left: -20vmin;
+    top: 50%;
+    left: 50%;
+    width: 40vmin;
+    height: 40vmin;
+    vertical-align: text-bottom;
+    border: 1rem solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    /*-webkit-animation: spinner-border .75s linear infinite;*/
+    animation: spinner-border .75s linear infinite;
+}

@@ -10,6 +10,10 @@ class League(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False, unique=True)
     short_name = db.Column(db.String, nullable=False, unique=True)
+    is_selected = db.Column(db.Boolean, nullable=False)
+
+    def __init__(self):
+        self.is_selected = False
 
 
 class Season(db.Model):
@@ -19,6 +23,10 @@ class Season(db.Model):
     league_id = db.Column(db.Integer, db.ForeignKey(f'{League.__tablename__}.id'))
     title = db.Column(db.String, nullable=False, unique=True)
     short_title = db.Column(db.String, nullable=False, unique=True)
+    is_selected = db.Column(db.Boolean, nullable=False)
+
+    def __init__(self):
+        self.is_selected = False
 
 
 class Race(db.Model):
@@ -32,16 +40,8 @@ class Coach(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     league_id = db.Column(db.Integer, db.ForeignKey(f'{League.__tablename__}.id'))
     first_name = db.Column(db.String, nullable=False)
-    second_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
     display_name = db.Column(db.String, nullable=True)
-
-
-class Group(db.Model):
-    __tablename__ = "bb_group"
-    id = db.Column(db.Integer, primary_key=True)
-    season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'))
-    name = db.Column(db.String, nullable=False)
-    short_name = db.Column(db.String, nullable=False)
 
 
 class Team(db.Model):
@@ -50,9 +50,12 @@ class Team(db.Model):
     season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'), nullable=False)
     coach_id = db.Column(db.Integer, db.ForeignKey(f'{Coach.__tablename__}.id'), nullable=False)
     race_id = db.Column(db.Integer, db.ForeignKey(f'{Race.__tablename__}.id'), nullable=False)
-    group_id = db.Column(db.Integer, db.ForeignKey(f'{Group.__tablename__}.id'), nullable=True)
     team_name = db.Column(db.String, nullable=False)
     short_name = db.Column(db.String, nullable=False)
+    is_disqualified = db.Column(db.Boolean, nullable=False)
+
+    def __init__(self):
+        self.is_disqualified = False
 
 
 class BBMatch(db.Model):

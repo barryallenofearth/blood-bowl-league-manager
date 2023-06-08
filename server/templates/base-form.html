@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{%block scripts %}
+{{super()}}
+<script>
+    button = document.getElementById("submit");
+    button.classList.remove("btn-default");
+    button.classList.add("btn-warning");
+    button.addEventListener('click',function(){
+        backdrop.style.display='block';
+        spinner.style.display='block';
+
+        return true;
+    });
+
+</script>
+{% endblock %}

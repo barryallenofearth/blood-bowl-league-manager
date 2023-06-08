@@ -1,0 +1,24 @@
+{% extends 'base-form.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}{{title}}{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script>
+    button = document.getElementById("new-entry");
+    button.classList.add("active");
+</script>
+{% endblock %}
+
+{% block content %}
+{{super()}}
+<div class="container">
+    <h1>{{title}}</h1>
+    {{ wtf.quick_form(form,novalidate=True) }}
+    <div class="row">
+        <a href="{{url_for('home')}}" class="btn btn-outline-warning">
+            <i class="bi bi-table"></i> Zur Übersicht</a>
+    </div>
+
+</div>
+{% endblock %}
