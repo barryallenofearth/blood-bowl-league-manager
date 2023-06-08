@@ -8,7 +8,7 @@ class League(db.Model):
 
     # store logo on disk not in database
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False, unique=True)
     short_name = db.Column(db.String, nullable=False, unique=True)
     is_selected = db.Column(db.Boolean, nullable=False)
 
@@ -22,7 +22,7 @@ class Season(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     league_id = db.Column(db.Integer, db.ForeignKey(f'{League.__tablename__}.id'))
     title = db.Column(db.String, nullable=False, unique=True)
-    short_title = db.Column(db.String, nullable=False, unique=True)
+    short_name = db.Column(db.String, nullable=False, unique=True)
     is_selected = db.Column(db.Boolean, nullable=False)
 
     def __init__(self):
@@ -50,7 +50,7 @@ class Team(db.Model):
     season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'), nullable=False)
     coach_id = db.Column(db.Integer, db.ForeignKey(f'{Coach.__tablename__}.id'), nullable=False)
     race_id = db.Column(db.Integer, db.ForeignKey(f'{Race.__tablename__}.id'), nullable=False)
-    team_name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False)
     short_name = db.Column(db.String, nullable=False)
     is_disqualified = db.Column(db.Boolean, nullable=False)
 

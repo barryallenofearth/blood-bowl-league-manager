@@ -13,8 +13,10 @@
 {% block content %}
 {{super()}}
 
-<div class="container">
+<div class="container headline-container">
     <h1>{{title}}</h1>
+</div>
+<div class="container">
     <table class="bordered">
         <tr>
             {% for headline in title_row %}
@@ -29,14 +31,24 @@
             {% if loop.index < entity|length %}
             <td>{{value}}</td>
             {% else %}
-            <td>{{value}}</td>
-            <td>value</td>
+            <td>
+                <a href="{{ url_for('update',entity_type=entity_type,id=value) }}"
+                   class="btn btn-outline-warning">
+                    <i class="bi bi-pencil"></i>
+                </a>
+            </td>
+            <td>
+                <a href="#" id="delete-entry-{{ value }}" class="btn btn-outline-warning">
+                    <i class="bi bi-trash"></i> </a>
+            </td>
             {% endif %}
             {% endfor %}
         </tr>
         {% endfor %}
 
     </table>
+</div>
+<div class="container">
     <h2>Add new {{title}}</h2>
     {{ wtf.quick_form(form,novalidate=True) }}
     <div class="row">

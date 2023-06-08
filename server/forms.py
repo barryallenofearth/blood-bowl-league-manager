@@ -7,7 +7,7 @@ from database.database import db, Coach, Race, Season, SeasonRules, League
 
 
 class BaseLeagueForm(FlaskForm):
-    title = StringField("Name", validators=[DataRequired("Please enter a league name.")])
+    name = StringField("Name", validators=[DataRequired("Please enter a league name.")])
     short_name = StringField("Short name", validators=[DataRequired("Please enter a league short name.")])
 
 
@@ -20,7 +20,7 @@ class UpdateLeagueForm(BaseLeagueForm):
 
 
 class BaseSeasonForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired("Please enter a season name.")])
+    title = StringField("Name", validators=[DataRequired("Please enter a season name.")])
     short_name = StringField("Short name", validators=[DataRequired("Please enter a season short name.")])
 
 
@@ -58,38 +58,26 @@ class UpdateRaceForm(BaseRaceForm):
     submit = SubmitField(label="Update race")
 
 
-class BaseGroupForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired("Please enter a group name.")])
-    short_name = StringField("Name", validators=[DataRequired("Please enter a group short name.")])
-
-
-class AddGroupForm(BaseGroupForm):
-    submit = SubmitField(label="Add new group")
-
-
-class UpdateGroupForm(BaseGroupForm):
-    submit = SubmitField(label="Update group")
-
-
 class BaseTeamForm(FlaskForm):
-    team_name = StringField("Name", validators=[DataRequired("Please enter a team name.")])
-    coach_select = SelectField("Coach", choices=[], validators=[DataRequired("Please select a coach")])
-    race_select = SelectField("Race", choices=[], validators=[DataRequired("Please select a race")])
+    name = StringField("Name", validators=[DataRequired("Please enter a team name.")])
+    coach_select = SelectField("Coach", validators=[DataRequired("Please select a coach")])
+    race_select = SelectField("Race", validators=[DataRequired("Please select a race")])
 
-    def __init__(self, app: Flask):
+    def __init__(self, app=None, **kwargs):
+        super().__init__(**kwargs)
         self.app = app
 
         with app.app_context():
-            coach_options = [(coach.id, f"{coach.first_name} {coach.last_name}" + f"({coach.display_name})" if coach.display_name is not None else "") for coach in db.session.query(Coach).all()]
-            self.coach_select.options = coach_options
+            coach_options = [(coach.id, f"{coach.first_name} {coach.last_name}" + f" ({coach.display_name})" if coach.display_name is not None else "") for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
+            self.coach_select.choices = coach_options
 
-            race_options = [(race.id, race.name) for race in db.session.query(Race).all()]
-            self.race_select.options = race_options
+            race_options = [(race.id, race.name) for race in db.session.query(Race).order_by(Race.name).all()]
+            self.race_select.choices = race_options
 
 
-class AddTeamForm(BaseRaceForm):
+class AddTeamForm(BaseTeamForm):
     submit = SubmitField(label="Add new season")
 
 
-class UpdateTeamForm(BaseRaceForm):
+class UpdateTeamForm(BaseTeamForm):
     submit = SubmitField(label="Update season")
