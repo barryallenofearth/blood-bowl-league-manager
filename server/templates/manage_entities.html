@@ -29,10 +29,10 @@
         <tr>
             {% for value in entity %}
             {% if loop.index < entity|length %}
-            <td>{{value}}</td>
+            <td>{% if value %}{{value}}{% endif %}</td>
             {% else %}
             <td>
-                <a href="{{ url_for('update',entity_type=entity_type,id=value) }}"
+                <a href="{{ url_for('manage',entity_type=entity_type,id=value,_anchor='form-title') }}"
                    class="btn btn-outline-warning">
                     <i class="bi bi-pencil"></i>
                 </a>
@@ -49,7 +49,7 @@
     </table>
 </div>
 <div class="container">
-    <h2>Add new {{title}}</h2>
+    <h2 id="form-title">Add new {{title}}</h2>
     {{ wtf.quick_form(form,novalidate=True) }}
     <div class="row">
         <a href="{{url_for('home')}}" class="btn btn-outline-warning">

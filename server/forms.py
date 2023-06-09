@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, DateField
+from wtforms import StringField, SubmitField, SelectField, DateField, FileField, IntegerField
 from wtforms.validators import DataRequired, Regexp, Length
 
 from database.database import db, Coach, Race, Season, SeasonRules, League
@@ -9,6 +9,7 @@ from database.database import db, Coach, Race, Season, SeasonRules, League
 class BaseLeagueForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired("Please enter a league name.")])
     short_name = StringField("Short name", validators=[DataRequired("Please enter a league short name.")])
+    logo = FileField("Logo", validators=[DataRequired(message="Please enter a png file for the logo.")])
 
 
 class AddLeagueForm(BaseLeagueForm):
@@ -20,8 +21,15 @@ class UpdateLeagueForm(BaseLeagueForm):
 
 
 class BaseSeasonForm(FlaskForm):
-    title = StringField("Name", validators=[DataRequired("Please enter a season name.")])
+    name = StringField("Name", validators=[DataRequired("Please enter a season name.")])
     short_name = StringField("Short name", validators=[DataRequired("Please enter a season short name.")])
+    team_short_name_length = IntegerField("Team short name length", validators=[DataRequired("Please enter a season short name.")])
+    number_of_allowed_matches = IntegerField("Matches per team", validators=[DataRequired("Please enter a season short name.")])
+    number_of_allowed_matches_vs_same_opponent = IntegerField("Matches vs same team", validators=[DataRequired("Please enter a season short name.")])
+    number_of_playoff_places = IntegerField("Playoff place count", validators=[DataRequired("Please enter a season short name.")])
+    term_for_team_names = StringField("Term for team names", validators=[DataRequired("Please enter a season short name.")])
+    term_for_coaches = StringField("Term for coaches", validators=[DataRequired("Please enter a season short name.")])
+    term_for_races = StringField("Term for races", validators=[DataRequired("Please enter a season short name.")])
 
 
 class AddSeasonForm(BaseSeasonForm):
@@ -64,11 +72,17 @@ class BaseTeamForm(FlaskForm):
     race_select = SelectField("Race", validators=[DataRequired("Please select a race")])
 
     def __init__(self, app=None, **kwargs):
+        def format_coach_name(coach: Coach):
+            name = f"{coach.first_name} {coach.last_name}"
+            if coach.display_name is not None and coach.display_name != "":
+                name += f" ({coach.display_name})"
+            return name
+
         super().__init__(**kwargs)
         self.app = app
 
         with app.app_context():
-            coach_options = [(coach.id, f"{coach.first_name} {coach.last_name}" + f" ({coach.display_name})" if coach.display_name is not None else "") for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
+            coach_options = [(coach.id, format_coach_name(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
             self.coach_select.choices = coach_options
 
             race_options = [(race.id, race.name) for race in db.session.query(Race).order_by(Race.name).all()]

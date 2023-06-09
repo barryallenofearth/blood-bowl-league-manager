@@ -21,8 +21,8 @@ class Season(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     league_id = db.Column(db.Integer, db.ForeignKey(f'{League.__tablename__}.id'))
-    name = db.Column(db.String, nullable=False, unique=True)
-    short_name = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False)
+    short_name = db.Column(db.String, nullable=False)
     is_selected = db.Column(db.Boolean, nullable=False)
 
     def __init__(self):
@@ -81,7 +81,6 @@ class SeasonRules(db.Model):
     number_of_allowed_matches = db.Column(db.Integer, nullable=True)
     number_of_allowed_matches_vs_same_opponent = db.Column(db.Integer, nullable=True)
     number_of_playoff_places = db.Column(db.Integer, nullable=True)
-    playoff_highlight_color = db.Column(db.String, nullable=True)
     term_for_team_names = db.Column(db.String, nullable=False)
     term_for_coaches = db.Column(db.String, nullable=False)
     term_for_races = db.Column(db.String, nullable=False)
