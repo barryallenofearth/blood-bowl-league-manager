@@ -66,7 +66,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            {% if selected_season %}
+            {% if nav_properties.selected_season %}
             <li class="nav-item" id="matches">
                 <a class="nav-link" href="{{url_for('manage',entity_type='bb_match')}}">
                     <i class="bi bi-dice-3-fill"></i> Matches</a>
@@ -76,7 +76,7 @@
                     <i class="bi bi-people-fill"></i> Teams</a>
             </li>
             {% endif %}
-            {% if selected_league %}
+            {% if nav_properties.selected_league %}
             <li class="nav-item" id="coaches">
                 <a class="nav-link" href="{{url_for('manage',entity_type='coach')}}">
                     <i class="bi bi-robot"></i> Coaches</a>
@@ -86,7 +86,7 @@
                 <a class="nav-link" href="{{url_for('manage',entity_type='race')}}">
                     <i class="bi bi-robot"></i> Races</a>
             </li>
-            {% if selected_league %}
+            {% if nav_properties.selected_league %}
             <li class="nav-item dropdown" id="season-selection">
                 <a class="nav-link dropdown-toggle" role="button"
                    data-toggle="dropdown"
@@ -95,8 +95,8 @@
                     <i class="bi bi-calendar-week"></i> Seasons </a>
                 <ul class="dropdown-menu">
 
-                    {% for season in seasons %}
-                    <li><a class="dropdown-item" href="{{url_for('select_season',id=season.id)}}">{{season.name}} ({{season.short_name}}){%if season.is_selected %} (active){% endif %}</a></li>
+                    {% for season in nav_properties.seasons %}
+                    <li><a class="dropdown-item" href="{{url_for('select_season',id=season.id)}}">{{season.name}} | {{season.short_name}}{%if season.is_selected %} (active){% endif %}</a></li>
                     {% endfor %}
                     <li>
                         <div class="dropdown-divider"></div>
@@ -114,8 +114,8 @@
                    href="#">
                     <i class="bi bi-person-circle"></i> Leagues </a>
                 <ul class="dropdown-menu">
-                    {% for league in leagues %}
-                    <li><a class="dropdown-item" href="{{url_for('select_league',id=league.id)}}">{{league.name}} ({{league.short_name}}){%if league.is_selected %} (active){% endif %}</a></li>
+                    {% for league in nav_properties.leagues %}
+                    <li><a class="dropdown-item" href="{{url_for('select_league',id=league.id)}}">{{league.name}} | {{league.short_name}}{%if league.is_selected %} (active){% endif %}</a></li>
                     {% endfor %}
                     <li>
                         <div class="dropdown-divider"></div>
@@ -126,6 +126,9 @@
                 </ul>
             </li>
         </ul>
+        {% if nav_properties.selected_league %}
+        <h3 class="nav-item nav-item-right">{{nav_properties.selected_league.short_name}}{% if nav_properties.selected_season %} | {{nav_properties.selected_season.name}}{%endif%}</h3>
+        {% endif %}
     </div>
 </nav>
 {% endblock %}

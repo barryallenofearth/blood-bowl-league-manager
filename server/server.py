@@ -3,6 +3,7 @@ import os
 
 from flask import Flask, request, send_from_directory, render_template, url_for, redirect
 from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 
 from database.database import db, League, Race, Coach, Team, Season, SeasonRules, Scorings
@@ -25,6 +26,19 @@ with app.app_context():
     db.create_all()
 
 
+class NavProperties:
+
+    def __init__(self, db: SQLAlchemy):
+        self.selected_league = db.session.query(League).order_by(League.name).filter_by(is_selected=True).first()
+        self.leagues = db.session.query(League).order_by(League.name).all()
+
+        self.selected_season = None
+        self.seasons = []
+        if self.selected_league is not None:
+            self.selected_season = get_selected_season()
+            self.seasons = db.session.query(Season).filter_by(league_id=self.selected_league.id).order_by(Season.name).all()
+
+
 def get_selected_league() -> League:
     return db.session.query(League).filter_by(is_selected=True).first()
 
@@ -42,15 +56,7 @@ def favicon():
 
 @app.route('/')
 def home():
-    selected_season = None
-    seasons = []
-
-    selected_league = db.session.query(League).order_by(League.name).filter_by(is_selected=True).first()
-    leagues = db.session.query(League).order_by(League.name).all()
-    if selected_league is not None:
-        selected_season = get_selected_season()
-        seasons = db.session.query(Season).order_by(Season.name).all()
-    return render_template("home.html", leagues=leagues, seasons=seasons, selected_league=selected_league, selected_season=selected_season)
+    return render_template("home.html", nav_properties=NavProperties(db))
 
 
 def persist_and_redirect(entity, entity_type: str):
@@ -95,15 +101,6 @@ def manage(entity_type: str):
     title: str
     title_row = []
     table = []  # list of lists (every internal list contains entity information)
-
-    selected_league = db.session.query(League).order_by(League.name).filter_by(is_selected=True).first()
-    leagues = db.session.query(League).order_by(League.name).all()
-
-    selected_season = None
-    seasons = []
-    if selected_league is not None:
-        selected_season = get_selected_season()
-        seasons = db.session.query(Season).order_by(Season.name).all()
 
     if entity_type == League.__tablename__:
         title = "Leagues"
@@ -233,7 +230,7 @@ def manage(entity_type: str):
             return persist_and_redirect(team, entity_type)
 
     return render_template("add-or-update-entity.html", form=form, title=title, title_row=title_row, table=table,
-                           entity_type=entity_type, leagues=leagues, seasons=seasons, selected_league=selected_league, selected_season=selected_season)
+                           entity_type=entity_type, nav_properties=NavProperties(db))
 
 
 @app.route("/<string:entity_type>/update/<int:id>", methods=["GET", "POST"])
