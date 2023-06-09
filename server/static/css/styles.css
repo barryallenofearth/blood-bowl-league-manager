@@ -9,11 +9,12 @@ your web pages for the styles to be rendered. */
     --nav-background: #222;
     --table-border: #666;
     --dark-yellow: #b58803;
+    --text-color: white;
 }
 
 body {
     background-color: var(--background);
-    color: white;
+    color: var(--text-color);
 }
 
 h1 {
@@ -41,6 +42,11 @@ h5 {
 .dropdown-submenu {
     position: relative;
 }
+
+.navbar-light .navbar-brand {
+    color: var(--text-color);
+}
+
 
 .dropdown-submenu a::after {
     transform: rotate(-90deg);

@@ -115,6 +115,7 @@ def manage(entity_type: str):
             league.short_name = form.short_name.data
             league.is_selected = True
 
+            selected_league = get_selected_league()
             if selected_league is not None:
                 selected_league.is_selected = False
                 db.session.add(selected_league)
@@ -136,6 +137,7 @@ def manage(entity_type: str):
             season.short_name = form.short_name.data
             season.is_selected = True
 
+            selected_season = get_selected_season()
             if selected_season is not None:
                 selected_season.is_selected = False
                 db.session.add(selected_season)
@@ -229,7 +231,7 @@ def manage(entity_type: str):
 
             return persist_and_redirect(team, entity_type)
 
-    return render_template("add-or-update-entity.html", form=form, title=title, title_row=title_row, table=table,
+    return render_template("manage_entities.html", form=form, title=title, title_row=title_row, table=table,
                            entity_type=entity_type, nav_properties=NavProperties(db))
 
 

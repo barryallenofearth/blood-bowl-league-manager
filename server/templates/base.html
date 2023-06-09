@@ -57,9 +57,12 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-    <a class="navbar-brand" href="{{url_for('home')}}">
-        <img src="{{url_for('static', filename='favicon.ico')}}" width="30" height="30" alt="">
-    </a>
+    <a class="navbar-brand" href="{{ url_for('home') }}"><img
+            src="{{ url_for('static', filename='favicon.ico') }}" width="30" height="30"
+            class="d-inline-block align-top" alt="">
+        {% if nav_properties.selected_league %}
+        {{nav_properties.selected_league.short_name}}{% if nav_properties.selected_season %} | {{nav_properties.selected_season.name}}{%endif%}
+        {% endif %}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -126,9 +129,6 @@
                 </ul>
             </li>
         </ul>
-        {% if nav_properties.selected_league %}
-        <h3 class="nav-item nav-item-right">{{nav_properties.selected_league.short_name}}{% if nav_properties.selected_season %} | {{nav_properties.selected_season.name}}{%endif%}</h3>
-        {% endif %}
     </div>
 </nav>
 {% endblock %}
