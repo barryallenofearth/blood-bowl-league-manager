@@ -66,6 +66,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            {% if selected_season %}
             <li class="nav-item" id="matches">
                 <a class="nav-link" href="{{url_for('manage',entity_type='bb_match')}}">
                     <i class="bi bi-dice-3-fill"></i> Matches</a>
@@ -74,14 +75,18 @@
                 <a class="nav-link" href="{{url_for('manage',entity_type='team')}}">
                     <i class="bi bi-people-fill"></i> Teams</a>
             </li>
+            {% endif %}
+            {% if selected_league %}
             <li class="nav-item" id="coaches">
                 <a class="nav-link" href="{{url_for('manage',entity_type='coach')}}">
                     <i class="bi bi-robot"></i> Coaches</a>
             </li>
+            {% endif %}
             <li class="nav-item" id="races">
                 <a class="nav-link" href="{{url_for('manage',entity_type='race')}}">
                     <i class="bi bi-robot"></i> Races</a>
             </li>
+            {% if selected_league %}
             <li class="nav-item dropdown" id="season-selection">
                 <a class="nav-link dropdown-toggle" role="button"
                    data-toggle="dropdown"
@@ -90,6 +95,9 @@
                     <i class="bi bi-calendar-week"></i> Seasons </a>
                 <ul class="dropdown-menu">
 
+                    {% for season in seasons %}
+                    <li><a class="dropdown-item" href="{{url_for('select_season',id=season.id)}}">{{season.name}} ({{season.short_name}}){%if season.is_selected %} (active){% endif %}</a></li>
+                    {% endfor %}
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
@@ -98,6 +106,7 @@
                     </li>
                 </ul>
             </li>
+            {% endif %}
             <li class="nav-item dropdown" id="league-selection">
                 <a class="nav-link dropdown-toggle" role="button"
                    data-toggle="dropdown"
@@ -105,7 +114,9 @@
                    href="#">
                     <i class="bi bi-person-circle"></i> Leagues </a>
                 <ul class="dropdown-menu">
-
+                    {% for league in leagues %}
+                    <li><a class="dropdown-item" href="{{url_for('select_league',id=league.id)}}">{{league.name}} ({{league.short_name}}){%if league.is_selected %} (active){% endif %}</a></li>
+                    {% endfor %}
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>

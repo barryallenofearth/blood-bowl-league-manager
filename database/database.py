@@ -21,7 +21,7 @@ class Season(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     league_id = db.Column(db.Integer, db.ForeignKey(f'{League.__tablename__}.id'))
-    title = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False, unique=True)
     short_name = db.Column(db.String, nullable=False, unique=True)
     is_selected = db.Column(db.Boolean, nullable=False)
 

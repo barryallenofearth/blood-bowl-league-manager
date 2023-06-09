@@ -42,7 +42,15 @@ def favicon():
 
 @app.route('/')
 def home():
-    return render_template("home.html")
+    selected_season = None
+    seasons = []
+
+    selected_league = db.session.query(League).order_by(League.name).filter_by(is_selected=True).first()
+    leagues = db.session.query(League).order_by(League.name).all()
+    if selected_league is not None:
+        selected_season = get_selected_season()
+        seasons = db.session.query(Season).order_by(Season.name).all()
+    return render_template("home.html", leagues=leagues, seasons=seasons, selected_league=selected_league, selected_season=selected_season)
 
 
 def persist_and_redirect(entity, entity_type: str):
@@ -51,12 +59,51 @@ def persist_and_redirect(entity, entity_type: str):
     return redirect(url_for("manage", entity_type=entity_type))
 
 
+@app.route("/season/select/<string:id>")
+def select_season(id: int):
+    selected_season = db.session.query(Season).filter_by(is_selected=True).first()
+    if selected_season is not None:
+        selected_season.is_selected = False
+        db.session.add(selected_season)
+
+    season = db.session.query(Season).filter_by(id=id).first()
+    season.is_selected = True
+    db.session.add(season)
+    db.session.commit()
+
+    return redirect(url_for('manage', entity_type="season"))
+
+
+@app.route("/league/select/<string:id>")
+def select_league(id: int):
+    selected_league = db.session.query(League).filter_by(is_selected=True).first()
+    if selected_league is not None:
+        selected_league.is_selected = False
+        db.session.add(selected_league)
+
+    league = db.session.query(League).filter_by(id=id).first()
+    league.is_selected = True
+    db.session.add(league)
+    db.session.commit()
+
+    return redirect(url_for('manage', entity_type="league"))
+
+
 @app.route("/<string:entity_type>/manage", methods=["GET", "POST"])
 def manage(entity_type: str):
     form: FlaskForm
     title: str
     title_row = []
     table = []  # list of lists (every internal list contains entity information)
+
+    selected_league = db.session.query(League).order_by(League.name).filter_by(is_selected=True).first()
+    leagues = db.session.query(League).order_by(League.name).all()
+
+    selected_season = None
+    seasons = []
+    if selected_league is not None:
+        selected_season = get_selected_season()
+        seasons = db.session.query(Season).order_by(Season.name).all()
 
     if entity_type == League.__tablename__:
         title = "Leagues"
@@ -71,7 +118,6 @@ def manage(entity_type: str):
             league.short_name = form.short_name.data
             league.is_selected = True
 
-            selected_league = db.session.query(League).order_by(League.name).filter_by(is_selected=True).first()
             if selected_league is not None:
                 selected_league.is_selected = False
                 db.session.add(selected_league)
@@ -84,18 +130,17 @@ def manage(entity_type: str):
         title_row = ["Name", "Short name"]
         for season in db.session.query(Season).order_by(Season.short_name).filter_by(
                 league_id=get_selected_league().id).all():
-            table.append([season.title + (f" (active)" if season.is_selected else ""), season.short_name, season.id])
+            table.append([season.name + (f" (active)" if season.is_selected else ""), season.short_name, season.id])
         form = forms.AddSeasonForm()
         if form.validate_on_submit():
             season = Season()
             season.league_id = get_selected_league().id
-            season.title = form.title.data
+            season.name = form.title.data
             season.short_name = form.short_name.data
             season.is_selected = True
 
-            selected_season = get_selected_season()
             if selected_season is not None:
-                selected_season = False
+                selected_season.is_selected = False
                 db.session.add(selected_season)
                 db.session.commit()
 
@@ -188,7 +233,7 @@ def manage(entity_type: str):
             return persist_and_redirect(team, entity_type)
 
     return render_template("add-or-update-entity.html", form=form, title=title, title_row=title_row, table=table,
-                           entity_type=entity_type)
+                           entity_type=entity_type, leagues=leagues, seasons=seasons, selected_league=selected_league, selected_season=selected_season)
 
 
 @app.route("/<string:entity_type>/update/<int:id>", methods=["GET", "POST"])
