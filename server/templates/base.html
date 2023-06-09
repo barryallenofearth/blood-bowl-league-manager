@@ -66,26 +66,53 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown" id="children-selection">
+            <li class="nav-item" id="matches">
+                <a class="nav-link" href="{{url_for('manage',entity_type='bb_match')}}">
+                    <i class="bi bi-dice-3-fill"></i> Matches</a>
+            </li>
+            <li class="nav-item" id="teams">
+                <a class="nav-link" href="{{url_for('manage',entity_type='team')}}">
+                    <i class="bi bi-people-fill"></i> Teams</a>
+            </li>
+            <li class="nav-item" id="coaches">
+                <a class="nav-link" href="{{url_for('manage',entity_type='coach')}}">
+                    <i class="bi bi-robot"></i> Coaches</a>
+            </li>
+            <li class="nav-item" id="races">
+                <a class="nav-link" href="{{url_for('manage',entity_type='race')}}">
+                    <i class="bi bi-robot"></i> Races</a>
+            </li>
+            <li class="nav-item dropdown" id="season-selection">
+                <a class="nav-link dropdown-toggle" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"
+                   href="#">
+                    <i class="bi bi-calendar-week"></i> Seasons </a>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <li><a class="dropdown-item"
+                           href="{{url_for('manage',entity_type='season')}}">Manage Seasons</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" id="league-selection">
                 <a class="nav-link dropdown-toggle" role="button"
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"
                    href="#">
                     <i class="bi bi-person-circle"></i> Leagues </a>
                 <ul class="dropdown-menu">
+
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <li><a class="dropdown-item"
+                           href="{{url_for('manage',entity_type='league')}}">Manage Leagues</a>
+                    </li>
                 </ul>
-            </li>
-            <li class="nav-item" id="races">
-                <a class="nav-link" href="{{url_for('create',entity_type='race')}}">
-                    <i class="bi bi-robot"></i> Races</a>
-            </li>
-            <li class="nav-item" id="coaches">
-                <a class="nav-link" href="{{url_for('create',entity_type='coach')}}">
-                    <i class="bi bi-person-square"></i> Coaches</a>
-            </li>
-            <li class="nav-item" id="teams">
-                <a class="nav-link" href="{{url_for('create',entity_type='team')}}">
-                    <i class="bi bi-people-fill"></i> Teams</a>
             </li>
         </ul>
     </div>

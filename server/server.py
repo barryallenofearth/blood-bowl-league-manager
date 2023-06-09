@@ -5,7 +5,7 @@ from flask import Flask, request, send_from_directory, render_template, url_for,
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 
-from database.database import db, League, Race, Coach, Team, Season
+from database.database import db, League, Race, Coach, Team, Season, SeasonRules, Scorings
 from server import forms
 
 app = Flask(__name__)
@@ -45,14 +45,14 @@ def home():
     return render_template("home.html")
 
 
-def persist_and_redirect_home(entity, entity_type: str):
+def persist_and_redirect(entity, entity_type: str):
     db.session.add(entity)
     db.session.commit()
-    return redirect(url_for("create", entity_type=entity_type))
+    return redirect(url_for("manage", entity_type=entity_type))
 
 
-@app.route("/<string:entity_type>/create", methods=["GET", "POST"])
-def create(entity_type: str):
+@app.route("/<string:entity_type>/manage", methods=["GET", "POST"])
+def manage(entity_type: str):
     form: FlaskForm
     title: str
     title_row = []
@@ -77,12 +77,13 @@ def create(entity_type: str):
                 db.session.add(selected_league)
                 db.session.commit()
 
-            return persist_and_redirect_home(league, entity_type)
+            return persist_and_redirect(league, entity_type)
     elif entity_type == Season.__tablename__:
         title = "Season"
 
         title_row = ["Name", "Short name"]
-        for season in db.session.query(Season).order_by(Season.short_name).filter_by(league_id=get_selected_league().id).all():
+        for season in db.session.query(Season).order_by(Season.short_name).filter_by(
+                league_id=get_selected_league().id).all():
             table.append([season.title + (f" (active)" if season.is_selected else ""), season.short_name, season.id])
         form = forms.AddSeasonForm()
         if form.validate_on_submit():
@@ -98,7 +99,37 @@ def create(entity_type: str):
                 db.session.add(selected_season)
                 db.session.commit()
 
-            return persist_and_redirect_home(season, entity_type)
+            db.session.add(season)
+            db.session.commit()
+
+            selected_season = get_selected_season()
+            season_rules = SeasonRules()
+            season_rules.season_id = selected_season.id
+
+            db.session.add(season_rules)
+            db.session.commit()
+
+            scorings_loss = Scorings()
+            scorings_loss.season_id = selected_season.id
+            scorings_loss.touchdown_difference = -1
+            scorings_loss.points_scored = 0
+            db.session.add(scorings_loss)
+
+            scorings_tie = Scorings()
+            scorings_tie.season_id = selected_season.id
+            scorings_tie.touchdown_difference = 0
+            scorings_tie.points_scored = 1
+            db.session.add(scorings_tie)
+
+            scorings_win = Scorings()
+            scorings_win.season_id = selected_season.id
+            scorings_win.touchdown_difference = 1
+            scorings_win.points_scored = 3
+            db.session.add(scorings_win)
+
+            db.session.commit()
+
+            return redirect(url_for("manage", entity_type=entity_type))
 
     elif entity_type == Race.__tablename__:
         title = "Races"
@@ -112,7 +143,7 @@ def create(entity_type: str):
             race = Race()
             race.name = form.name.data
 
-            return persist_and_redirect_home(race, entity_type)
+            return persist_and_redirect(race, entity_type)
     elif entity_type == Coach.__tablename__:
         title = "Coaches"
 
@@ -128,7 +159,7 @@ def create(entity_type: str):
             coach.last_name = form.last_name.data
             coach.display_name = form.display_name.data
 
-            return persist_and_redirect_home(coach, entity_type)
+            return persist_and_redirect(coach, entity_type)
     elif entity_type == Team.__tablename__:
         title = "Teams"
 
@@ -138,7 +169,8 @@ def create(entity_type: str):
         for team in db.session.query(Team).filter_by(season_id=selected_season.id).order_by(Team.name).all():
             coach = db.session.query(Coach).filter_by(id=team.coach_id).first()
             race = db.session.query(Race).filter_by(id=team.race_id).first()
-            table.append([team.name, f"{coach.first_name} {coach.last_name} ({coach.display_name})", race.name, team.id])
+            table.append(
+                [team.name, f"{coach.first_name} {coach.last_name} ({coach.display_name})", race.name, team.id])
 
         form = forms.AddTeamForm(app=app)
         if form.validate_on_submit():
@@ -153,9 +185,10 @@ def create(entity_type: str):
             team.race_id = form.race_select.data
             team.season_id = selected_season.id
 
-            return persist_and_redirect_home(team, entity_type)
+            return persist_and_redirect(team, entity_type)
 
-    return render_template("add-or-update-entity.html", form=form, title=title, title_row=title_row, table=table, entity_type=entity_type)
+    return render_template("add-or-update-entity.html", form=form, title=title, title_row=title_row, table=table,
+                           entity_type=entity_type)
 
 
 @app.route("/<string:entity_type>/update/<int:id>", methods=["GET", "POST"])
