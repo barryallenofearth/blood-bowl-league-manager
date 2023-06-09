@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import pandas as pd
 
 db = SQLAlchemy()
 
@@ -102,3 +103,64 @@ class Scorings(db.Model):
     season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'))
     touchdown_difference = db.Column(db.Integer, nullable=False)
     points_scored = db.Column(db.Integer, nullable=False)
+
+
+def get_selected_league() -> League:
+    return db.session.query(League).filter_by(is_selected=True).first()
+
+
+def get_selected_season() -> Season:
+    selected_league = get_selected_league()
+    return db.session.query(Season).filter_by(league_id=selected_league.id).filter_by(is_selected=True).first()
+
+
+def init_database():
+    if db.session.query(League).count() == 0:
+        init_leagues = pd.read_csv("init/leagues.csv", delimiter=";")
+        for league_index, league_data in init_leagues.iterrows():
+            league = League()
+            league.id = league_data["id"]
+            league.name = league_data["name"]
+            league.short_name = league_data["short_name"]
+            league.is_selected = league_data["is_selected"]
+            db.session.add(league)
+
+        db.session.commit()
+
+        init_seasons = pd.read_csv("init/seasons.csv", delimiter=";")
+        for season_index, season_data in init_seasons.iterrows():
+            season = Season()
+            season.id = season_data["id"]
+            season.league_id = season_data["league_id"]
+            season.name = season_data["name"]
+            season.short_name = season_data["short_name"]
+            season.is_selected = season_data["is_selected"]
+            db.session.add(season)
+            db.session.commit()
+
+            season_rules = SeasonRules()
+            season_rules.season_id = season.id
+            db.session.add(season_rules)
+            db.session.commit()
+
+        init_races = pd.read_csv("init/races.csv", delimiter=";")
+        for race_index, race_data in init_races.iterrows():
+            race = Race()
+            race.id = race_data["id"]
+            race.name = race_data["name"]
+
+            db.session.add(race)
+
+        db.session.commit()
+
+        init_coaches = pd.read_csv("init/coaches.csv", delimiter=";")
+        for coach_index, coach_data in init_coaches.iterrows():
+            coach = Coach()
+            coach.id = coach_data["id"]
+            coach.league_id = coach_data["league_id"]
+            coach.first_name = coach_data["first_name"]
+            coach.last_name = coach_data["last_name"]
+            coach.display_name = coach_data["display_name"]
+            db.session.add(coach)
+
+        db.session.commit()
