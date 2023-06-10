@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from database import database
 from database.database import League, Season, SeasonRules, Scorings, Coach, Race, Team
 from server import forms
+from server.forms import UpdateTeamForm
 from util import formatting
 
 FORM_KEY = "form"
@@ -33,7 +34,10 @@ def league_get(db: SQLAlchemy, entity_id: int) -> dict:
 
     league = __get_league(db, entity_id)
 
-    form = forms.AddLeagueForm(name=league.name, short_name=league.short_name)
+    if entity_id == 0:
+        form = forms.AddLeagueForm()
+    else:
+        form = forms.UpdateLeagueForm(name=league.name, short_name=league.short_name)
     kwargs = {FORM_KEY: form, "title": "Leagues", "title_row": title_row, "table": table}
 
     return kwargs
@@ -41,8 +45,8 @@ def league_get(db: SQLAlchemy, entity_id: int) -> dict:
 
 def league_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     league = __get_league(db, entity_id)
-    league.name = form.name.data
-    league.short_name = form.short_name.data
+    league.name = form.name.data.strip()
+    league.short_name = form.short_name.data.strip()
     league.is_selected = True
 
     selected_league = database.get_selected_league()
@@ -76,15 +80,24 @@ def season_get(db: SQLAlchemy, entity_id: int):
     season = season_and_rules[0]
     season_rules = season_and_rules[1]
 
-    form = forms.AddSeasonForm(name=season.name,
-                               short_name=season.short_name,
-                               team_short_name_length=season_rules.team_short_name_length,
-                               number_of_allowed_matches=season_rules.number_of_allowed_matches,
-                               number_of_allowed_matches_vs_same_opponent=season_rules.number_of_allowed_matches_vs_same_opponent,
-                               number_of_playoff_places=season_rules.number_of_playoff_places,
-                               term_for_team_names=season_rules.term_for_team_names,
-                               term_for_coaches=season_rules.term_for_coaches,
-                               term_for_races=season_rules.term_for_races)
+    if entity_id == 0:
+        form = forms.AddSeasonForm(team_short_name_length=season_rules.team_short_name_length,
+                                   number_of_allowed_matches=season_rules.number_of_allowed_matches,
+                                   number_of_allowed_matches_vs_same_opponent=season_rules.number_of_allowed_matches_vs_same_opponent,
+                                   number_of_playoff_places=season_rules.number_of_playoff_places,
+                                   term_for_team_names=season_rules.term_for_team_names,
+                                   term_for_coaches=season_rules.term_for_coaches,
+                                   term_for_races=season_rules.term_for_races)
+    else:
+        form = forms.UpdateSeasonForm(name=season.name,
+                                      short_name=season.short_name,
+                                      team_short_name_length=season_rules.team_short_name_length,
+                                      number_of_allowed_matches=season_rules.number_of_allowed_matches,
+                                      number_of_allowed_matches_vs_same_opponent=season_rules.number_of_allowed_matches_vs_same_opponent,
+                                      number_of_playoff_places=season_rules.number_of_playoff_places,
+                                      term_for_team_names=season_rules.term_for_team_names,
+                                      term_for_coaches=season_rules.term_for_coaches,
+                                      term_for_races=season_rules.term_for_races)
     return {FORM_KEY: form, "title": "Seasons", "title_row": ["Name", "Short name"], "table": table}
 
 
@@ -94,8 +107,8 @@ def season_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     season_rules = season_and_rules[1]
 
     season.league_id = database.get_selected_league().id
-    season.name = form.name.data
-    season.short_name = form.short_name.data
+    season.name = form.name.data.strip()
+    season.short_name = form.short_name.data.strip()
     season.is_selected = True
 
     selected_season = database.get_selected_season()
@@ -112,9 +125,9 @@ def season_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     season_rules.number_of_allowed_matches = form.number_of_allowed_matches.data
     season_rules.number_of_allowed_matches_vs_same_opponent = form.number_of_allowed_matches_vs_same_opponent.data
     season_rules.number_of_playoff_places = form.number_of_playoff_places.data
-    season_rules.term_for_team_names = form.term_for_team_names.data
-    season_rules.term_for_coaches = form.term_for_coaches.data
-    season_rules.term_for_races = form.term_for_races.data
+    season_rules.term_for_team_names = form.term_for_team_names.data.strip()
+    season_rules.term_for_coaches = form.term_for_coaches.data.strip()
+    season_rules.term_for_races = form.term_for_races.data.strip()
 
     db.session.add(season_rules)
     db.session.commit()
@@ -158,15 +171,18 @@ def coach_get(db: SQLAlchemy, entity_id: int) -> dict:
         table.append([coach.first_name, coach.last_name, coach.display_name, coach.id])
 
     coach = __get_coach(db, entity_id)
-    form = forms.AddCoachForm(first_name=coach.first_name, last_name=coach.last_name, display_name=coach.display_name)
+    if entity_id == 0:
+        form = forms.AddCoachForm()
+    else:
+        form = forms.UpdateCoachForm(first_name=coach.first_name, last_name=coach.last_name, display_name=coach.display_name)
     return {FORM_KEY: form, "title": "Coaches", "title_row": ["First Name", "Last Name", "Display Name"], "table": table}
 
 
 def coach_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     coach = __get_coach(db, entity_id)
-    coach.first_name = form.first_name.data
-    coach.last_name = form.last_name.data
-    coach.display_name = form.display_name.data
+    coach.first_name = form.first_name.data.strip()
+    coach.last_name = form.last_name.data.strip()
+    coach.display_name = form.display_name.data.strip() if form.display_name.data is not None else None
 
     return persist_and_redirect(coach, Coach.__tablename__, db)
 
@@ -187,7 +203,11 @@ def race_get(db: SQLAlchemy, entity_id: int) -> dict:
         table.append([race.name, race.id])
 
     race = __get_race(db, entity_id)
-    form = forms.AddRaceForm(name=race.name)
+
+    if entity_id == 0:
+        form = forms.AddRaceForm()
+    else:
+        form = forms.UpdateRaceForm(name=race.name)
 
     return {FORM_KEY: form, "title": "Races", "title_row": ["Name"], "table": table}
 
@@ -215,21 +235,26 @@ def team_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
     for team in db.session.query(Team).filter_by(season_id=selected_season.id).order_by(Team.name).all():
         coach = db.session.query(Coach).filter_by(id=team.coach_id).first()
         race = db.session.query(Race).filter_by(id=team.race_id).first()
-        table.append([team.name, formatting.format_coach(coach), race.name, team.is_disqualified, team.id])
+        table.append([team.name, team.short_name, formatting.format_coach(coach), race.name, team.is_disqualified, team.id])
 
     team = __get_team(db, entity_id)
-    form = forms.AddTeamForm(app=app, name=team.name, coach_select=team.coach_id, race_select=team.race_id, is_disqualified=team.is_disqualified)
+    if entity_id == 0:
+        form = forms.AddTeamForm(app=app)
+    else:
+        form = forms.UpdateTeamForm(app=app, name=team.name, coach_select=team.coach_id, race_select=team.race_id, is_disqualified=team.is_disqualified)
 
-    return {FORM_KEY: form, "title": "Teams", "title_row": ["Name", "Coach", "Race", "Disqualified"], "table": table}
+    return {FORM_KEY: form, "title": "Teams", "title_row": ["Name", "Short name", "Coach", "Race", "Disqualified"], "table": table}
 
 
 def team_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     team = __get_team(db, entity_id)
-    team.name = form.name.data
+    team.season_id = database.get_selected_season().id
+    team.name = form.name.data.strip()
     team.short_name = formatting.generate_team_short_name(team.name)
     team.coach_id = form.coach_select.data
     team.race_id = form.race_select.data
-    team.is_disqualified = form.is_disqualified.data
-    team.season_id = database.get_selected_season().id
+
+    if type(form) == UpdateTeamForm:
+        team.is_disqualified = form.is_disqualified.data
 
     return persist_and_redirect(team, Team.__tablename__, db)
