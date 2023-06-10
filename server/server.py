@@ -5,7 +5,7 @@ from flask import Flask, request, send_from_directory, render_template
 from flask_bootstrap import Bootstrap
 
 from database.database import db, Team
-from server.manage_template_handling import *
+from server.manage_entities import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'

@@ -6,12 +6,60 @@
 {{super()}}
 <script>
     button = document.getElementById("new-entry");
-    button.classList.add("active");
+</script>
+<script>
+    let backdrop = document.querySelector('.backdrop');
+    let spinner = document.querySelector('.spinner-border');
+    let modalDeleteEntity = document.getElementById('delete-entity-dialog');
+
+
+    function dismissModal() {
+        if (!spinner.style.display) {
+            modalDeleteEntity.style.display = 'none';
+            backdrop.style.display = 'none';
+        }
+    }
+
+    let modalDeleteEntityMessage = document.getElementById('delete-entity-message');
+    backdrop.addEventListener('click', dismissModal);
+    document.getElementById('reject-entity-deleted').addEventListener('click', dismissModal);
+    let entityDeleteButton;
+    {% for entity in table %}
+    entityDeleteButton = document.getElementById('delete-entity-{{entity|last}}');
+
+    entityDeleteButton.addEventListener('click', function () {
+        let text = modalDeleteEntityMessage.getAttribute("data-text");
+        text = text.replace('{name}', '{{entity|first}}');
+        modalDeleteEntityMessage.innerHTML = text;
+
+        modalDeleteEntity.style.display = 'block';
+        backdrop.style.display = 'block';
+
+        document.getElementById('confirm-entity-deleted').addEventListener('click', function () {
+            spinner.style.display = 'inline-block';
+            fetch("{{url_for('delete',entity_type=entity_type,id=entity|last)}}", {method: "POST"})
+                .then((response) => window.location = "{{url_for('home')}}");
+        });
+    });
+    {% endfor %}
 </script>
 {% endblock %}
 
 {% block content %}
 {{super()}}
+
+<div class="backdrop"></div>
+<div class="spinner-border text-warning" role="status"></div>
+<div id="delete-entity-dialog" class="delete-modal">
+    <h1 class="modal__title">Actually delete?</h1>
+    <p id="delete-entity-message" data-text="Möchten Sie '{name}' und alle zugehörigend Daten tatsächlich löschen?"
+       class="lead delete-message"></p>
+    <div class="row modal__actions">
+        <button id="confirm-entity-deleted" class="btn btn-outline-warning col-lg-3 col-sm-6">Yes</button>
+        <button id="reject-entity-deleted" class="btn btn-warning modal-dismiss col-lg-3 col-sm-6" type="button">No
+        </button>
+    </div>
+</div>
 
 <div class="container headline-container">
     <h1>{{title}}</h1>
@@ -38,7 +86,7 @@
                 </a>
             </td>
             <td>
-                <a href="#" id="delete-entry-{{ value }}" class="btn btn-outline-warning">
+                <a href="#" id="delete-entity-{{ value }}" class="btn btn-outline-warning">
                     <i class="bi bi-trash"></i> </a>
             </td>
             {% endif %}

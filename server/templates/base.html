@@ -22,39 +22,11 @@
 
         return false;
     });
-    let backdrop = document.querySelector('.backdrop');
-    let spinner = document.querySelector('.spinner-border');
-    let modalDeleteChild = document.getElementById('delete-child-dialog');
-    let modalDeleteEntry = document.getElementById('delete-entry-dialog');
-
-
-    function dismissModal() {
-        if (!spinner.style.display) {
-            modalDeleteChild.style.display = 'none';
-            modalDeleteEntry.style.display = 'none';
-            backdrop.style.display = 'none';
-        }
-    }
-
-    backdrop.addEventListener('click', dismissModal);
-    document.getElementById('reject-child-deleted').addEventListener('click', dismissModal);
 
 </script>
 {%endblock%}
 
 {% block content %}
-<div class="backdrop"></div>
-<div class="spinner-border text-warning" role="status"></div>
-<div id="delete-child-dialog" class="delete-modal">
-    <h1 class="modal__title">Wirklich löschen?</h1>
-    <p id="delete-child-message" data-text="Möchten Sie '{name}' und alle zugehörigend Daten tatsächlich löschen?"
-       class="lead delete-message"></p>
-    <div class="row modal__actions">
-        <button id="confirm-child-deleted" class="btn btn-outline-warning col-lg-3 col-sm-6">Ja</button>
-        <button id="reject-child-deleted" class="btn btn-warning modal-dismiss col-lg-3 col-sm-6" type="button">Nein
-        </button>
-    </div>
-</div>
 
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <a class="navbar-brand" href="{{ url_for('home') }}"><img

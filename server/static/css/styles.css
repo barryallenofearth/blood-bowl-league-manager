@@ -9,12 +9,11 @@ your web pages for the styles to be rendered. */
     --nav-background: #222;
     --table-border: #666;
     --dark-yellow: #b58803;
-    --text-color: white;
 }
 
 body {
     background-color: var(--background);
-    color: var(--text-color);
+    color: white;
 }
 
 h1 {
@@ -42,11 +41,6 @@ h5 {
 .dropdown-submenu {
     position: relative;
 }
-
-.navbar-light .navbar-brand {
-    color: var(--text-color);
-}
-
 
 .dropdown-submenu a::after {
     transform: rotate(-90deg);
@@ -289,10 +283,8 @@ a:focus,
     margin: 0 0 1rem 0;
 }
 
-#confirm-entry-deleted,
-#confirm-child-deleted,
-#reject-entry-deleted,
-#reject-child-deleted {
+#confirm-entity-deleted,
+#reject-entity-deleted {
     margin: auto;
 }
 
