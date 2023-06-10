@@ -124,23 +124,16 @@ def delete(entity_type: str, id: int):
     message = "No matching entity type found"
     if entity_type == League.__tablename__:
         message = delete_entities.league_delete(id)
-        print(message)
     elif entity_type == Season.__tablename__:
         message = delete_entities.season_delete(id)
-        print(message)
-
     elif entity_type == Race.__tablename__:
         message = delete_entities.race_delete(id)
-        print(message)
     elif entity_type == Coach.__tablename__:
         message = delete_entities.coach_delete(id)
-        print(message)
     elif entity_type == Team.__tablename__:
         message = delete_entities.team_delete(id)
-        print(message)
 
-    dict = str({'message': message}).replace("'", '"')
-    print(dict)
+    dict = str({'message': message, 'status': 200 if message == delete_entities.SUCCESSFULLY_DELETED else 403}).replace("'", '"')
     return json.loads(dict)
 
 

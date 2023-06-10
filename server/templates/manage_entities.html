@@ -44,8 +44,8 @@
                 .then(output => {
                     let redirect_location = "{{url_for('manage',entity_type=entity_type)}}";
                     let message = output["message"];
-                    console.log(message)
-                    if (message === "successfully deleted") {
+                    let status = output["status"];
+                    if (status === 200) {
                         window.location = redirect_location
                     } else {
                         alert(message)

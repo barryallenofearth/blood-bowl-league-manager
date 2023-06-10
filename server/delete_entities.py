@@ -2,7 +2,7 @@ from collections import defaultdict
 
 from sqlalchemy import or_
 
-from database.database import db, BBMatch, Team, Season, Coach
+from database.database import db, BBMatch, Team, Season, Coach, Race
 
 SUCCESSFULLY_DELETED = "successfully deleted"
 
@@ -20,6 +20,23 @@ def scoring_delete(id: int):
 
 
 def race_delete(id: int):
+    race = db.session.query(Race).filter_by(id=id).first()
+
+    race_teams = db.session.query(Team).filter_by(race_id=id).all()
+    if len(race_teams) > 0:
+        teams_and_seasons = defaultdict(list)
+        for team in race_teams:
+            teams_and_seasons[team.season_id].append(team.name)
+
+        error_message = f"Could not delete race {race}. There are still the following teams connected to this race:"
+        for season_id, teams in teams_and_seasons.items():
+            team_names = '\n - '.join(teams)
+            error_message += f"\n{db.session.query(Season).filter_by(id=season_id).first().name}:\n - {team_names}"
+
+        return error_message
+
+    db.session.delete(race)
+    db.session.commit()
     return SUCCESSFULLY_DELETED
 
 
