@@ -2,21 +2,49 @@ from collections import defaultdict
 
 from sqlalchemy import or_
 
-from database.database import db, BBMatch, Team, Season, Coach, Race
+from database.database import db, BBMatch, Team, Season, Coach, Race, Scorings, League, SeasonRules
 from util import formatting
 
 SUCCESSFULLY_DELETED = "successfully deleted"
 
 
 def league_delete(id: int):
+    league = db.session.query(League).filter_by(id=id).first()
+
+    seasons = db.session.query(Season).filter_by(league_id=id).all()
+    if len(seasons) > 0:
+        error_message = f"Could not delete league {league.name}. There are still the following seasons connected to this league:\n - "
+        error_message += '\n - '.join([season.name for season in seasons])
+        return error_message
+
+    db.session.delete(league)
+    db.session.commit()
     return SUCCESSFULLY_DELETED
 
 
 def season_delete(id: int):
+    season = db.session.query(Season).filter_by(id=id).first()
+
+    teams = db.session.query(Team).filter_by(season_id=id).all()
+    if len(teams) > 0:
+        error_message = f"Could not delete season {season.name}. There are still the following teams connected to this season:\n - "
+        error_message += '\n - '.join([team.name for team in teams])
+        return error_message
+
+    season_rules = db.session.query(SeasonRules).filter_by(season_id=id).first()
+    for scorings in db.session.query(Scorings).filter_by(season_id=season_rules.id).all():
+        db.session.delete(db.session.query(Scorings).filter_by(id=scorings.id).first())
+
+    db.session.delete(season_rules)
+    db.session.delete(season)
+
+    db.session.commit()
     return SUCCESSFULLY_DELETED
 
 
 def scoring_delete(id: int):
+    db.session.delete(db.session.query(Scorings).filter_by(id=id).first())
+    db.session.commit()
     return SUCCESSFULLY_DELETED
 
 
