@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from database import database
 from database.database import League, Season, SeasonRules, Scorings, Coach, Race, Team
 from server import forms
+from util import formatting
 
 FORM_KEY = "form"
 
@@ -209,30 +210,27 @@ def __get_team(db: SQLAlchemy, entity_id: int) -> Team:
 
 
 def team_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
-    team = __get_team(db, entity_id)
 
     table = []
     selected_season = database.get_selected_season()
     for team in db.session.query(Team).filter_by(season_id=selected_season.id).order_by(Team.name).all():
         coach = db.session.query(Coach).filter_by(id=team.coach_id).first()
         race = db.session.query(Race).filter_by(id=team.race_id).first()
-        table.append([team.name, str(coach), race.name, team.id])
+        table.append([team.name, formatting.format_coach(coach), race.name, team.is_disqualified, team.id])
 
-    form = forms.AddTeamForm(app=app, name=team.name, coach_select=team.coach_id, race_select=team.race_id)
+    team = __get_team(db, entity_id)
+    form = forms.AddTeamForm(app=app, name=team.name, coach_select=team.coach_id, race_select=team.race_id, is_disqualified=team.is_disqualified)
 
-    return {FORM_KEY: form, "title": "Teams", "title_row": ["Name", "Coach", "Race"], "table": table}
+    return {FORM_KEY: form, "title": "Teams", "title_row": ["Name", "Coach", "Race", "Disqualified"], "table": table}
 
 
 def team_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
-    def generate_short_name(team_name: str) -> str:
-        # TODO generate proper team name
-        return team_name
-
     team = __get_team(db, entity_id)
     team.name = form.name.data
-    team.short_name = generate_short_name(form.name.data)
+    team.short_name = formatting.generate_team_short_name(team.name)
     team.coach_id = form.coach_select.data
     team.race_id = form.race_select.data
+    team.is_disqualified = form.is_disqualified.data
     team.season_id = database.get_selected_season().id
 
     return persist_and_redirect(team, Team.__tablename__, db)

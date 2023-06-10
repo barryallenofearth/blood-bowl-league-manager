@@ -92,7 +92,14 @@
         <tr>
             {% for value in entity %}
             {% if loop.index < entity|length %}
-            <td>{% if value %}{{value}}{% endif %}</td>
+            <td>{% if value %}
+                {% if value is boolean %}
+                <input type="checkbox" disabled checked>
+                {%else%}
+                {{value}}
+                {% endif %}
+                {% endif %}
+            </td>
             {% else %}
             <td>
                 <a href="{{ url_for('manage',entity_type=entity_type,id=value,_anchor='form-title') }}"

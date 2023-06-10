@@ -4,6 +4,7 @@ import os
 from flask import Flask, request, send_from_directory, render_template
 from flask_bootstrap import Bootstrap
 
+from database import bootstrapping
 from database.database import db, Team
 from server import delete_entities
 from server.manage_entities import *
@@ -23,7 +24,7 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
-    database.init_database()
+    bootstrapping.init_database()
 
 
 class NavProperties:
@@ -133,8 +134,8 @@ def delete(entity_type: str, id: int):
     elif entity_type == Team.__tablename__:
         message = delete_entities.team_delete(id)
 
-    dict = str({'message': message, 'status': 200 if message == delete_entities.SUCCESSFULLY_DELETED else 403}).replace("'", '"')
-    return json.loads(dict)
+    return_json = str({'message': message, 'status': 200 if message == delete_entities.SUCCESSFULLY_DELETED else 403}).replace("'", '"')
+    return json.loads(return_json)
 
 
 def jsonify_league(league: League):

@@ -1,9 +1,10 @@
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, DateField, FileField, IntegerField
+from wtforms import StringField, SubmitField, SelectField, DateField, FileField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, Regexp, Length
 
 from database.database import db, Coach, Race, Season, SeasonRules, League
+from util import formatting
 
 
 class BaseLeagueForm(FlaskForm):
@@ -70,14 +71,14 @@ class BaseTeamForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired("Please enter a team name.")])
     coach_select = SelectField("Coach", validators=[DataRequired("Please select a coach")])
     race_select = SelectField("Race", validators=[DataRequired("Please select a race")])
+    is_disqualified = BooleanField("Disqualified")
 
     def __init__(self, app=None, **kwargs):
-
         super().__init__(**kwargs)
         self.app = app
 
         with app.app_context():
-            coach_options = [(coach.id, str(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
+            coach_options = [(coach.id, formatting.format_coach(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
             self.coach_select.choices = coach_options
 
             race_options = [(race.id, race.name) for race in db.session.query(Race).order_by(Race.name).all()]
@@ -85,8 +86,8 @@ class BaseTeamForm(FlaskForm):
 
 
 class AddTeamForm(BaseTeamForm):
-    submit = SubmitField(label="Add new season")
+    submit = SubmitField(label="Add new team")
 
 
 class UpdateTeamForm(BaseTeamForm):
-    submit = SubmitField(label="Update season")
+    submit = SubmitField(label="Update team")
