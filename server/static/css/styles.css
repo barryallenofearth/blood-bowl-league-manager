@@ -9,11 +9,12 @@ your web pages for the styles to be rendered. */
     --nav-background: #222;
     --table-border: #666;
     --dark-yellow: #b58803;
+    --text-color: white;
 }
 
 body {
     background-color: var(--background);
-    color: white;
+    color: var(--text-color);
 }
 
 h1 {
@@ -56,6 +57,11 @@ h5 {
     margin-right: .1rem;
     padding: 0;
 }
+
+.navbar-light .navbar-brand {
+    color: var(--text-color);
+}
+
 
 div.headline-container {
     padding-bottom: 0;

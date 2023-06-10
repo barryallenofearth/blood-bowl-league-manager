@@ -216,7 +216,7 @@ def team_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
     for team in db.session.query(Team).filter_by(season_id=selected_season.id).order_by(Team.name).all():
         coach = db.session.query(Coach).filter_by(id=team.coach_id).first()
         race = db.session.query(Race).filter_by(id=team.race_id).first()
-        table.append([team.name, f"{coach.first_name} {coach.last_name} ({coach.display_name})", race.name, team.id])
+        table.append([team.name, str(coach), race.name, team.id])
 
     form = forms.AddTeamForm(app=app, name=team.name, coach_select=team.coach_id, race_select=team.race_id)
 

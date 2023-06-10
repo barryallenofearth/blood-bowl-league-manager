@@ -72,17 +72,12 @@ class BaseTeamForm(FlaskForm):
     race_select = SelectField("Race", validators=[DataRequired("Please select a race")])
 
     def __init__(self, app=None, **kwargs):
-        def format_coach_name(coach: Coach):
-            name = f"{coach.first_name} {coach.last_name}"
-            if coach.display_name is not None and coach.display_name != "":
-                name += f" ({coach.display_name})"
-            return name
 
         super().__init__(**kwargs)
         self.app = app
 
         with app.app_context():
-            coach_options = [(coach.id, format_coach_name(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
+            coach_options = [(coach.id, str(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
             self.coach_select.choices = coach_options
 
             race_options = [(race.id, race.name) for race in db.session.query(Race).order_by(Race.name).all()]

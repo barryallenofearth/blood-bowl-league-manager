@@ -5,6 +5,7 @@ from flask import Flask, request, send_from_directory, render_template
 from flask_bootstrap import Bootstrap
 
 from database.database import db, Team
+from server import delete_entities
 from server.manage_entities import *
 
 app = Flask(__name__)
@@ -101,7 +102,7 @@ def manage(entity_type: str):
         kwargs = race_get(db, entity_id)
         form = kwargs[FORM_KEY]
         if form.validate_on_submit():
-            return coach_submit(form, db, entity_id)
+            return race_submit(form, db, entity_id)
     elif entity_type == Coach.__tablename__:
         kwargs = coach_get(db, entity_id)
         form = kwargs[FORM_KEY]
@@ -120,34 +121,31 @@ def manage(entity_type: str):
 
 @app.route("/<string:entity_type>/delete/<int:id>", methods=["POST"])
 def delete(entity_type: str, id: int):
-    pass
+    message = "No matching entity type found"
+    if entity_type == League.__tablename__:
+        message = delete_entities.league_delete(id)
+        print(message)
+    elif entity_type == Season.__tablename__:
+        message = delete_entities.season_delete(id)
+        print(message)
+
+    elif entity_type == Race.__tablename__:
+        message = delete_entities.race_delete(id)
+        print(message)
+    elif entity_type == Coach.__tablename__:
+        message = delete_entities.coach_delete(id)
+        print(message)
+    elif entity_type == Team.__tablename__:
+        message = delete_entities.team_delete(id)
+        print(message)
+
+    dict = str({'message': message}).replace("'", '"')
+    print(dict)
+    return json.loads(dict)
 
 
 def jsonify_league(league: League):
     return {"id": league.id, "title": league.title, "short_name": league.short_name}
-
-
-@app.route("/<string:entity_type>/get")
-def get_all(entity_type: str) -> list:
-    all_leagues = db.session.query(League).all()
-    leagues_json = {"leagues": []}
-    for league in all_leagues:
-        leagues_json["leagues"].append(jsonify_league(league))
-
-    string = str(leagues_json).replace("'", '"')
-    print(string)
-    return json.loads(string)
-
-
-@app.route("/<string:entity_type>/get/<int:id>")
-def get(entity_type: str, id: int) -> League:
-    league = db.session.query(League).filter_by(id=id).first()
-    league_json = jsonify_league(league)
-
-    string = str(league_json).replace("'", '"')
-
-    print(string)
-    return json.loads(string)
 
 
 @app.route("/match-result/user-input", methods=["POST"])

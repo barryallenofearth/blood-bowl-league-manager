@@ -24,7 +24,9 @@
     backdrop.addEventListener('click', dismissModal);
     document.getElementById('reject-entity-deleted').addEventListener('click', dismissModal);
     let entityDeleteButton;
+    // @formatter:off
     {% for entity in table %}
+    // @formatter:on
     entityDeleteButton = document.getElementById('delete-entity-{{entity|last}}');
 
     entityDeleteButton.addEventListener('click', function () {
@@ -38,10 +40,23 @@
         document.getElementById('confirm-entity-deleted').addEventListener('click', function () {
             spinner.style.display = 'inline-block';
             fetch("{{url_for('delete',entity_type=entity_type,id=entity|last)}}", {method: "POST"})
-                .then((response) => window.location = "{{url_for('home')}}");
+                .then(response => response.json())
+                .then(output => {
+                    let redirect_location = "{{url_for('manage',entity_type=entity_type)}}";
+                    let message = output["message"];
+                    console.log(message)
+                    if (message === "successfully deleted") {
+                        window.location = redirect_location
+                    } else {
+                        alert(message)
+                        window.location = redirect_location
+                    }
+                });
         });
     });
+    // @formatter:off
     {% endfor %}
+    // @formatter:on
 </script>
 {% endblock %}
 
@@ -52,7 +67,7 @@
 <div class="spinner-border text-warning" role="status"></div>
 <div id="delete-entity-dialog" class="delete-modal">
     <h1 class="modal__title">Actually delete?</h1>
-    <p id="delete-entity-message" data-text="Möchten Sie '{name}' und alle zugehörigend Daten tatsächlich löschen?"
+    <p id="delete-entity-message" data-text="Do you actually want to delete '{name}'?"
        class="lead delete-message"></p>
     <div class="row modal__actions">
         <button id="confirm-entity-deleted" class="btn btn-outline-warning col-lg-3 col-sm-6">Yes</button>

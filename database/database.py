@@ -44,6 +44,12 @@ class Coach(db.Model):
     last_name = db.Column(db.String, nullable=False)
     display_name = db.Column(db.String, nullable=True)
 
+    def __str__(self):
+        string = f"{self.first_name} {self.last_name}"
+        if self.display_name is not None and self.display_name != "":
+            string += f" ({self.display_name})"
+        return string
+
 
 class Team(db.Model):
     __tablename__ = "team"
@@ -69,8 +75,29 @@ class BBMatch(db.Model):
     team_2_touchdown = db.Column(db.Integer, nullable=False)
     team_1_surrendered = db.Column(db.Boolean, nullable=True)
     team_2_surrendered = db.Column(db.Boolean, nullable=True)
+    team_1_point_modification = db.Column(db.Integer, nullable=True)
+    team_2_point_modification = db.Column(db.Integer, nullable=True)
     is_playoff_match = db.Column(db.Boolean)
     is_tournament = db.Column(db.Boolean)
+
+    def __str__(self):
+        team1_name = db.session.query(Team).filter_by(self.team_1_id).first().name
+        team2_name = db.session.query(Team).filter_by(self.team_2_id).first().name
+
+        string = f"{team1_name} vs. {team2_name} : {self.team_1_touchdown}:{self.team_2_touchdown}"
+        if self.team_1_surrendered:
+            string += f" ({team1_name} surrendered)"
+        if self.team_2_surrendered:
+            string += f" ({team2_name} surrendered)"
+        if self.team_1_point_modification is not None and self.team_1_point_modification != 0:
+            string += f" ({self.team_1_point_modification} points for {team1_name})"
+        if self.team_2_point_modification is not None and self.team_2_point_modification != 0:
+            string += f" ({self.team_2_point_modification} points for {team2_name})"
+        if self.is_playoff_match:
+            string += " (Playoffs)"
+        if self.is_tournament:
+            string += " (Tournament)"
+
 
 
 class SeasonRules(db.Model):
