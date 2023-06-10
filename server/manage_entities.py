@@ -13,7 +13,7 @@ FORM_KEY = "form"
 def persist_and_redirect(entity, entity_type: str, db: SQLAlchemy):
     db.session.add(entity)
     db.session.commit()
-    return redirect(url_for("manage", entity_type=entity_type))
+    return redirect(url_for("manage", entity_type=entity_type, _anchor=f"row-entity-{entity.id}"))
 
 
 def __get_league(db, entity_id):
@@ -210,7 +210,6 @@ def __get_team(db: SQLAlchemy, entity_id: int) -> Team:
 
 
 def team_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
-
     table = []
     selected_season = database.get_selected_season()
     for team in db.session.query(Team).filter_by(season_id=selected_season.id).order_by(Team.name).all():
