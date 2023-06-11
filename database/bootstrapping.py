@@ -1,5 +1,6 @@
 import pandas as pd
 
+from database import database
 from database.database import db, SeasonRules, Season, Coach, Race, Team, League
 from util import formatting
 
@@ -32,6 +33,8 @@ def init_database():
             season_rules.season_id = season.id
             db.session.add(season_rules)
             db.session.commit()
+
+            database.persist_scorings(season_data["scorings"].replace("\\n", "\n"), season.id)
 
         init_races = pd.read_csv("init/races.csv", delimiter=";")
         for race_index, race_data in init_races.iterrows():

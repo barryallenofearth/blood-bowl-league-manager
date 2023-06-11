@@ -1,11 +1,11 @@
-id;league_id;name;short_name;is_selected
-1;2;Season 1;S.1;False
-2;2;Season 2;S.2;True
-3;1;Season 1;S.1;False
-4;1;Season 2;S.2;False
-5;1;Season 3;S.3;False
-6;1;Season 4;S.4;False
-7;1;Season 5;S.5;False
-8;1;Season 6;S.6;False
-9;1;Season 7;S.7;False
-10;1;Season 8;S.8;True
+id;league_id;name;short_name;is_selected;scorings
+1;2;Season 1;S.1;False;-1:1\n0:1\n1:3
+2;2;Season 2;S.2;True;-1:1\n0:1\n1:3
+3;1;Season 1;S.1;False;-1:1\n0:1\n1:3
+4;1;Season 2;S.2;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+5;1;Season 3;S.3;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+6;1;Season 4;S.4;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+7;1;Season 5;S.5;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+8;1;Season 6;S.6;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+9;1;Season 7;S.7;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+10;1;Season 8;S.8;True;-2:1\n-1:2\n0:3\n1:4\n2:5

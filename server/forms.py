@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, DateField, FileField, IntegerField, BooleanField
+from wtforms import StringField, SubmitField, SelectField, DateField, FileField, IntegerField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Regexp, Length
 
 from database.database import db, Coach, Race, Season, SeasonRules, League
@@ -31,6 +31,8 @@ class BaseSeasonForm(FlaskForm):
     term_for_team_names = StringField("Term for team names", validators=[DataRequired("Please enter a season short name.")])
     term_for_coaches = StringField("Term for coaches", validators=[DataRequired("Please enter a season short name.")])
     term_for_races = StringField("Term for races", validators=[DataRequired("Please enter a season short name.")])
+    scorings = TextAreaField("Scorings (each line must follow format {TD-Diff}: {Points received}. i.e.: -1: 0)",
+                             validators=[Regexp(regex=r"^(?:-?\d+\s*:\s*-?\d+\s*)+$", message="Please enter scorings in the required format")])
 
 
 class AddSeasonForm(BaseSeasonForm):

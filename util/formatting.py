@@ -1,8 +1,18 @@
 import re
 
 from database import database
-from database.database import db, Team, Coach, BBMatch, SeasonRules
+from database.database import db, Team, Coach, BBMatch, SeasonRules, Scorings
 
+
+def generate_scorings_field_value(season_id: int):
+    scorings_text_area = ""
+    all_scorings = db.session.query(Scorings).filter_by(season_id=season_id).all()
+    for index in range(0, len(all_scorings)):
+        scoring = all_scorings[index]
+        scorings_text_area += f"{scoring.touchdown_difference}: {scoring.points_scored}"
+        if index < len(all_scorings) - 1:
+            scorings_text_area += "\n"
+    return scorings_text_area
 
 def generate_team_short_name(team_name: str):
     def length_of_all_words(index_words: dict):

@@ -98,6 +98,8 @@ class SeasonRules(db.Model):
 
 
 class Scorings(db.Model):
+    DEFAULT_SCORINGS_ENTRY = "-1: 1\n0:1\n1:3"
+
     __tablename__ = "scorings"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -115,3 +117,24 @@ def get_selected_season() -> Season:
     return db.session.query(Season).filter_by(league_id=selected_league.id).filter_by(is_selected=True).first()
 
 
+def persist_scorings(user_input: str, season_id: int):
+    if season_id == 0:
+        season_id = get_selected_season().id
+
+    for scoring in db.session.query(Scorings).filter_by(season_id=season_id).all():
+        db.session.delete(scoring)
+
+    scorings_lines = user_input.strip().split("\n")
+
+    for scoring_line in scorings_lines:
+        if ":" not in scoring_line:
+            continue
+        line_split = scoring_line.split(":")
+
+        scoring = Scorings()
+        scoring.season_id = season_id
+        scoring.touchdown_difference = int(line_split[0].strip())
+        scoring.points_scored = int(line_split[1].strip())
+        db.session.add(scoring)
+
+    db.session.commit()
