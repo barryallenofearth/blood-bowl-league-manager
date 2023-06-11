@@ -1,9 +1,10 @@
-from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, DateField, FileField, IntegerField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, Regexp, Length
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, SelectField, FileField, IntegerField, BooleanField, TextAreaField
+from wtforms.validators import DataRequired, Regexp
 
-from database.database import db, Coach, Race, Season, SeasonRules, League
+import database.database
+from database.database import db, Coach, Race, Team
 from util import formatting
 
 
@@ -77,7 +78,6 @@ class BaseTeamForm(FlaskForm):
 
     def __init__(self, app=None, **kwargs):
         super().__init__(**kwargs)
-        self.app = app
 
         with app.app_context():
             coach_options = [(coach.id, formatting.format_coach(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
@@ -94,3 +94,31 @@ class AddTeamForm(BaseTeamForm):
 class UpdateTeamForm(BaseTeamForm):
     is_disqualified = BooleanField("Disqualified")
     submit = SubmitField(label="Update team")
+
+
+class BaseMatchForm(FlaskForm):
+    team1 = SelectField("Team 1", validators=[DataRequired("Please select a team")])
+    team2 = SelectField("Team 2", validators=[DataRequired("Please select an opponent")])
+    team1_td_made = IntegerField("Team 1 touchdowns", validators=[DataRequired("Please enter a valid number.")])
+    team2_td_made = IntegerField("Team 2 touchdowns", validators=[DataRequired("Please enter a valid number.")])
+    surrendered_select = SelectField("Team surrendered", choices=[(0, "No team surrendered"), (1, "Team 1 surrendered"), (2, "Team 2 surrendered")])
+    team1_points_modification = IntegerField("Team 1 points modification")
+    team2_points_modification = IntegerField("Team 2 points modification")
+    match_type_select = SelectField("Match type", choices=[(0, "Standard match"), (1, "Playoff match"), (2, "Tournament match")])
+
+    def __init__(self, app=None, **kwargs):
+        super().__init__(**kwargs)
+
+        with app.app_context():
+            season = database.database.get_selected_season()
+            all_teams = db.session.query(Team).filter_by(season_id=season.id).all()
+            self.team1.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
+            self.team2.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
+
+
+class AddMatchForm(BaseMatchForm):
+    submit = SubmitField(label="Add new match")
+
+
+class UpdateMatchForm(BaseMatchForm):
+    submit = SubmitField(label="Update match")

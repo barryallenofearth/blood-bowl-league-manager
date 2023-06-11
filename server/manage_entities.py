@@ -3,9 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 
 from database import database
-from database.database import League, Season, SeasonRules, Scorings, Coach, Race, Team
+from database.database import League, Season, SeasonRules, Scorings, Coach, Race, Team, BBMatch
 from server import forms
-from server.forms import UpdateTeamForm, BaseSeasonForm, BaseCoachForm, BaseRaceForm, BaseTeamForm
+from server.forms import UpdateTeamForm, BaseSeasonForm, BaseCoachForm, BaseRaceForm, BaseTeamForm, BaseMatchForm
 from util import formatting
 
 FORM_KEY = "form"
@@ -248,3 +248,80 @@ def team_submit(form: BaseTeamForm, db: SQLAlchemy, entity_id: int):
         team.is_disqualified = form.is_disqualified.data
 
     return persist_and_redirect(team, Team.__tablename__, db)
+
+
+def __get_match(db: SQLAlchemy, entity_id: int) -> BBMatch:
+    if entity_id != 0:
+        return db.session.query(BBMatch).filter_by(id=entity_id).first()
+    else:
+        return BBMatch()
+
+
+def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
+    match = __get_match(db, entity_id)
+
+    if entity_id == 0:
+        form = forms.AddMatchForm(app=app, team1_points_modification=0, team2_points_modification=0)
+    else:
+
+        surrendered_value = 0
+        if match.team_1_surrendered:
+            surrendered_value = 1
+        elif match.team_1_surrendered:
+            surrendered_value = 2
+
+        match_type_value = 0
+        if match.is_playoff_match:
+            match_type_value = 1
+        elif match.is_tournament_match:
+            match_type_value = 2
+
+        form = forms.UpdateMatchForm(app=app,
+                                     team1=match.team_1_id, team2=match.team_2_id,
+                                     team1_td_made=match.team_1_touchdown,
+                                     team2_td_made=match.team_2_touchdown,
+                                     surrendered_select=surrendered_value,
+                                     team1_points_modification=match.team_1_point_modification,
+                                     team2_points_modification=match.team_2_point_modification,
+                                     match_type_select=match_type_value)
+
+    table = []
+    season_id = database.get_selected_season().id
+    all_matches = db.session.query(BBMatch).filter_by(season_id=season_id).all()
+    for match in all_matches:
+        table.append([formatting.format_match(match), match.id])
+    return {FORM_KEY: form, "title": "Matches", "title_row": ["Match"], "table": table}
+
+
+def match_submit(form: BaseMatchForm, db: SQLAlchemy, entity_id: int):
+    match = __get_match(db, entity_id)
+    match.season_id = database.get_selected_season().id
+    match.team_1_id = form.team1.data
+    match.team_2_id = form.team2.data
+    match.team_1_touchdown = form.team1_td_made.data
+    match.team_2_touchdown = form.team2_td_made.data
+
+    if form.surrendered_select.data == "0":
+        match.team_1_surrendered = False
+        match.team_2_surrendered = False
+    if form.surrendered_select.data == "1":
+        match.team_1_surrendered = True
+        match.team_2_surrendered = False
+    elif form.surrendered_select.data == "2":
+        match.team_1_surrendered = False
+        match.team_2_surrendered = True
+
+    match.team_1_point_modification = form.team1_points_modification.data
+    match.team_2_point_modification = form.team2_points_modification.data
+
+    if form.match_type_select.data == "0":
+        match.is_playoff_match = False
+        match.is_tournament_match = False
+    elif form.match_type_select.data == "1":
+        match.is_playoff_match = True
+        match.is_tournament_match = False
+    elif form.match_type_select.data == "2":
+        match.is_playoff_match = False
+        match.is_tournament_match = True
+
+    return persist_and_redirect(match, BBMatch.__tablename__, db)

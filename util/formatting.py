@@ -4,7 +4,7 @@ from database import database
 from database.database import db, Team, Coach, BBMatch, SeasonRules, Scorings
 
 
-def generate_scorings_field_value(season_id: int):
+def generate_scorings_field_value(season_id: int) -> str:
     scorings_text_area = ""
     all_scorings = db.session.query(Scorings).filter_by(season_id=season_id).all()
     for index in range(0, len(all_scorings)):
@@ -14,8 +14,9 @@ def generate_scorings_field_value(season_id: int):
             scorings_text_area += "\n"
     return scorings_text_area
 
-def generate_team_short_name(team_name: str):
-    def length_of_all_words(index_words: dict):
+
+def generate_team_short_name(team_name: str) -> str:
+    def length_of_all_words(index_words: dict) -> int:
         length = 0
         for value in index_words.values():
             length += len(value)
@@ -71,16 +72,41 @@ def generate_team_short_name(team_name: str):
     return short_name
 
 
-def format_coach(coach: Coach):
+def format_team(team: Team) -> str:
+    return f"{team.name} ({coach_table_name(team.coach_id)})"
+
+
+def format_coach(coach: Coach) -> str:
     string = f"{coach.first_name} {coach.last_name}"
     if coach.display_name is not None and coach.display_name != "":
         string += f" ({coach.display_name})"
     return string
 
 
-def format_match(match: BBMatch):
-    team1_name = db.session.query(Team).filter_by(match.team_1_id).first().name
-    team2_name = db.session.query(Team).filter_by(match.team_2_id).first().name
+def coach_table_name(coach_id: Coach) -> str:
+    season_id = database.get_selected_season().id
+
+    coach = db.session.query(Coach).filter_by(id=coach_id).first()
+    if coach.display_name is not None and coach.display_name != "":
+        return coach.display_name
+
+    all_coaches_ids_with_team_in_season = [team.coach_id for team in db.session.query(Team).filter_by(season_id=season_id).filter(Team.coach_id != coach_id).all()]
+
+    all_coaches_with_identical_first_name = db.session.query(Coach) \
+        .filter(Coach.id.in_(all_coaches_ids_with_team_in_season)) \
+        .filter_by(first_name=coach.first_name) \
+        .all()
+
+    if len(all_coaches_with_identical_first_name):
+        return coach.first_name
+
+    # TODO handle names with equal first name
+    return coach.first_name + " " + coach.last_name
+
+
+def format_match(match: BBMatch) -> str:
+    team1_name = db.session.query(Team).filter_by(id=match.team_1_id).first().name
+    team2_name = db.session.query(Team).filter_by(id=match.team_2_id).first().name
 
     string = f"{team1_name} vs. {team2_name} : {match.team_1_touchdown}:{match.team_2_touchdown}"
     if match.team_1_surrendered:
@@ -93,7 +119,7 @@ def format_match(match: BBMatch):
         string += f" ({match.team_2_point_modification} points for {team2_name})"
     if match.is_playoff_match:
         string += " (Playoffs)"
-    if match.is_tournament:
+    if match.is_tournament_match:
         string += " (Tournament)"
 
     return string

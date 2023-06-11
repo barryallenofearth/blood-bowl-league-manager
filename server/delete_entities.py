@@ -106,7 +106,9 @@ def team_delete(id: int):
     return SUCCESSFULLY_DELETED
 
 
-def match_delete(id: int):
+def match_delete(id: int) -> str:
     bb_match = db.session.query(BBMatch).filter_by(id=id).first()
     db.session.delete(bb_match)
     db.session.commit()
+
+    return SUCCESSFULLY_DELETED

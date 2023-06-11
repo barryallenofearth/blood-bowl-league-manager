@@ -61,7 +61,7 @@ class Team(db.Model):
 class BBMatch(db.Model):
     __tablename__ = "bb_match"
     id = db.Column(db.Integer, primary_key=True)
-    league_id = db.Column(db.Integer, db.ForeignKey(f'{League.__tablename__}.id'))
+    season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'))
     team_1_id = db.Column(db.Integer, db.ForeignKey(f'{Team.__tablename__}.id'), nullable=False)
     team_2_id = db.Column(db.Integer, db.ForeignKey(f'{Team.__tablename__}.id'), nullable=False)
     team_1_touchdown = db.Column(db.Integer, nullable=False)
@@ -71,7 +71,7 @@ class BBMatch(db.Model):
     team_1_point_modification = db.Column(db.Integer, nullable=True)
     team_2_point_modification = db.Column(db.Integer, nullable=True)
     is_playoff_match = db.Column(db.Boolean)
-    is_tournament = db.Column(db.Boolean)
+    is_tournament_match = db.Column(db.Boolean)
 
 
 class SeasonRules(db.Model):
