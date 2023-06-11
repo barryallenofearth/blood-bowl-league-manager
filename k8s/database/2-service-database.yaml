@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: postgresql
+  name: postgresql
+  namespace: blood-bowl-season-manager
+spec:
+  ports:
+    - name: postgresql
+      port: 5432
+      protocol: TCP
+      targetPort: postgresql
+  selector:
+    app: postgresql
+  clusterIP: None

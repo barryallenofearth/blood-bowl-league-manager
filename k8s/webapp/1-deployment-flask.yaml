@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  namespace: blood-bowl-season-manager
+  labels:
+    deployment: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: blood-bowl-season-manager
+          image: barryallenofearth/blood-bowl-season-manager:1
+          env:
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: blood-bowl-season-manager-database
+                  key: database
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: blood-bowl-season-manager-database
+                  key: user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: blood-bowl-season-manager-database
+                  key: password
+            - name: DATABASE_URI
+              value: postgresql://$(DB_USER):$(DB_PASSWORD)@postgresql:5432/$(DB_NAME)
+          resources: { }
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            #TODO set proper value
+            - mountPath: /app/blood-bowl-python/data/init_file.extension
+              name: init-files
+              subPath: init_children.csv
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+              scheme: HTTP
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+            successThreshold: 1
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            periodSeconds: 30
+            timeoutSeconds: 30
+            failureThreshold: 3
+            successThreshold: 1
+      volumes:
+        - name: init-files
+          configMap:
+            name: init-files-blood-bowl-season-manager

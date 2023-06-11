@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-blood-bowl-season-manager-db-pvc
+  namespace: blood-bowl-season-manager
+spec:
+  selector:
+    matchLabels:
+      volume: blood-bowl-season-manager-postgres
+  accessModes: [ "ReadWriteMany" ]
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1.5Gi
