@@ -6,9 +6,9 @@ from util import formatting
 
 
 def init_database():
-    if db.session.query(League).count() == 0:
-        init_leagues = pd.read_csv("init/leagues.csv", delimiter=";")
-        for league_index, league_data in init_leagues.iterrows():
+    def init_leagues():
+        init_file = pd.read_csv("init/leagues.csv", delimiter=";")
+        for league_index, league_data in init_file.iterrows():
             league = League()
             league.id = league_data["id"]
             league.name = league_data["name"]
@@ -18,8 +18,9 @@ def init_database():
 
         db.session.commit()
 
-        init_seasons = pd.read_csv("init/seasons.csv", delimiter=";")
-        for season_index, season_data in init_seasons.iterrows():
+    def init_seasons():
+        init_file = pd.read_csv("init/seasons.csv", delimiter=";")
+        for season_index, season_data in init_file.iterrows():
             season = Season()
             season.id = season_data["id"]
             season.league_id = season_data["league_id"]
@@ -36,8 +37,10 @@ def init_database():
 
             database.persist_scorings(season_data["scorings"].replace("\\n", "\n"), season.id)
 
-        init_races = pd.read_csv("init/races.csv", delimiter=";")
-        for race_index, race_data in init_races.iterrows():
+    def init_races():
+
+        init_file = pd.read_csv("init/races.csv", delimiter=";")
+        for race_index, race_data in init_file.iterrows():
             race = Race()
             race.id = race_data["id"]
             race.name = race_data["name"]
@@ -46,8 +49,9 @@ def init_database():
 
         db.session.commit()
 
-        init_coaches = pd.read_csv("init/coaches.csv", delimiter=";")
-        for coach_index, coach_data in init_coaches.iterrows():
+    def init_coaches():
+        init_file = pd.read_csv("init/coaches.csv", delimiter=";")
+        for coach_index, coach_data in init_file.iterrows():
             coach = Coach()
             coach.id = coach_data["id"]
             coach.league_id = coach_data["league_id"]
@@ -56,8 +60,11 @@ def init_database():
             coach.display_name = coach_data["display_name"]
             db.session.add(coach)
 
-        init_teams = pd.read_csv("init/teams.csv", delimiter=";")
-        for team_index, team_data in init_teams.iterrows():
+        db.session.commit()
+
+    def init_teams():
+        init_file = pd.read_csv("init/teams.csv", delimiter=";")
+        for team_index, team_data in init_file.iterrows():
             team = Team()
             team.id = team_data["id"]
             team.season_id = team_data["season_id"]
@@ -69,3 +76,10 @@ def init_database():
             db.session.add(team)
 
         db.session.commit()
+
+    if db.session.query(League).count() == 0:
+        init_leagues()
+        init_seasons()
+        init_races()
+        init_coaches()
+        init_teams()

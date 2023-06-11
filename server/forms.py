@@ -32,6 +32,7 @@ class BaseSeasonForm(FlaskForm):
     term_for_coaches = StringField("Term for coaches", validators=[DataRequired("Please enter a season short name.")])
     term_for_races = StringField("Term for races", validators=[DataRequired("Please enter a season short name.")])
     scorings = TextAreaField("Scorings (each line must follow format {TD-Diff}: {Points received}. i.e.: -1: 0)",
+                             render_kw={"rows": 5, "cols": 11},
                              validators=[Regexp(regex=r"^(?:-?\d+\s*:\s*-?\d+\s*)+$", message="Please enter scorings in the required format")])
 
 
