@@ -47,12 +47,13 @@ def league_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     league = __get_league(db, entity_id)
     league.name = form.name.data.strip()
     league.short_name = form.short_name.data.strip()
-    league.is_selected = True
 
-    selected_league = database.get_selected_league()
-    if selected_league is not None:
-        selected_league.is_selected = False
-        db.session.add(selected_league)
+    if entity_id == 0:
+        league.is_selected = True
+        selected_league = database.get_selected_league()
+        if selected_league is not None:
+            selected_league.is_selected = False
+            db.session.add(selected_league)
 
     return persist_and_redirect(league, League.__tablename__, db)
 
@@ -117,7 +118,7 @@ def season_submit(form: BaseSeasonForm, db: SQLAlchemy, entity_id: int):
     season.short_name = form.short_name.data.strip()
 
     selected_season = database.get_selected_season()
-    if entity_id != 0:
+    if entity_id == 0:
         season.is_selected = True
 
         if selected_season is not None:
