@@ -85,6 +85,7 @@
 <div class="container">
     <table class="bordered">
         <tr>
+            <th>#</th>
             {% for headline in title_row %}
             <th>{{headline}}</th>
             {% endfor %}
@@ -93,6 +94,7 @@
         </tr>
         {% for entity in table %}
         <tr id="row-entity-{{ entity|last }}">
+        <td>{{loop.index}}</td>
             {% for value in entity %}
             {% if loop.index < entity|length %}
             <td>{% if value %}
