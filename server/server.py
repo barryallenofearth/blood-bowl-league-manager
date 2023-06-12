@@ -49,20 +49,6 @@ def favicon():
 
 @app.route('/')
 def home():
-    results = ["Die Hafenmeister vs The no One's 2:1",
-               "Match 9: Necropolis Nightmares vs Lucky men in tights  0:6",
-               "Mortheim Maniacs vs The no One's 1:1",
-               "The no One´s vs        Lucky men in tights 1:1",
-               "Gully Sneaker vs Wolbecker Wolpertingers 3:1",
-               "Mortheim Maniacs vs Lucky men in tights 2:1",
-               "Anheim_Frozen Fingers vs Buckelberg-Bombers 2:2",
-               "Mighty Moon Moshaz vs Big Bad Crocs 2:1"]
-
-    for result in results:
-        bb_match = parsing.parse_match_result(result)
-        db.session.add(bb_match)
-        db.session.commit()
-
     return render_template("home.html", nav_properties=NavProperties(db))
 
 
@@ -167,4 +153,11 @@ def jsonify_league(league: League):
 @app.route("/match-result/user-input", methods=["POST"])
 def match_result_from_user_inpt():
     match_result = request.json["match-result"]
-    pass
+    try:
+        bb_match = parsing.parse_match_result(match_result)
+        db.session.add(bb_match)
+        db.session.commit()
+
+        return f"Match successfully entered: '{formatting.format_match(bb_match)}' from user input '{match_result}'"
+    except SyntaxError:
+        return f"Match result '{match_result}' did not match the expected pattern."
