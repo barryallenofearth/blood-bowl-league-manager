@@ -42,9 +42,24 @@ spec:
               name: http
           volumeMounts:
             #TODO set proper value
-            - mountPath: /app/blood-bowl-python/data/init_file.extension
-              name: init-files
-              subPath: init_children.csv
+            - mountPath: /app/blood-bowl-python/data/leagues.csv
+              name: data-files
+              subPath: leagues.csv
+            - mountPath: /app/blood-bowl-python/data/seasons.csv
+              name: data-files
+              subPath: seasons.csv
+            - mountPath: /app/blood-bowl-python/data/races.csv
+              name: data-files
+              subPath: races.csv
+            - mountPath: /app/blood-bowl-python/data/coaches.csv
+              name: data-files
+              subPath: coaches.csv
+            - mountPath: /app/blood-bowl-python/data/teams.csv
+              name: data-files
+              subPath: teams.csv
+            - mountPath: /app/blood-bowl-python/data/matches.csv
+              name: data-files
+              subPath: matches.csv
           livenessProbe:
             httpGet:
               path: /health
@@ -73,6 +88,6 @@ spec:
             failureThreshold: 3
             successThreshold: 1
       volumes:
-        - name: init-files
+        - name: data-files
           configMap:
             name: init-files-blood-bowl-season-manager

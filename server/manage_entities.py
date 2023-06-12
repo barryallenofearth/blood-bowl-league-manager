@@ -261,7 +261,14 @@ def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
     match = __get_match(db, entity_id)
 
     if entity_id == 0:
-        form = forms.AddMatchForm(app=app, team1_points_modification=0, team2_points_modification=0)
+        highest_match_number = db.session.query(BBMatch) \
+            .filter_by(season_id=database.get_selected_season().id) \
+            .order_by(BBMatch.match_number.desc()) \
+            .first()
+        match_number = 1
+        if highest_match_number is not None:
+            match_number = highest_match_number.match_number + 1
+        form = forms.AddMatchForm(app=app, team1_points_modification=0, team2_points_modification=0, match_number=match_number)
     else:
 
         surrendered_value = 0
@@ -280,6 +287,7 @@ def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
                                      team1=match.team_1_id, team2=match.team_2_id,
                                      team1_td_made=match.team_1_touchdown,
                                      team2_td_made=match.team_2_touchdown,
+                                     match_number=match.match_number,
                                      surrendered_select=surrendered_value,
                                      team1_points_modification=match.team_1_point_modification,
                                      team2_points_modification=match.team_2_point_modification,
@@ -287,7 +295,11 @@ def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
 
     table = []
     season_id = database.get_selected_season().id
-    all_matches = db.session.query(BBMatch).filter_by(season_id=season_id).all()
+    all_matches = db.session.query(BBMatch) \
+        .filter_by(season_id=season_id) \
+        .order_by(BBMatch.match_number.desc()) \
+        .all()
+
     for match in all_matches:
         table.append([formatting.format_match(match), match.id])
     return {FORM_KEY: form, "title": "Matches", "title_row": ["Match"], "table": table}
@@ -300,6 +312,8 @@ def match_submit(form: BaseMatchForm, db: SQLAlchemy, entity_id: int):
     match.team_2_id = form.team2.data
     match.team_1_touchdown = form.team1_td_made.data
     match.team_2_touchdown = form.team2_td_made.data
+    # TODO handle if match number is existing
+    match.match_number = form.match_number.data
 
     if form.surrendered_select.data == "0":
         match.team_1_surrendered = False

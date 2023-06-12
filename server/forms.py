@@ -80,7 +80,7 @@ class BaseTeamForm(FlaskForm):
         super().__init__(**kwargs)
 
         with app.app_context():
-            coach_options = [(coach.id, formatting.format_coach(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).all()]
+            coach_options = [(coach.id, formatting.format_coach(coach)) for coach in db.session.query(Coach).order_by(Coach.first_name).order_by(Coach.last_name).all()]
             self.coach_select.choices = coach_options
 
             race_options = [(race.id, race.name) for race in db.session.query(Race).order_by(Race.name).all()]
@@ -101,6 +101,7 @@ class BaseMatchForm(FlaskForm):
     team2 = SelectField("Team 2", validators=[DataRequired("Please select an opponent")])
     team1_td_made = IntegerField("Team 1 touchdowns", validators=[DataRequired("Please enter a valid number.")])
     team2_td_made = IntegerField("Team 2 touchdowns", validators=[DataRequired("Please enter a valid number.")])
+    match_number = IntegerField("Match number", validators=[DataRequired("Please enter a valid number.")])
     surrendered_select = SelectField("Team surrendered", choices=[(0, "No team surrendered"), (1, "Team 1 surrendered"), (2, "Team 2 surrendered")])
     team1_points_modification = IntegerField("Team 1 points modification")
     team2_points_modification = IntegerField("Team 2 points modification")

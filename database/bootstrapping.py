@@ -7,7 +7,7 @@ from util import formatting
 
 def init_database():
     def init_leagues():
-        init_file = pd.read_csv("init/leagues.csv", delimiter=";")
+        init_file = pd.read_csv("data/leagues.csv", delimiter=";")
         for league_index, league_data in init_file.iterrows():
             league = League()
             league.id = league_data["id"]
@@ -19,7 +19,7 @@ def init_database():
         db.session.commit()
 
     def init_seasons():
-        init_file = pd.read_csv("init/seasons.csv", delimiter=";")
+        init_file = pd.read_csv("data/seasons.csv", delimiter=";")
         for season_index, season_data in init_file.iterrows():
             season = Season()
             season.id = season_data["id"]
@@ -39,7 +39,7 @@ def init_database():
 
     def init_races():
 
-        init_file = pd.read_csv("init/races.csv", delimiter=";")
+        init_file = pd.read_csv("data/races.csv", delimiter=";")
         for race_index, race_data in init_file.iterrows():
             race = Race()
             race.id = race_data["id"]
@@ -50,7 +50,7 @@ def init_database():
         db.session.commit()
 
     def init_coaches():
-        init_file = pd.read_csv("init/coaches.csv", delimiter=";")
+        init_file = pd.read_csv("data/coaches.csv", delimiter=";")
         for coach_index, coach_data in init_file.iterrows():
             coach = Coach()
             coach.id = coach_data["id"]
@@ -63,7 +63,7 @@ def init_database():
         db.session.commit()
 
     def init_teams():
-        init_file = pd.read_csv("init/teams.csv", delimiter=";")
+        init_file = pd.read_csv("data/teams.csv", delimiter=";")
         for team_index, team_data in init_file.iterrows():
             team = Team()
             team.id = team_data["id"]

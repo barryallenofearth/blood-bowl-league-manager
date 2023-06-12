@@ -62,6 +62,7 @@ class BBMatch(db.Model):
     __tablename__ = "bb_match"
     id = db.Column(db.Integer, primary_key=True)
     season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'))
+    match_number = db.Column(db.Integer, nullable=False)
     team_1_id = db.Column(db.Integer, db.ForeignKey(f'{Team.__tablename__}.id'), nullable=False)
     team_2_id = db.Column(db.Integer, db.ForeignKey(f'{Team.__tablename__}.id'), nullable=False)
     team_1_touchdown = db.Column(db.Integer, nullable=False)

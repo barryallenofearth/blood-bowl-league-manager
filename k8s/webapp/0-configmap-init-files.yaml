@@ -5,5 +5,123 @@ metadata:
   namespace: blood-bowl-season-manager
 data:
   #TODO enter bootstrap data
-  init_file.extension: |
-    file_content
+  leagues.csv: |
+    id;name;short_name;is_selected
+    1;Blood Bowl Liga Münster;BBLM;False
+    2;Westfalia Blood Bowl League;WBBL;True
+  seasons.csv: |
+    id;league_id;name;short_name;is_selected;scorings
+    1;2;Season 1;S.1;False;-1:1\n0:1\n1:3
+    2;2;Season 2;S.2;True;-1:1\n0:1\n1:3
+    3;1;Season 1;S.1;False;-1:1\n0:1\n1:3
+    4;1;Season 2;S.2;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    5;1;Season 3;S.3;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    6;1;Season 4;S.4;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    7;1;Season 5;S.5;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    8;1;Season 6;S.6;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    9;1;Season 7;S.7;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    10;1;Season 8;S.8;True;-2:1\n-1:2\n0:3\n1:4\n2:5
+  races.csv: |
+    id;name
+    1;Amazonen
+    2;Bretonen
+    3;Bögenhafen Barons
+    4;Chaos Chosen
+    5;Chaos Pact
+    6;Chaos Renegades
+    7;Chaoszwerge
+    8;Dunkelelfen
+    9;Elfen Union
+    10;Goblins
+    11;Halblinge
+    12;Hochelfen
+    13;Imperial Nobility
+    14;Khemri
+    15;Khorne
+    16;Khorne-Dämonen
+    17;Menschen
+    18;Necromantic Horrors
+    19;Nekromanten
+    20;Norse
+    21;Nurgle
+    22;Oger
+    23;Old World Alliance
+    24;Orks
+    25;Schwarzorks
+    26;Skaven
+    27;Slann
+    28;Snotlinge
+    29;Underworld
+    30;Underworld Denizens
+    31;Untote
+    32;Vampire
+    33;Waldelfen
+    34;Zwerge
+    35;Echsenmenschen
+  coaches.csv: |
+    id;league_id;first_name;last_name;display_name
+    1;2;André;Gährken;
+    2;2;Berit;Schlüter;
+    3;2;Bernd;Junker;
+    4;2;Carl;Henjes;
+    5;2;Chris;Pott;
+    6;2;Faton;Sejdija;
+    7;2;Felix;Blankermann;
+    8;2;Frederik;Trieb;
+    9;2;Jennifer;Schlechter;Jenny
+    10;2;Johann;Kuhn;
+    11;2;Kevin;Lequen;
+    12;2;Marco;Oberecht;Obi
+    13;2;Max;Richter;
+    14;2;Philipp;Pollmann;
+    15;2;Philipp;Saatkamp;Fips
+    16;2;Rainer;Gelhaus;
+    17;2;Raphael;Wresh;
+    18;2;Raphael;Oppenberg;
+    19;2;Simon;Nosthoff;
+    20;2;Stephan;Waider;
+    21;2;Sven;Lehmkuhl;
+    22;2;Sven;Fatum;
+    23;2;Till;Limbrock;
+    24;2;Tim;Freund;
+    25;2;Timo;Decker;
+    26;2;Timon;Michler;
+    27;2;Tobias;Stelter;
+    28;1;Bernd;Junker;
+    29;1;Johann;Kuhn;
+    30;1;Marco;Oberecht;Obi
+    31;1;Rainer;Gelhaus;
+    32;1;Raphael;Wresh;
+    33;1;Till;Limbrock;
+    34;1;Timo;Decker;
+    35;1;Tobias;Stelter;
+    36;2;Max;Pomblitz;
+  teams.csv: |
+    id;season_id;name;race_id;coach_id
+    1;2;Wolbecker Wolpertinger;6;12
+    2;2;Middenland Wolves;13;6
+    3;2;Mortheim Maniacs;17;3
+    4;2;Mighty Moon Moshaz;25;7
+    5;2;Gully Sneakers;26;36
+    6;2;Anaheim Frozen Fingers;20;1
+    7;2;The no ones;27;15
+    8;2;BuckelBerg Bombers;25;29
+    9;2;Lucky Men in Tights;33;22
+    10;2;Big Bad Crocs;35;8
+    11;2;Necropolis Nightmares;18;19
+    12;2;The Plague Pit Bloaters;21;5
+    13;2;Eastend Slowdiver;7;25
+    14;2;Competitive Math;15;21
+    15;2;Underworld Kindergarten;30;5
+    16;2;Naggaroth Nightwings;8;27
+    17;2;The Snu Snuugs;11;20
+    18;2;Squighorn Screamers;10;24
+    19;2;Die Hafenmeister;34;13
+    20;2;Carroburg Cosmopolitans;23;3
+    21;2;This is my favorite team on the pitch;14;16
+    22;2;Greenboi Packers;25;11
+    23;2;Da Red Thunda;24;1
+    24;2;Beards & Bulls United;7;23
+    25;2;Kara Temple Harpies;1;27
+  matches.csv: |
+    

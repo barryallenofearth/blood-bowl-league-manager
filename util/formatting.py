@@ -108,7 +108,7 @@ def format_match(match: BBMatch) -> str:
     team1_name = db.session.query(Team).filter_by(id=match.team_1_id).first().name
     team2_name = db.session.query(Team).filter_by(id=match.team_2_id).first().name
 
-    string = f"{team1_name} vs. {team2_name} : {match.team_1_touchdown}:{match.team_2_touchdown}"
+    string = f"Match {match.match_number}: {team1_name} vs. {team2_name} : {match.team_1_touchdown}:{match.team_2_touchdown}"
     if match.team_1_surrendered:
         string += f" ({team1_name} surrendered)"
     if match.team_2_surrendered:
