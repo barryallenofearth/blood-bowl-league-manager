@@ -152,12 +152,18 @@ def jsonify_league(league: League):
 
 @app.route("/match-result/user-input", methods=["POST"])
 def match_result_from_user_inpt():
-    match_result = request.json["match-result"]
-    try:
-        bb_match = parsing.parse_match_result(match_result)
-        db.session.add(bb_match)
-        db.session.commit()
+    match_result = request.json["match-results"]  # type list
 
-        return f"Match successfully entered: '{formatting.format_match(bb_match)}' from user input '{match_result}'"
-    except SyntaxError:
-        return f"Match result '{match_result}' did not match the expected pattern."
+    response = ""
+    if len(match_result) == 0:
+        return "No match results were submitted."
+    for match in match_result:
+        try:
+            bb_match = parsing.parse_match_result(match)
+            db.session.add(bb_match)
+            db.session.commit()
+            response += f"<200> Match successfully entered: '{formatting.format_match(bb_match)}' from user input '{match}'\n"
+        except SyntaxError:
+            response += f"<400> Match result '{match}' did not match the expected pattern.\n"
+
+    return response.strip()

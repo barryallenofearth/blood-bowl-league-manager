@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Regexp
 
 import database.database
 from database.database import db, Coach, Race, Team
-from util import formatting
+from util import formatting, parsing
 
 
 class BaseLeagueForm(FlaskForm):
@@ -98,6 +98,17 @@ class UpdateTeamForm(BaseTeamForm):
 
 class BaseMatchForm(FlaskForm):
     team1 = SelectField("Team 1", validators=[DataRequired("Please select a team")])
+
+
+class AddMatchForm(FlaskForm):
+    match_user_input = StringField("Match user input", description="Matches need to be entered using the following pattern: {TEAM 1} vs. {TEAM 2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
+                                                                   "i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1",
+                                   validators=[Regexp(regex=parsing.MATCH_REGEX, message="Please enter match results in the required format")])
+    submit = SubmitField(label="Add new match")
+
+
+class UpdateMatchForm(FlaskForm):
+    team1 = SelectField("Team 1", validators=[DataRequired("Please select a team")])
     team2 = SelectField("Team 2", validators=[DataRequired("Please select an opponent")])
     team1_td_made = IntegerField("Team 1 touchdowns", validators=[DataRequired("Please enter a valid number.")])
     team2_td_made = IntegerField("Team 2 touchdowns", validators=[DataRequired("Please enter a valid number.")])
@@ -106,6 +117,7 @@ class BaseMatchForm(FlaskForm):
     team1_points_modification = IntegerField("Team 1 points modification")
     team2_points_modification = IntegerField("Team 2 points modification")
     match_type_select = SelectField("Match type", choices=[(0, "Standard match"), (1, "Playoff match"), (2, "Tournament match")])
+    submit = SubmitField(label="Update match")
 
     def __init__(self, app=None, **kwargs):
         super().__init__(**kwargs)
@@ -115,11 +127,3 @@ class BaseMatchForm(FlaskForm):
             all_teams = db.session.query(Team).filter_by(season_id=season.id).all()
             self.team1.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
             self.team2.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
-
-
-class AddMatchForm(BaseMatchForm):
-    submit = SubmitField(label="Add new match")
-
-
-class UpdateMatchForm(BaseMatchForm):
-    submit = SubmitField(label="Update match")
