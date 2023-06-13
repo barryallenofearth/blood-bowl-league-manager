@@ -71,7 +71,6 @@ def parse_match_result(user_input: str) -> BBMatch:
         else:
             bb_match.match_number = highest_match_number.match_number + 1
     else:
-        # TODO handle if number already exists
         bb_match.match_number = int(match_number.strip())
 
     bb_match.team_1_id = determine_matching_team(all_teams, team_input_1).id

@@ -110,8 +110,8 @@ class AddMatchForm(FlaskForm):
 class UpdateMatchForm(FlaskForm):
     team1 = SelectField("Team 1", validators=[DataRequired("Please select a team")])
     team2 = SelectField("Team 2", validators=[DataRequired("Please select an opponent")])
-    team1_td_made = IntegerField("Team 1 touchdowns", validators=[DataRequired("Please enter a valid number.")])
-    team2_td_made = IntegerField("Team 2 touchdowns", validators=[DataRequired("Please enter a valid number.")])
+    team1_td_made = IntegerField("Team 1 touchdowns")
+    team2_td_made = IntegerField("Team 2 touchdowns")
     match_number = IntegerField("Match number", validators=[DataRequired("Please enter a valid number.")])
     surrendered_select = SelectField("Team surrendered", choices=[(0, "No team surrendered"), (1, "Team 1 surrendered"), (2, "Team 2 surrendered")])
     team1_points_modification = IntegerField("Team 1 points modification")

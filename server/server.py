@@ -4,6 +4,7 @@ import os
 from flask import request, send_from_directory, render_template
 from flask_bootstrap import Bootstrap
 
+import database.database
 from database import bootstrapping
 from database.database import db
 from server import delete_entities
@@ -49,6 +50,10 @@ def favicon():
 
 @app.route('/')
 def home():
+    if database.get_selected_league() is None:
+        return redirect(url_for("manage", entity_type="league"))
+    elif database.get_selected_season() is None:
+        return redirect(url_for("manage", entity_type="season"))
     return render_template("home.html", nav_properties=NavProperties(db))
 
 
@@ -146,10 +151,6 @@ def delete(entity_type: str, id: int):
     return json.loads(return_json)
 
 
-def jsonify_league(league: League):
-    return {"id": league.id, "title": league.title, "short_name": league.short_name}
-
-
 @app.route("/match-result/user-input", methods=["POST"])
 def match_result_from_user_inpt():
     match_result = request.json["match-results"]  # type list
@@ -162,8 +163,8 @@ def match_result_from_user_inpt():
             bb_match = parsing.parse_match_result(match)
             db.session.add(bb_match)
             db.session.commit()
-            response += f"<200> Match successfully entered: '{formatting.format_match(bb_match)}' from user input '{match}'\n"
+            response += f"[200] Match successfully entered: '{formatting.format_match(bb_match)}' from user input '{match}'\n"
         except SyntaxError:
-            response += f"<400> Match result '{match}' did not match the expected pattern.\n"
+            response += f"[400] Match result '{match}' did not match the expected pattern.\n"
 
     return response.strip()

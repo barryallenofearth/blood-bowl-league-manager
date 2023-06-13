@@ -2,6 +2,7 @@ from collections import defaultdict
 
 from sqlalchemy import or_
 
+from database import database
 from database.database import db, BBMatch, Team, Season, Coach, Race, Scorings, League, SeasonRules
 from util import formatting
 
@@ -108,7 +109,22 @@ def team_delete(id: int):
 
 def match_delete(id: int) -> str:
     bb_match = db.session.query(BBMatch).filter_by(id=id).first()
+    match_number = bb_match.match_number
     db.session.delete(bb_match)
     db.session.commit()
+
+    highest_match_number = database.highest_match_number()
+    if match_number != highest_match_number:
+        season = database.get_selected_season()
+        all_matches = db.session.query(BBMatch) \
+            .filter_by(season_id=season.id) \
+            .filter(BBMatch.match_number >= match_number) \
+            .all()
+
+        for match in all_matches:
+            match.match_number = match.match_number - 1
+            db.session.add(match)
+
+        db.session.commit()
 
     return SUCCESSFULLY_DELETED

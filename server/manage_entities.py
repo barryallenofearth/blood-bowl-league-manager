@@ -299,8 +299,36 @@ def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
 
 
 def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
+    def reorganize_match_numbers(bb_match: BBMatch, match_number: int):
+        season = database.get_selected_season()
+
+        same_number_match = db.session.query(BBMatch) \
+            .filter_by(season_id=season.id) \
+            .filter_by(match_number=match_number) \
+            .first()
+
+        if same_number_match is not None:
+            all_matches = db.session.query(BBMatch) \
+                .filter_by(season_id=season.id) \
+                .filter(BBMatch.match_number >= match_number) \
+                .all()
+
+            for current_match in all_matches:
+                current_match.match_number = current_match.match_number + 1
+                db.session.add(current_match)
+
+            db.session.commit()
+        else:
+            highest_number = database.highest_match_number()
+            if highest_number + 1 > match_number:
+                bb_match.match_number = highest_number + 1
+
+        match.match_number = match_number
+
+    match_number: int
     if entity_id == 0:
         match = parsing.parse_match_result(form.match_user_input.data)
+        match_number = match.match_number
     else:
         match = __get_match(db, entity_id)
         match.season_id = database.get_selected_season().id
@@ -308,8 +336,9 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
         match.team_2_id = form.team2.data
         match.team_1_touchdown = form.team1_td_made.data
         match.team_2_touchdown = form.team2_td_made.data
-        # TODO handle if match number is existing
-        match.match_number = form.match_number.data
+
+        match_number = form.match_number.data
+        match.match_number = match_number
 
         if form.surrendered_select.data == "0":
             match.team_1_surrendered = False
@@ -333,5 +362,7 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
         elif form.match_type_select.data == "2":
             match.is_playoff_match = False
             match.is_tournament_match = True
+
+    reorganize_match_numbers(match, match_number)
 
     return persist_and_redirect(match, BBMatch.__tablename__, db)

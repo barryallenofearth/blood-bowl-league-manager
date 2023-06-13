@@ -139,3 +139,13 @@ def persist_scorings(user_input: str, season_id: int):
         db.session.add(scoring)
 
     db.session.commit()
+
+
+def highest_match_number() -> int:
+    season = get_selected_season()
+
+    highest_number_match = db.session.query(BBMatch).filter_by(season_id=season.id).order_by(BBMatch.match_number.desc()).first()
+    if highest_number_match is None:
+        return 0
+
+    return highest_number_match.match_number
