@@ -119,6 +119,14 @@ a:focus,
     text-align: center;
 }
 
+.bordered tr:nth-of-type(even) td {
+    background: #555;
+}
+
+.bordered tr:nth-of-type(odd) td {
+    background: #444;
+}
+
 @media only screen and (max-width: 990px) {
     .bordered {
         font-size: 0.8rem;

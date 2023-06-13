@@ -99,7 +99,7 @@ class SeasonRules(db.Model):
 
 
 class Scorings(db.Model):
-    DEFAULT_SCORINGS_ENTRY = "-1: 1\n0:1\n1:3"
+    DEFAULT_SCORINGS_ENTRY = "-1: 0\n0:1\n1:3"
 
     __tablename__ = "scorings"
 

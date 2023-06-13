@@ -5,6 +5,7 @@ from flask import request, send_from_directory, render_template
 from flask_bootstrap import Bootstrap
 
 import database.database
+import table.table_generator
 from database import bootstrapping
 from database.database import db
 from server import delete_entities
@@ -54,6 +55,10 @@ def home():
         return redirect(url_for("manage", entity_type="league"))
     elif database.get_selected_season() is None:
         return redirect(url_for("manage", entity_type="season"))
+
+    # TODO render table
+    scores = table.table_generator.calculate_team_scores()
+    print(scores)
     return render_template("home.html", nav_properties=NavProperties(db))
 
 
