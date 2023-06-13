@@ -10,7 +10,7 @@ class TeamScores:
         self.place = place
         self.team_short_name = team.short_name
         self.race = db.session.query(Race).filter_by(id=team.race_id).first().name
-        self.coach = formatting.format_coach(db.session.query(Coach).filter_by(id=team.coach_id).first())
+        self.coach = formatting.coach_table_name(team.coach_id)
         self.number_of_matches = number_of_matches
         self.match_result_counts = match_result_counts
         self.td_received = td_received
@@ -19,8 +19,8 @@ class TeamScores:
         self.points = points
 
     def __repr__(self):
-        return f"place: {self.place}, team_short_name:{self.team_short_name}, race:{self.race}, coach:{self.coach}, " \
-               f"number_of_matches:{self.number_of_matches},match_result_counts:{self.match_result_counts},td_received:{self.td_received},td_made:{self.td_made},td_diff:{self.td_diff},points:{self.points}\n"
+        return f"TeamResults<place: {self.place}, team_short_name:{self.team_short_name}, race:{self.race}, coach:{self.coach}, " \
+               f"number_of_matches:{self.number_of_matches},match_result_counts:{self.match_result_counts},td_received:{self.td_received},td_made:{self.td_made},td_diff:{self.td_diff},points:{self.points}>\n"
 
 
 def calculate_team_scores():
@@ -62,7 +62,8 @@ def calculate_team_scores():
         modify_team_score(team_results, match.team_1_id, match.team_1_touchdown, match.team_2_touchdown, match.team_1_point_modification, scorings)
         modify_team_score(team_results, match.team_2_id, match.team_2_touchdown, match.team_1_touchdown, match.team_2_point_modification, scorings)
 
-    sorted_results = sorted(team_results.values(), key=lambda result: (-result.points, -result.td_diff, -result.td_made, -result.number_of_matches))
+    sorted_results = sorted([result for result in team_results.values() if result.number_of_matches > 0], key=lambda result: (-result.points, -result.td_diff, -result.td_made, -result.number_of_matches, result.team_short_name))
+    sorted_results = sorted_results + sorted([result for result in team_results.values() if result.number_of_matches == 0], key=lambda result: result.team_short_name)
     points_previous = sorted_results[0].points
     td_diff_previous = sorted_results[0].td_diff
     td_made_previous = sorted_results[0].td_made

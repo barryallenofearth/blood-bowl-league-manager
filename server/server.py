@@ -51,15 +51,16 @@ def favicon():
 
 @app.route('/')
 def home():
+    season = database.get_selected_season()
     if database.get_selected_league() is None:
         return redirect(url_for("manage", entity_type="league"))
-    elif database.get_selected_season() is None:
+    elif season is None:
         return redirect(url_for("manage", entity_type="season"))
 
     # TODO render table
-    scores = table.table_generator.calculate_team_scores()
-    print(scores)
-    return render_template("home.html", nav_properties=NavProperties(db))
+    team_results = table.table_generator.calculate_team_scores()
+    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
+    return render_template("home.html", team_results=team_results, scorings=scorings, nav_properties=NavProperties(db))
 
 
 @app.route("/season/select/<string:id>")

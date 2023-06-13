@@ -1,1 +1,47 @@
 {% extends 'base.html' %}
+{% block content %}
+{{super()}}
+<div class="container">
+    <table class="bordered">
+        <tr>
+            <th>Platz</th>
+            <!--use names from database-->
+            <th>Name</th>
+            <th>Team</th>
+            <th>Coach</th>
+            <th>Spiele</th>
+            {% for scoring in scorings %}
+            <th>
+                {% if scoring.touchdown_difference > 0%}
+                Win{{scoring.touchdown_difference}}{%if loop.index == 1%}+{% endif%}
+                {% elif scoring.touchdown_difference == 0%}
+                Draw
+                {% else %}
+                Loss{{scoring.touchdown_difference*(-1)}}{%if loop.index == scorings|length%}+{% endif%}
+                {% endif %}
+            </th>
+            {% endfor %}
+            <th>TD-</th>
+            <th>TD+</th>
+            <th>TD Diff</th>
+            <th>Punkte</th>
+        </tr>
+        {% for result in team_results %}
+        <tr>
+            <td>{{result.place}}</td>
+            <td>{{result.team_short_name}}</td>
+            <td>{{result.race}}</td>
+            <td>{{result.coach}}</td>
+            <td>{{result.number_of_matches}}</td>
+            {% for count in result.match_result_counts %}
+            <td>{{count}}</td>
+            {% endfor %}
+            <td>{{result.td_received}}</td>
+            <td>{{result.td_made}}</td>
+            <td>{{result.td_diff}}</td>
+            <td>{{result.points}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+{% endblock %}
