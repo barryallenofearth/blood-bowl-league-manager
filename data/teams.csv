@@ -9,11 +9,11 @@ id;season_id;name;race_id;coach_id
 8;2;BuckelBerg Bombers;25;29
 9;2;Lucky Men in Tights;33;22
 10;2;Big Bad Crocs;35;8
-11;2;Necropolis Nightmares;18;19
+11;2;Necropolis Nightmares;19;19
 12;2;The Plague Pit Bloaters;21;5
 13;2;Eastend Slowdiver;7;25
 14;2;Competitive Math;15;21
-15;2;Underworld Kindergarten;30;5
+15;2;Underworld Kindergarten;29;5
 16;2;Naggaroth Nightwings;8;27
 17;2;The Snu Snuugs;11;20
 18;2;Squighorn Screamers;10;24
@@ -24,3 +24,6 @@ id;season_id;name;race_id;coach_id
 23;2;Da Red Thunda;24;1
 24;2;Beards & Bulls United;7;23
 25;2;Kara Temple Harpies;1;27
+26;2;Ancient Conquerors;31;18
+27;2;Karak a Karaz Iron Breakers;34;6
+28;2;Righteous Anger;8;22

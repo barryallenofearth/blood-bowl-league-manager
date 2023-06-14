@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}{{super()}} | Overview{% endblock %}
 {% block content %}
 {{super()}}
 
@@ -45,7 +46,7 @@
             {% for count in result.match_result_counts %}
             <td class="center">{{count}}</td>
             {% endfor %}
-            <td  class="center">{{result.td_received}}</td>
+            <td class="center">{{result.td_received}}</td>
             <td class="center"><strong>{{result.td_made}}</strong></td>
             <td class="center"><strong>{{result.td_diff}}</strong></td>
             <td class="center"><strong class="scored-points">{{result.points}}</strong></td>

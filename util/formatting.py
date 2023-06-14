@@ -84,6 +84,11 @@ def format_coach(coach: Coach) -> str:
 
 
 def coach_table_name(coach_id: Coach) -> str:
+    def generate_table_name(coach: Coach, index: int):
+        if len(coach.last_name) < index:
+            return f"{coach.first_name} {coach.last_name}"
+        return coach.first_name + " " + coach.last_name[:index + 1]
+
     season_id = database.get_selected_season().id
 
     coach = db.session.query(Coach).filter_by(id=coach_id).first()
@@ -106,7 +111,22 @@ def coach_table_name(coach_id: Coach) -> str:
         return coach.first_name
 
     # TODO handle names with equal first name
-    return coach.first_name + " " + coach.last_name
+    index = 0
+    full_name = coach.first_name + " " + coach.last_name
+    table_name = generate_table_name(coach, index)
+    display_names = [generate_table_name(current_coach, index) for current_coach in all_coaches_with_identical_first_name]
+    while table_name in display_names:
+        index += 1
+
+        table_name = generate_table_name(coach, index)
+        display_names = [generate_table_name(current_coach, index) for current_coach in all_coaches_with_identical_first_name]
+
+    if table_name != full_name:
+        table_name += "."
+    else:
+        table_name = full_name
+
+    return table_name
 
 
 def format_match(match: BBMatch) -> str:
