@@ -1,0 +1,16 @@
+{% import 'fragments/table_macros.html' as table_commons %}
+<table class="bordered">
+    <tr>
+        <th>Platz</th>
+        <th>{{term_for_races}}</th>
+        {{table_commons.common_headers(scorings)}}
+    </tr>
+    {% for result in race_results %}
+    <tr>
+        <td class="center{% if result.number_of_matches>0 and loop.index <= number_of_playoff_places %} highlight-table-cell{% endif %}">{{result.place}}</td>
+        <td>{{result.race}}</td>
+        <td class="center{% if result.number_of_matches == number_of_allowed_matches %} highlight-table-cell{% endif %}"><strong>{{result.number_of_matches}}</strong></td>
+        {{table_commons.common_results(result)}}
+    </tr>
+    {%endfor%}
+</table>

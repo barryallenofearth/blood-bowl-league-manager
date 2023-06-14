@@ -106,13 +106,13 @@
                 {% endif %}
             </td>
             {% else %}
-            <td>
+            <td class="center">
                 <a href="{{ url_for('manage',entity_type=entity_type,id=value) }}"
                    class="btn btn-outline-warning">
                     <i class="bi bi-pencil"></i>
                 </a>
             </td>
-            <td>
+            <td class="center">
                 <a href="#" id="delete-entity-{{ value }}" class="btn btn-outline-warning">
                     <i class="bi bi-trash"></i> </a>
             </td>

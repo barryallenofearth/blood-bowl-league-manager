@@ -12,47 +12,7 @@
     <h2>Teams</h2>
 </div>
 <div class="container">
-    <table class="bordered">
-        <tr>
-            <th>Platz</th>
-            <!--use names from database-->
-            <th>{{term_for_team_names}}</th>
-            <th>{{term_for_races}}</th>
-            <th>{{term_for_coaches}}</th>
-            <th>Spiele</th>
-            {% for scoring in scorings %}
-            <th>
-                {% if scoring.touchdown_difference > 0%}
-                Win{{scoring.touchdown_difference}}{%if loop.index == 1%}+{% endif%}
-                {% elif scoring.touchdown_difference == 0%}
-                Draw
-                {% else %}
-                Loss{{scoring.touchdown_difference*(-1)}}{%if loop.index == scorings|length%}+{% endif%}
-                {% endif %}
-            </th>
-            {% endfor %}
-            <th>TD-</th>
-            <th>TD+</th>
-            <th>TD Diff</th>
-            <th>Punkte</th>
-        </tr>
-        {% for result in team_results %}
-        <tr>
-            <td class="center{% if result.number_of_matches>0 and loop.index <= number_of_playoff_places %} highlight-table-cell{% endif %}">{{result.place}}</td>
-            <td><strong>{{result.team_short_name}}</strong></td>
-            <td>{{result.race}}</td>
-            <td>{{result.coach}}</td>
-            <td class="center{% if result.number_of_matches == number_of_allowed_matches %} highlight-table-cell{% endif %}"><strong>{{result.number_of_matches}}</strong></td>
-            {% for count in result.match_result_counts %}
-            <td class="center">{{count}}</td>
-            {% endfor %}
-            <td class="center">{{result.td_received}}</td>
-            <td class="center"><strong>{{result.td_made}}</strong></td>
-            <td class="center"><strong>{{result.td_diff}}</strong></td>
-            <td class="center"><strong class="scored-points">{{result.points}}</strong></td>
-        </tr>
-        {%endfor%}
-    </table>
+    {% include 'fragments/teams_table.html' %}
 </div>
 
 
@@ -60,6 +20,12 @@
     <h2>Coaches</h2>
 </div>
 <div class="container">
+    {% include 'fragments/coaches_table.html' %}
+</div>
+<div class="container">
     <h2>Races</h2>
+</div>
+<div class="container">
+    {% include 'fragments/races_table.html' %}
 </div>
 {% endblock %}

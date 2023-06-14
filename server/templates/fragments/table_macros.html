@@ -1,0 +1,28 @@
+{% macro common_headers(scorings) %}
+<th>Spiele</th>
+{% for scoring in scorings %}
+<th>
+    {% if scoring.touchdown_difference > 0%}
+    Win{{scoring.touchdown_difference}}{%if loop.index == 1%}+{% endif%}
+    {% elif scoring.touchdown_difference == 0%}
+    Draw
+    {% else %}
+    Loss{{scoring.touchdown_difference*(-1)}}{%if loop.index == scorings|length%}+{% endif%}
+    {% endif %}
+</th>
+{% endfor %}
+<th>TD-</th>
+<th>TD+</th>
+<th>TD Diff</th>
+<th>Punkte</th>
+{% endmacro %}
+
+{% macro common_results(result) %}
+{% for count in result.match_result_counts %}
+<td class="center">{{count}}</td>
+{% endfor %}
+<td class="center">{{result.td_received}}</td>
+<td class="center"><strong>{{result.td_made}}</strong></td>
+<td class="center"><strong>{{result.td_diff}}</strong></td>
+<td class="center"><strong class="scored-points">{{result.points}}</strong></td>
+{% endmacro %}
