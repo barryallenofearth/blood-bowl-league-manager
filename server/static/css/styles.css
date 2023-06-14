@@ -115,9 +115,6 @@ a:focus,
     border: 1px solid var(--table-border);
     padding: 0.2rem;
 }
-.bordered th {
-    border-bottom: 1px double var(--table-border);
-}
 
 .bordered tr:nth-of-type(even) td {
     background: #555;

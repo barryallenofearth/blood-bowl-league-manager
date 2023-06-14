@@ -94,7 +94,7 @@
         </tr>
         {% for entity in table %}
         <tr id="row-entity-{{ entity|last }}">
-        <td>{{loop.index}}</td>
+        <td class="center">{{loop.index}}</td>
             {% for value in entity %}
             {% if loop.index < entity|length %}
             <td>{% if value %}

@@ -37,18 +37,18 @@
         </tr>
         {% for result in team_results %}
         <tr>
-            <td {% if result.number_of_matches>0 and loop.index <= number_of_playoff_places %}class="highlight-table-cell"{% endif %}>{{result.place}}</td>
+            <td class="center{% if result.number_of_matches>0 and loop.index <= number_of_playoff_places %} highlight-table-cell{% endif %}">{{result.place}}</td>
             <td><strong>{{result.team_short_name}}</strong></td>
             <td>{{result.race}}</td>
             <td>{{result.coach}}</td>
-            <td {% if result.number_of_matches == number_of_allowed_matches %}class="highlight-table-cell" {% endif %}><strong>{{result.number_of_matches}}</strong></td>
+            <td class="center{% if result.number_of_matches == number_of_allowed_matches %} highlight-table-cell{% endif %}"><strong>{{result.number_of_matches}}</strong></td>
             {% for count in result.match_result_counts %}
-            <td>{{count}}</td>
+            <td class="center">{{count}}</td>
             {% endfor %}
-            <td>{{result.td_received}}</td>
-            <td><strong>{{result.td_made}}</strong></td>
-            <td><strong>{{result.td_diff}}</strong></td>
-            <td><strong class="scored-points">{{result.points}}</strong></td>
+            <td  class="center">{{result.td_received}}</td>
+            <td class="center"><strong>{{result.td_made}}</strong></td>
+            <td class="center"><strong>{{result.td_diff}}</strong></td>
+            <td class="center"><strong class="scored-points">{{result.points}}</strong></td>
         </tr>
         {%endfor%}
     </table>

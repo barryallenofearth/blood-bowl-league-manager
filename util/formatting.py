@@ -90,14 +90,19 @@ def coach_table_name(coach_id: Coach) -> str:
     if coach.display_name is not None and coach.display_name != "":
         return coach.display_name
 
-    all_coaches_ids_with_team_in_season = [team.coach_id for team in db.session.query(Team).filter_by(season_id=season_id).filter(Team.coach_id != coach_id).all()]
+    teams_by_other_coaches = db.session.query(Team) \
+        .filter_by(season_id=season_id) \
+        .filter(Team.coach_id != coach_id) \
+        .filter(Team.is_disqualified is not True) \
+        .all()
+    all_coaches_ids_with_team_in_season = [team.coach_id for team in teams_by_other_coaches]
 
     all_coaches_with_identical_first_name = db.session.query(Coach) \
         .filter(Coach.id.in_(all_coaches_ids_with_team_in_season)) \
         .filter_by(first_name=coach.first_name) \
         .all()
 
-    if len(all_coaches_with_identical_first_name):
+    if len(all_coaches_with_identical_first_name) == 0:
         return coach.first_name
 
     # TODO handle names with equal first name
