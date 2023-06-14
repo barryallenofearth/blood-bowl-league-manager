@@ -7,9 +7,9 @@
     </tr>
     {% for result in coach_results %}
     <tr>
-        <td class="center{% if result.number_of_matches>0 and loop.index <= number_of_playoff_places %} highlight-table-cell{% endif %}">{{result.place}}</td>
-        <td>{{result.coach}}</td>
-        <td class="center{% if result.number_of_matches == number_of_allowed_matches %} highlight-table-cell{% endif %}"><strong>{{result.number_of_matches}}</strong></td>
+        <td class="center">{{result.place}}</td>
+        <td><strong>{{result.coach}}</strong></td>
+        <td class="center"><strong>{{result.number_of_matches}}</strong></td>
         {{table_commons.common_results(result)}}
     </tr>
     {%endfor%}

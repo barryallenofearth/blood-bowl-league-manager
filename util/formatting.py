@@ -83,7 +83,7 @@ def format_coach(coach: Coach) -> str:
     return string
 
 
-def coach_table_name(coach_id: Coach) -> str:
+def coach_table_name(coach_id: int) -> str:
     def generate_table_name(coach: Coach, index: int):
         if len(coach.last_name) < index:
             return f"{coach.first_name} {coach.last_name}"

@@ -5,29 +5,55 @@ from database.database import db, BBMatch, Team, Race, Coach, Scorings
 from util import formatting
 
 
-class TeamScores:
-    def __init__(self, team: Team, match_result_counts, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):
+class BaseScores:
+    def __init__(self, number_of_scorings: int, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):
         self.place = place
-        self.team_short_name = team.short_name
-        self.race = db.session.query(Race).filter_by(id=team.race_id).first().name
-        self.coach = formatting.coach_table_name(team.coach_id)
         self.number_of_matches = number_of_matches
-        self.match_result_counts = match_result_counts
+        self.match_result_counts = [0 for _ in range(number_of_scorings)]
         self.td_received = td_received
         self.td_made = td_made
         self.td_diff = td_diff
         self.points = points
 
+
+def __repr__(self):
+    return f"place: {self.place}, number_of_matches:{self.number_of_matches},match_result_counts:{self.match_result_counts},td_received:{self.td_received},td_made:{self.td_made},td_diff:{self.td_diff},points:{self.points}>\n"
+
+
+class TeamScores(BaseScores):
+    def __init__(self, team: Team, number_of_scorings: int, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):
+        super().__init__(number_of_scorings, place, number_of_matches, td_received, td_made, td_diff, points)
+        self.team_short_name = team.short_name
+        self.race = db.session.query(Race).filter_by(id=team.race_id).first().name
+        self.coach = formatting.coach_table_name(team.coach_id)
+
     def __repr__(self):
-        return f"TeamResults<place: {self.place}, team_short_name:{self.team_short_name}, race:{self.race}, coach:{self.coach}, " \
-               f"number_of_matches:{self.number_of_matches},match_result_counts:{self.match_result_counts},td_received:{self.td_received},td_made:{self.td_made},td_diff:{self.td_diff},points:{self.points}>\n"
+        return f"TeamResults<place: team_short_name:{self.team_short_name}, race:{self.race}, coach:{self.coach}, " + super().__repr__()
 
 
-def calculate_team_scores():
-    def modify_team_score(team_results: dict, team_id: int, td_made: int, td_received: int, points_modification: int, scorings: list):
+class CoachScores(BaseScores):
+    def __init__(self, coach: Coach, number_of_scorings: int, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):
+        super().__init__(number_of_scorings, place, number_of_matches, td_received, td_made, td_diff, points)
+        self.coach = formatting.coach_table_name(coach.id)
+
+    def __repr__(self):
+        return f"CoachResults<place: coach:{self.coach}, " + super().__repr__()
+
+
+class RaceScores(BaseScores):
+    def __init__(self, race: Race, number_of_scorings: int, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):
+        super().__init__(number_of_scorings, place, number_of_matches, td_received, td_made, td_diff, points)
+        self.race = race.name
+
+    def __repr__(self):
+        return f"RaceResults<place: race:{self.race}, " + super().__repr__()
+
+
+def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_from_team_id_getter, alphabetic_sorter):
+    def modify_team_score(analysis_results: dict, entity_id: int, td_made: int, td_received: int, points_modification: int, scorings: list):
         def determine_points(td_diff: int) -> int:
             def increment_match_results_count(index: int):
-                team_scoring.match_result_counts[len(scorings) - 1 - index] = team_scoring.match_result_counts[len(scorings) - 1 - index] + 1
+                analysis_scoring.match_result_counts[len(scorings) - 1 - index] = analysis_scoring.match_result_counts[len(scorings) - 1 - index] + 1
 
             if td_diff <= scorings[0].touchdown_difference:
                 increment_match_results_count(0)
@@ -42,28 +68,22 @@ def calculate_team_scores():
                     return scorings[index].points_scored
             raise ValueError(f"No points entry found for points difference {td_diff}")
 
-        team_scoring = team_results[team_id]
-        team_scoring.number_of_matches = team_scoring.number_of_matches + 1
-        team_scoring.td_made = team_scoring.td_made + td_made
-        team_scoring.td_received = team_scoring.td_received + td_received
+        analysis_scoring = analysis_results[entity_id]
+        analysis_scoring.number_of_matches = analysis_scoring.number_of_matches + 1
+        analysis_scoring.td_made = analysis_scoring.td_made + td_made
+        analysis_scoring.td_received = analysis_scoring.td_received + td_received
         td_diff = td_made - td_received
-        team_scoring.td_diff = team_scoring.td_diff + td_diff
-        team_scoring.points = team_scoring.points + points_modification + determine_points(td_diff)
+        analysis_scoring.td_diff = analysis_scoring.td_diff + td_diff
+        analysis_scoring.points = analysis_scoring.points + points_modification + determine_points(td_diff)
 
-    season = database.get_selected_season()
-    teams = db.session.query(Team).filter_by(season_id=season.id).all()
-
-    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
-    team_results = {team.id: TeamScores(team=team, match_result_counts=[0 for _ in range(len(scorings))]) for team in teams}
-
-    matches = db.session.query(BBMatch).filter_by(season_id=season.id).all()
+    matches = db.session.query(BBMatch).filter_by(season_id=season_id).all()
 
     for match in matches:
-        modify_team_score(team_results, match.team_1_id, match.team_1_touchdown, match.team_2_touchdown, match.team_1_point_modification, scorings)
-        modify_team_score(team_results, match.team_2_id, match.team_2_touchdown, match.team_1_touchdown, match.team_2_point_modification, scorings)
+        modify_team_score(results, entity_id_from_team_id_getter(match.team_1_id), match.team_1_touchdown, match.team_2_touchdown, match.team_1_point_modification, scorings)
+        modify_team_score(results, entity_id_from_team_id_getter(match.team_2_id), match.team_2_touchdown, match.team_1_touchdown, match.team_2_point_modification, scorings)
 
-    sorted_results = sorted([result for result in team_results.values() if result.number_of_matches > 0], key=lambda result: (-result.points, -result.td_diff, -result.td_made, -result.number_of_matches, result.team_short_name))
-    sorted_results = sorted_results + sorted([result for result in team_results.values() if result.number_of_matches == 0], key=lambda result: result.team_short_name)
+    sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0], key=lambda result: (-result.points, -result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))
+    sorted_results = sorted_results + sorted([result for result in results.values() if result.number_of_matches == 0], key=lambda result: alphabetic_sorter(result))
     points_previous = sorted_results[0].points
     td_diff_previous = sorted_results[0].td_diff
     td_made_previous = sorted_results[0].td_made
@@ -80,3 +100,48 @@ def calculate_team_scores():
         place_previous = sorted_results[index].place
 
     return sorted_results
+
+
+def calculate_team_scores():
+    def team_id_getter(team_id: int):
+        return team_id
+
+    def alphabetic_sorter(team_scores: TeamScores):
+        return team_scores.team_short_name
+
+    season = database.get_selected_season()
+    teams = db.session.query(Team).filter_by(season_id=season.id).all()
+
+    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
+    team_results = {team.id: TeamScores(team=team, number_of_scorings=len(scorings)) for team in teams}
+    return __calculate_scores(team_results, scorings, season.id, team_id_getter, alphabetic_sorter)
+
+
+def calculate_coaches_scores():
+    def coach_id_getter(team_id: int):
+        return db.session.query(Team).filter_by(id=team_id).first().coach_id
+
+    def alphabetic_sorter(coach_scores: CoachScores):
+        return coach_scores.coach
+
+    season = database.get_selected_season()
+    coaches = {db.session.query(Coach).filter_by(id=team.coach_id).first() for team in db.session.query(Team).filter_by(season_id=season.id).all()}
+
+    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
+    coach_results = {coach.id: CoachScores(coach=coach, number_of_scorings=len(scorings)) for coach in coaches}
+    return __calculate_scores(coach_results, scorings, season.id, coach_id_getter, alphabetic_sorter)
+
+
+def calculate_races_scores():
+    def race_id_getter(team_id: int):
+        return db.session.query(Team).filter_by(id=team_id).first().race_id
+
+    def alphabetic_sorter(race_scores: RaceScores):
+        return race_scores.race
+
+    season = database.get_selected_season()
+    races = {db.session.query(Race).filter_by(id=team.race_id).first() for team in db.session.query(Team).filter_by(season_id=season.id).all()}
+
+    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
+    race_results = {race.id: RaceScores(race=race, number_of_scorings=len(scorings)) for race in races}
+    return __calculate_scores(race_results, scorings, season.id, race_id_getter, alphabetic_sorter)
