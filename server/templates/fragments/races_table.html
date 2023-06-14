@@ -3,12 +3,14 @@
     <tr>
         <th>Platz</th>
         <th>{{term_for_races}}</th>
+        <th>Teams</th>
         {{table_commons.common_headers(scorings)}}
     </tr>
     {% for result in race_results %}
     <tr>
         <td class="center">{{result.place}}</td>
         <td><strong>{{result.race}}</strong></td>
+        <td class="center"><strong>{{result.number_of_teams}}</strong></td>
         <td class="center"><strong>{{result.number_of_matches}}</strong></td>
         {{table_commons.common_results(result)}}
     </tr>
