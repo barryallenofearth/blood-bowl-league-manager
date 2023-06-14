@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import request, send_from_directory, render_template
+from flask import request, send_from_directory, render_template, Flask
 from flask_bootstrap import Bootstrap
 
 import database.database
@@ -11,6 +11,7 @@ from database.database import db
 from server import delete_entities
 from server.manage_entities import *
 from util import parsing
+from html2image import Html2Image
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -62,6 +63,26 @@ def home():
     coach_results = table.table_generator.calculate_coaches_scores()
     race_results = table.table_generator.calculate_races_scores()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
+
+    output_path = f"{os.getcwd()}/server/static/output"
+    hti = Html2Image(output_path=output_path)
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+    with open("server/static/css/styles.css", encoding="utf-8") as css_file:
+        css_content = css_file.read()
+        teams_table = render_template("teams_table_for_image.html", team_results=team_results, race_results=race_results, coach_results=coach_results, scorings=scorings, css_content=css_content,
+                                      term_for_team_names=season_rules.term_for_team_names, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
+                                      number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places)
+
+        html_file = f"{output_path}/table_season_{season.short_name.replace('.', '_')}.html"
+        with open(html_file, "w", encoding="utf-8") as output:
+            output.write(teams_table)
+
+        # hti.screenshot(html_file=f"{os.getcwd()}/table_season_{season.short_name.replace('.', '_')}.html", save_as=f"{output_path}/table_season_{season.short_name.replace('.', '_')}html_file.png")
+        png_output = f"table_season_{season.short_name.replace('.', '_')}.png"
+        print(png_output)
+
+        hti.screenshot(html_str=teams_table, save_as=png_output)
     return render_template("home.html", team_results=team_results, race_results=race_results, coach_results=coach_results, scorings=scorings, nav_properties=NavProperties(db),
                            term_for_team_names=season_rules.term_for_team_names, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
                            number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places)

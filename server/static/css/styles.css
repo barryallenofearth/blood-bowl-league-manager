@@ -8,14 +8,18 @@ your web pages for the styles to be rendered. */
     --link-focus-background: #f8f9fa;
     --nav-background: #222;
     --table-border: #666;
+    --yellow: #FFC107FF;
     --dark-yellow: #b58803;
     --darker-yellow: #8a6700;
     --text-color: white;
+
 }
 
 body {
     background-color: var(--background);
     color: var(--text-color);
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 h1 {
@@ -108,6 +112,8 @@ a:focus,
 
 .bordered {
     width: 100%;
+    border-spacing: 2px;
+    border-collapse: collapse;
     background-color: var(--background);
 }
 
