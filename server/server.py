@@ -57,10 +57,12 @@ def home():
     elif season is None:
         return redirect(url_for("manage", entity_type="season"))
 
-    # TODO render table
+    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
     team_results = table.table_generator.calculate_team_scores()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
-    return render_template("home.html", team_results=team_results, scorings=scorings, nav_properties=NavProperties(db))
+    return render_template("home.html", team_results=team_results, scorings=scorings, nav_properties=NavProperties(db),
+                           term_for_team_names=season_rules.term_for_team_names, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
+                           number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places)
 
 
 @app.route("/season/select/<string:id>")

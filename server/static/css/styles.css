@@ -9,6 +9,7 @@ your web pages for the styles to be rendered. */
     --nav-background: #222;
     --table-border: #666;
     --dark-yellow: #b58803;
+    --darker-yellow: #8a6700;
     --text-color: white;
 }
 
@@ -110,13 +111,12 @@ a:focus,
     background-color: var(--background);
 }
 
-.bordered, .bordered th, .bordered td {
+.bordered, .bordered th, .bordered td{
     border: 1px solid var(--table-border);
     padding: 0.2rem;
 }
-
-.bordered th, .bordered td {
-    text-align: center;
+.bordered th {
+    border-bottom: 1px double var(--table-border);
 }
 
 .bordered tr:nth-of-type(even) td {
@@ -125,6 +125,18 @@ a:focus,
 
 .bordered tr:nth-of-type(odd) td {
     background: #444;
+}
+
+.bordered tr:nth-of-type(even)>td.highlight-table-cell {
+    background: var(--dark-yellow);
+}
+
+.bordered tr:nth-of-type(odd)>td.highlight-table-cell {
+    background: var(--darker-yellow);
+}
+
+.scored-points {
+    color: var(--yellow);
 }
 
 @media only screen and (max-width: 990px) {

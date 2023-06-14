@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 {{super()}}
+
+<div class="container headline-container">
+    <h1>
+        {% if nav_properties.selected_league %}
+        {{nav_properties.selected_league.short_name}}{% if nav_properties.selected_season %} | {{nav_properties.selected_season.name}}{%endif%}{%endif%}</h1>
+</div>
+<div class="container">
+    <h2>Teams</h2>
+</div>
 <div class="container">
     <table class="bordered">
         <tr>
             <th>Platz</th>
             <!--use names from database-->
-            <th>Name</th>
-            <th>Team</th>
-            <th>Coach</th>
+            <th>{{term_for_team_names}}</th>
+            <th>{{term_for_races}}</th>
+            <th>{{term_for_coaches}}</th>
             <th>Spiele</th>
             {% for scoring in scorings %}
             <th>
@@ -28,20 +37,28 @@
         </tr>
         {% for result in team_results %}
         <tr>
-            <td>{{result.place}}</td>
-            <td>{{result.team_short_name}}</td>
+            <td {% if result.number_of_matches>0 and loop.index <= number_of_playoff_places %}class="highlight-table-cell"{% endif %}>{{result.place}}</td>
+            <td><strong>{{result.team_short_name}}</strong></td>
             <td>{{result.race}}</td>
             <td>{{result.coach}}</td>
-            <td>{{result.number_of_matches}}</td>
+            <td {% if result.number_of_matches == number_of_allowed_matches %}class="highlight-table-cell" {% endif %}><strong>{{result.number_of_matches}}</strong></td>
             {% for count in result.match_result_counts %}
             <td>{{count}}</td>
             {% endfor %}
             <td>{{result.td_received}}</td>
-            <td>{{result.td_made}}</td>
-            <td>{{result.td_diff}}</td>
-            <td>{{result.points}}</td>
+            <td><strong>{{result.td_made}}</strong></td>
+            <td><strong>{{result.td_diff}}</strong></td>
+            <td><strong class="scored-points">{{result.points}}</strong></td>
         </tr>
         {%endfor%}
     </table>
+</div>
+
+
+<div class="container">
+    <h2>Coaches</h2>
+</div>
+<div class="container">
+    <h2>Races</h2>
 </div>
 {% endblock %}
