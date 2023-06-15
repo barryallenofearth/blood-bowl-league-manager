@@ -83,7 +83,6 @@ def update_images():
 
         png_output = f"{base_team_table_name}.png"
         hti = Html2Image(output_path=output_path)
-        # TODO size
         hti.screenshot(html_str=table_html, save_as=png_output, size=(1080, 100 + (number_of_entries + 1) * 32))
 
     season = database.get_selected_season()
