@@ -17,9 +17,12 @@ def update_images():
     def copy_required_files():
         if not os.path.exists(OUTPUT_PATH):
             os.mkdir(OUTPUT_PATH)
+        files_to_copy = [f"{os.getcwd()}/server/static/css/Nuffle.ttf", f"{os.getcwd()}/server/static/logos/logo_league_{database.get_selected_league().id}.png"]
 
-        if not os.path.exists(f"{HTML_2_IMAGE.temp_path}/Nuffle.ttf"):
-            shutil.copy(f"{os.getcwd()}/server/static/css/Nuffle.ttf", HTML_2_IMAGE.temp_path)
+        for file in files_to_copy:
+            file_name = file.split("/")[-1]
+            if not os.path.exists(f"{HTML_2_IMAGE.temp_path}/{file_name}") and os.path.exists(file):
+                shutil.copy(file, HTML_2_IMAGE.temp_path)
 
         if not os.path.exists(f"{HTML_2_IMAGE.temp_path}/styles.css"):
             with open(f"{os.getcwd()}/server/static/css/styles.css", encoding="utf-8") as css_file:
@@ -32,7 +35,7 @@ def update_images():
 
         base_team_table_name = generate_base_output_name(dimension)
         png_output = f"{base_team_table_name}.png"
-        print(HTML_2_IMAGE.temp_path)
+
         HTML_2_IMAGE.screenshot(html_str=table_html, save_as=png_output, size=(1080, 100 + (number_of_entries + 1) * 32))
 
     copy_required_files()

@@ -78,13 +78,17 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
         analysis_scoring.td_diff = analysis_scoring.td_diff + td_diff
         analysis_scoring.points = analysis_scoring.points + points_modification + determine_points(td_diff)
 
+    if len(results) == 0:
+        return []
+
     matches = db.session.query(BBMatch).filter_by(season_id=season_id).all()
 
     for match in matches:
         modify_team_score(results, entity_id_from_team_id_getter(match.team_1_id), match.team_1_touchdown, match.team_2_touchdown, match.team_1_point_modification, scorings)
         modify_team_score(results, entity_id_from_team_id_getter(match.team_2_id), match.team_2_touchdown, match.team_1_touchdown, match.team_2_point_modification, scorings)
 
-    sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0], key=lambda result: (-result.points, -result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))
+    sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0],
+                            key=lambda result: (-result.points, -result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))
     sorted_results = sorted_results + sorted([result for result in results.values() if result.number_of_matches == 0], key=lambda result: alphabetic_sorter(result))
     points_previous = sorted_results[0].points
     td_diff_previous = sorted_results[0].td_diff
