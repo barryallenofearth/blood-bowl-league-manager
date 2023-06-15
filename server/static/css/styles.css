@@ -1,4 +1,4 @@
-/* This CSS file will need to be added to the styling of 
+/* This CSS file will need to be added to the styling of
 your web pages for the styles to be rendered. */
 
 :root {
@@ -347,4 +347,8 @@ a:focus,
     border-radius: 50%;
     /*-webkit-animation: spinner-border .75s linear infinite;*/
     animation: spinner-border .75s linear infinite;
+}
+
+.date-line {
+    text-align: right;
 }
