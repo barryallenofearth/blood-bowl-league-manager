@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        /*@formatter:off*/
+        {{css_content|safe}}
+        /*@formatter:on*/
+        .date-line {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<h1>{{league.name}} | {{season.name}} </h1>
+{% include 'fragments/races_table.html' %}
+<div class="date-line">
+    <p>{{creation_date}}</p>
+</div>
+</body>
+</html>

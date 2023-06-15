@@ -15,6 +15,13 @@ your web pages for the styles to be rendered. */
 
 }
 
+@font-face {
+    font-family: 'Nuffle';
+    font-style: normal;
+    font-weight: normal;
+    src: url('/static/css/Nuffle.ttf') format('truetype');
+}
+
 body {
     background-color: var(--background);
     color: var(--text-color);
@@ -24,15 +31,12 @@ body {
 
 h1 {
     color: var(--main-headline);
+    font-family: 'Nuffle', sans-serif;
 }
 
-h4 {
+h2 {
+    font-family: 'Nuffle', sans-serif;
     color: var(--sub-headline);
-    margin: 1rem;
-}
-
-h5 {
-    margin: 1rem;
 }
 
 .dropdown-menu {

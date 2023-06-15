@@ -135,3 +135,4 @@ fabric.properties
 /baby_dimensions/web/static/images/height_1.png
 /baby_dimensions/web/static/images/weight_1.png
 /generate_k8s_files/output/
+/server/static/output/
