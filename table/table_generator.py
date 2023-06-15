@@ -1,7 +1,7 @@
 from operator import itemgetter
 
 from database import database
-from database.database import db, BBMatch, Team, Race, Coach, Scorings
+from database.database import db, BBMatch, Team, Race, Coach, Scorings, SeasonRules
 from util import formatting
 
 
@@ -81,11 +81,25 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
     if len(results) == 0:
         return []
 
-    matches = db.session.query(BBMatch).filter_by(season_id=season_id).all()
+    is_teams_table = type(next(iter(results.values()))) == TeamScores
+    season = database.get_selected_season()
+    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
+    matches = db.session.query(BBMatch).filter_by(season_id=season_id).order_by(BBMatch.match_number).all()
 
+    skip_team_1_result = False
+    skip_team_2_result = False
     for match in matches:
-        modify_team_score(results, entity_id_from_team_id_getter(match.team_1_id), match.team_1_touchdown, match.team_2_touchdown, match.team_1_point_modification, scorings)
-        modify_team_score(results, entity_id_from_team_id_getter(match.team_2_id), match.team_2_touchdown, match.team_1_touchdown, match.team_2_point_modification, scorings)
+        if is_teams_table and season_id > 0:
+            if match.is_playoff_match:
+                continue
+
+            skip_team_1_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_1_id)].number_of_matches == season_rules.number_of_allowed_matches
+            skip_team_2_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_2_id)].number_of_matches == season_rules.number_of_allowed_matches
+
+        if not skip_team_1_result:
+            modify_team_score(results, entity_id_from_team_id_getter(match.team_1_id), match.team_1_touchdown, match.team_2_touchdown, match.team_1_point_modification, scorings)
+        if not skip_team_2_result:
+            modify_team_score(results, entity_id_from_team_id_getter(match.team_2_id), match.team_2_touchdown, match.team_1_touchdown, match.team_2_point_modification, scorings)
 
     sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0],
                             key=lambda result: (-result.points, -result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))
