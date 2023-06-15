@@ -5,10 +5,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>{{league.name}} | {{season.name}} </h1>
-{% include 'fragments/races_table.html' %}
-<div class="date-line">
-    <p>{{creation_date}}</p>
+
+<div class="title-row">
+    <img src="logo_league_{{league.id}}.png" alt="logo">
+    <h1>{{league.name}} | {{season.name}}</h1>
+</div>
+<div class="framed-table">
+    {% include 'fragments/races_table.html' %}
+    <div class="date-line">
+        <p>Stand: {{creation_date}}</p>
+    </div>
 </div>
 </body>
 </html>

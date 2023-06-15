@@ -351,4 +351,24 @@ a:focus,
 
 .date-line {
     text-align: right;
+    margin-right: 5%;
+}
+
+.title-row {
+    text-align: center;
+}
+
+.title-row img {
+    width: 5.25rem;
+    height: 5.25rem;
+    vertical-align: middle;
+}
+
+.title-row h1 {
+    display: inline-block;
+}
+
+.framed-table table.bordered {
+    width: 90%;
+    margin: auto;
 }

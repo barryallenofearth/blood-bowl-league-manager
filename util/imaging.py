@@ -36,7 +36,7 @@ def update_images():
         base_team_table_name = generate_base_output_name(dimension)
         png_output = f"{base_team_table_name}.png"
 
-        HTML_2_IMAGE.screenshot(html_str=table_html, save_as=png_output, size=(1080, 100 + (number_of_entries + 1) * 32))
+        HTML_2_IMAGE.screenshot(html_str=table_html, save_as=png_output, size=(1200, 100 + (number_of_entries + 1) * 32))
 
     copy_required_files()
 
