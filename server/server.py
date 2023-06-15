@@ -98,7 +98,7 @@ def update_images():
     if not os.path.exists(output_path):
         os.mkdir(output_path)
     with open("server/static/css/styles.css", encoding="utf-8") as css_file:
-        css_content = css_file.read().replace("/static/css/Nuffle.ttf", f"/server/static/css/Nuffle.ttf")
+        css_content = css_file.read().replace("/static/css/Nuffle.ttf", "Nuffle.ttf")
         today = datetime.date.today()
 
         teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results, scorings=scorings, css_content=css_content,
