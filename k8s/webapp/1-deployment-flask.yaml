@@ -54,9 +54,9 @@ spec:
             - mountPath: /app/blood-bowl-python/data/coaches.csv
               name: data-files
               subPath: coaches.csv
-            - mountPath: /app/blood-bowl-python/data/teams.csv
+            - mountPath: /app/blood-bowl-python/data/teams_and_coaches.csv
               name: data-files
-              subPath: teams.csv
+              subPath: teams_and_coaches.csv
             - mountPath: /app/blood-bowl-python/data/matches.csv
               name: data-files
               subPath: matches.csv
