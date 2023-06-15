@@ -1,7 +1,7 @@
 import pandas as pd
 
 from database import database
-from database.database import db, SeasonRules, Season, Coach, Race, Team, League
+from database.database import db, SeasonRules, Season, Coach, Race, Team, League, BBMatch
 from util import formatting
 
 
@@ -101,8 +101,32 @@ def init_database():
 
         db.session.commit()
 
+    def init_matches():
+        def team_id_by_name(team_name: str, season_id: int):
+            team = db.session.query(Team).filter_by(name=team_name).filter_by(season_id=season_id).first()
+            if team is None:
+                raise ValueError(f"Team '{team_name}' not found.")
+            return team.id
+
+        init_file = pd.read_csv("data/matches.csv", delimiter=";")
+        for team_index, match_data in init_file.iterrows():
+            match = BBMatch()
+            match.match_number = match_data["match_number"]
+            match.season_id = season_id_by_short_name(match_data["season_short_name"], match_data["league_short_name"])
+            match.team_1_id = team_id_by_name(match_data["team1"], match.season_id)
+            match.team_2_id = team_id_by_name(match_data["team2"], match.season_id)
+            match.team_1_touchdown = match_data["td_team_1"]
+            match.team_2_touchdown = match_data["td_team_2"]
+            match.team_1_point_modification = match_data["point_modification_team_1"]
+            match.team_2_point_modification = match_data["point_modification_team_2"]
+            match.is_playoff_match = True if match_data["is_playoff_match"] == 1 else False
+            match.is_tournament_match = True if match_data["is_tournament_match"] == 1 else False
+            db.session.add(match)
+        db.session.commit()
+
     if db.session.query(League).count() == 0:
         init_leagues()
         init_seasons()
         init_races()
         init_teams_and_coaches()
+        init_matches()

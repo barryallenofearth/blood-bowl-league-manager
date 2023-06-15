@@ -1,4 +1,4 @@
-﻿match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;is_playoff_match;is_tournament_match;season_shortname;league_short_name
+﻿match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;is_playoff_match;is_tournament_match;season_short_name;league_short_name
 1;Warlocks in Purple;Knochensammler;1;1;0;0;0;0;Pre.1;BBLM
 2;Elfheim Ranger;The 69 Lusty Lickers;2;1;0;0;0;0;Pre.1;BBLM
 3;LoneBoneShamblers;OrkLand RaiDaZ;2;0;0;0;0;0;Pre.1;BBLM
@@ -492,7 +492,7 @@
 2;Barak Varr Blackhawks;Iskvard Ironfins;1;0;0;0;0;0;S.1;WBBL
 3;Ironfoot Greybeards;Chlamydiaville Clappers;1;1;0;0;0;0;S.1;WBBL
 4;Barak Varr Blackhawks;Raffy's Roxler Ratten;1;1;0;0;0;0;S.1;WBBL
-5;Just here for the Violins;Dummy Team;1;1;0;0;0;0;S.1;WBBL
+5;Just here for the Violins;Wolbecker Wolpertinger;1;1;0;0;0;0;S.1;WBBL
 6;BuckelBerg Bombers;Slanesh Slayers;0;1;0;0;0;0;S.1;WBBL
 7;BuckelBerg Bombers;Iskvard Ironfins;1;2;0;0;0;0;S.1;WBBL
 8;Die listigen Lustria Lurche;Ironfoot Greybeards;2;0;0;0;0;0;S.1;WBBL
@@ -505,7 +505,7 @@
 15;Kharibdyss Kracher;Schrödingers Snotlinge;1;1;0;0;0;0;S.1;WBBL
 16;Barak Varr Blackhawks;Asgard Allstars;2;1;0;0;0;0;S.1;WBBL
 17;Bay Harbor Butchers;Chlamydiaville Clappers;2;0;0;0;0;0;S.1;WBBL
-18;Lustria Legacy e.V.;Dummy Team;2;1;0;0;0;0;S.1;WBBL
+18;Lustria Legacy e.V.;Amazona Cardinals;2;1;0;0;0;0;S.1;WBBL
 19;BuckelBerg Bombers;Barak Varr Blackhawks;3;1;0;0;0;0;S.1;WBBL
 20;Milfheim Mammoths;Kharibdyss Kracher;4;0;0;0;0;0;S.1;WBBL
 21;Raffy's Roxler Ratten;BuckelBerg Bombers;4;2;0;0;0;0;S.1;WBBL
