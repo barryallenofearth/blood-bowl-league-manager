@@ -1,7 +1,7 @@
 import pandas as pd
 
 from database import database
-from database.database import db, SeasonRules, Season, Coach, Race, Team, League
+from database.database import db, SeasonRules, Season, Coach, Race, Team, League, BBMatch
 from util import formatting
 
 
@@ -10,7 +10,6 @@ def init_database():
         init_file = pd.read_csv("data/leagues.csv", delimiter=";")
         for league_index, league_data in init_file.iterrows():
             league = League()
-            league.id = league_data["id"]
             league.name = league_data["name"]
             league.short_name = league_data["short_name"]
             league.is_selected = league_data["is_selected"]
@@ -18,12 +17,23 @@ def init_database():
 
         db.session.commit()
 
+    def league_id_by_short_name(short_name):
+        league = db.session.query(League).filter_by(short_name=short_name).first()
+        if league is None:
+            raise ValueError(f"League '{short_name}' not found.")
+        return league.id
+
+    def season_id_by_short_name(season_short_name: str, league_short_name: str):
+        season = db.session.query(Season).filter_by(short_name=season_short_name).filter_by(league_id=league_id_by_short_name(league_short_name)).first()
+        if season is None:
+            raise ValueError(f"League '{season_short_name}' not found.")
+        return season.id
+
     def init_seasons():
         init_file = pd.read_csv("data/seasons.csv", delimiter=";")
         for season_index, season_data in init_file.iterrows():
             season = Season()
-            season.id = season_data["id"]
-            season.league_id = season_data["league_id"]
+            season.league_id = league_id_by_short_name(season_data["league_short_name"])
             season.name = season_data["name"]
             season.short_name = season_data["short_name"]
             season.is_selected = season_data["is_selected"]
@@ -42,44 +52,81 @@ def init_database():
         init_file = pd.read_csv("data/races.csv", delimiter=";")
         for race_index, race_data in init_file.iterrows():
             race = Race()
-            race.id = race_data["id"]
             race.name = race_data["name"]
 
             db.session.add(race)
 
         db.session.commit()
 
-    def init_coaches():
-        init_file = pd.read_csv("data/coaches.csv", delimiter=";")
-        for coach_index, coach_data in init_file.iterrows():
-            coach = Coach()
-            coach.id = coach_data["id"]
-            coach.league_id = coach_data["league_id"]
-            coach.first_name = coach_data["first_name"]
-            coach.last_name = coach_data["last_name"]
-            coach.display_name = coach_data["display_name"]
-            db.session.add(coach)
+    def init_teams_and_coaches():
+        def race_id_by_name(name: str) -> int:
+            race = db.session.query(Race).filter_by(name=name).first()
 
-        db.session.commit()
+            if race is None:
+                raise ValueError(f"Race '{name}' not found.")
+            return race.id
 
-    def init_teams():
-        init_file = pd.read_csv("data/teams.csv", delimiter=";")
+        def coach_id_by_name(first_name: str, last_name: str, display_name: str, league_name: str) -> int:
+            league_id = league_id_by_short_name(league_name)
+            coach = db.session.query(Coach) \
+                .filter_by(first_name=first_name.strip()) \
+                .filter_by(last_name=last_name.strip()) \
+                .filter_by(display_name=display_name.strip()) \
+                .filter_by(league_id=league_id) \
+                .first()
+            if coach is None:
+                coach = Coach()
+                coach.first_name = first_name.strip()
+                coach.last_name = last_name.strip()
+                coach.display_name = display_name.strip()
+                coach.league_id = league_id
+
+                db.session.add(coach)
+                db.session.commit()
+
+                return coach.id
+
+            return coach.id
+
+        init_file = pd.read_csv("data/teams_and_coaches.csv", delimiter=";")
         for team_index, team_data in init_file.iterrows():
             team = Team()
-            team.id = team_data["id"]
-            team.season_id = team_data["season_id"]
+            team.season_id = season_id_by_short_name(team_data["season_short_name"], team_data["league_short_name"])
             team.name = team_data["name"]
             team.short_name = formatting.generate_team_short_name(team.name)
-            team.race_id = team_data["race_id"]
-            team.coach_id = team_data["coach_id"]
+            team.race_id = race_id_by_name(team_data["race_name"])
+            team.coach_id = coach_id_by_name(team_data["coach_first_name"], team_data["coach_last_name"], team_data["coach_display_name"], team_data["league_short_name"])
             team.is_disqualified = False
             db.session.add(team)
 
+        db.session.commit()
+
+    def init_matches():
+        def team_id_by_name(team_name: str, season_id: int):
+            team = db.session.query(Team).filter_by(name=team_name).filter_by(season_id=season_id).first()
+            if team is None:
+                raise ValueError(f"Team '{team_name}' not found.")
+            return team.id
+
+        init_file = pd.read_csv("data/matches.csv", delimiter=";")
+        for team_index, match_data in init_file.iterrows():
+            match = BBMatch()
+            match.match_number = match_data["match_number"]
+            match.season_id = season_id_by_short_name(match_data["season_short_name"], match_data["league_short_name"])
+            match.team_1_id = team_id_by_name(match_data["team1"], match.season_id)
+            match.team_2_id = team_id_by_name(match_data["team2"], match.season_id)
+            match.team_1_touchdown = match_data["td_team_1"]
+            match.team_2_touchdown = match_data["td_team_2"]
+            match.team_1_point_modification = match_data["point_modification_team_1"]
+            match.team_2_point_modification = match_data["point_modification_team_2"]
+            match.is_playoff_match = True if match_data["is_playoff_match"] == 1 else False
+            match.is_tournament_match = True if match_data["is_tournament_match"] == 1 else False
+            db.session.add(match)
         db.session.commit()
 
     if db.session.query(League).count() == 0:
         init_leagues()
         init_seasons()
         init_races()
-        init_coaches()
-        init_teams()
+        init_teams_and_coaches()
+        init_matches()

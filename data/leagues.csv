@@ -1,3 +1,3 @@
-id;name;short_name;is_selected
-1;Blood Bowl Liga Münster;BBLM;False
-2;Westfalia Blood Bowl League;WBBL;True
+name;short_name;is_selected
+Blood Bowl Liga Münster;BBLM;False
+Westfalia Blood Bowl League;WBBL;True
