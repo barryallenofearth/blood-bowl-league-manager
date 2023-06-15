@@ -1,4 +1,6 @@
-from flask import redirect, url_for, Flask
+import os.path
+
+from flask import redirect, url_for, Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 
@@ -55,7 +57,16 @@ def league_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
             selected_league.is_selected = False
             db.session.add(selected_league)
 
-    return persist_and_redirect(league, League.__tablename__, db)
+    db.session.add(league)
+    db.session.commit()
+
+    logo_files = request.files["logo"]
+    if logo_files.filename != "":
+        logo_path = "server/static/logos"
+        if not os.path.exists(logo_path):
+            os.mkdir(logo_path)
+        logo_files.save(f"{logo_path}/logo_league_{league.id}.png")
+    return redirect(url_for("manage", entity_type="league", _anchor=f"row-entity-{league.id}"))
 
 
 def __get_season_and_rules(db: SQLAlchemy, entity_id: int) -> tuple:
