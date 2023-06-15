@@ -17,6 +17,13 @@
     <h2>Teams</h2>
 </div>
 <div class="container">
+    <a href="{{ url_for('download_table',entity_type='teams') }}"
+       class="btn btn-warning">
+        <i class="bi bi-people-fill"></i>
+        Teams Table Download
+    </a>
+</div>
+<div class="container">
     {% include 'fragments/teams_table.html' %}
 </div>
 
@@ -24,10 +31,24 @@
     <h2>Coaches</h2>
 </div>
 <div class="container">
+    <a href="{{ url_for('download_table',entity_type='coaches') }}"
+       class="btn btn-warning">
+        <i class="bi bi-person-square"></i>
+        Coaches Table Download
+    </a>
+</div>
+<div class="container">
     {% include 'fragments/coaches_table.html' %}
 </div>
 <div class="container">
     <h2>Races</h2>
+</div>
+<div class="container">
+    <a href="{{ url_for('download_table',entity_type='races') }}"
+       class="btn btn-warning">
+        <i class="bi bi-robot"></i>
+        Races Table Download
+    </a>
 </div>
 <div class="container">
     {% include 'fragments/races_table.html' %}

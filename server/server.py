@@ -182,3 +182,12 @@ def match_result_from_user_inpt():
             response += f"[400] Match result '{match}' did not match the expected pattern.\n"
 
     return response.strip()
+
+
+@app.route("/download/<string:entity_type>")
+def download_table(entity_type: str):
+    league = database.get_selected_league()
+    season = database.get_selected_season()
+    uploads = os.path.join(app.root_path, "static/output/")
+    file_name = f"{entity_type}_table_{league.short_name}_season_{season.short_name.replace('.', '_')}.png"
+    return send_from_directory(directory=uploads, path=file_name, as_attachment=True, download_name=file_name)
