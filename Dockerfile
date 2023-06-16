@@ -5,10 +5,12 @@ WORKDIR /app/
 
 RUN apt-get update -y && apt-get install -y chromium
 
-
 # CHROMIUM default flags for container environnement
 # The --no-sandbox flag is needed by default since we execute chromium in a root environnement
 RUN echo 'export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --no-sandbox"' >> /etc/chromium.d/default-flags
+
+RUN apt-get install -y gcc
+RUN apt-get install -y libpq-dev
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
