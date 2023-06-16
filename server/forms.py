@@ -1,3 +1,5 @@
+import re
+
 from flask_wtf import FlaskForm
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, FileField, IntegerField, BooleanField, TextAreaField
@@ -126,7 +128,7 @@ class UpdateMatchForm(FlaskForm):
 
 
 class AddAdditionalStatisticsEntryForm(FlaskForm):
-    statistics_user_input = StringField("Casualty user input", validators=[Regexp(regex=parsing.CASUALTIES_REGEX, message="Please enter casualties in the required format")],
+    statistics_user_input = StringField("Casualty user input", validators=[Regexp(regex=parsing.CASUALTIES_REGEX, message="Please enter casualties in the required format", flags=re.IGNORECASE)],
                                         description="Casualties need to be entered using the following pattern: {TEAM_NAME} vs. {TEAM 2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>i.e.: Wolbecker Wolpertinger: Casualties 3")
     submit = SubmitField(label="Add new statistics")
 
