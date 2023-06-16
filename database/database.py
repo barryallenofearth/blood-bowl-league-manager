@@ -109,6 +109,15 @@ class Scorings(db.Model):
     points_scored = db.Column(db.Integer, nullable=False)
 
 
+class AdditionalStatistics(db.Model):
+    __tablename__ = "additional_statistics"
+
+    id = db.Column(db.Integer, primary_key=True)
+    season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'))
+    team_id = db.Column(db.Integer, db.ForeignKey(f'{Team.__tablename__}.id'), nullable=False)
+    casualties = db.Column(db.Integer, nullable=False)
+
+
 def get_selected_league() -> League:
     return db.session.query(League).filter_by(is_selected=True).first()
 
