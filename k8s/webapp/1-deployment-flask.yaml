@@ -42,22 +42,22 @@ spec:
               name: http
           volumeMounts:
             #TODO set proper value
-            - mountPath: /app/blood-bowl-python/data/leagues.csv
+            - mountPath: /app/blood-bowl-leauge-manager/data/leagues.csv
               name: data-files
               subPath: leagues.csv
-            - mountPath: /app/blood-bowl-python/data/seasons.csv
+            - mountPath: /app/blood-bowl-leauge-manager/data/seasons.csv
               name: data-files
               subPath: seasons.csv
-            - mountPath: /app/blood-bowl-python/data/races.csv
+            - mountPath: /app/blood-bowl-leauge-manager/data/races.csv
               name: data-files
               subPath: races.csv
-            - mountPath: /app/blood-bowl-python/data/coaches.csv
+            - mountPath: /app/blood-bowl-leauge-manager/data/coaches.csv
               name: data-files
               subPath: coaches.csv
-            - mountPath: /app/blood-bowl-python/data/teams_and_coaches.csv
+            - mountPath: /app/blood-bowl-leauge-manager/data/teams_and_coaches.csv
               name: data-files
               subPath: teams_and_coaches.csv
-            - mountPath: /app/blood-bowl-python/data/matches.csv
+            - mountPath: /app/blood-bowl-leauge-manager/data/matches.csv
               name: data-files
               subPath: matches.csv
           livenessProbe:
