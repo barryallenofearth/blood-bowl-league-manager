@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: blood-bowl-season-manager
+  name: blood-bowl-league-manager

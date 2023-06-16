@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql
-  namespace: blood-bowl-season-manager
+  namespace: blood-bowl-league-manager
   labels:
     app: postgresql
 spec:
@@ -22,17 +22,17 @@ spec:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: blood-bowl-season-manager-database
+                  name: blood-bowl-league-manager-database
                   key: database
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: blood-bowl-season-manager-database
+                  name: blood-bowl-league-manager-database
                   key: user
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: blood-bowl-season-manager-database
+                  name: blood-bowl-league-manager-database
                   key: password
             - name: PGDATA
               value: "/var/lib/postgresql/data/pgdata"
@@ -45,4 +45,4 @@ spec:
       volumes:
         - name: postgres-db-volume
           persistentVolumeClaim:
-            claimName: nfs-blood-bowl-season-manager-db-pvc
+            claimName: nfs-blood-bowl-league-manager-db-pvc

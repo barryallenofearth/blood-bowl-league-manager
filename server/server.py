@@ -1,16 +1,15 @@
-import datetime
 import json
 import os
 
-from flask import request, send_from_directory, render_template, Flask
+from flask import send_from_directory, render_template
 from flask_bootstrap import Bootstrap
 
 import database.database
-from table import score_table, casualties_table
 from database import bootstrapping
 from database.database import db
 from server import delete_entities
 from server.manage_entities import *
+from table import score_table, casualties_table
 from util import parsing, imaging
 
 app = Flask(__name__)
@@ -52,10 +51,11 @@ def favicon():
 
 @app.route('/')
 def home():
-    season = database.get_selected_season()
     if database.get_selected_league() is None:
         return redirect(url_for("manage", entity_type="league"))
-    elif season is None:
+
+    season = database.get_selected_season()
+    if season is None:
         return redirect(url_for("manage", entity_type="season"))
 
     season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()

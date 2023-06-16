@@ -4,7 +4,7 @@ metadata:
   labels:
     service: webapp
   name: webapp
-  namespace: blood-bowl-season-manager
+  namespace: blood-bowl-league-manager
 spec:
   ports:
     - name: http

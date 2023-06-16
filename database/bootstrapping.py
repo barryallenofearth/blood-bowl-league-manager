@@ -1,3 +1,5 @@
+import os.path
+
 import pandas as pd
 
 from database import database
@@ -7,7 +9,10 @@ from util import formatting, parsing
 
 def init_database():
     def init_leagues():
-        init_file = pd.read_csv("data/leagues.csv", delimiter=";")
+        leagues_csv = "data/leagues.csv"
+        if not os.path.exists(leagues_csv):
+            return
+        init_file = pd.read_csv(leagues_csv, delimiter=";")
         for league_index, league_data in init_file.iterrows():
             league = League()
             league.name = league_data["name"]
@@ -30,7 +35,10 @@ def init_database():
         return season.id
 
     def init_seasons():
-        init_file = pd.read_csv("data/seasons.csv", delimiter=";")
+        seasons_csv = "data/seasons.csv"
+        if not os.path.exists(seasons_csv):
+            return
+        init_file = pd.read_csv(seasons_csv, delimiter=";")
         for season_index, season_data in init_file.iterrows():
             season = Season()
             season.league_id = league_id_by_short_name(season_data["league_short_name"])
@@ -49,7 +57,10 @@ def init_database():
 
     def init_races():
 
-        init_file = pd.read_csv("data/races.csv", delimiter=";")
+        races_csv = "data/races.csv"
+        if not os.path.exists(races_csv):
+            return
+        init_file = pd.read_csv(races_csv, delimiter=";")
         for race_index, race_data in init_file.iterrows():
             race = Race()
             race.name = race_data["name"]
@@ -94,7 +105,10 @@ def init_database():
 
             return coach.id
 
-        init_file = pd.read_csv("data/teams_and_coaches.csv", delimiter=";")
+        coaches_csv = "data/teams_and_coaches.csv"
+        if not os.path.exists(coaches_csv):
+            return
+        init_file = pd.read_csv(coaches_csv, delimiter=";")
         for team_index, team_data in init_file.iterrows():
             team = Team()
             team.season_id = season_id_by_short_name(team_data["season_short_name"], team_data["league_short_name"])
@@ -109,7 +123,10 @@ def init_database():
 
     def init_matches():
 
-        init_file = pd.read_csv("data/matches.csv", delimiter=";")
+        matches_csv = "data/matches.csv"
+        if not os.path.exists(matches_csv):
+            return
+        init_file = pd.read_csv(matches_csv, delimiter=";")
         for team_index, match_data in init_file.iterrows():
             match = BBMatch()
             match.match_number = match_data["match_number"]
@@ -128,7 +145,10 @@ def init_database():
         db.session.commit()
 
     def init_additional_statistics():
-        init_file = pd.read_csv("data/additional_statistics.csv", delimiter=";")
+        statistics_csv = "data/additional_statistics.csv"
+        if not os.path.exists(statistics_csv):
+            return
+        init_file = pd.read_csv(statistics_csv, delimiter=";")
 
         for additional_statistics_index, additional_statistics_data in init_file.iterrows():
             season_short_name = additional_statistics_data["season_short_name"]

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp
-  namespace: blood-bowl-season-manager
+  namespace: blood-bowl-league-manager
   labels:
     deployment: webapp
 spec:
@@ -16,23 +16,23 @@ spec:
         app: webapp
     spec:
       containers:
-        - name: blood-bowl-season-manager
-          image: barryallenofearth/blood-bowl-season-manager:1
+        - name: blood-bowl-league-manager
+          image: barryallenofearth/blood-bowl-league-manager:1
           env:
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  name: blood-bowl-season-manager-database
+                  name: blood-bowl-league-manager-database
                   key: database
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: blood-bowl-season-manager-database
+                  name: blood-bowl-league-manager-database
                   key: user
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: blood-bowl-season-manager-database
+                  name: blood-bowl-league-manager-database
                   key: password
             - name: DATABASE_URI
               value: postgresql://$(DB_USER):$(DB_PASSWORD)@postgresql:5432/$(DB_NAME)
@@ -41,25 +41,24 @@ spec:
             - containerPort: 80
               name: http
           volumeMounts:
-            #TODO set proper value
-            - mountPath: /app/blood-bowl-leauge-manager/data/leagues.csv
+            - mountPath: /app/blood-bowl-league-manager/data/leagues.csv
               name: data-files
               subPath: leagues.csv
-            - mountPath: /app/blood-bowl-leauge-manager/data/seasons.csv
+            - mountPath: /app/blood-bowl-league-manager/data/seasons.csv
               name: data-files
               subPath: seasons.csv
-            - mountPath: /app/blood-bowl-leauge-manager/data/races.csv
+            - mountPath: /app/blood-bowl-league-manager/data/races.csv
               name: data-files
               subPath: races.csv
-            - mountPath: /app/blood-bowl-leauge-manager/data/coaches.csv
-              name: data-files
-              subPath: coaches.csv
-            - mountPath: /app/blood-bowl-leauge-manager/data/teams_and_coaches.csv
+            - mountPath: /app/blood-bowl-league-manager/data/teams_and_coaches.csv
               name: data-files
               subPath: teams_and_coaches.csv
-            - mountPath: /app/blood-bowl-leauge-manager/data/matches.csv
+            - mountPath: /app/blood-bowl-league-manager/data/matches.csv
               name: data-files
               subPath: matches.csv
+            - mountPath: /app/blood-bowl-league-manager/data/additional_statistics.csv
+              name: data-files
+              subPath: additional_statistics.csv
           livenessProbe:
             httpGet:
               path: /health
@@ -90,4 +89,4 @@ spec:
       volumes:
         - name: data-files
           configMap:
-            name: init-files-blood-bowl-season-manager
+            name: init-files-blood-bowl-league-manager
