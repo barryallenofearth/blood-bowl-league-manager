@@ -48,7 +48,9 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',
                                mimetype='images/vnd.microsoft.icon')
 
-
+@app.route('/health')
+def health():
+    return "I am fine"
 @app.route('/')
 def home():
     if database.get_selected_league() is None:
