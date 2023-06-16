@@ -94,10 +94,10 @@
         </tr>
         {% for entity in table %}
         <tr id="row-entity-{{ entity|last }}">
-        <td class="center">{{loop.index}}</td>
+            <td class="center">{{loop.index}}</td>
             {% for value in entity %}
             {% if loop.index < entity|length %}
-            <td>{% if value %}
+            <td {% if value is number %}class="center" {%endif%}>{% if value %}
                 {% if value is boolean %}
                 <input type="checkbox" disabled checked>
                 {%else%}

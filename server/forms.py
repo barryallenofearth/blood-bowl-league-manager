@@ -96,12 +96,8 @@ class UpdateTeamForm(BaseTeamForm):
     submit = SubmitField(label="Update team")
 
 
-class BaseMatchForm(FlaskForm):
-    team1 = SelectField("Team 1", validators=[DataRequired("Please select a team")])
-
-
 class AddMatchForm(FlaskForm):
-    match_user_input = StringField("Match user input", description="Matches need to be entered using the following pattern: {TEAM 1} vs. {TEAM 2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
+    match_user_input = StringField("Match user input", description="Matches need to be entered using the following pattern: {TEAM_NAME_1} vs. {TEAM_NAME_2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
                                                                    "i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1",
                                    validators=[Regexp(regex=parsing.MATCH_REGEX, message="Please enter match results in the required format")])
     submit = SubmitField(label="Add new match")
@@ -127,3 +123,23 @@ class UpdateMatchForm(FlaskForm):
             all_teams = db.session.query(Team).filter_by(season_id=season.id).all()
             self.team1.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
             self.team2.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
+
+
+class AddAdditionalStatisticsEntryForm(FlaskForm):
+    statistics_user_input = StringField("Casualty user input", validators=[Regexp(regex=parsing.CASUALTIES_REGEX, message="Please enter casualties in the required format")],
+                                        description="Casualties need to be entered using the following pattern: {TEAM_NAME} vs. {TEAM 2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>i.e.: Wolbecker Wolpertinger: Casualties 3")
+    submit = SubmitField(label="Add new statistics")
+
+
+class UpdateAdditionalStatisticsEntryForm(FlaskForm):
+    team = SelectField("Team", validators=[DataRequired("Please select a team")])
+    casualties = IntegerField("Please enter the number of casualties made.")
+    submit = SubmitField(label="Update statistics")
+
+    def __init__(self, app=None, **kwargs):
+        super().__init__(**kwargs)
+
+        with app.app_context():
+            season = database.database.get_selected_season()
+            all_teams = db.session.query(Team).filter_by(season_id=season.id).all()
+            self.team.choices = [(current_team.id, formatting.format_team(current_team)) for current_team in all_teams]

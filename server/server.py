@@ -138,6 +138,11 @@ def manage(entity_type: str):
         form = kwargs[FORM_KEY]
         if form.validate_on_submit():
             return match_submit(form, db, entity_id)
+    elif entity_type == AdditionalStatistics.__tablename__:
+        kwargs = additional_statistics_get(app, db, entity_id)
+        form = kwargs[FORM_KEY]
+        if form.validate_on_submit():
+            return additional_statistics_submit(form, db, entity_id)
 
     kwargs["entity_type"] = entity_type
     kwargs["nav_properties"] = NavProperties(db)
@@ -159,6 +164,8 @@ def delete(entity_type: str, id: int):
         message = delete_entities.team_delete(id)
     elif entity_type == BBMatch.__tablename__:
         message = delete_entities.match_delete(id)
+    elif entity_type == AdditionalStatistics.__tablename__:
+        message = delete_entities.additional_statistics_delete(id)
 
     return_json = str({'message': message, 'status': 200 if message == delete_entities.SUCCESSFULLY_DELETED else 403}).replace("'", '"')
     return json.loads(return_json)

@@ -5,9 +5,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 
 from database import database
-from database.database import League, Season, SeasonRules, Scorings, Coach, Race, Team, BBMatch
+from database.database import League, Season, SeasonRules, Scorings, Coach, Race, Team, BBMatch, AdditionalStatistics
 from server import forms
-from server.forms import UpdateTeamForm, BaseSeasonForm, BaseCoachForm, BaseRaceForm, BaseTeamForm, BaseMatchForm
+from server.forms import UpdateTeamForm, BaseSeasonForm, BaseCoachForm, BaseRaceForm, BaseTeamForm, UpdateAdditionalStatisticsEntryForm, AddAdditionalStatisticsEntryForm
 from util import formatting, parsing
 
 FORM_KEY = "form"
@@ -377,3 +377,39 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     reorganize_match_numbers(match, match_number)
 
     return persist_and_redirect(match, BBMatch.__tablename__, db)
+
+
+def __get_additonal_statistics(db: SQLAlchemy, entity_id: int):
+    additional_statistics = db.session.query(AdditionalStatistics).filter_by(id=entity_id).first()
+    if additional_statistics is None:
+        return AdditionalStatistics()
+
+    return additional_statistics
+
+
+def additional_statistics_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
+    table = []
+    for additional_statistics in db.session.query(AdditionalStatistics).all():
+        team = db.session.query(Team).filter_by(id=additional_statistics.team_id).first()
+        table.append([formatting.format_team(team), additional_statistics.casualties, additional_statistics.id])
+
+    additional_statistics = __get_additonal_statistics(db, entity_id)
+
+    if entity_id == 0:
+        form = AddAdditionalStatisticsEntryForm()
+    else:
+        form = UpdateAdditionalStatisticsEntryForm(app=app, team=additional_statistics.team_id, casualties=additional_statistics.casualties)
+
+    return {FORM_KEY: form, "title": "Additional Statistics", "title_row": ["Team", "Casualties"], "table": table}
+
+
+def additional_statistics_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
+    additional_statistics = __get_additonal_statistics(db, entity_id)
+    if type(form) == UpdateAdditionalStatisticsEntryForm:
+        additional_statistics.team = form.team.data
+        additional_statistics.casualties = form.casualties.data
+    else:
+        statistics_user_input = form.statistics_user_input.data
+        additional_statistics = parsing.parse_additonal_statistics_input(statistics_user_input)
+
+    return persist_and_redirect(additional_statistics, AdditionalStatistics.__tablename__, db)

@@ -3,7 +3,7 @@ from collections import defaultdict
 from sqlalchemy import or_
 
 from database import database
-from database.database import db, BBMatch, Team, Season, Coach, Race, Scorings, League, SeasonRules
+from database.database import db, BBMatch, Team, Season, Coach, Race, Scorings, League, SeasonRules, AdditionalStatistics
 from util import formatting
 
 SUCCESSFULLY_DELETED = "successfully deleted"
@@ -126,5 +126,13 @@ def match_delete(id: int) -> str:
             db.session.add(match)
 
         db.session.commit()
+
+    return SUCCESSFULLY_DELETED
+
+
+def additional_statistics_delete(id: int) -> str:
+    additional_statistics = db.session.query(AdditionalStatistics).filter_by(id=id).first()
+    db.session.delete(additional_statistics)
+    db.session.commit()
 
     return SUCCESSFULLY_DELETED
