@@ -99,8 +99,9 @@ class UpdateTeamForm(BaseTeamForm):
 
 
 class AddMatchForm(FlaskForm):
-    match_user_input = StringField("Match user input", description="Matches need to be entered using the following pattern: {TEAM_NAME_1} vs. {TEAM_NAME_2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
-                                                                   "i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1",
+    match_user_input = StringField("Match user input",
+                                   description="Matches need to be entered using the following pattern: {TEAM_NAME_1} vs. {TEAM_NAME_2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
+                                               "i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1",
                                    validators=[Regexp(regex=parsing.MATCH_REGEX, message="Please enter match results in the required format")])
     submit = SubmitField(label="Add new match")
 
@@ -128,8 +129,9 @@ class UpdateMatchForm(FlaskForm):
 
 
 class AddAdditionalStatisticsEntryForm(FlaskForm):
-    statistics_user_input = StringField("Casualty user input", validators=[Regexp(regex=parsing.CASUALTIES_REGEX, message="Please enter casualties in the required format", flags=re.IGNORECASE)],
-                                        description="Casualties need to be entered using the following pattern: {TEAM_NAME} vs. {TEAM 2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>i.e.: Wolbecker Wolpertinger: Casualties 3")
+    statistics_user_input = StringField("Casualty user input",
+                                        validators=[Regexp(regex=parsing.CASUALTIES_REGEX, message="Please enter casualties in the required format and only larger than 0", flags=re.IGNORECASE)],
+                                        description="Casualties need to be entered using the following pattern: {TEAM_NAME}: {CASUALTIES} Casualties<br>i.e.: Wolbecker Wolpertinger: 3 Casualties")
     submit = SubmitField(label="Add new statistics")
 
 

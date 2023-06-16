@@ -97,7 +97,7 @@
             <td class="center">{{loop.index}}</td>
             {% for value in entity %}
             {% if loop.index < entity|length %}
-            <td {% if value is number %}class="center" {%endif%}>{% if value %}
+            <td {% if value is number or value== 0%}class="center" {%endif%}>{% if value %}
                 {% if value is boolean %}
                 <input type="checkbox" disabled checked>
                 {%else%}

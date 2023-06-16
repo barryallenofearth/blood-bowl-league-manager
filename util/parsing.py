@@ -16,7 +16,7 @@ MATCH_RESULT_MATCHER = re.compile(MATCH_REGEX)
 
 # group 1: Team name
 # group 2 or 3: casualties
-CASUALTIES_REGEX = r"^\s*([^:]+?)[\s:]+(?:(\d+)\s*(?:casualty|casulty|casualties|casulties|cas)|(?:casualty|casulty|casualties|casulties|cas)\s*(\d+))[\s.]*$"
+CASUALTIES_REGEX = r"^\s*([^:]+?)[\s:]+(?:((?!0)\d+)\s*(?:casualty|casulty|casualties|casulties|cas)|(?:casualty|casulty|casualties|casulties|cas)\s*((?!0)\d+))[\s.]*$"
 CASUALTIES_MATCHER = re.compile(CASUALTIES_REGEX, re.IGNORECASE)
 
 
@@ -98,7 +98,7 @@ def parse_match_result(user_input: str) -> BBMatch:
     return bb_match
 
 
-def parse_additonal_statistics_input(user_input: str) -> AdditionalStatistics:
+def parse_additonal_statistics_input(user_input: str, season_id=0) -> AdditionalStatistics:
     original_input = user_input
 
     user_input = __clean_up_unwanted_chars(user_input)
@@ -106,11 +106,13 @@ def parse_additonal_statistics_input(user_input: str) -> AdditionalStatistics:
     if matching_result is None:
         raise SyntaxError(f"The provided input '{original_input}' could not be parsed after cleanup: '{user_input}'")
 
-    season = database.database.get_selected_season()
-    all_teams = db.session.query(Team).filter_by(season_id=season.id).all()
+    if season_id == 0:
+        season = database.database.get_selected_season()
+        season_id = season.id
+    all_teams = db.session.query(Team).filter_by(season_id=season_id).all()
 
     additional_statistics = AdditionalStatistics()
-    additional_statistics.season_id = season.id
+    additional_statistics.season_id = season_id
 
     additional_statistics.team_id = __determine_matching_team(all_teams, matching_result.group(1)).id
     if matching_result.group(2) is not None:

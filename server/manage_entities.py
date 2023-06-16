@@ -389,7 +389,7 @@ def __get_additonal_statistics(db: SQLAlchemy, entity_id: int):
 
 def additional_statistics_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
     table = []
-    for additional_statistics in db.session.query(AdditionalStatistics).all():
+    for additional_statistics in db.session.query(AdditionalStatistics).order_by(AdditionalStatistics.id.desc()).all():
         team = db.session.query(Team).filter_by(id=additional_statistics.team_id).first()
         table.append([formatting.format_team(team), additional_statistics.casualties, additional_statistics.id])
 

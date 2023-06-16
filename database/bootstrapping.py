@@ -1,8 +1,8 @@
 import pandas as pd
 
 from database import database
-from database.database import db, SeasonRules, Season, Coach, Race, Team, League, BBMatch
-from util import formatting
+from database.database import db, SeasonRules, Season, Coach, Race, Team, League, BBMatch, AdditionalStatistics
+from util import formatting, parsing
 
 
 def init_database():
@@ -58,6 +58,12 @@ def init_database():
 
         db.session.commit()
 
+    def __team_id_by_name(team_name: str, season_id: int):
+        team = db.session.query(Team).filter_by(name=team_name).filter_by(season_id=season_id).first()
+        if team is None:
+            raise ValueError(f"Team '{team_name}' not found.")
+        return team.id
+
     def init_teams_and_coaches():
         def race_id_by_name(name: str) -> int:
             race = db.session.query(Race).filter_by(name=name).first()
@@ -102,19 +108,14 @@ def init_database():
         db.session.commit()
 
     def init_matches():
-        def team_id_by_name(team_name: str, season_id: int):
-            team = db.session.query(Team).filter_by(name=team_name).filter_by(season_id=season_id).first()
-            if team is None:
-                raise ValueError(f"Team '{team_name}' not found.")
-            return team.id
 
         init_file = pd.read_csv("data/matches.csv", delimiter=";")
         for team_index, match_data in init_file.iterrows():
             match = BBMatch()
             match.match_number = match_data["match_number"]
             match.season_id = season_id_by_short_name(match_data["season_short_name"], match_data["league_short_name"])
-            match.team_1_id = team_id_by_name(match_data["team1"], match.season_id)
-            match.team_2_id = team_id_by_name(match_data["team2"], match.season_id)
+            match.team_1_id = __team_id_by_name(match_data["team1"], match.season_id)
+            match.team_2_id = __team_id_by_name(match_data["team2"], match.season_id)
             match.team_1_touchdown = match_data["td_team_1"]
             match.team_2_touchdown = match_data["td_team_2"]
             match.team_1_point_modification = match_data["point_modification_team_1"]
@@ -126,9 +127,25 @@ def init_database():
             db.session.add(match)
         db.session.commit()
 
+    def init_additional_statistics():
+        init_file = pd.read_csv("data/additional_statistics.csv", delimiter=";")
+
+        for additional_statistics_index, additional_statistics_data in init_file.iterrows():
+            season_short_name = additional_statistics_data["season_short_name"]
+            league_short_name = additional_statistics_data["league_short_name"]
+            season_id = season_id_by_short_name(season_short_name, league_short_name)
+
+            additional_statistics = AdditionalStatistics()
+            additional_statistics.season_id = season_id
+            additional_statistics.team_id = __team_id_by_name(additional_statistics_data["team_name"], season_id)
+            additional_statistics.casualties = additional_statistics_data["casualties"]
+            db.session.add(additional_statistics)
+            db.session.commit()
+
     if db.session.query(League).count() == 0:
         init_leagues()
         init_seasons()
         init_races()
         init_teams_and_coaches()
         init_matches()
+        init_additional_statistics()
