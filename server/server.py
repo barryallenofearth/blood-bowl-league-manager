@@ -64,7 +64,6 @@ def home():
     coach_results = table.table_generator.calculate_coaches_scores()
     race_results = table.table_generator.calculate_races_scores()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
-    imaging.update_images()
 
     return render_template("home.html", team_results=team_results, race_results=race_results, coach_results=coach_results, scorings=scorings, nav_properties=NavProperties(db),
                            term_for_team_names=season_rules.term_for_team_names, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
@@ -186,6 +185,8 @@ def match_result_from_user_inpt():
 
 @app.route("/download/<string:entity_type>")
 def download_table(entity_type: str):
+    imaging.update_images(entity_type)
+
     league = database.get_selected_league()
     season = database.get_selected_season()
     uploads = os.path.join(app.root_path, "static/output/")

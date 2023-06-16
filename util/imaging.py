@@ -13,7 +13,7 @@ OUTPUT_PATH = f"{os.getcwd()}/server/static/output"
 HTML_2_IMAGE = Html2Image(output_path=OUTPUT_PATH)
 
 
-def update_images():
+def update_images(entity_type: str):
     def copy_required_files():
         if not os.path.exists(OUTPUT_PATH):
             os.mkdir(OUTPUT_PATH)
@@ -43,8 +43,7 @@ def update_images():
     season = database.get_selected_season()
     league = database.get_selected_league()
     season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
-    team_results = table_generator.calculate_team_scores()
-    coach_results = table_generator.calculate_coaches_scores()
+
     race_results = table_generator.calculate_races_scores()
 
     rendering_args = {"scorings": db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all(),
@@ -55,12 +54,14 @@ def update_images():
                       "league": league,
                       "creation_date": datetime.date.today().strftime("%d.%m.%Y")}
 
-    teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results,
-                                  term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races, **rendering_args)
-    print_png(teams_table, 'teams', len(team_results))
-
-    coaches_table = render_template("imaging/coaches_table_for_image.html", coach_results=coach_results, term_for_coaches=season_rules.term_for_coaches, **rendering_args)
-    print_png(coaches_table, 'coaches', len(coach_results))
-
-    races_table = render_template("imaging/races_table_for_image.html", race_results=race_results, term_for_races=season_rules.term_for_races, **rendering_args)
-    print_png(races_table, 'races', len(race_results))
+    if entity_type == "teams":
+        team_results = table_generator.calculate_team_scores()
+        teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races, **rendering_args)
+        print_png(teams_table, 'teams', len(team_results))
+    elif entity_type == "coaches":
+        coach_results = table_generator.calculate_coaches_scores()
+        coaches_table = render_template("imaging/coaches_table_for_image.html", coach_results=coach_results, term_for_coaches=season_rules.term_for_coaches, **rendering_args)
+        print_png(coaches_table, 'coaches', len(coach_results))
+    elif entity_type == "races":
+        races_table = render_template("imaging/races_table_for_image.html", race_results=race_results, term_for_races=season_rules.term_for_races, **rendering_args)
+        print_png(races_table, 'races', len(race_results))
