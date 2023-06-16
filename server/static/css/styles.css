@@ -118,6 +118,10 @@ a:focus,
     background-color: var(--link-focus-background);
 }
 
+.container-table {
+    overflow-x: auto;
+}
+
 .bordered {
     width: 100%;
     border-spacing: 2px;
