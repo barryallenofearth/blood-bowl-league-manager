@@ -6,13 +6,12 @@ from flask import request, send_from_directory, render_template, Flask
 from flask_bootstrap import Bootstrap
 
 import database.database
-import table.table_generator
+from table import score_table, casualties_table
 from database import bootstrapping
 from database.database import db
 from server import delete_entities
 from server.manage_entities import *
 from util import parsing, imaging
-from html2image import Html2Image
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -60,12 +59,16 @@ def home():
         return redirect(url_for("manage", entity_type="season"))
 
     season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
-    team_results = table.table_generator.calculate_team_scores()
-    coach_results = table.table_generator.calculate_coaches_scores()
-    race_results = table.table_generator.calculate_races_scores()
+    team_results = score_table.calculate_team_scores()
+    team_casualties = casualties_table.calculate_team_casulties()
+    coach_results = score_table.calculate_coaches_scores()
+    coach_casualties = casualties_table.calculate_coaches_casulties()
+    race_results = score_table.calculate_races_scores()
+    race_casualties = casualties_table.calculate_races_casulties()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
 
     return render_template("home.html", team_results=team_results, race_results=race_results, coach_results=coach_results, scorings=scorings, nav_properties=NavProperties(db),
+                           team_casualties=team_casualties, race_casualties=race_casualties, coach_casualties=coach_casualties,
                            term_for_team_names=season_rules.term_for_team_names, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
                            number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places)
 

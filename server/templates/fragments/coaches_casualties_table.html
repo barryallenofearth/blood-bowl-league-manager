@@ -1,0 +1,19 @@
+{% import 'fragments/table_macros.html' as table_commons %}
+<table class="bordered">
+    <tr>
+        <th>Platz</th>
+        <th>{{term_for_coaches}}</th>
+        <th>Teams</th>
+        <th>Spiele</th>
+        <th>Casualties</th>
+    </tr>
+    {% for result in coach_casualties %}
+    <tr>
+        <td class="center">{{result.place}}</td>
+        <td><strong>{{result.coach}}</strong></td>
+        <td class="center"><strong>{{result.number_of_teams}}</strong></td>
+        <td class="center"><strong>{{result.number_of_matches}}</strong></td>
+        <td class="center"><strong class="scored-points">{{result.casualties}}</strong></td>
+    </tr>
+    {%endfor%}
+</table>
