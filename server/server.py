@@ -62,11 +62,11 @@ def home():
 
     season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
     team_results = score_table.calculate_team_scores()
-    team_casualties = casualties_table.calculate_team_casulties()
+    team_casualties = casualties_table.calculate_team_casualties()
     coach_results = score_table.calculate_coaches_scores()
-    coach_casualties = casualties_table.calculate_coaches_casulties()
+    coach_casualties = casualties_table.calculate_coaches_casualties()
     race_results = score_table.calculate_races_scores()
-    race_casualties = casualties_table.calculate_races_casulties()
+    race_casualties = casualties_table.calculate_races_casualties()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
 
     return render_template("home.html", team_results=team_results, race_results=race_results, coach_results=coach_results, scorings=scorings, nav_properties=NavProperties(db),
