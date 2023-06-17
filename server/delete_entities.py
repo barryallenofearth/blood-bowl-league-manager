@@ -97,13 +97,12 @@ def team_delete(id: int):
     if len(team_matches) > 0:
         error_message = f"Could not delete team {team.name}. There are still the following matches connected to this team:"
         for match in team_matches:
-            error_message += "\n" + str(match)
-
-        team.is_disqualified = True
-        db.session.add(team)
+            error_message += "\n" + formatting.format_match(match)
+        return error_message
 
     db.session.delete(team)
     db.session.commit()
+
     return SUCCESSFULLY_DELETED
 
 
