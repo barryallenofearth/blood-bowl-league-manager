@@ -323,6 +323,11 @@ a:focus,
     }
 }
 
+.form-control::placeholder {
+    color: #BBB;
+    opacity: 1;
+}
+
 .delete-message {
     text-align: center;
     max-height: 60%;

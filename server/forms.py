@@ -11,8 +11,8 @@ from util import formatting, parsing
 
 
 class BaseLeagueForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired("Please enter a league name.")])
-    short_name = StringField("Short name", validators=[DataRequired("Please enter a league short name.")])
+    name = StringField("Name", validators=[DataRequired("Please enter a league name.")], render_kw={"placeholder": "Westfalia Blood Bowl League"})
+    short_name = StringField("Short name", validators=[DataRequired("Please enter a league short name.")], render_kw={"placeholder": "WBBL"})
     logo = FileField("Logo", validators=[DataRequired(message="Please enter a png file for the logo.")])
 
 
@@ -25,8 +25,8 @@ class UpdateLeagueForm(BaseLeagueForm):
 
 
 class BaseSeasonForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired("Please enter a season name.")])
-    short_name = StringField("Short name", validators=[DataRequired("Please enter a season short name.")])
+    name = StringField("Name", validators=[DataRequired("Please enter a season name.")], render_kw={"placeholder": "Season 4"})
+    short_name = StringField("Short name", validators=[DataRequired("Please enter a season short name.")], render_kw={"placeholder": "S.4"})
     team_short_name_length = IntegerField("Team short name length", validators=[DataRequired("Please enter a season short name.")])
     number_of_allowed_matches = IntegerField("Matches per team", validators=[DataRequired("Please enter a season short name.")])
     number_of_allowed_matches_vs_same_opponent = IntegerField("Matches vs same team", validators=[DataRequired("Please enter a season short name.")])
@@ -102,6 +102,7 @@ class AddMatchForm(FlaskForm):
     match_user_input = StringField("Match user input",
                                    description="Matches need to be entered using the following pattern: {TEAM_NAME_1} vs. {TEAM_NAME_2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
                                                "i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1",
+                                   render_kw={"placeholder": "Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1 (Playoffs)"},
                                    validators=[Regexp(regex=parsing.MATCH_REGEX, message="Please enter match results in the required format")])
     submit = SubmitField(label="Add new match")
 
@@ -130,6 +131,7 @@ class UpdateMatchForm(FlaskForm):
 
 class AddAdditionalStatisticsEntryForm(FlaskForm):
     statistics_user_input = StringField("Casualty user input",
+                                        render_kw={"placeholder": "Wolbecker Wolpertinger: 4 Casualties"},
                                         validators=[Regexp(regex=parsing.CASUALTIES_REGEX, message="Please enter casualties in the required format and only larger than 0", flags=re.IGNORECASE)],
                                         description="Casualties need to be entered using the following pattern: {TEAM_NAME}: {CASUALTIES} Casualties<br>i.e.: Wolbecker Wolpertinger: 3 Casualties")
     submit = SubmitField(label="Add new statistics")
