@@ -158,6 +158,56 @@ def manage(entity_type: str):
     return render_template("manage_entities.html", **kwargs)
 
 
+@app.route("/user-input", methods=["POST"])
+def match_result_from_user_inpt():
+    def could_not_be_parsed(response: dict, user_input: str):
+        response['results'].append({'status': 400,
+                                    'message': 'user input could not be parsed',
+                                    'user-input': f"'{user_input}'",
+                                    'formatted-input': ''})
+
+    user_inputs = request.json["user-inputs"]  # type list
+
+    if len(user_inputs) == 0:
+        return {'message': 'No match results were submitted.', 'status': 200}
+
+    response = {'results': []}
+    for user_input in user_inputs:
+        try:
+            if parsing.MATCH_RESULT_MATCHER.match(user_input):
+                bb_match = parsing.parse_match_result(user_input)
+                db.session.add(bb_match)
+                db.session.commit()
+                response['results'].append({'status': 200,
+                                            'message': 'match successfully entered',
+                                            'user-input': f"'{user_input}'",
+                                            'formatted-input': f"'{formatting.format_match(bb_match)}"})
+            elif parsing.CASUALTIES_MATCHER.match(user_input):
+                additional_statistics = parsing.parse_additonal_statistics_input(user_input)
+                db.session.add(additional_statistics)
+                db.session.commit()
+                response['results'].append({'status': 200,
+                                            'message': 'casualties entry successfully entered',
+                                            'user-input': f"'{user_input}'",
+                                            'formatted-input': f"'{formatting.format_additional_statistics(additional_statistics)}"})
+            else:
+                could_not_be_parsed(response, user_input)
+        except SyntaxError:
+            could_not_be_parsed(response, user_input)
+    return json.dumps(response)
+
+
+@app.route("/download/<string:entity_type>")
+def download_table(entity_type: str):
+    imaging.update_images(entity_type)
+
+    league = database.get_selected_league()
+    season = database.get_selected_season()
+    uploads = os.path.join(app.root_path, "static/output/")
+    file_name = f"{entity_type}_table_{league.short_name}_season_{season.short_name.replace('.', '_')}.png"
+    return send_from_directory(directory=uploads, path=file_name, as_attachment=True, download_name=file_name)
+
+
 @app.route("/<string:entity_type>/delete/<int:id>", methods=["POST"])
 def delete(entity_type: str, id: int):
     message = "No matching entity type found"
@@ -183,33 +233,3 @@ def delete(entity_type: str, id: int):
         print(f"original json string could not be converted to true json since it probably contains a ' or a \" in the message part: {return_json}")
         return_json = str({"message": f"The {entity_type} could not be deleted.", "status": 500}).replace("'", '"')
         return json.loads(return_json)
-
-
-@app.route("/match-result/user-input", methods=["POST"])
-def match_result_from_user_inpt():
-    match_result = request.json["match-results"]  # type list
-
-    response = ""
-    if len(match_result) == 0:
-        return "No match results were submitted."
-    for match in match_result:
-        try:
-            bb_match = parsing.parse_match_result(match)
-            db.session.add(bb_match)
-            db.session.commit()
-            response += f"[200] Match successfully entered: '{formatting.format_match(bb_match)}' from user input '{match}'\n"
-        except SyntaxError:
-            response += f"[400] Match result '{match}' did not match the expected pattern.\n"
-
-    return response.strip()
-
-
-@app.route("/download/<string:entity_type>")
-def download_table(entity_type: str):
-    imaging.update_images(entity_type)
-
-    league = database.get_selected_league()
-    season = database.get_selected_season()
-    uploads = os.path.join(app.root_path, "static/output/")
-    file_name = f"{entity_type}_table_{league.short_name}_season_{season.short_name.replace('.', '_')}.png"
-    return send_from_directory(directory=uploads, path=file_name, as_attachment=True, download_name=file_name)
