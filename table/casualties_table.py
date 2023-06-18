@@ -73,7 +73,7 @@ def __calculate_scores(results: dict, season_id: int, entity_id_from_team_id_get
 def number_of_matches_by_team(team_list: list) -> int:
     number_of_matches = 0
     for team in team_list:
-        number_of_matches = db.session.query(BBMatch).filter(or_(BBMatch.team_1_id == team.id, BBMatch.team_2_id == team.id)).count()
+        number_of_matches += db.session.query(BBMatch).filter(or_(BBMatch.team_1_id == team.id, BBMatch.team_2_id == team.id)).count()
     return number_of_matches
 
 
