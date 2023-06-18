@@ -1,7 +1,7 @@
 import re
 
 from database import database
-from database.database import db, Team, Coach, BBMatch, SeasonRules, Scorings
+from database.database import db, Team, Coach, BBMatch, SeasonRules, Scorings, AdditionalStatistics
 
 
 def generate_scorings_field_value(season_id: int) -> str:
@@ -110,7 +110,6 @@ def coach_table_name(coach_id: int) -> str:
     if len(all_coaches_with_identical_first_name) == 0:
         return coach.first_name
 
-    # TODO handle names with equal first name
     index = 0
     full_name = coach.first_name + " " + coach.last_name
     table_name = generate_table_name(coach, index)
@@ -148,3 +147,9 @@ def format_match(match: BBMatch) -> str:
         string += " (Tournament)"
 
     return string
+
+
+def format_additional_statistics(additional_statistics: AdditionalStatistics):
+    team = db.session.query(Team).filter_by(id=additional_statistics.team_id).first()
+
+    return f"{team.name}: {additional_statistics.casualties} Casualties"

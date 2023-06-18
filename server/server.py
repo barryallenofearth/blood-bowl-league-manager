@@ -1,5 +1,6 @@
 import json
 import os
+from json.decoder import JSONDecodeError
 
 from flask import send_from_directory, render_template
 from flask_bootstrap import Bootstrap
@@ -48,9 +49,12 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',
                                mimetype='images/vnd.microsoft.icon')
 
+
 @app.route('/health')
 def health():
     return "I am fine"
+
+
 @app.route('/')
 def home():
     if database.get_selected_league() is None:
@@ -172,8 +176,13 @@ def delete(entity_type: str, id: int):
     elif entity_type == AdditionalStatistics.__tablename__:
         message = delete_entities.additional_statistics_delete(id)
 
-    return_json = str({'message': message, 'status': 200 if message == delete_entities.SUCCESSFULLY_DELETED else 403}).replace("'", '"')
-    return json.loads(return_json)
+    try:
+        return_json = str({"message": message, "status": 200 if "success" in message else 403}).replace("'", '"')
+        return json.loads(return_json)
+    except JSONDecodeError:
+        return_json = str({"message": f"The {entity_type} could not be deleted.", "status": 500}).replace("'", '"')
+        print(return_json)
+        return json.loads(return_json)
 
 
 @app.route("/match-result/user-input", methods=["POST"])

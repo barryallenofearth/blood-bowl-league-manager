@@ -10,19 +10,24 @@
 <script>
     let backdrop = document.querySelector('.backdrop');
     let spinner = document.querySelector('.spinner-border');
-    let modalDeleteEntity = document.getElementById('delete-entity-dialog');
-
+    let modalDeleteDialog = document.getElementById('delete-entity-dialog');
+    let modalPostDeleteDialog = document.getElementById('post-delete-dialog');
 
     function dismissModal() {
         if (!spinner.style.display) {
-            modalDeleteEntity.style.display = 'none';
+            modalDeleteDialog.style.display = 'none';
+            modalPostDeleteDialog.style.display = 'none';
             backdrop.style.display = 'none';
         }
     }
 
-    let modalDeleteEntityMessage = document.getElementById('delete-entity-message');
+    let modalDeleteDialogMessage = document.getElementById('delete-entity-message');
     backdrop.addEventListener('click', dismissModal);
     document.getElementById('reject-entity-deleted').addEventListener('click', dismissModal);
+    document.getElementById('post-delete-confirm').addEventListener('click', dismissModal)
+    document.getElementById('post-delete-confirm').addEventListener('click', function () {
+        window.location = "{{url_for('manage',entity_type=entity_type)}}"
+    })
     let entityDeleteButton;
     // @formatter:off
     {% for entity in table %}
@@ -30,11 +35,11 @@
     entityDeleteButton = document.getElementById('delete-entity-{{entity|last}}');
 
     entityDeleteButton.addEventListener('click', function () {
-        let text = modalDeleteEntityMessage.getAttribute("data-text");
+        let text = modalDeleteDialogMessage.getAttribute("data-text");
         text = text.replace('{name}', '{{entity|first}}');
-        modalDeleteEntityMessage.innerHTML = text;
+        modalDeleteDialogMessage.innerHTML = text;
 
-        modalDeleteEntity.style.display = 'block';
+        modalDeleteDialog.style.display = 'block';
         backdrop.style.display = 'block';
 
         document.getElementById('confirm-entity-deleted').addEventListener('click', function () {
@@ -42,15 +47,17 @@
             fetch("{{url_for('delete',entity_type=entity_type,id=entity|last)}}", {method: "POST"})
                 .then(response => response.json())
                 .then(output => {
-                    let redirect_location = "{{url_for('manage',entity_type=entity_type)}}";
-                    let message = output["message"];
+                    let modalPostDeleteMessage = document.getElementById("post-delete-message");
+                    modalPostDeleteMessage.innerHTML = output["message"];
                     let status = output["status"];
-                    if (status === 200) {
-                        window.location = redirect_location
-                    } else {
-                        alert(message)
-                        window.location = redirect_location
+                    if (status !== 403) {
+                        modalPostDeleteDialog.style.height='auto';
                     }
+
+
+                    modalPostDeleteDialog.style.display = 'block'
+                    modalDeleteDialog.style.display = 'none'
+                    spinner.style.display = 'none'
                 });
         });
     });
@@ -71,8 +78,14 @@
        class="lead delete-message"></p>
     <div class="row modal__actions">
         <button id="confirm-entity-deleted" class="btn btn-outline-warning col-lg-3 col-sm-6">Yes</button>
-        <button id="reject-entity-deleted" class="btn btn-warning modal-dismiss col-lg-3 col-sm-6" type="button">No
-        </button>
+        <button id="reject-entity-deleted" class="btn btn-warning modal-dismiss col-lg-3 col-sm-6" type="button">No</button>
+    </div>
+</div>
+<div id="post-delete-dialog" class="delete-modal post-delete-dialog">
+    <h1 class="modal__title">Deletion result</h1>
+    <div id="post-delete-message" class="lead delete-message"></div>
+    <div class="row modal__actions">
+        <button id="post-delete-confirm" class="btn btn-warning col-lg-3 col-sm-6">Okay</button>
     </div>
 </div>
 
