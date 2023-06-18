@@ -59,7 +59,8 @@ def race_delete(id: int):
 
         error_message = f"<p>Could not delete race {race.name}.</p><p>There are still the following teams connected to this race:</p><ul>"
         for season_id, teams in teams_and_seasons.items():
-            error_message += f"<li>{db.session.query(Season).filter_by(id=season_id).first().name}:</li><ul><li>"
+            season = db.session.query(Season).filter_by(id=season_id).first()
+            error_message += f"<li>{season.name} ({season.short_name}):</li><ul><li>"
             team_names = "</li><li>".join(teams)
             error_message += f"{team_names}</li></ul>"
         error_message += "</ul>"

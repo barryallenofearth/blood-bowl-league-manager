@@ -176,12 +176,12 @@ def delete(entity_type: str, id: int):
     elif entity_type == AdditionalStatistics.__tablename__:
         message = delete_entities.additional_statistics_delete(id)
 
+    return_json = {"message": message, "status": 200 if "success" in message else 403}
     try:
-        return_json = str({"message": message, "status": 200 if "success" in message else 403}).replace("'", '"')
-        return json.loads(return_json)
+        return json.dumps(return_json)
     except JSONDecodeError:
+        print(f"original json string could not be converted to true json since it probably contains a ' or a \" in the message part: {return_json}")
         return_json = str({"message": f"The {entity_type} could not be deleted.", "status": 500}).replace("'", '"')
-        print(return_json)
         return json.loads(return_json)
 
 
