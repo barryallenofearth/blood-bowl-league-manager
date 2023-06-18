@@ -79,19 +79,15 @@ def home():
                            number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places)
 
 
-@app.route("/season/select/<string:id>")
-def select_season(id: int):
-    selected_season = db.session.query(Season).filter_by(is_selected=True).first()
-    if selected_season is not None:
-        selected_season.is_selected = False
-        db.session.add(selected_season)
+@app.route("/download/<string:entity_type>")
+def download_table(entity_type: str):
+    imaging.update_images(entity_type)
 
-    season = db.session.query(Season).filter_by(id=id).first()
-    season.is_selected = True
-    db.session.add(season)
-    db.session.commit()
-
-    return redirect(url_for('manage', entity_type="season"))
+    league = database.get_selected_league()
+    season = database.get_selected_season()
+    uploads = os.path.join(app.root_path, "static/output/")
+    file_name = f"{entity_type}_table_{league.short_name}_season_{season.short_name.replace('.', '_')}.png"
+    return send_from_directory(directory=uploads, path=file_name, as_attachment=True, download_name=file_name)
 
 
 @app.route("/league/select/<string:id>")
@@ -107,6 +103,21 @@ def select_league(id: int):
     db.session.commit()
 
     return redirect(url_for('manage', entity_type="league"))
+
+
+@app.route("/season/select/<string:id>")
+def select_season(id: int):
+    selected_season = db.session.query(Season).filter_by(is_selected=True).first()
+    if selected_season is not None:
+        selected_season.is_selected = False
+        db.session.add(selected_season)
+
+    season = db.session.query(Season).filter_by(id=id).first()
+    season.is_selected = True
+    db.session.add(season)
+    db.session.commit()
+
+    return redirect(url_for('manage', entity_type="season"))
 
 
 @app.route("/<string:entity_type>/manage", methods=["GET", "POST"])
@@ -158,6 +169,33 @@ def manage(entity_type: str):
     return render_template("manage_entities.html", **kwargs)
 
 
+@app.route("/<string:entity_type>/delete/<int:id>", methods=["POST"])
+def delete(entity_type: str, id: int):
+    message = "No matching entity type found"
+    if entity_type == League.__tablename__:
+        message = delete_entities.league_delete(id)
+    elif entity_type == Season.__tablename__:
+        message = delete_entities.season_delete(id)
+    elif entity_type == Race.__tablename__:
+        message = delete_entities.race_delete(id)
+    elif entity_type == Coach.__tablename__:
+        message = delete_entities.coach_delete(id)
+    elif entity_type == Team.__tablename__:
+        message = delete_entities.team_delete(id)
+    elif entity_type == BBMatch.__tablename__:
+        message = delete_entities.match_delete(id)
+    elif entity_type == AdditionalStatistics.__tablename__:
+        message = delete_entities.additional_statistics_delete(id)
+
+    return_json = {"message": message, "status": 200 if "success" in message else 403}
+    try:
+        return json.dumps(return_json)
+    except JSONDecodeError:
+        print(f"original json string could not be converted to true json since it probably contains a ' or a \" in the message part: {return_json}")
+        return_json = str({"message": f"The {entity_type} could not be deleted.", "status": 500}).replace("'", '"')
+        return json.loads(return_json)
+
+
 @app.route("/user-input", methods=["POST"])
 def match_result_from_user_inpt():
     def could_not_be_parsed(response: dict, user_input: str):
@@ -197,39 +235,65 @@ def match_result_from_user_inpt():
     return json.dumps(response)
 
 
-@app.route("/download/<string:entity_type>")
-def download_table(entity_type: str):
-    imaging.update_images(entity_type)
+@app.route("/export")
+def export_data():
+    content = {'leagues': [],
+               'races': [race.name for race in db.session.query(Race).all()]}
 
-    league = database.get_selected_league()
-    season = database.get_selected_season()
-    uploads = os.path.join(app.root_path, "static/output/")
-    file_name = f"{entity_type}_table_{league.short_name}_season_{season.short_name.replace('.', '_')}.png"
-    return send_from_directory(directory=uploads, path=file_name, as_attachment=True, download_name=file_name)
+    for league in db.session.query(League).all():
+        league_json = {'name': league.name,
+                       'short_name': league.short_name,
+                       'seasons': [],
+                       'coaches': [{'first_name': coach.first_name,
+                                    'last_name': coach.last_name,
+                                    'display_name': coach.display_name} for coach in db.session.query(Coach).filter_by(league_id=league.id).all()]}
+        content['leagues'].append(league_json)
+        for season in db.session.query(Season).filter_by(league_id=league.id).all():
+            season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
+            season_json = {'name': season.name,
+                           'short_name': season.short_name,
+                           "team_short_name_length": season_rules.team_short_name_length,
+                           "number_of_allowed_matches": season_rules.number_of_allowed_matches,
+                           "number_of_allowed_matches_vs_same_opponent": season_rules.number_of_allowed_matches_vs_same_opponent,
+                           "number_of_playoff_places": season_rules.number_of_playoff_places,
+                           "term_for_team_names": season_rules.term_for_team_names,
+                           "term_for_coaches": season_rules.term_for_coaches,
+                           "term_for_races": season_rules.term_for_races,
+                           "scorings": [{'touchdown_difference': scoring.touchdown_difference,
+                                         'points_scored': scoring.points_scored} for scoring in db.session.query(Scorings).filter_by(season_id=season.id).all()],
+                           'teams': [],
+                           'matches': [],
+                           'additional_statistics': []}
+            for team in db.session.query(Team).filter_by(season_id=season.id).all():
+                race_name = db.session.query(Race).filter_by(id=team.race_id).first().name
+                coach = db.session.query(Coach).filter_by(id=team.coach_id).first()
+                team_json = {'name': team.name,
+                             'coach_first_name': coach.first_name,
+                             'coach_last_name': coach.last_name,
+                             'coach_display_name': coach.display_name,
+                             'race': race_name,
+                             'is_disqualified': team.is_disqualified}
+                season_json['teams'].append(team_json)
 
-
-@app.route("/<string:entity_type>/delete/<int:id>", methods=["POST"])
-def delete(entity_type: str, id: int):
-    message = "No matching entity type found"
-    if entity_type == League.__tablename__:
-        message = delete_entities.league_delete(id)
-    elif entity_type == Season.__tablename__:
-        message = delete_entities.season_delete(id)
-    elif entity_type == Race.__tablename__:
-        message = delete_entities.race_delete(id)
-    elif entity_type == Coach.__tablename__:
-        message = delete_entities.coach_delete(id)
-    elif entity_type == Team.__tablename__:
-        message = delete_entities.team_delete(id)
-    elif entity_type == BBMatch.__tablename__:
-        message = delete_entities.match_delete(id)
-    elif entity_type == AdditionalStatistics.__tablename__:
-        message = delete_entities.additional_statistics_delete(id)
-
-    return_json = {"message": message, "status": 200 if "success" in message else 403}
-    try:
-        return json.dumps(return_json)
-    except JSONDecodeError:
-        print(f"original json string could not be converted to true json since it probably contains a ' or a \" in the message part: {return_json}")
-        return_json = str({"message": f"The {entity_type} could not be deleted.", "status": 500}).replace("'", '"')
-        return json.loads(return_json)
+            for additional_statistics in db.session.query(AdditionalStatistics).filter_by(season_id=season.id).all():
+                team_name = db.session.query(Team).filter_by(id=additional_statistics.team_id).first().name
+                statistics_json = {'team': team_name, 'casualties': additional_statistics.casualties}
+                season_json['additional_statistics'].append(statistics_json)
+            for match in db.session.query(BBMatch).filter_by(season_id=season.id).all():
+                team_name_1 = db.session.query(Team).filter_by(id=match.team_1_id).first().name
+                team_name_2 = db.session.query(Team).filter_by(id=match.team_2_id).first().name
+                season_json['matches'].append({
+                    'match_number': match.match_number,
+                    'team_1': team_name_1,
+                    'team_2': team_name_2,
+                    'team_1_touchdowns': match.team_1_touchdown,
+                    'team_2_touchdowns': match.team_2_touchdown,
+                    'team_1_surrendered': match.team_1_surrendered,
+                    'team_2_surrendered': match.team_2_surrendered,
+                    'team_1_point_modification': match.team_1_point_modification,
+                    'team_2_point_modification': match.team_2_point_modification,
+                    'is_playoff_match': match.is_playoff_match,
+                    'is_tournament_match': match.is_tournament_match
+                })
+            league_json['seasons'].append(season_json)
+    return json.dumps(content)
