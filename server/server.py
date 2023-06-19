@@ -253,6 +253,7 @@ def export_data():
             season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
             season_json = {'name': season.name,
                            'short_name': season.short_name,
+                           'is_selected': season.is_selected,
                            "team_short_name_length": season_rules.team_short_name_length,
                            "number_of_allowed_matches": season_rules.number_of_allowed_matches,
                            "number_of_allowed_matches_vs_same_opponent": season_rules.number_of_allowed_matches_vs_same_opponent,
