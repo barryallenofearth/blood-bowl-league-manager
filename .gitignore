@@ -137,3 +137,4 @@ fabric.properties
 /generate_k8s_files/output/
 /server/static/output/
 /server/static/logos/
+/tools/output/

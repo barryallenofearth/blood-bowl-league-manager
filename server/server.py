@@ -243,6 +243,7 @@ def export_data():
     for league in db.session.query(League).all():
         league_json = {'name': league.name,
                        'short_name': league.short_name,
+                       'is_selected': league.is_selected,
                        'seasons': [],
                        'coaches': [{'first_name': coach.first_name,
                                     'last_name': coach.last_name,
