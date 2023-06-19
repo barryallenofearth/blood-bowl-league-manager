@@ -312,6 +312,10 @@ a:focus,
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
+.post-delete-dialog {
+    height: 50%;
+}
+
 @media only screen and (max-width: 768px) {
     .delete-modal {
         left: 10%;
@@ -319,8 +323,20 @@ a:focus,
     }
 }
 
+.form-control::placeholder {
+    color: #BBB;
+    opacity: 1;
+}
+
 .delete-message {
     text-align: center;
+    max-height: 60%;
+    overflow-y: auto;
+}
+
+.delete-message ul {
+    display: table;
+    margin: 0 auto;
 }
 
 .modal__title {
@@ -328,8 +344,7 @@ a:focus,
     margin: 0 0 1rem 0;
 }
 
-#confirm-entity-deleted,
-#reject-entity-deleted {
+.modal__actions > button {
     margin: auto;
 }
 

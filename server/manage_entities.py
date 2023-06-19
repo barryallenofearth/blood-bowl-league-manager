@@ -184,6 +184,7 @@ def coach_submit(form: BaseCoachForm, db: SQLAlchemy, entity_id: int):
     coach.first_name = form.first_name.data.strip()
     coach.last_name = form.last_name.data.strip()
     coach.display_name = form.display_name.data.strip() if form.display_name.data is not None else None
+    coach.league_id = database.get_selected_league().id
 
     return persist_and_redirect(coach, Coach.__tablename__, db)
 
