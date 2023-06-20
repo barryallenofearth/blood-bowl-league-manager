@@ -94,4 +94,4 @@ spec:
             name: init-files-blood-bowl-league-manager
         - name: images-volume
           persistentVolumeClaim:
-            claimName: nfs-blood-bowl-league-manager-images
+            claimName: nfs-blood-bowl-league-manager-images-pvc

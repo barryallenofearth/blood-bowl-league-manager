@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-blood-bowl-league-manager-db-pvc
+  name: nfs-blood-bowl-league-manager-images-pvc
   namespace: blood-bowl-league-manager
 spec:
   selector:
