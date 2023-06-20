@@ -28,7 +28,7 @@ WORKDIR /
 
 VOLUME /app/blood-bowl-league-manager/instance
 VOLUME /app/blood-bowl-league-manager/data
-VOLUME /app/blood-bowl-league-manager/server/static/output
+VOLUME /app/blood-bowl-league-manager/server/static/logos
 
 EXPOSE 80
 

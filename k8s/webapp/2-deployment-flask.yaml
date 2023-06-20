@@ -60,7 +60,7 @@ spec:
               name: data-files
               subPath: additional_statistics.csv
             - name: images-volume
-              mountPath: /app/blood-bowl-league-manager/server/static/output
+              mountPath: /app/blood-bowl-league-manager/server/static/logos
           livenessProbe:
             httpGet:
               path: /health
@@ -94,4 +94,4 @@ spec:
             name: init-files-blood-bowl-league-manager
         - name: images-volume
           persistentVolumeClaim:
-            claimName: nfs-blood-bowl-league-manager-images-pvc
+            claimName: nfs-blood-bowl-league-manager-logos-pvc
