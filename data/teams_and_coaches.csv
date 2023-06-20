@@ -1,4 +1,4 @@
-﻿name;coach_first_name;coach_last_name;coach_display_name;race_name;season_short_name;league_short_name
+name;coach_first_name;coach_last_name;coach_display_name;race_name;season_short_name;league_short_name
 Bloody Mary;Christian;Stach; ;Echsenmenschen;Pre.1;BBLM
 Blueboy Ravens;Niklas;Nolte; ;Menschen;Pre.1;BBLM
 Bugmans Raufbolde;Marcus;Folz;Lasse;Zwerge;Pre.1;BBLM
@@ -86,45 +86,6 @@ The Real Vermins;Hamlet;Abedian; ;Skaven;S.3;BBLM
 The Unkillable Colts;Matthias;Huber; ;Untote;S.3;BBLM
 Tylos BBC;Timo;Decker; ;Skaven;S.3;BBLM
 Wild Boys;Niklas;Nolte; ;Orks;S.3;BBLM
-11xElf;Christian;Stach; ;Waldelfen;S.4;BBLM
-BabySaurus2;Christian;Stach; ;Echsenmenschen;S.4;BBLM
-Badbulls;Raphael;Wresch; ;Orks;S.4;BBLM
-Biker Mice from Mars;Raphael;Wresch; ;Skaven;S.4;BBLM
-Blitzburgh Stealers;Gregor;Saremba; ;Skaven;S.4;BBLM
-Böhmerbach Blood Pact;Max;Driemer; ;Nekromanten;S.4;BBLM
-Clan Mordkin;Marc;Hansen; ;Skaven;S.4;BBLM
-Doomsday Experience;Michael;Evelt; ;Skaven;S.4;BBLM
-Drow Dominators;Rainer;Gelhaus; ;Dunkelelfen;S.4;BBLM
-Erpho Erazers;Till;Limbrock; ;Chaoszwerge;S.4;BBLM
-Havixbeck Deadskins;Gregor;Saremba; ;Untote;S.4;BBLM
-Huatl Hunters;Michael;Evelt; ;Echsenmenschen;S.4;BBLM
-Integrationssport Sylvania;Till;Limbrock; ;Vampire;S.4;BBLM
-Karak Telgte Tornados;Max;Driemer; ;Zwerge;S.4;BBLM
-Kematef Amduat;Rainer;Gelhaus; ;Khemri;S.4;BBLM
-Köllefornia Orcstars;Stefan;Decker; ;Orks;S.4;BBLM
-L'Amour;Niklas;Nolte; ;Bretonen;S.4;BBLM
-Lieber Tot Als Zweiter;Dennis;Karlström; ;Untote;S.4;BBLM
-Loren Legends;Ron;Krollzig; ;Waldelfen;S.4;BBLM
-Mauritz Marauders;Timo;Decker; ;Menschen;S.4;BBLM
-Monasterian Monster Moshers;Marco;Oberecht;Obi;Chaos Chosen;S.4;BBLM
-Mordheim Mutant Ninja Rats;Carl;Kapinski; ;Skaven;S.4;BBLM
-Necro Dancers;Ron;Krollzig; ;Nekromanten;S.4;BBLM
-Number of the Beast;Thomas;Ludwig; ;Chaos Chosen;S.4;BBLM
-QuiEKaZ;Max;Möllering; ;Underworld;S.4;BBLM
-Red Bull Renegades;Tobias;Stelter; ;Chaoszwerge;S.4;BBLM
-Red Mob;Tim;Leenen; ;Orks;S.4;BBLM
-Roxel Rockets;Sebastian;Sprengel; ;Menschen;S.4;BBLM
-Rusty Rumbler;Daniel;Blagojevic; ;Orks;S.4;BBLM
-Sporting Tafelrunde;Thomas;Ludwig; ;Bretonen;S.4;BBLM
-Steinfurter Schurken;Hamlet;Abedian; ;Skaven;S.4;BBLM
-Stumpen Patriots;Jan;Limbrock; ;Zwerge;S.4;BBLM
-The Mountain Fighters;Hamlet;Abedian; ;Norse;S.4;BBLM
-Tlaxtlan Titans;Carl;Kapinski; ;Echsenmenschen;S.4;BBLM
-Totenhemd Hotspur;Timo;Decker; ;Untote;S.4;BBLM
-Ultrak'Arines;Vanja;Mariani; ;Zwerge;S.4;BBLM
-Warpstone Hunters;Bernd;Junker; ;Skaven;S.4;BBLM
-Wolfgangs Wölfe;Tobias;Stelter; ;Nekromanten;S.4;BBLM
-Woodies Woodpackers;Dirk;Mannweiler;Manni;Waldelfen;S.4;BBLM
 A Tribute to the Horned Rat;Raphael;Wresch; ;Skaven;S.5;BBLM
 Aasee Geziefer Blau-Gelb;Max;Möllering; ;Underworld;S.5;BBLM
 Aasee Vikings;Gregor;Saremba; ;Norse;S.5;BBLM
@@ -208,6 +169,45 @@ Telgte Troubadours;Max;Driemer; ;Waldelfen;S.7;BBLM
 Telligt Night Hawks;Marc;Jannemann; ;Dunkelelfen;S.7;BBLM
 The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;S.7;BBLM
 Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Pact;S.7;BBLM
+11xElf;Christian;Stach; ;Waldelfen;S.4;BBLM
+BabySaurus2;Christian;Stach; ;Echsenmenschen;S.4;BBLM
+Badbulls;Raphael;Wresch; ;Orks;S.4;BBLM
+Biker Mice from Mars;Raphael;Wresch; ;Skaven;S.4;BBLM
+Blitzburgh Stealers;Gregor;Saremba; ;Skaven;S.4;BBLM
+Böhmerbach Blood Pact;Max;Driemer; ;Nekromanten;S.4;BBLM
+Clan Mordkin;Marc;Hansen; ;Skaven;S.4;BBLM
+Doomsday Experience;Michael;Evelt; ;Skaven;S.4;BBLM
+Drow Dominators;Rainer;Gelhaus; ;Dunkelelfen;S.4;BBLM
+Erpho Erazers;Till;Limbrock; ;Chaoszwerge;S.4;BBLM
+Havixbeck Deadskins;Gregor;Saremba; ;Untote;S.4;BBLM
+Huatl Hunters;Michael;Evelt; ;Echsenmenschen;S.4;BBLM
+Integrationssport Sylvania;Till;Limbrock; ;Vampire;S.4;BBLM
+Karak Telgte Tornados;Max;Driemer; ;Zwerge;S.4;BBLM
+Kematef Amduat;Rainer;Gelhaus; ;Khemri;S.4;BBLM
+Köllefornia Orcstars;Stefan;Decker; ;Orks;S.4;BBLM
+L'Amour;Niklas;Nolte; ;Bretonen;S.4;BBLM
+Lieber Tot Als Zweiter;Dennis;Karlström; ;Untote;S.4;BBLM
+Loren Legends;Ron;Krollzig; ;Waldelfen;S.4;BBLM
+Mauritz Marauders;Timo;Decker; ;Menschen;S.4;BBLM
+Monasterian Monster Moshers;Marco;Oberecht;Obi;Chaos Chosen;S.4;BBLM
+Mordheim Mutant Ninja Rats;Carl;Kapinski; ;Skaven;S.4;BBLM
+Necro Dancers;Ron;Krollzig; ;Nekromanten;S.4;BBLM
+Number of the Beast;Thomas;Ludwig; ;Chaos Chosen;S.4;BBLM
+QuiEKaZ;Max;Möllering; ;Underworld;S.4;BBLM
+Red Bull Renegades;Tobias;Stelter; ;Chaoszwerge;S.4;BBLM
+Red Mob;Tim;Leenen; ;Orks;S.4;BBLM
+Roxel Rockets;Sebastian;Sprengel; ;Menschen;S.4;BBLM
+Rusty Rumbler;Daniel;Blagojevic; ;Orks;S.4;BBLM
+Sporting Tafelrunde;Thomas;Ludwig; ;Bretonen;S.4;BBLM
+Steinfurter Schurken;Hamlet;Abedian; ;Skaven;S.4;BBLM
+Stumpen Patriots;Jan;Limbrock; ;Zwerge;S.4;BBLM
+The Mountain Fighters;Hamlet;Abedian; ;Norse;S.4;BBLM
+Tlaxtlan Titans;Carl;Kapinski; ;Echsenmenschen;S.4;BBLM
+Totenhemd Hotspur;Timo;Decker; ;Untote;S.4;BBLM
+Ultrak'Arines;Vanja;Mariani; ;Zwerge;S.4;BBLM
+Warpstone Hunters;Bernd;Junker; ;Skaven;S.4;BBLM
+Wolfgangs Wölfe;Tobias;Stelter; ;Nekromanten;S.4;BBLM
+Woodies Woodpackers;Dirk;Mannweiler;Manni;Waldelfen;S.4;BBLM
 Asgard Allstars;Kevin;Lequen; ;Norse;S.1;WBBL
 Barak Varr Blackhawks;Stephan;Waider; ;Zwerge;S.1;WBBL
 Bay Harbor Butchers;Raphael;Oppenberg; ;Khorne;S.1;WBBL
@@ -253,6 +253,8 @@ The Plague Pit Bloaters;Chris;Pott; ;Nurgle;S.2;WBBL
 The Snu Snuugs;Stephan;Waider; ;Halblinge;S.2;WBBL
 The no ones;Philipp;Saatkamp;Fips;Slann;S.2;WBBL
 This is my favourite team on the pitch;Rainer;Gelhaus; ;Khemri;S.2;WBBL
-Undeadburg Necrophobics;Max;Pomblitz; ;Untote;S.2;WBBL
 Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;S.2;WBBL
 Helden in Strumpfhosen;Chris;Pott; ;Elfen Union;S.2;WBBL
+Hexoatl Vipers;Max;Pomblitz; ;Echsenmenschen;S.2;WBBL
+Bläckhead Smashazz;Simon;Nosthoff; ;Orks;S.2;WBBL
+Blitzburgh Steelers;Patrick;Everding; ;Imperial Nobility;S.2;WBBL

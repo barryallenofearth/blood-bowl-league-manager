@@ -137,10 +137,10 @@ def init_database():
             match.team_2_touchdown = match_data["td_team_2"]
             match.team_1_point_modification = match_data["point_modification_team_1"]
             match.team_2_point_modification = match_data["point_modification_team_2"]
-            match.team_1_surrendered = True if match.team_1_point_modification < 0 else False
-            match.team_2_surrendered = True if match.team_2_point_modification < 0 else False
-            match.is_playoff_match = True if match_data["is_playoff_match"] == 1 else False
-            match.is_tournament_match = True if match_data["is_tournament_match"] == 1 else False
+            match.team_1_surrendered = match_data["team_1_surrendered"]
+            match.team_2_surrendered = match_data["team_2_surrendered"]
+            match.is_playoff_match = match_data["is_playoff_match"]
+            match.is_tournament_match = match_data["is_tournament_match"]
             db.session.add(match)
         db.session.commit()
 

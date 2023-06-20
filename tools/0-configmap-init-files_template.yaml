@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-files-blood-bowl-league-manager
+  namespace: blood-bowl-league-manager
+data:
+  leagues.csv: |
+    {{leagues.csv}}
+  seasons.csv: |
+    {{seasons.csv}}
+  races.csv: |
+    {{races.csv}}
+  teams_and_coaches.csv: |
+    {{teams_and_coaches.csv}}
+  matches.csv: |
+    {{matches.csv}}
+  additional_statistics.csv: |
+    {{additional_statistics.csv}}
