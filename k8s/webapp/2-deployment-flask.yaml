@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blood-bowl-league-manager
-          image: barryallenofearth/blood-bowl-league-manager:9
+          image: barryallenofearth/blood-bowl-league-manager:10
           env:
             - name: DB_NAME
               valueFrom:
@@ -59,6 +59,8 @@ spec:
             - mountPath: /app/blood-bowl-league-manager/data/additional_statistics.csv
               name: data-files
               subPath: additional_statistics.csv
+            - name: images-volume
+              mountPath: /app/blood-bowl-league-manager/server/static/output
           livenessProbe:
             httpGet:
               path: /health
@@ -90,3 +92,6 @@ spec:
         - name: data-files
           configMap:
             name: init-files-blood-bowl-league-manager
+        - name: images-volume
+          persistentVolumeClaim:
+            claimName: nfs-blood-bowl-league-manager-images
