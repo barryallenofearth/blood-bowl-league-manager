@@ -1,4 +1,54 @@
 name;coach_first_name;coach_last_name;coach_display_name;race_name;season_short_name;league_short_name
+Asgard Allstars;Kevin;Lequen; ;Norse;S.1;WBBL
+Barak Varr Blackhawks;Stephan;Waider; ;Zwerge;S.1;WBBL
+Bay Harbor Butchers;Raphael;Oppenberg; ;Khorne;S.1;WBBL
+BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;S.1;WBBL
+Chlamydiaville Clappers;Carl;Henjes; ;Nurgle;S.1;WBBL
+Coldblooded Allygators;Jennifer;Schlechter;Jenny;Echsenmenschen;S.1;WBBL
+Die listigen Lustria Lurche;Timon;Michler; ;Echsenmenschen;S.1;WBBL
+Flying Diggers;Philipp;Saatkamp;Fips;Underworld;S.1;WBBL
+Ironfoot Greybeards;Chris;Pott; ;Zwerge;S.1;WBBL
+Iskvard Ironfins;Tim;Freund; ;Norse;S.1;WBBL
+Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;S.1;WBBL
+Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;S.1;WBBL
+Just here for the Violins;Sven;Lehmkuhl; ;Nekromanten;S.1;WBBL
+Kharibdyss Kracher;Philip;Pollmann; ;Dunkelelfen;S.1;WBBL
+Lustria Legacy e.V.;André;Gährken; ;Echsenmenschen;S.1;WBBL
+Milfheim Mammoths;Felix;Blankermann; ;Norse;S.1;WBBL
+Raffy's Roxler Ratten;Raphael;Wresch; ;Skaven;S.1;WBBL
+Schrödingers Snotlinge;Berit;Schlüter; ;Snotlinge;S.1;WBBL
+Slanesh Slayers;Max;Richter; ;Echsenmenschen;S.1;WBBL
+Anaheim Frozen Fingers;André;Gährken; ;Norse;S.2;WBBL
+Ancient Conquerors;Raphael;Oppenberg; ;Untote;S.2;WBBL
+Beards & Bulls United;Till;Limbrock; ;Chaoszwerge;S.2;WBBL
+Big Bad Crocs;Frederik;Trieb; ;Echsenmenschen;S.2;WBBL
+BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;S.2;WBBL
+Carroburg Cosmopolitans;Bernd;Junker; ;Old World Alliance;S.2;WBBL
+Competitive Math;Sven;Lehmkuhl; ;Khorne;S.2;WBBL
+Da Red Thunda;André;Gährken; ;Orks;S.2;WBBL
+Die Hafenmeister;Max;Richter; ;Zwerge;S.2;WBBL
+Eastend Slowdiver;Timo;Decker; ;Chaoszwerge;S.2;WBBL
+Greenboi Packers;Kevin;Lequen; ;Schwarzorks;S.2;WBBL
+Gully Sneakers;Max;Pomblitz; ;Skaven;S.2;WBBL
+Kara Temple Harpies;Tobias;Stelter; ;Amazonen;S.2;WBBL
+Karak a Karaz Iron Breakers;Faton;Sejdija; ;Zwerge;S.2;WBBL
+Lucky Men in Tights;Sven;Fatum; ;Waldelfen;S.2;WBBL
+Middenland Wolves;Faton;Sejdija; ;Imperial Nobility;S.2;WBBL
+Mighty Moon Moshaz;Felix;Blankermann; ;Schwarzorks;S.2;WBBL
+Mortheim Maniacs;Bernd;Junker; ;Menschen;S.2;WBBL
+Naggaroth Nightwings;Tobias;Stelter; ;Dunkelelfen;S.2;WBBL
+Necropolis Nightmares;Simon;Nosthoff; ;Nekromanten;S.2;WBBL
+Righteous Anger;Sven;Fatum; ;Dunkelelfen;S.2;WBBL
+Squighorn Screamers;Tim;Freund; ;Goblins;S.2;WBBL
+The Plague Pit Bloaters;Chris;Pott; ;Nurgle;S.2;WBBL
+The Snu Snuugs;Stephan;Waider; ;Halblinge;S.2;WBBL
+The no ones;Philipp;Saatkamp;Fips;Slann;S.2;WBBL
+This is my favourite team on the pitch;Rainer;Gelhaus; ;Khemri;S.2;WBBL
+Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;S.2;WBBL
+Helden in Strumpfhosen;Chris;Pott; ;Elfen Union;S.2;WBBL
+Hexoatl Vipers;Max;Pomblitz; ;Echsenmenschen;S.2;WBBL
+Bläckhead Smashazz;Simon;Nosthoff; ;Orks;S.2;WBBL
+Blitzburgh Steelers;Patrick;Everding; ;Imperial Nobility;S.2;WBBL
 Bloody Mary;Christian;Stach; ;Echsenmenschen;Pre.1;BBLM
 Blueboy Ravens;Niklas;Nolte; ;Menschen;Pre.1;BBLM
 Bugmans Raufbolde;Marcus;Folz;Lasse;Zwerge;Pre.1;BBLM
@@ -145,30 +195,6 @@ Telgoth Slayers;Marc;Jannemann; ;Orks;S.6;BBLM
 The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;S.6;BBLM
 Warpfire Fighters;Benjamin;Roß; ;Skaven;S.6;BBLM
 Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Pact;S.6;BBLM
-Aasee Vikings;Gregor;Saremba; ;Norse;S.7;BBLM
-Aqualand Stingrays;Carl;Kapinski; ;Elfen Union;S.7;BBLM
-Asoziales Netzwerk Returns;Dominick;B; ;Orks;S.7;BBLM
-Bloodsports United;Till;Limbrock; ;Khorne-Dämonen;S.7;BBLM
-Doomsday Experience;Michael;Evelt; ;Skaven;S.7;BBLM
-Erpho Raptors;Till;Limbrock; ;Echsenmenschen;S.7;BBLM
-Grimfangberch Greyhogs;Sebastian;Rosentreter; ;Orks;S.7;BBLM
-Hellpit Harbingers;Bernd;Junker; ;Skaven;S.7;BBLM
-Horror V2;Christian;Stach; ;Nekromanten;S.7;BBLM
-Huatl Hunters;Michael;Evelt; ;Echsenmenschen;S.7;BBLM
-Kauket Reteh-qabet;Rainer;Gelhaus; ;Khemri;S.7;BBLM
-Killer Bees;Tobias;Stelter; ;Amazonen;S.7;BBLM
-Mean Greenskinz;Lukas;Ziegert; ;Goblins;S.7;BBLM
-New Norse Giants;Rainer;Gelhaus; ;Norse;S.7;BBLM
-Project G;Christian;Stach; ;Dunkelelfen;S.7;BBLM
-Raffy’s Roxler Ratten;Raphael;Wresch; ;Skaven;S.7;BBLM
-Red Lions;Tobias;Stelter; ;Chaoszwerge;S.7;BBLM
-Runaway Prescriptons;Dominick;B; ;Nurgle;S.7;BBLM
-Stirland Sentinels;Bernd;Junker; ;Menschen;S.7;BBLM
-Telgoth Oak Sticks;Marc;Jannemann; ;Chaoszwerge;S.7;BBLM
-Telgte Troubadours;Max;Driemer; ;Waldelfen;S.7;BBLM
-Telligt Night Hawks;Marc;Jannemann; ;Dunkelelfen;S.7;BBLM
-The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;S.7;BBLM
-Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Pact;S.7;BBLM
 11xElf;Christian;Stach; ;Waldelfen;S.4;BBLM
 BabySaurus2;Christian;Stach; ;Echsenmenschen;S.4;BBLM
 Badbulls;Raphael;Wresch; ;Orks;S.4;BBLM
@@ -208,53 +234,27 @@ Ultrak'Arines;Vanja;Mariani; ;Zwerge;S.4;BBLM
 Warpstone Hunters;Bernd;Junker; ;Skaven;S.4;BBLM
 Wolfgangs Wölfe;Tobias;Stelter; ;Nekromanten;S.4;BBLM
 Woodies Woodpackers;Dirk;Mannweiler;Manni;Waldelfen;S.4;BBLM
-Asgard Allstars;Kevin;Lequen; ;Norse;S.1;WBBL
-Barak Varr Blackhawks;Stephan;Waider; ;Zwerge;S.1;WBBL
-Bay Harbor Butchers;Raphael;Oppenberg; ;Khorne;S.1;WBBL
-BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;S.1;WBBL
-Chlamydiaville Clappers;Carl;Henjes; ;Nurgle;S.1;WBBL
-Coldblooded Allygators;Jennifer;Schlechter;Jenny;Echsenmenschen;S.1;WBBL
-Die listigen Lustria Lurche;Timon;Michler; ;Echsenmenschen;S.1;WBBL
-Flying Diggers;Philipp;Saatkamp;Fips;Underworld;S.1;WBBL
-Ironfoot Greybeards;Chris;Pott; ;Zwerge;S.1;WBBL
-Iskvard Ironfins;Tim;Freund; ;Norse;S.1;WBBL
-Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;S.1;WBBL
-Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;S.1;WBBL
-Just here for the Violins;Sven;Lehmkuhl; ;Nekromanten;S.1;WBBL
-Kharibdyss Kracher;Philip;Pollmann; ;Dunkelelfen;S.1;WBBL
-Lustria Legacy e.V.;André;Gährken; ;Echsenmenschen;S.1;WBBL
-Milfheim Mammoths;Felix;Blankermann; ;Norse;S.1;WBBL
-Raffy's Roxler Ratten;Raphael;Wresch; ;Skaven;S.1;WBBL
-Schrödingers Snotlinge;Berit;Schlüter; ;Snotlinge;S.1;WBBL
-Slanesh Slayers;Max;Richter; ;Echsenmenschen;S.1;WBBL
-Anaheim Frozen Fingers;André;Gährken; ;Norse;S.2;WBBL
-Ancient Conquerors;Raphael;Oppenberg; ;Untote;S.2;WBBL
-Beards & Bulls United;Till;Limbrock; ;Chaoszwerge;S.2;WBBL
-Big Bad Crocs;Frederik;Trieb; ;Echsenmenschen;S.2;WBBL
-BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;S.2;WBBL
-Carroburg Cosmopolitans;Bernd;Junker; ;Old World Alliance;S.2;WBBL
-Competitive Math;Sven;Lehmkuhl; ;Khorne;S.2;WBBL
-Da Red Thunda;André;Gährken; ;Orks;S.2;WBBL
-Die Hafenmeister;Max;Richter; ;Zwerge;S.2;WBBL
-Eastend Slowdiver;Timo;Decker; ;Chaoszwerge;S.2;WBBL
-Greenboi Packers;Kevin;Lequen; ;Schwarzorks;S.2;WBBL
-Gully Sneakers;Max;Pomblitz; ;Skaven;S.2;WBBL
-Kara Temple Harpies;Tobias;Stelter; ;Amazonen;S.2;WBBL
-Karak a Karaz Iron Breakers;Faton;Sejdija; ;Zwerge;S.2;WBBL
-Lucky Men in Tights;Sven;Fatum; ;Waldelfen;S.2;WBBL
-Middenland Wolves;Faton;Sejdija; ;Imperial Nobility;S.2;WBBL
-Mighty Moon Moshaz;Felix;Blankermann; ;Schwarzorks;S.2;WBBL
-Mortheim Maniacs;Bernd;Junker; ;Menschen;S.2;WBBL
-Naggaroth Nightwings;Tobias;Stelter; ;Dunkelelfen;S.2;WBBL
-Necropolis Nightmares;Simon;Nosthoff; ;Nekromanten;S.2;WBBL
-Righteous Anger;Sven;Fatum; ;Dunkelelfen;S.2;WBBL
-Squighorn Screamers;Tim;Freund; ;Goblins;S.2;WBBL
-The Plague Pit Bloaters;Chris;Pott; ;Nurgle;S.2;WBBL
-The Snu Snuugs;Stephan;Waider; ;Halblinge;S.2;WBBL
-The no ones;Philipp;Saatkamp;Fips;Slann;S.2;WBBL
-This is my favourite team on the pitch;Rainer;Gelhaus; ;Khemri;S.2;WBBL
-Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;S.2;WBBL
-Helden in Strumpfhosen;Chris;Pott; ;Elfen Union;S.2;WBBL
-Hexoatl Vipers;Max;Pomblitz; ;Echsenmenschen;S.2;WBBL
-Bläckhead Smashazz;Simon;Nosthoff; ;Orks;S.2;WBBL
-Blitzburgh Steelers;Patrick;Everding; ;Imperial Nobility;S.2;WBBL
+Aasee Vikings;Gregor;Saremba; ;Norse;S.7;BBLM
+Aqualand Stingrays;Carl;Kapinski; ;Elfen Union;S.7;BBLM
+Asoziales Netzwerk Returns;Dominick;B; ;Orks;S.7;BBLM
+Bloodsports United;Till;Limbrock; ;Khorne-Dämonen;S.7;BBLM
+Doomsday Experience;Michael;Evelt; ;Skaven;S.7;BBLM
+Erpho Raptors;Till;Limbrock; ;Echsenmenschen;S.7;BBLM
+Grimfangberch Greyhogs;Sebastian;Rosentreter; ;Orks;S.7;BBLM
+Hellpit Harbingers;Bernd;Junker; ;Skaven;S.7;BBLM
+Horror V2;Christian;Stach; ;Nekromanten;S.7;BBLM
+Huatl Hunters;Michael;Evelt; ;Echsenmenschen;S.7;BBLM
+Kauket Reteh-qabet;Rainer;Gelhaus; ;Khemri;S.7;BBLM
+Killer Bees;Tobias;Stelter; ;Amazonen;S.7;BBLM
+Mean Greenskinz;Lukas;Ziegert; ;Goblins;S.7;BBLM
+New Norse Giants;Rainer;Gelhaus; ;Norse;S.7;BBLM
+Project G;Christian;Stach; ;Dunkelelfen;S.7;BBLM
+Raffy’s Roxler Ratten;Raphael;Wresch; ;Skaven;S.7;BBLM
+Red Lions;Tobias;Stelter; ;Chaoszwerge;S.7;BBLM
+Runaway Prescriptons;Dominick;B; ;Nurgle;S.7;BBLM
+Stirland Sentinels;Bernd;Junker; ;Menschen;S.7;BBLM
+Telgoth Oak Sticks;Marc;Jannemann; ;Chaoszwerge;S.7;BBLM
+Telgte Troubadours;Max;Driemer; ;Waldelfen;S.7;BBLM
+Telligt Night Hawks;Marc;Jannemann; ;Dunkelelfen;S.7;BBLM
+The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;S.7;BBLM
+Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Pact;S.7;BBLM
