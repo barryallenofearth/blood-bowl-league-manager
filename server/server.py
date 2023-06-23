@@ -10,7 +10,7 @@ from database import bootstrapping
 from database.database import db
 from server import delete_entities
 from server.manage_entities import *
-from table import score_table, casualties_table
+from table import score_table, casualties_table, statistics
 from util import parsing, imaging
 
 app = Flask(__name__)
@@ -73,10 +73,13 @@ def home():
     race_casualties = casualties_table.calculate_races_casualties()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
 
+    stats = statistics.determine_statistics(db)
+
     return render_template("home.html", team_results=team_results, race_results=race_results, coach_results=coach_results, scorings=scorings, nav_properties=NavProperties(db),
                            team_casualties=team_casualties, race_casualties=race_casualties, coach_casualties=coach_casualties,
                            term_for_team_names=season_rules.term_for_team_names, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
-                           number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places)
+                           number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places,
+                           stats=stats)
 
 
 @app.route("/download/<string:entity_type>")

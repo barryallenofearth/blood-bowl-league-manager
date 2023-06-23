@@ -1,0 +1,51 @@
+{% import 'fragments/table_macros.html' as table_commons %}
+<table class="bordered">
+    <tr>
+        <th></th>
+        {% for stat in stats %}
+            <th>{{ stat.title }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Number of matches</td>
+        {% for stat in stats %}
+            <td class="center">{{ stat.number_of_matches }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Number of non playoff matches</td>
+        {% for stat in stats %}
+            <td class="center">{{ stat.number_of_non_playoff_matches }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Number of seasons</td>
+        {% for stat in stats %}
+            <td class="center">{{ stat.number_of_seasons }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Longest season</td>
+        {% for stat in stats %}
+            <td class="center">{{ stat.longest_season }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Average number of matches per season</td>
+        {% for stat in stats %}
+            <td class="center">{{ stat.average_number_of_games_per_season }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Number of teams</td>
+        {% for stat in stats %}
+            <td class="center">{{ stat.number_of_teams }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>Number of coaches</td>
+        {% for stat in stats %}
+            <td class="center">{{ stat.number_of_coaches }}</td>
+        {% endfor %}
+    </tr>
+</table>
