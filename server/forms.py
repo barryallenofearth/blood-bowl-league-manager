@@ -114,7 +114,7 @@ class BaseMatchForm(FlaskForm):
 
         with app.app_context():
             season = database.database.get_selected_season()
-            all_teams = db.session.query(Team).filter_by(season_id=season.id).all()
+            all_teams = db.session.query(Team).filter_by(season_id=season.id).order_by(Team.name).all()
             self.team1.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
             self.team2.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
 

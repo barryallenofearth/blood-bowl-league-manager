@@ -91,17 +91,13 @@ def home():
     season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
     team_results = score_table.calculate_team_scores()
     team_casualties = casualties_table.calculate_team_casualties()
-    coach_results = score_table.calculate_coaches_scores()
-    coach_casualties = casualties_table.calculate_coaches_casualties()
-    race_results = score_table.calculate_races_scores()
-    race_casualties = casualties_table.calculate_races_casualties()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
 
     stats = statistics.determine_statistics(db)
     form = UserInputForm()
 
-    kwargs = {'team_results': team_results, 'race_results': race_results, 'coach_results': coach_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
-              'team_casualties': team_casualties, 'race_casualties': race_casualties, 'coach_casualties': coach_casualties,
+    kwargs = {'team_results': team_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
+              'team_casualties': team_casualties,
               'term_for_team_names': season_rules.term_for_team_names, 'term_for_coaches': season_rules.term_for_coaches, 'term_for_races': season_rules.term_for_races,
               'number_of_allowed_matches': season_rules.number_of_allowed_matches, 'number_of_playoff_places': season_rules.number_of_playoff_places,
               'stats': stats, 'form': form}
@@ -115,7 +111,10 @@ def home():
 @app.route("/statistics")
 def statistics_overview():
     stats = statistics.determine_statistics(db)
-    return render_template("statistics.html", stats=stats, nav_properties=NavProperties(db))
+
+    coach_results = score_table.calculate_coaches_scores()
+    race_results = score_table.calculate_races_scores()
+    return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results)
 
 
 @app.route("/download/<string:entity_type>")

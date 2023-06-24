@@ -89,37 +89,3 @@ def calculate_team_casualties():
 
     team_casualties = {team.id: TeamCasualties(team=team, number_of_matches=number_of_matches_by_team([team])) for team in teams}
     return __calculate_scores(team_casualties, season.id, team_id_getter, alphabetic_sorter)
-
-
-def calculate_coaches_casualties():
-    def team_id_getter(team_id: int):
-        return db.session.query(Team).filter_by(id=team_id).first().coach_id
-
-    def alphabetic_sorter(coach_casualties: CoachCasualties):
-        return coach_casualties.coach
-
-    season = database.get_selected_season()
-    coaches = {db.session.query(Coach).filter_by(id=team.coach_id).first() for team in db.session.query(Team).filter_by(season_id=season.id).all()}
-
-    coach_casualties = {}
-    for coach in coaches:
-        teams = db.session.query(Team).filter_by(season_id=season.id).filter_by(coach_id=coach.id).all()
-        coach_casualties[coach.id] = CoachCasualties(coach=coach, number_of_teams=len(teams), number_of_matches=number_of_matches_by_team(teams))
-    return __calculate_scores(coach_casualties, season.id, team_id_getter, alphabetic_sorter)
-
-
-def calculate_races_casualties():
-    def team_id_getter(team_id: int):
-        return db.session.query(Team).filter_by(id=team_id).first().race_id
-
-    def alphabetic_sorter(race_scores: RaceCasualties):
-        return race_scores.race
-
-    season = database.get_selected_season()
-    races = {db.session.query(Race).filter_by(id=team.race_id).first() for team in db.session.query(Team).filter_by(season_id=season.id).all()}
-
-    races_casualties = {}
-    for race in races:
-        teams = db.session.query(Team).filter_by(season_id=season.id).filter_by(race_id=race.id).all()
-        races_casualties[race.id] = RaceCasualties(race=race, number_of_teams=len(teams), number_of_matches=number_of_matches_by_team(teams))
-    return __calculate_scores(races_casualties, season.id, team_id_getter, alphabetic_sorter)

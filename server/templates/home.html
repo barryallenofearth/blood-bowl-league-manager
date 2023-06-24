@@ -1,119 +1,79 @@
 {% extends 'layout/base-form.html' %}
 {% block title %}{{ super() }} | Overview{% endblock %}
 {% block scripts %}
-    {{ super() }}
-    {% if parsing_response %}
-        <script>
-            let backdrop = document.querySelector('.backdrop');
-            let modalPostDeleteDialog = document.getElementById('submitted-user-input-dialog');
+{{ super() }}
+{% if parsing_response %}
+<script>
+    let backdrop = document.querySelector('.backdrop');
+    let modalPostDeleteDialog = document.getElementById('submitted-user-input-dialog');
 
             function dismissModal() {
                 window.location = '{{ url_for('home') }}'
             }
 
-            modalPostDeleteDialog.style.display = 'block';
-            backdrop.style.display = 'block';
+    modalPostDeleteDialog.style.display = 'block';
+    backdrop.style.display = 'block';
 
-            document.getElementById('submitted-user-input-confirm').addEventListener('click', dismissModal)
-            backdrop.addEventListener('click', dismissModal)
+    document.getElementById('submitted-user-input-confirm').addEventListener('click', dismissModal)
+    backdrop.addEventListener('click', dismissModal)
 
-        </script>
+</script>
 
-    {% endif %}
+{% endif %}
 {% endblock %}
 
 {% block content %}
-    {{ super() }}
+{{ super() }}
 
-    {% if parsing_response %}
-        <div class="backdrop"></div>
-        <div id="submitted-user-input-dialog" class="delete-modal">
-            <h1 class="modal__title">{{ parsing_response.message }}</h1>
-            <div class="delete-message">
-                <p>User input:</p>
-                <p>{{ parsing_response.user_input }}</p>
-                <p>Parsed Input:</p>
-                <p>{{ parsing_response.parsed_result }}</p>
-            </div>
-            <div class="row modal__actions">
-                <button id="submitted-user-input-confirm" class="btn btn-warning col-lg-3 col-sm-6">Okay</button>
-            </div>
-        </div>
-    {% endif %}
-
-
-    <div class="container headline-container">
-        <h1>
-            {% if nav_properties.selected_league %}
-                {{ nav_properties.selected_league.short_name }}{% if nav_properties.selected_season %} | {{ nav_properties.selected_season.name }}{% endif %}{% endif %}</h1>
+{% if parsing_response %}
+<div class="backdrop"></div>
+<div id="submitted-user-input-dialog" class="delete-modal">
+    <h1 class="modal__title">{{ parsing_response.message }}</h1>
+    <div class="delete-message">
+        <p>User input:</p>
+        <p>{{ parsing_response.user_input }}</p>
+        <p>Parsed Input:</p>
+        <p>{{ parsing_response.parsed_result }}</p>
     </div>
-    {% if team_results|length == 0 %}
-        <div class="container">
-            <h2>No teams entered so far</h2>
-        </div>
-    {% else %}
-        <div class="container">
-            {{ wtf.quick_form(form,novalidate=True) }}
-        </div>
-
-        <div class="container">
-            <h2>Teams</h2>
-        </div>
-        <div class="container">
-            <a href="{{ url_for('download_table',entity_type='teams') }}"
-               class="btn btn-warning">
-                <i class="bi bi-people-fill"></i>
-                Teams Table Download
-            </a>
-        </div>
-        <div class="container container-table">
-            {% include 'fragments/teams_table.html' %}
-        </div>
-        <div class="container container-table">
-            <h3>Casualties</h3>
-        </div>
-        <div class="container container-table">
-            {% include 'fragments/teams_casualties_table.html' %}
-        </div>
+    <div class="row modal__actions">
+        <button id="submitted-user-input-confirm" class="btn btn-warning col-lg-3 col-sm-6">Okay</button>
+    </div>
+</div>
+{% endif %}
 
 
-        <div class="container">
-            <h2>Coaches</h2>
-        </div>
-        <div class="container">
-            <a href="{{ url_for('download_table',entity_type='coaches') }}"
-               class="btn btn-warning">
-                <i class="bi bi-person-square"></i>
-                Coaches Table Download
-            </a>
-        </div>
-        <div class="container container-table">
-            {% include 'fragments/coaches_table.html' %}
-        </div>
-        <div class="container">
-            <h3>Casualties</h3>
-        </div>
-        <div class="container container-table">
-            {% include 'fragments/coaches_casualties_table.html' %}
-        </div>
-        <div class="container">
-            <h2>Races</h2>
-        </div>
-        <div class="container">
-            <a href="{{ url_for('download_table',entity_type='races') }}"
-               class="btn btn-warning">
-                <i class="bi bi-robot"></i>
-                Races Table Download
-            </a>
-        </div>
-        <div class="container container-table">
-            {% include 'fragments/races_table.html' %}
-        </div>
-        <div class="container">
-            <h3>Casualties</h3>
-        </div>
-        <div class="container container-table">
-            {% include 'fragments/races_casualties_table.html' %}
-        </div>
-    {% endif %}
+<div class="container headline-container">
+    <h1>
+        {% if nav_properties.selected_league %}
+        {{ nav_properties.selected_league.short_name }}{% if nav_properties.selected_season %} | {{ nav_properties.selected_season.name }}{% endif %}{% endif %}</h1>
+</div>
+<div class="container">
+    {{ wtf.quick_form(form,novalidate=True) }}
+</div>
+{% if team_results|length == 0 %}
+<div class="container">
+    <h2>No teams entered so far</h2>
+</div>
+{% else %}
+
+<div class="container">
+    <h2>Teams</h2>
+</div>
+<div class="container">
+    <a href="{{ url_for('download_table',entity_type='teams') }}"
+       class="btn btn-warning">
+        <i class="bi bi-people-fill"></i>
+        Teams Table Download
+    </a>
+</div>
+<div class="container container-table">
+    {% include 'fragments/teams_table.html' %}
+</div>
+<div class="container container-table">
+    <h3>Casualties</h3>
+</div>
+<div class="container container-table">
+    {% include 'fragments/teams_casualties_table.html' %}
+</div>
+{% endif %}
 {% endblock %}
