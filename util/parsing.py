@@ -121,3 +121,14 @@ def parse_additonal_statistics_input(user_input: str, season_id=0) -> Additional
         additional_statistics.casualties = int(matching_result.group(3))
 
     return additional_statistics
+
+
+class ParsingResponse:
+
+    def __init__(self, status, message: str, user_input: str, parsed_result: str):
+        self.status = status
+        self.message = message
+        self.user_input = user_input
+        self.parsed_result = parsed_result
+
+

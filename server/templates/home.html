@@ -1,7 +1,46 @@
-{% extends 'layout/base.html' %}
+{% extends 'layout/base-form.html' %}
 {% block title %}{{ super() }} | Overview{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    {% if parsing_response %}
+        <script>
+            let backdrop = document.querySelector('.backdrop');
+            let modalPostDeleteDialog = document.getElementById('submitted-user-input-dialog');
+
+            function dismissModal() {
+                window.location = '{{ url_for('home') }}'
+            }
+
+            modalPostDeleteDialog.style.display = 'block';
+            backdrop.style.display = 'block';
+
+            document.getElementById('submitted-user-input-confirm').addEventListener('click', dismissModal)
+            backdrop.addEventListener('click', dismissModal)
+
+        </script>
+
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {{ super() }}
+
+    {% if parsing_response %}
+        <div class="backdrop"></div>
+        <div id="submitted-user-input-dialog" class="delete-modal">
+            <h1 class="modal__title">{{ parsing_response.message }}</h1>
+            <div class="delete-message">
+                <p>User input:</p>
+                <p>{{ parsing_response.user_input }}</p>
+                <p>Parsed Input:</p>
+                <p>{{ parsing_response.parsed_result }}</p>
+            </div>
+            <div class="row modal__actions">
+                <button id="submitted-user-input-confirm" class="btn btn-warning col-lg-3 col-sm-6">Okay</button>
+            </div>
+        </div>
+    {% endif %}
+
 
     <div class="container headline-container">
         <h1>
@@ -13,7 +52,9 @@
             <h2>No teams entered so far</h2>
         </div>
     {% else %}
-
+        <div class="container">
+            {{ wtf.quick_form(form,novalidate=True) }}
+        </div>
         <div class="container">
             <h2>Statistics</h2>
         </div>

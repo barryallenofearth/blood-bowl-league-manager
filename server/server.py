@@ -9,9 +9,11 @@ import database.database
 from database import bootstrapping
 from database.database import db
 from server import delete_entities
+from server.forms import UserInputForm
 from server.manage_entities import *
 from table import score_table, casualties_table, statistics
 from util import parsing, imaging
+from util.parsing import ParsingResponse
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -55,7 +57,29 @@ def health():
     return "I am fine"
 
 
-@app.route('/')
+def parse_user_input(user_input: str):
+    def could_not_be_parsed(user_input: str):
+        return ParsingResponse(400, 'user input could not be parsed', f"{user_input}", '')
+
+    try:
+        if parsing.MATCH_RESULT_MATCHER.match(user_input):
+            bb_match = parsing.parse_match_result(user_input)
+            db.session.add(bb_match)
+            db.session.commit()
+            return ParsingResponse(200, 'match successfully entered', f"{user_input}", f"{formatting.format_match(bb_match)}")
+        elif parsing.CASUALTIES_MATCHER.match(user_input):
+            additional_statistics = parsing.parse_additonal_statistics_input(user_input)
+            db.session.add(additional_statistics)
+            db.session.commit()
+            return ParsingResponse(200, 'casualties entry successfully entered', f"{user_input}", f"{formatting.format_additional_statistics(additional_statistics)}")
+        else:
+            return could_not_be_parsed(user_input)
+
+    except SyntaxError:
+        return could_not_be_parsed(user_input)
+
+
+@app.route('/', methods=["GET", "POST"])
 def home():
     if database.get_selected_league() is None:
         return redirect(url_for("manage", entity_type="league"))
@@ -74,12 +98,18 @@ def home():
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
 
     stats = statistics.determine_statistics(db)
+    form = UserInputForm()
 
-    return render_template("home.html", team_results=team_results, race_results=race_results, coach_results=coach_results, scorings=scorings, nav_properties=NavProperties(db),
-                           team_casualties=team_casualties, race_casualties=race_casualties, coach_casualties=coach_casualties,
-                           term_for_team_names=season_rules.term_for_team_names, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
-                           number_of_allowed_matches=season_rules.number_of_allowed_matches, number_of_playoff_places=season_rules.number_of_playoff_places,
-                           stats=stats)
+    kwargs = {'team_results': team_results, 'race_results': race_results, 'coach_results': coach_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
+              'team_casualties': team_casualties, 'race_casualties': race_casualties, 'coach_casualties': coach_casualties,
+              'term_for_team_names': season_rules.term_for_team_names, 'term_for_coaches': season_rules.term_for_coaches, 'term_for_races': season_rules.term_for_races,
+              'number_of_allowed_matches': season_rules.number_of_allowed_matches, 'number_of_playoff_places': season_rules.number_of_playoff_places,
+              'stats': stats, 'form': form}
+
+    if form.validate_on_submit():
+        parsing_response = parse_user_input(form.user_input.data)
+        kwargs['parsing_response'] = parsing_response
+    return render_template("home.html", **kwargs)
 
 
 @app.route("/download/<string:entity_type>")
@@ -201,12 +231,6 @@ def delete(entity_type: str, id: int):
 
 @app.route("/user-input", methods=["POST"])
 def match_result_from_user_inpt():
-    def could_not_be_parsed(response: dict, user_input: str):
-        response['results'].append({'status': 400,
-                                    'message': 'user input could not be parsed',
-                                    'user-input': f"'{user_input}'",
-                                    'formatted-input': ''})
-
     user_inputs = request.json["user-inputs"]  # type list
 
     if len(user_inputs) == 0:
@@ -214,27 +238,12 @@ def match_result_from_user_inpt():
 
     response = {'results': []}
     for user_input in user_inputs:
-        try:
-            if parsing.MATCH_RESULT_MATCHER.match(user_input):
-                bb_match = parsing.parse_match_result(user_input)
-                db.session.add(bb_match)
-                db.session.commit()
-                response['results'].append({'status': 200,
-                                            'message': 'match successfully entered',
-                                            'user-input': f"'{user_input}'",
-                                            'formatted-input': f"'{formatting.format_match(bb_match)}"})
-            elif parsing.CASUALTIES_MATCHER.match(user_input):
-                additional_statistics = parsing.parse_additonal_statistics_input(user_input)
-                db.session.add(additional_statistics)
-                db.session.commit()
-                response['results'].append({'status': 200,
-                                            'message': 'casualties entry successfully entered',
-                                            'user-input': f"'{user_input}'",
-                                            'formatted-input': f"'{formatting.format_additional_statistics(additional_statistics)}"})
-            else:
-                could_not_be_parsed(response, user_input)
-        except SyntaxError:
-            could_not_be_parsed(response, user_input)
+        parsing_response = parse_user_input(user_input)
+        response['results'].append({'status': parsing_response.status,
+                                    'message': parsing_response.message,
+                                    'user_input': parsing_response.user_input,
+                                    'parsed_result': parsing_response.parsed_result})
+
     return json.dumps(response)
 
 

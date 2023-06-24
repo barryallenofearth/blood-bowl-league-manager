@@ -129,18 +129,9 @@ class UpdateMatchForm(FlaskForm):
             self.team2.choices = [(team.id, formatting.format_team(team)) for team in all_teams]
 
 
-class AddAdditionalStatisticsEntryForm(FlaskForm):
-    statistics_user_input = StringField("Casualty user input",
-                                        render_kw={"placeholder": "Wolbecker Wolpertinger: 4 Casualties"},
-                                        validators=[Regexp(regex=parsing.CASUALTIES_REGEX, message="Please enter casualties in the required format and only larger than 0", flags=re.IGNORECASE)],
-                                        description="Casualties need to be entered using the following pattern: {TEAM_NAME}: {CASUALTIES} Casualties<br>i.e.: Wolbecker Wolpertinger: 3 Casualties")
-    submit = SubmitField(label="Add new statistics")
-
-
-class UpdateAdditionalStatisticsEntryForm(FlaskForm):
+class BaseAdditionalStatisticsEntryForm(FlaskForm):
     team = SelectField("Team", validators=[DataRequired("Please select a team")])
     casualties = IntegerField("Please enter the number of casualties made.")
-    submit = SubmitField(label="Update statistics")
 
     def __init__(self, app=None, **kwargs):
         super().__init__(**kwargs)
@@ -149,3 +140,27 @@ class UpdateAdditionalStatisticsEntryForm(FlaskForm):
             season = database.database.get_selected_season()
             all_teams = db.session.query(Team).filter_by(season_id=season.id).all()
             self.team.choices = [(current_team.id, formatting.format_team(current_team)) for current_team in all_teams]
+
+
+class AddAdditionalStatisticsEntryForm(BaseAdditionalStatisticsEntryForm):
+    submit = SubmitField(label="Add new statistics")
+
+    def __init__(self, app=None, **kwargs):
+        super().__init__(app=app, **kwargs)
+
+
+class UpdateAdditionalStatisticsEntryForm(BaseAdditionalStatisticsEntryForm):
+    submit = SubmitField(label="Update statistics")
+
+    def __init__(self, app=None, **kwargs):
+        super().__init__(app=app, **kwargs)
+
+
+class UserInputForm(FlaskForm):
+    user_input = StringField("User input",
+                             description="Matches need to be entered using the following pattern: {TEAM_NAME_1} vs. {TEAM_NAME_2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
+                                         "i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1<br>"
+                                         "i.e.: Wolbecker Wolpertinger: 3 Casualties<br>",
+                             render_kw={"placeholder": "Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1 (Playoffs)"},
+                             validators=[Regexp(regex=f"({parsing.MATCH_REGEX}|{parsing.CASUALTIES_REGEX})", flags=re.IGNORECASE, message="Please enter a valid match result or casualties entry.")])
+    submit = SubmitField(label="Process user input")

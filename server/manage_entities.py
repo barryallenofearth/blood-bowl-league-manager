@@ -381,9 +381,13 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
 
 
 def __get_additonal_statistics(db: SQLAlchemy, entity_id: int):
-    additional_statistics = db.session.query(AdditionalStatistics).filter_by(id=entity_id).first()
-    if additional_statistics is None:
-        return AdditionalStatistics()
+    if entity_id != 0:
+        additional_statistics = db.session.query(AdditionalStatistics).filter_by(id=entity_id).first()
+        if additional_statistics is None:
+            return AdditionalStatistics()
+    else:
+        additional_statistics = AdditionalStatistics()
+        additional_statistics.season_id = database.get_selected_season().id
 
     return additional_statistics
 
@@ -397,7 +401,7 @@ def additional_statistics_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dic
     additional_statistics = __get_additonal_statistics(db, entity_id)
 
     if entity_id == 0:
-        form = AddAdditionalStatisticsEntryForm()
+        form = AddAdditionalStatisticsEntryForm(app)
     else:
         form = UpdateAdditionalStatisticsEntryForm(app=app, team=additional_statistics.team_id, casualties=additional_statistics.casualties)
 
@@ -406,11 +410,8 @@ def additional_statistics_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dic
 
 def additional_statistics_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     additional_statistics = __get_additonal_statistics(db, entity_id)
-    if type(form) == UpdateAdditionalStatisticsEntryForm:
-        additional_statistics.team = form.team.data
-        additional_statistics.casualties = form.casualties.data
-    else:
-        statistics_user_input = form.statistics_user_input.data
-        additional_statistics = parsing.parse_additonal_statistics_input(statistics_user_input)
+
+    additional_statistics.team_id = form.team.data
+    additional_statistics.casualties = form.casualties.data
 
     return persist_and_redirect(additional_statistics, AdditionalStatistics.__tablename__, db)
