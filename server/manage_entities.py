@@ -273,7 +273,10 @@ def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
     match = __get_match(db, entity_id)
 
     if entity_id == 0:
-        form = forms.AddMatchForm()
+        form = forms.AddMatchForm(app,
+                                  match_number=database.highest_match_number() + 1,
+                                  team1_points_modification=0,
+                                  team2_points_modification=0)
     else:
 
         surrendered_value = 0
@@ -338,42 +341,38 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
         match.match_number = match_number
 
     match_number: int
-    if entity_id == 0:
-        match = parsing.parse_match_result(form.match_user_input.data)
-        match_number = match.match_number
-    else:
-        match = __get_match(db, entity_id)
-        match.season_id = database.get_selected_season().id
-        match.team_1_id = form.team1.data
-        match.team_2_id = form.team2.data
-        match.team_1_touchdown = form.team1_td_made.data
-        match.team_2_touchdown = form.team2_td_made.data
+    match = __get_match(db, entity_id)
+    match.season_id = database.get_selected_season().id
+    match.team_1_id = form.team1.data
+    match.team_2_id = form.team2.data
+    match.team_1_touchdown = form.team1_td_made.data
+    match.team_2_touchdown = form.team2_td_made.data
 
-        match_number = form.match_number.data
-        match.match_number = match_number
+    match_number = form.match_number.data
+    match.match_number = match_number
 
-        if form.surrendered_select.data == "0":
-            match.team_1_surrendered = False
-            match.team_2_surrendered = False
-        if form.surrendered_select.data == "1":
-            match.team_1_surrendered = True
-            match.team_2_surrendered = False
-        elif form.surrendered_select.data == "2":
-            match.team_1_surrendered = False
-            match.team_2_surrendered = True
+    if form.surrendered_select.data == "0":
+        match.team_1_surrendered = False
+        match.team_2_surrendered = False
+    if form.surrendered_select.data == "1":
+        match.team_1_surrendered = True
+        match.team_2_surrendered = False
+    elif form.surrendered_select.data == "2":
+        match.team_1_surrendered = False
+        match.team_2_surrendered = True
 
-        match.team_1_point_modification = form.team1_points_modification.data
-        match.team_2_point_modification = form.team2_points_modification.data
+    match.team_1_point_modification = form.team1_points_modification.data
+    match.team_2_point_modification = form.team2_points_modification.data
 
-        if form.match_type_select.data == "0":
-            match.is_playoff_match = False
-            match.is_tournament_match = False
-        elif form.match_type_select.data == "1":
-            match.is_playoff_match = True
-            match.is_tournament_match = False
-        elif form.match_type_select.data == "2":
-            match.is_playoff_match = False
-            match.is_tournament_match = True
+    if form.match_type_select.data == "0":
+        match.is_playoff_match = False
+        match.is_tournament_match = False
+    elif form.match_type_select.data == "1":
+        match.is_playoff_match = True
+        match.is_tournament_match = False
+    elif form.match_type_select.data == "2":
+        match.is_playoff_match = False
+        match.is_tournament_match = True
 
     reorganize_match_numbers(match, match_number)
 
