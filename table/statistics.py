@@ -25,8 +25,6 @@ def determine_statistics(db: SQLAlchemy) -> list:
         if league is not None:
             seasons_matcher = [season.league_id == league.id for season in all_seasons]
             all_seasons = all_seasons[seasons_matcher]
-            coaches_matcher = [coach.league_id == league.id for coach in all_coaches]
-            all_coaches = all_coaches[coaches_matcher]
             all_seasons_ids = [season.id for season in all_seasons]
             matches_matcher = [match.season_id in all_seasons_ids for match in all_matches]
             all_matches = all_matches[matches_matcher]

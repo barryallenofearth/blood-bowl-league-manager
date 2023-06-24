@@ -168,7 +168,7 @@ def __get_coach(db: SQLAlchemy, entity_id: int) -> Coach:
 
 def coach_get(db: SQLAlchemy, entity_id: int) -> dict:
     table = []
-    for coach in db.session.query(Coach).filter_by(league_id=database.get_selected_league().id).order_by(Coach.first_name).all():
+    for coach in db.session.query(Coach).order_by(Coach.first_name).all():
         table.append([coach.first_name, coach.last_name, coach.display_name, coach.id])
 
     coach = __get_coach(db, entity_id)

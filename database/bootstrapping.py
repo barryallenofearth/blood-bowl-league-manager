@@ -83,20 +83,17 @@ def init_database():
                 raise ValueError(f"Race '{name}' not found.")
             return race.id
 
-        def coach_id_by_name(first_name: str, last_name: str, display_name: str, league_name: str) -> int:
-            league_id = league_id_by_short_name(league_name)
+        def coach_id_by_name(first_name: str, last_name: str, display_name: str) -> int:
             coach = db.session.query(Coach) \
                 .filter_by(first_name=first_name.strip()) \
                 .filter_by(last_name=last_name.strip()) \
                 .filter_by(display_name=display_name.strip()) \
-                .filter_by(league_id=league_id) \
                 .first()
             if coach is None:
                 coach = Coach()
                 coach.first_name = first_name.strip()
                 coach.last_name = last_name.strip()
                 coach.display_name = display_name.strip()
-                coach.league_id = league_id
 
                 db.session.add(coach)
                 db.session.commit()
@@ -115,7 +112,7 @@ def init_database():
             team.name = team_data["name"]
             team.short_name = formatting.generate_team_short_name(team.name)
             team.race_id = race_id_by_name(team_data["race_name"])
-            team.coach_id = coach_id_by_name(team_data["coach_first_name"], team_data["coach_last_name"], team_data["coach_display_name"], team_data["league_short_name"])
+            team.coach_id = coach_id_by_name(team_data["coach_first_name"], team_data["coach_last_name"], team_data["coach_display_name"])
             team.is_disqualified = False
             db.session.add(team)
 

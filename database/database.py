@@ -38,7 +38,6 @@ class Race(db.Model):
 class Coach(db.Model):
     __tablename__ = "coach"
     id = db.Column(db.Integer, primary_key=True)
-    league_id = db.Column(db.Integer, db.ForeignKey(f'{League.__tablename__}.id'))
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable=False)
     display_name = db.Column(db.String, nullable=True)
