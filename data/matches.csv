@@ -1,80 +1,4 @@
 match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;is_playoff_match;is_tournament_match;season_short_name;league_short_name
-1;Raffy's Roxler Ratten;Asgard Allstars;2;1;0;0;False;False;False;False;S.1;WBBL
-2;Barak Varr Blackhawks;Iskvard Ironfins;1;0;0;0;False;False;False;False;S.1;WBBL
-3;Ironfoot Greybeards;Chlamydiaville Clappers;1;1;0;0;False;False;False;False;S.1;WBBL
-4;Barak Varr Blackhawks;Raffy's Roxler Ratten;1;1;0;0;False;False;False;False;S.1;WBBL
-5;Just here for the Violins;Wolbecker Wolpertinger;1;1;0;0;False;False;False;False;S.1;WBBL
-6;BuckelBerg Bombers;Slanesh Slayers;0;1;0;0;False;False;False;False;S.1;WBBL
-7;BuckelBerg Bombers;Iskvard Ironfins;1;2;0;0;False;False;False;False;S.1;WBBL
-8;Die listigen Lustria Lurche;Ironfoot Greybeards;2;0;0;0;False;False;False;False;S.1;WBBL
-9;Milfheim Mammoths;Schrödingers Snotlinge;2;2;0;0;False;False;False;False;S.1;WBBL
-10;Raffy's Roxler Ratten;Slanesh Slayers;1;2;0;0;False;False;False;False;S.1;WBBL
-11;Raffy's Roxler Ratten;Iskvard Ironfins;2;1;0;0;False;False;False;False;S.1;WBBL
-12;Bay Harbor Butchers;Die listigen Lustria Lurche;1;1;0;0;False;False;False;False;S.1;WBBL
-13;Bay Harbor Butchers;Ironfoot Greybeards;0;0;0;0;False;False;False;False;S.1;WBBL
-14;Coldblooded Allygators;Lustria Legacy e.V.;1;1;0;0;False;False;False;False;S.1;WBBL
-15;Kharibdyss Kracher;Schrödingers Snotlinge;1;1;0;0;False;False;False;False;S.1;WBBL
-16;Barak Varr Blackhawks;Asgard Allstars;2;1;0;0;False;False;False;False;S.1;WBBL
-17;Bay Harbor Butchers;Chlamydiaville Clappers;2;0;0;0;False;False;False;False;S.1;WBBL
-18;Lustria Legacy e.V.;Amazona Cardinals;2;1;0;0;False;False;False;False;S.1;WBBL
-19;BuckelBerg Bombers;Barak Varr Blackhawks;3;1;0;0;False;False;False;False;S.1;WBBL
-20;Milfheim Mammoths;Kharibdyss Kracher;4;0;0;0;False;False;False;False;S.1;WBBL
-21;Raffy's Roxler Ratten;BuckelBerg Bombers;4;2;0;0;False;False;False;False;S.1;WBBL
-22;Just here for the Violins;Schrödingers Snotlinge;1;0;0;0;False;False;False;False;S.1;WBBL
-23;Asgard Allstars;Iskvard Ironfins;3;0;0;0;False;False;False;False;S.1;WBBL
-24;Barak Varr Blackhawks;Slanesh Slayers;1;1;0;0;False;False;False;False;S.1;WBBL
-25;Lustria Legacy e.V.;Flying Diggers;2;2;0;0;False;False;False;False;S.1;WBBL
-26;Iskvard Ironfins;Slanesh Slayers;1;2;0;0;False;False;False;False;S.1;WBBL
-27;Asgard Allstars;BuckelBerg Bombers;0;3;0;0;False;False;False;False;S.1;WBBL
-28;Flying Diggers;Coldblooded Allygators;1;0;0;0;False;False;False;False;S.1;WBBL
-29;Just here for the Violins;Milfheim Mammoths;2;0;0;0;False;False;False;False;S.1;WBBL
-30;Just here for the Violins;Kharibdyss Kracher;3;0;0;0;False;False;False;False;S.1;WBBL
-31;Chlamydiaville Clappers;Die listigen Lustria Lurche;0;3;0;0;False;False;False;False;S.1;WBBL
-32;Lustria Legacy e.V.;Flying Diggers;1;1;0;0;False;False;False;False;S.1;WBBL
-33;Asgard Allstars;Lustria Legacy e.V.;2;0;0;0;False;False;False;False;S.1;WBBL
-34;BuckelBerg Bombers;Slanesh Slayers;0;1;0;0;False;False;False;False;S.1;WBBL
-35;Bay Harbor Butchers;Die listigen Lustria Lurche;0;1;0;0;False;False;False;False;S.1;WBBL
-36;BuckelBerg Bombers;Iskvard Ironfins;2;0;0;0;False;False;False;False;S.1;WBBL
-37;Coldblooded Allygators;Lustria Legacy e.V.;0;3;0;0;False;False;False;False;S.1;WBBL
-38;Just here for the Violins;Schrödingers Snotlinge;2;1;0;0;False;False;False;False;S.1;WBBL
-39;Asgard Allstars;Flying Diggers;2;0;0;0;False;False;False;False;S.1;WBBL
-40;Asgard Allstars;Coldblooded Allygators;1;0;0;0;False;False;False;False;S.1;WBBL
-41;Just here for the Violins;Kharibdyss Kracher;4;0;0;0;False;False;False;False;S.1;WBBL
-42;Flying Diggers;Coldblooded Allygators;2;1;0;0;False;False;False;False;S.1;WBBL
-43;Kharibdyss Kracher;Schrödingers Snotlinge;1;0;0;0;False;False;False;False;S.1;WBBL
-44;Just here for the Violins;Milfheim Mammoths;1;0;0;0;False;False;False;False;S.1;WBBL
-45;Milfheim Mammoths;Kharibdyss Kracher;2;1;0;0;False;False;False;False;S.1;WBBL
-46;BuckelBerg Bombers;Raffy's Roxler Ratten;2;2;0;0;False;False;False;False;S.1;WBBL
-47;Milfheim Mammoths;Schrödingers Snotlinge;1;1;0;0;False;False;False;False;S.1;WBBL
-1;Anaheim Frozen Fingers;Mortheim Maniacs;1;1;0;0;False;False;False;False;S.2;WBBL
-2;Mighty Moon Moshaz;Big Bad Crocs;2;1;0;0;False;False;False;False;S.2;WBBL
-3;Anaheim Frozen Fingers;BuckelBerg Bombers;2;2;0;0;False;False;False;False;S.2;WBBL
-4;Mortheim Maniacs;Lucky Men in Tights;2;1;0;0;False;False;False;False;S.2;WBBL
-5;Middenland Wolves;Big Bad Crocs;1;1;0;0;False;False;False;False;S.2;WBBL
-6;Gully Sneakers;Wolbecker Wolpertinger;3;1;0;0;False;False;False;False;S.2;WBBL
-7;The no ones;Lucky Men in Tights;1;1;0;0;False;False;False;False;S.2;WBBL
-8;Mortheim Maniacs;The no ones;1;1;0;0;False;False;False;False;S.2;WBBL
-9;Mighty Moon Moshaz;Middenland Wolves;1;1;0;0;False;False;False;False;S.2;WBBL
-10;The Plague Pit Bloaters;Middenland Wolves;0;2;0;0;False;False;False;False;S.2;WBBL
-11;Wolbecker Wolpertinger;Eastend Slowdiver;2;0;0;0;False;False;False;False;S.2;WBBL
-12;Wolbecker Wolpertinger;Necropolis Nightmares;2;1;0;0;False;False;False;False;S.2;WBBL
-13;Mighty Moon Moshaz;The Plague Pit Bloaters;2;1;0;0;False;False;False;False;S.2;WBBL
-14;Naggaroth Nightwings;Mortheim Maniacs;1;1;0;0;False;False;False;False;S.2;WBBL
-15;Da Red Thunda;Necropolis Nightmares;1;0;0;0;False;False;False;False;S.2;WBBL
-16;Necropolis Nightmares;Lucky Men in Tights;0;6;0;0;False;False;False;False;S.2;WBBL
-17;Die Hafenmeister;The no ones;2;1;0;0;False;False;False;False;S.2;WBBL
-18;Lucky Men in Tights;Mortheim Maniacs;2;2;0;0;False;False;False;False;S.2;WBBL
-19;Mighty Moon Moshaz;Gully Sneakers;2;0;0;0;False;False;False;False;S.2;WBBL
-20;The Plague Pit Bloaters;Greenboi Packers;1;0;0;0;False;False;False;False;S.2;WBBL
-21;Anaheim Frozen Fingers;Righteous Anger;0;2;0;0;False;False;False;False;S.2;WBBL
-22;Die Hafenmeister;Mortheim Maniacs;1;1;0;0;False;False;False;False;S.2;WBBL
-23;Ancient Conquerors;Middenland Wolves;3;1;0;0;False;False;False;False;S.2;WBBL
-24;Mighty Moon Moshaz;Middenland Wolves;2;0;0;0;False;False;False;False;S.2;WBBL
-25;Gully Sneakers;The Snu Snuugs;1;1;0;0;False;False;False;False;S.2;WBBL
-26;The Snu Snuugs;Necropolis Nightmares;1;0;0;0;False;False;False;False;S.2;WBBL
-27;Greenboi Packers;Blitzburgh Steelers;2;2;0;0;False;False;False;False;S.2;WBBL
-28;Middenland Wolves;Greenboi Packers;0;1;0;0;False;False;False;False;S.2;WBBL
-29;Big Bad Crocs;Ancient Conquerors;2;2;0;0;False;False;False;False;S.2;WBBL
 1;Warlocks in Purple;Knochensammler;1;1;0;0;False;False;False;False;Pre.1;BBLM
 2;Elfheim Ranger;The 69 Lusty Lickers;2;1;0;0;False;False;False;False;Pre.1;BBLM
 3;LoneBoneShamblers;OrkLand RaiDaZ;2;0;0;0;False;False;False;False;Pre.1;BBLM
@@ -564,3 +488,83 @@ match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_mod
 21;Telgoth Oak Sticks;Stirland Sentinels;0;2;0;0;False;False;False;False;S.7;BBLM
 22;Killer Bees;Hellpit Harbingers;2;0;0;0;False;False;False;False;S.7;BBLM
 23;Telgte Troubadours;Telligt Night Hawks;3;0;0;0;False;False;False;False;S.7;BBLM
+1;Raffy's Roxler Ratten;Asgard Allstars;2;1;0;0;False;False;False;False;S.1;WBBL
+2;Barak Varr Blackhawks;Iskvard Ironfins;1;0;0;0;False;False;False;False;S.1;WBBL
+3;Ironfoot Greybeards;Chlamydiaville Clappers;1;1;0;0;False;False;False;False;S.1;WBBL
+4;Barak Varr Blackhawks;Raffy's Roxler Ratten;1;1;0;0;False;False;False;False;S.1;WBBL
+5;Just here for the Violins;Wolbecker Wolpertinger;1;1;0;0;False;False;False;False;S.1;WBBL
+6;BuckelBerg Bombers;Slanesh Slayers;0;1;0;0;False;False;False;False;S.1;WBBL
+7;BuckelBerg Bombers;Iskvard Ironfins;1;2;0;0;False;False;False;False;S.1;WBBL
+8;Die listigen Lustria Lurche;Ironfoot Greybeards;2;0;0;0;False;False;False;False;S.1;WBBL
+9;Milfheim Mammoths;Schrödingers Snotlinge;2;2;0;0;False;False;False;False;S.1;WBBL
+10;Raffy's Roxler Ratten;Slanesh Slayers;1;2;0;0;False;False;False;False;S.1;WBBL
+11;Raffy's Roxler Ratten;Iskvard Ironfins;2;1;0;0;False;False;False;False;S.1;WBBL
+12;Bay Harbor Butchers;Die listigen Lustria Lurche;1;1;0;0;False;False;False;False;S.1;WBBL
+13;Bay Harbor Butchers;Ironfoot Greybeards;0;0;0;0;False;False;False;False;S.1;WBBL
+14;Coldblooded Allygators;Lustria Legacy e.V.;1;1;0;0;False;False;False;False;S.1;WBBL
+15;Kharibdyss Kracher;Schrödingers Snotlinge;1;1;0;0;False;False;False;False;S.1;WBBL
+16;Barak Varr Blackhawks;Asgard Allstars;2;1;0;0;False;False;False;False;S.1;WBBL
+17;Bay Harbor Butchers;Chlamydiaville Clappers;2;0;0;0;False;False;False;False;S.1;WBBL
+18;Lustria Legacy e.V.;Amazona Cardinals;2;1;0;0;False;False;False;False;S.1;WBBL
+19;BuckelBerg Bombers;Barak Varr Blackhawks;3;1;0;0;False;False;False;False;S.1;WBBL
+20;Milfheim Mammoths;Kharibdyss Kracher;4;0;0;0;False;False;False;False;S.1;WBBL
+21;Raffy's Roxler Ratten;BuckelBerg Bombers;4;2;0;0;False;False;False;False;S.1;WBBL
+22;Just here for the Violins;Schrödingers Snotlinge;1;0;0;0;False;False;False;False;S.1;WBBL
+23;Asgard Allstars;Iskvard Ironfins;3;0;0;0;False;False;False;False;S.1;WBBL
+24;Barak Varr Blackhawks;Slanesh Slayers;1;1;0;0;False;False;False;False;S.1;WBBL
+25;Lustria Legacy e.V.;Flying Diggers;2;2;0;0;False;False;False;False;S.1;WBBL
+26;Iskvard Ironfins;Slanesh Slayers;1;2;0;0;False;False;False;False;S.1;WBBL
+27;Asgard Allstars;BuckelBerg Bombers;0;3;0;0;False;False;False;False;S.1;WBBL
+28;Flying Diggers;Coldblooded Allygators;1;0;0;0;False;False;False;False;S.1;WBBL
+29;Just here for the Violins;Milfheim Mammoths;2;0;0;0;False;False;False;False;S.1;WBBL
+30;Just here for the Violins;Kharibdyss Kracher;3;0;0;0;False;False;False;False;S.1;WBBL
+31;Chlamydiaville Clappers;Die listigen Lustria Lurche;0;3;0;0;False;False;False;False;S.1;WBBL
+32;Lustria Legacy e.V.;Flying Diggers;1;1;0;0;False;False;False;False;S.1;WBBL
+33;Asgard Allstars;Lustria Legacy e.V.;2;0;0;0;False;False;False;False;S.1;WBBL
+34;BuckelBerg Bombers;Slanesh Slayers;0;1;0;0;False;False;False;False;S.1;WBBL
+35;Bay Harbor Butchers;Die listigen Lustria Lurche;0;1;0;0;False;False;False;False;S.1;WBBL
+36;BuckelBerg Bombers;Iskvard Ironfins;2;0;0;0;False;False;False;False;S.1;WBBL
+37;Coldblooded Allygators;Lustria Legacy e.V.;0;3;0;0;False;False;False;False;S.1;WBBL
+38;Just here for the Violins;Schrödingers Snotlinge;2;1;0;0;False;False;False;False;S.1;WBBL
+39;Asgard Allstars;Flying Diggers;2;0;0;0;False;False;False;False;S.1;WBBL
+40;Asgard Allstars;Coldblooded Allygators;1;0;0;0;False;False;False;False;S.1;WBBL
+41;Just here for the Violins;Kharibdyss Kracher;4;0;0;0;False;False;False;False;S.1;WBBL
+42;Flying Diggers;Coldblooded Allygators;2;1;0;0;False;False;False;False;S.1;WBBL
+43;Kharibdyss Kracher;Schrödingers Snotlinge;1;0;0;0;False;False;False;False;S.1;WBBL
+44;Just here for the Violins;Milfheim Mammoths;1;0;0;0;False;False;False;False;S.1;WBBL
+45;Milfheim Mammoths;Kharibdyss Kracher;2;1;0;0;False;False;False;False;S.1;WBBL
+46;BuckelBerg Bombers;Raffy's Roxler Ratten;2;2;0;0;False;False;False;False;S.1;WBBL
+47;Milfheim Mammoths;Schrödingers Snotlinge;1;1;0;0;False;False;False;False;S.1;WBBL
+1;Anaheim Frozen Fingers;Mortheim Maniacs;1;1;0;0;False;False;False;False;S.2;WBBL
+2;Mighty Moon Moshaz;Big Bad Crocs;2;1;0;0;False;False;False;False;S.2;WBBL
+3;Anaheim Frozen Fingers;BuckelBerg Bombers;2;2;0;0;False;False;False;False;S.2;WBBL
+4;Mortheim Maniacs;Lucky Men in Tights;2;1;0;0;False;False;False;False;S.2;WBBL
+5;Middenland Wolves;Big Bad Crocs;1;1;0;0;False;False;False;False;S.2;WBBL
+6;Gully Sneakers;Wolbecker Wolpertinger;3;1;0;0;False;False;False;False;S.2;WBBL
+7;The no ones;Lucky Men in Tights;1;1;0;0;False;False;False;False;S.2;WBBL
+8;Mortheim Maniacs;The no ones;1;1;0;0;False;False;False;False;S.2;WBBL
+9;Mighty Moon Moshaz;Middenland Wolves;1;1;0;0;False;False;False;False;S.2;WBBL
+10;The Plague Pit Bloaters;Middenland Wolves;0;2;0;0;False;False;False;False;S.2;WBBL
+11;Wolbecker Wolpertinger;Eastend Slowdiver;2;0;0;0;False;False;False;False;S.2;WBBL
+12;Wolbecker Wolpertinger;Necropolis Nightmares;2;1;0;0;False;False;False;False;S.2;WBBL
+13;Mighty Moon Moshaz;The Plague Pit Bloaters;2;1;0;0;False;False;False;False;S.2;WBBL
+14;Naggaroth Nightwings;Mortheim Maniacs;1;1;0;0;False;False;False;False;S.2;WBBL
+15;Da Red Thunda;Necropolis Nightmares;1;0;0;0;False;False;False;False;S.2;WBBL
+16;Necropolis Nightmares;Lucky Men in Tights;0;6;0;0;False;False;False;False;S.2;WBBL
+17;Die Hafenmeister;The no ones;2;1;0;0;False;False;False;False;S.2;WBBL
+18;Lucky Men in Tights;Mortheim Maniacs;2;2;0;0;False;False;False;False;S.2;WBBL
+19;Mighty Moon Moshaz;Gully Sneakers;2;0;0;0;False;False;False;False;S.2;WBBL
+20;The Plague Pit Bloaters;Greenboi Packers;1;0;0;0;False;False;False;False;S.2;WBBL
+21;Anaheim Frozen Fingers;Righteous Anger;0;2;0;0;False;False;False;False;S.2;WBBL
+22;Die Hafenmeister;Mortheim Maniacs;1;1;0;0;False;False;False;False;S.2;WBBL
+23;Ancient Conquerors;Middenland Wolves;3;1;0;0;False;False;False;False;S.2;WBBL
+24;Mighty Moon Moshaz;Middenland Wolves;2;0;0;0;False;False;False;False;S.2;WBBL
+25;Gully Sneakers;The Snu Snuugs;1;1;0;0;False;False;False;False;S.2;WBBL
+26;The Snu Snuugs;Necropolis Nightmares;1;0;0;0;False;False;False;False;S.2;WBBL
+27;Greenboi Packers;Blitzburgh Steelers;2;2;0;0;False;False;False;False;S.2;WBBL
+28;Middenland Wolves;Greenboi Packers;0;1;0;0;False;False;False;False;S.2;WBBL
+29;Big Bad Crocs;Ancient Conquerors;2;2;0;0;False;False;False;False;S.2;WBBL
+30;Die Hafenmeister;Gully Sneakers;2;0;0;0;False;False;False;False;S.2;WBBL
+31;BuckelBerg Bombers;Squighorn Screamers;1;1;0;0;False;False;False;False;S.2;WBBL
+32;Mighty Moon Moshaz;Wolbecker Wolpertinger;2;0;0;0;False;False;False;False;S.2;WBBL
+33;Necropolis Nightmares;Naggaroth Nightwings;1;0;0;0;False;False;False;False;S.2;WBBL
