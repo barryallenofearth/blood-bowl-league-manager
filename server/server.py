@@ -112,6 +112,12 @@ def home():
     return render_template("home.html", **kwargs)
 
 
+@app.route("/statistics")
+def statistics_overview():
+    stats = statistics.determine_statistics(db)
+    return render_template("statistics.html", stats=stats, nav_properties=NavProperties(db))
+
+
 @app.route("/download/<string:entity_type>")
 def download_table(entity_type: str):
     imaging.update_images(entity_type)

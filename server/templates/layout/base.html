@@ -43,6 +43,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if nav_properties.selected_season %}
+            <li class="nav-item" id="statistics">
+                <a class="nav-link" href="{{url_for('statistics_overview')}}">
+                    <i class="bi bi-bar-chart-line-fill"></i> Statistics</a>
+            </li>
             <li class="nav-item" id="matches">
                 <a class="nav-link" href="{{url_for('manage',entity_type='bb_match')}}">
                     <i class="bi bi-dice-3-fill"></i> Matches</a>

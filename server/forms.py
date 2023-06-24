@@ -162,9 +162,8 @@ class UpdateAdditionalStatisticsEntryForm(BaseAdditionalStatisticsEntryForm):
 
 class UserInputForm(FlaskForm):
     user_input = StringField("User input",
-                             description="Matches need to be entered using the following pattern: {TEAM_NAME_1} vs. {TEAM_NAME_2} : {TEAM 1 TOUCHDOWNS}:{TEAM 2 TOUCHDOWNS}<br>"
-                                         "i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1<br>"
-                                         "i.e.: Wolbecker Wolpertinger: 3 Casualties<br>",
+                             description="i.e.: Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1<br>"
+                                         "i.e.: Wolbecker Wolpertinger: 3 Casualties",
                              render_kw={"placeholder": "Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1 (Playoffs)"},
                              validators=[Regexp(regex=f"({parsing.MATCH_REGEX}|{parsing.CASUALTIES_REGEX})", flags=re.IGNORECASE, message="Please enter a valid match result or casualties entry.")])
     submit = SubmitField(label="Process user input")

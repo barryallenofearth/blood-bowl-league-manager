@@ -16,7 +16,7 @@ MATCH_RESULT_MATCHER = re.compile(MATCH_REGEX)
 
 # group 1: Team name
 # group 2 or 3: casualties
-CASUALTIES_REGEX = r"^\s*([^:]+?)[\s:]+(?:((?!0)\d+)\s*(?:casualty|casulty|casualties|casulties|cas)|(?:casualty|casulty|casualties|casulties|cas)\s*((?!0)\d+))[\s.]*$"
+CASUALTIES_REGEX = r"^\s*([^:]+?)[\s:]+(?:((?!0)\d+)\s*(?:casualty|casulty|casualties|casulties|cas)|(?:casualty|casulty|casualties|casulties|cas)\s*:?\s*((?!0)\d+))[\s.]*$"
 CASUALTIES_MATCHER = re.compile(CASUALTIES_REGEX, re.IGNORECASE)
 
 
@@ -130,5 +130,3 @@ class ParsingResponse:
         self.message = message
         self.user_input = user_input
         self.parsed_result = parsed_result
-
-

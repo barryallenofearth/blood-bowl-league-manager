@@ -1,0 +1,12 @@
+{% extends 'layout/base.html' %}
+{% block title %}{{ super() }} | Statistics{% endblock %}
+{% block content %}
+{{ super() }}
+
+<div class="container headline-container">
+    <h1>Statistics</h1>
+</div>
+<div class="container container-table">
+    {% include 'fragments/stats.html' %}
+</div>
+{% endblock %}

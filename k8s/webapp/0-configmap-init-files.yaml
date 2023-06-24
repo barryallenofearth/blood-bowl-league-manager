@@ -314,8 +314,8 @@ data:
     Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;S.2;WBBL
     Helden in Strumpfhosen;Chris;Pott; ;Elfen Union;S.2;WBBL
     Hexoatl Vipers;Max;Pomblitz; ;Echsenmenschen;S.2;WBBL
-    Bläckhead Smashazz;Simon;Nosthoff; ;Orks;S.2;WBBL
     Blitzburgh Steelers;Patrick;Everding; ;Imperial Nobility;S.2;WBBL
+    Bläckhead Smashazz;Simon;Nosthoff; ;Orks;S.2;WBBL
   matches.csv: |
     match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;is_playoff_match;is_tournament_match;season_short_name;league_short_name
     1;Warlocks in Purple;Knochensammler;1;1;0;0;False;False;False;False;Pre.1;BBLM
@@ -854,6 +854,12 @@ data:
     45;Milfheim Mammoths;Kharibdyss Kracher;2;1;0;0;False;False;False;False;S.1;WBBL
     46;BuckelBerg Bombers;Raffy's Roxler Ratten;2;2;0;0;False;False;False;False;S.1;WBBL
     47;Milfheim Mammoths;Schrödingers Snotlinge;1;1;0;0;False;False;False;False;S.1;WBBL
+    48;Slanesh Slayers;Lustria Legacy e.V.;2;1;0;0;False;False;True;False;S.1;WBBL
+    50;Slanesh Slayers;Raffy's Roxler Ratten;2;1;0;0;False;False;True;False;S.1;WBBL
+    51;Raffy's Roxler Ratten;Bay Harbor Butchers;3;1;0;0;False;False;True;False;S.1;WBBL
+    52;Milfheim Mammoths;Die listigen Lustria Lurche;2;1;0;0;False;False;True;False;S.1;WBBL
+    53;Milfheim Mammoths;Slanesh Slayers;2;2;3;0;False;False;True;False;S.1;WBBL
+    49;Milfheim Mammoths;Kharibdyss Kracher;2;0;0;0;False;False;True;False;S.1;WBBL
     1;Anaheim Frozen Fingers;Mortheim Maniacs;1;1;0;0;False;False;False;False;S.2;WBBL
     2;Mighty Moon Moshaz;Big Bad Crocs;2;1;0;0;False;False;False;False;S.2;WBBL
     3;Anaheim Frozen Fingers;BuckelBerg Bombers;2;2;0;0;False;False;False;False;S.2;WBBL
@@ -887,6 +893,8 @@ data:
     31;BuckelBerg Bombers;Squighorn Screamers;1;1;0;0;False;False;False;False;S.2;WBBL
     32;Mighty Moon Moshaz;Wolbecker Wolpertinger;2;0;0;0;False;False;False;False;S.2;WBBL
     33;Necropolis Nightmares;Naggaroth Nightwings;1;0;0;0;False;False;False;False;S.2;WBBL
+    34;Necropolis Nightmares;Lucky Men in Tights;2;4;0;0;False;False;False;False;S.2;WBBL
+    35;Bläckhead Smashazz;Righteous Anger;1;3;0;0;False;False;False;False;S.2;WBBL
   additional_statistics.csv: |
     team_name;casualties;season_short_name;league_short_name
     Mighty Moon Moshaz;1;S.2;WBBL
@@ -940,3 +948,5 @@ data:
     Necropolis Nightmares;2;S.2;WBBL
     Naggaroth Nightwings;3;S.2;WBBL
     BuckelBerg Bombers;5;S.2;WBBL
+    Righteous Anger;2;S.2;WBBL
+    Bläckhead Smashazz;5;S.2;WBBL
