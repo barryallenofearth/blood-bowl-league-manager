@@ -114,7 +114,7 @@ def coach_table_name(coach_id: int) -> str:
     full_name = coach.first_name + " " + coach.last_name
     table_name = generate_table_name(coach, index)
     display_names = [generate_table_name(current_coach, index) for current_coach in all_coaches_with_identical_first_name]
-    while table_name in display_names:
+    while table_name in display_names and table_name != f"{coach.first_name} {coach.last_name}":
         index += 1
 
         table_name = generate_table_name(coach, index)

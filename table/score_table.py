@@ -82,9 +82,12 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
         return []
 
     is_teams_table = type(next(iter(results.values()))) == TeamScores
-    season = database.get_selected_season()
-    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
-    matches = db.session.query(BBMatch).filter_by(season_id=season_id).order_by(BBMatch.match_number).all()
+
+    season_rules = db.session.query(SeasonRules).filter_by(season_id=season_id).first()
+    query = db.session.query(BBMatch)
+    if season_id != 0:
+        query.filter_by(season_id=season_id)
+    matches = query.order_by(BBMatch.match_number).all()
 
     skip_team_1_result = False
     skip_team_2_result = False
@@ -144,11 +147,14 @@ def calculate_coaches_scores():
     def alphabetic_sorter(coach_scores: CoachScores):
         return coach_scores.coach
 
+    print("calculate coaches scores")
     season = database.get_selected_season()
-    coaches = {db.session.query(Coach).filter_by(id=team.coach_id).first() for team in db.session.query(Team).filter_by(season_id=season.id).all()}
+    coaches = db.session.query(Coach).all()
 
+    print("coaches identified by teams")
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
-    coach_results = {coach.id: CoachScores(coach=coach, number_of_teams=db.session.query(Team).filter_by(season_id=season.id).filter_by(coach_id=coach.id).count(), number_of_scorings=len(scorings)) for coach in coaches}
+    coach_results = {coach.id: CoachScores(coach=coach, number_of_teams=db.session.query(Team).filter_by(coach_id=coach.id).count(), number_of_scorings=len(scorings))
+                     for coach in coaches}
     return __calculate_scores(coach_results, scorings, season.id, coach_id_getter, alphabetic_sorter)
 
 
@@ -160,8 +166,8 @@ def calculate_races_scores():
         return race_scores.race
 
     season = database.get_selected_season()
-    races = {db.session.query(Race).filter_by(id=team.race_id).first() for team in db.session.query(Team).filter_by(season_id=season.id).all()}
+    races = db.session.query(Race).all()
 
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
-    race_results = {race.id: RaceScores(race=race, number_of_teams=db.session.query(Team).filter_by(season_id=season.id).filter_by(race_id=race.id).count(), number_of_scorings=len(scorings)) for race in races}
+    race_results = {race.id: RaceScores(race=race, number_of_teams=db.session.query(Team).filter_by(race_id=race.id).count(), number_of_scorings=len(scorings)) for race in races}
     return __calculate_scores(race_results, scorings, season.id, race_id_getter, alphabetic_sorter)

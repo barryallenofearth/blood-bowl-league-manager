@@ -114,7 +114,10 @@ def statistics_overview():
 
     coach_results = score_table.calculate_coaches_scores()
     race_results = score_table.calculate_races_scores()
-    return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results)
+
+    season = database.get_selected_season()
+    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
+    return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results, scorings=scorings)
 
 
 @app.route("/download/<string:entity_type>")
