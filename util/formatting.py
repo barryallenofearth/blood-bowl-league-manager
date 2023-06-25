@@ -83,20 +83,23 @@ def format_coach(coach: Coach) -> str:
     return string
 
 
-def coach_table_name(coach_id: int) -> str:
+def coach_table_name(coach_id: int, season_id=-1) -> str:
     def generate_table_name(coach: Coach, index: int):
         if len(coach.last_name) < index:
             return f"{coach.first_name} {coach.last_name}"
         return coach.first_name + " " + coach.last_name[:index + 1]
 
-    season_id = database.get_selected_season().id
+    if season_id == -1:
+        season_id = database.get_selected_season().id
 
     coach = db.session.query(Coach).filter_by(id=coach_id).first()
     if coach.display_name is not None and coach.display_name != "":
         return coach.display_name
 
-    teams_by_other_coaches = db.session.query(Team) \
-        .filter_by(season_id=season_id) \
+    query = db.session.query(Team)
+    if season_id != 0:
+        query = query.filter_by(season_id=season_id)
+    teams_by_other_coaches = query \
         .filter(Team.coach_id != coach_id) \
         .filter(Team.is_disqualified is not True) \
         .all()

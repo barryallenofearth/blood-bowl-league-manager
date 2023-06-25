@@ -5,36 +5,15 @@ from database.database import Race, Team, db, AdditionalStatistics, Coach, BBMat
 from util import formatting
 
 
-class BaseCasualties:
-    def __init__(self, number_of_matches: int, place=1, casualties=0):
+class TeamCasualties:
+
+    def __init__(self, team: Team, number_of_matches: int, place=1, casualties=0):
         self.place = place
         self.number_of_matches = number_of_matches
         self.casualties = casualties
-
-
-class TeamCasualties(BaseCasualties):
-
-    def __init__(self, team: Team, number_of_matches: int, place=1, casualties=0):
-        super().__init__(number_of_matches, place, casualties)
         self.team_short_name = team.short_name
         self.race = db.session.query(Race).filter_by(id=team.race_id).first().name
         self.coach = formatting.coach_table_name(team.coach_id)
-
-
-class RaceCasualties(BaseCasualties):
-
-    def __init__(self, race: Race, number_of_teams: int, number_of_matches: int, place=1, casualties=0):
-        super().__init__(number_of_matches, place, casualties)
-        self.race = race.name
-        self.number_of_teams = number_of_teams
-
-
-class CoachCasualties(BaseCasualties):
-
-    def __init__(self, coach: Coach, number_of_teams: int, number_of_matches: int, place=1, casualties=0):
-        super().__init__(number_of_matches, place, casualties)
-        self.coach = formatting.coach_table_name(coach.id)
-        self.number_of_teams = number_of_teams
 
 
 def __calculate_scores(results: dict, season_id: int, entity_id_from_team_id_getter, alphabetic_sorter):

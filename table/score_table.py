@@ -34,7 +34,7 @@ class TeamScores(BaseScores):
 class CoachScores(BaseScores):
     def __init__(self, coach: Coach, number_of_teams: int, number_of_scorings: int, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):
         super().__init__(number_of_scorings, place, number_of_matches, td_received, td_made, td_diff, points)
-        self.coach = formatting.coach_table_name(coach.id)
+        self.coach = formatting.coach_table_name(coach.id, season_id=0)
         self.number_of_teams = number_of_teams
 
     def __repr__(self):

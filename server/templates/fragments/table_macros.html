@@ -3,11 +3,11 @@
 {% for scoring in scorings %}
 <th>
     {% if scoring.touchdown_difference > 0%}
-    Win{{scoring.touchdown_difference}}{%if loop.index == 1%}+{% endif%}
+    Win{% if scorings|length > 3 %}{{scoring.touchdown_difference}}{%if loop.index == 1 %}+{% endif%}{% endif%}
     {% elif scoring.touchdown_difference == 0%}
     Draw
     {% else %}
-    Loss{{scoring.touchdown_difference*(-1)}}{%if loop.index == scorings|length%}+{% endif%}
+    Loss{% if scorings|length > 3 %}{{scoring.touchdown_difference*(-1)}}{%if loop.index == scorings|length %}+{% endif%}{% endif%}
     {% endif %}
 </th>
 {% endfor %}
