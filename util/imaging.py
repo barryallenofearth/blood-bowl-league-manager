@@ -29,14 +29,19 @@ def update_images(entity_type: str):
                 with open(f"{HTML_2_IMAGE.temp_path}/styles.css", "w", encoding="utf-8") as imaging_css_file:
                     imaging_css_file.write(css_file.read().replace("/static/css/Nuffle.ttf", "Nuffle.ttf"))
 
-    def print_png(table_html: str, dimension: str, number_of_entries: int):
+    def print_png(table_html: str, dimension: str, number_of_entries: int, has_casualties_table=False):
         def generate_base_output_name(dimension: str):
             return f"{dimension}_table_{league.short_name}_season_{season.short_name}".replace('.', '_')
 
         base_team_table_name = generate_base_output_name(dimension)
         png_output = f"{base_team_table_name}.png"
 
-        HTML_2_IMAGE.screenshot(html_str=table_html, save_as=png_output, size=(1200, 100 + 2 * (number_of_entries + 1) * 32))
+        height = (number_of_entries + 1) * 31
+        if has_casualties_table:
+            height *= 2
+        height += 100
+
+        HTML_2_IMAGE.screenshot(html_str=table_html, save_as=png_output, size=(1200, height))
 
     copy_required_files()
 
@@ -55,16 +60,15 @@ def update_images(entity_type: str):
     if entity_type == "teams":
         team_results = score_table.calculate_team_scores()
         team_casualties = casualties_table.calculate_team_casualties()
-        teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results, team_casualties=team_casualties, term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races,
+        teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results, team_casualties=team_casualties, term_for_coaches=season_rules.term_for_coaches,
+                                      term_for_races=season_rules.term_for_races,
                                       **rendering_args)
-        print_png(teams_table, 'teams', len(team_results))
+        print_png(teams_table, 'teams', len(team_results), True)
     elif entity_type == "coaches":
         coach_results = score_table.calculate_coaches_scores()
-        coach_casualties = casualties_table.calculate_coaches_casualties()
-        coaches_table = render_template("imaging/coaches_table_for_image.html", coach_results=coach_results, coach_casualties=coach_casualties, term_for_coaches=season_rules.term_for_coaches, **rendering_args)
+        coaches_table = render_template("imaging/coaches_table_for_image.html", coach_results=coach_results, term_for_coaches=season_rules.term_for_coaches, **rendering_args)
         print_png(coaches_table, 'coaches', len(coach_results))
     elif entity_type == "races":
         race_results = score_table.calculate_races_scores()
-        race_casualties = casualties_table.calculate_races_casualties()
-        races_table = render_template("imaging/races_table_for_image.html", race_results=race_results, race_casualties=race_casualties, term_for_races=season_rules.term_for_races, **rendering_args)
+        races_table = render_template("imaging/races_table_for_image.html", race_results=race_results, term_for_races=season_rules.term_for_races, **rendering_args)
         print_png(races_table, 'races', len(race_results))
