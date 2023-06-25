@@ -6,6 +6,7 @@
         <th>{{term_for_races}}</th>
         <th>{{term_for_coaches}}</th>
         {{table_commons.common_headers(scorings)}}
+        <th>Punkte</th>
     </tr>
     {% for result in team_results %}
     <tr>
@@ -15,6 +16,7 @@
         <td>{{result.coach}}</td>
         <td class="center{% if result.number_of_matches == number_of_allowed_matches %} highlight-table-cell{% endif %}"><strong>{{result.number_of_matches}}</strong></td>
         {{table_commons.common_results(result)}}
+        <td class="center"><strong class="scored-points">{{result.points}}</strong></td>
     </tr>
     {%endfor%}
 </table>

@@ -140,6 +140,17 @@ def calculate_team_scores():
     return __calculate_scores(team_results, scorings, season.id, team_id_getter, alphabetic_sorter)
 
 
+def winning_scorings():
+    scorings = []
+    for td_diff in range(-1, 2):
+        scoring = Scorings()
+        scoring.touchdown_difference = td_diff
+        scoring.points_scored = td_diff
+        scorings.append(scoring)
+
+    return scorings
+
+
 def calculate_coaches_scores():
     def coach_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().coach_id
@@ -148,11 +159,10 @@ def calculate_coaches_scores():
         return coach_scores.coach
 
     print("calculate coaches scores")
-    season = database.get_selected_season()
     coaches = db.session.query(Coach).all()
 
     print("coaches identified by teams")
-    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
+    scorings = winning_scorings()
     coach_results = {coach.id: CoachScores(coach=coach, number_of_teams=db.session.query(Team).filter_by(coach_id=coach.id).count(), number_of_scorings=len(scorings))
                      for coach in coaches}
     return __calculate_scores(coach_results, scorings, 0, coach_id_getter, alphabetic_sorter)
@@ -165,9 +175,8 @@ def calculate_races_scores():
     def alphabetic_sorter(race_scores: RaceScores):
         return race_scores.race
 
-    season = database.get_selected_season()
     races = db.session.query(Race).all()
 
-    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
+    scorings = winning_scorings()
     race_results = {race.id: RaceScores(race=race, number_of_teams=db.session.query(Team).filter_by(race_id=race.id).count(), number_of_scorings=len(scorings)) for race in races}
     return __calculate_scores(race_results, scorings, 0, race_id_getter, alphabetic_sorter)
