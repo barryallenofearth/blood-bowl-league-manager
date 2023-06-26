@@ -3,21 +3,22 @@
     <tr>
         <th>Platz</th>
         <th>{{term_for_races}}</th>
-       <th>Seasons</th>
+        <th>Seasons</th>
         <th>Teams</th>
         <th>Spiele</th>
         <th>Playoff Spiele</th>
         {% for scoring in scorings %}
-            <th>
-                {% if scoring.touchdown_difference > 0 %}
-                    Win{% if scorings|length > 3 %}{{ scoring.touchdown_difference }}{% if loop.index == 1 %}+{% endif %}{% endif %}
-                {% elif scoring.touchdown_difference == 0 %}
-                    Draw
-                {% else %}
-                    Loss{% if scorings|length > 3 %}{{ scoring.touchdown_difference*(-1) }}{% if loop.index == scorings|length %}+{% endif %}{% endif %}
-                {% endif %}
-            </th>
+        <th>
+            {% if scoring.touchdown_difference > 0 %}
+            Win{% if scorings|length > 3 %}{{ scoring.touchdown_difference }}{% if loop.index == 1 %}+{% endif %}{% endif %}
+            {% elif scoring.touchdown_difference == 0 %}
+            Draw
+            {% else %}
+            Loss{% if scorings|length > 3 %}{{ scoring.touchdown_difference*(-1) }}{% if loop.index == scorings|length %}+{% endif %}{% endif %}
+            {% endif %}
+        </th>
         {% endfor %}
+        <th>Win/Loss Diff</th>
         <th>TD-</th>
         <th>TD+</th>
         <th>TD Diff</th>
@@ -27,15 +28,16 @@
         <td class="center">{{result.place}}</td>
         <td><strong>{{result.race}}</strong></td>
         <td class="center"><strong>{{ result.number_of_seasons }}</strong></td>
-            <td class="center"><strong>{{ result.number_of_teams }}</strong></td>
-            <td class="center"><strong>{{ result.number_of_matches }}</strong></td>
-            <td class="center"><strong>{{ result.number_of_playoff_matches }}</strong></td>
-            {% for count in result.match_result_counts %}
-                <td class="center">{{ count }}</td>
-            {% endfor %}
-            <td class="center">{{ result.td_received }}</td>
-            <td class="center"><strong>{{ result.td_made }}</strong></td>
-            <td class="center"><strong class="scored-points">{{ result.td_diff }}</strong></td>
+        <td class="center"><strong>{{ result.number_of_teams }}</strong></td>
+        <td class="center"><strong>{{ result.number_of_matches }}</strong></td>
+        <td class="center"><strong>{{ result.number_of_playoff_matches }}</strong></td>
+        {% for count in result.match_result_counts %}
+        <td class="center">{{ count }}</td>
+        {% endfor %}
+        <td class="center"><strong class="scored-points">{{ result.win_loss_diff }}</strong></td>
+        <td class="center">{{ result.td_received }}</td>
+        <td class="center"><strong>{{ result.td_made }}</strong></td>
+        <td class="center"><strong>{{ result.td_diff }}</strong></td>
     </tr>
     {%endfor%}
 </table>

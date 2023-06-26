@@ -260,16 +260,16 @@ def match_result_from_user_inpt():
 @app.route("/export")
 def export_data():
     content = {'leagues': [],
-               'races': [race.name for race in db.session.query(Race).all()]}
+               'races': [race.name for race in db.session.query(Race).all()],
+               'coaches': [{'first_name': coach.first_name,
+                            'last_name': coach.last_name,
+                            'display_name': coach.display_name} for coach in db.session.query(Coach).all()]}
 
     for league in db.session.query(League).all():
         league_json = {'name': league.name,
                        'short_name': league.short_name,
                        'is_selected': league.is_selected,
-                       'seasons': [],
-                       'coaches': [{'first_name': coach.first_name,
-                                    'last_name': coach.last_name,
-                                    'display_name': coach.display_name} for coach in db.session.query(Coach).filter_by(league_id=league.id).all()]}
+                       'seasons': []}
         content['leagues'].append(league_json)
         for season in db.session.query(Season).filter_by(league_id=league.id).all():
             season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
