@@ -40,13 +40,14 @@ def create_init_files(database_json: json):
                         coach_display_name = " "
                     teams_and_coaches_file.write(f"{team['name']};{team['coach_first_name']};{team['coach_last_name']};{coach_display_name};{team['race']};{season['short_name']};{league['short_name']}\n")
     with open(f"{OUTPUT_DIRECTORY}/matches.csv", "w", encoding='utf-8') as matches:
-        matches.write("match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;is_playoff_match;is_tournament_match;season_short_name;league_short_name\n")
+        matches.write("match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;"
+                      "is_team_1_victory_by_kickoff;is_team_2_victory_by_kickoff;is_playoff_match;is_tournament_match;season_short_name;league_short_name\n")
         for league in database_json["leagues"]:
             for season in league['seasons']:
                 for match in season['matches']:
                     matches.write(
                         f"{match['match_number']};{match['team_1']};{match['team_2']};{match['team_1_touchdowns']};{match['team_2_touchdowns']};{match['team_1_point_modification']};{match['team_2_point_modification']};"
-                        f"{match['team_1_surrendered']};{match['team_2_surrendered']};{match['is_playoff_match']};{match['is_tournament_match']};{season['short_name']};{league['short_name']}\n")
+                        f"{match['team_1_surrendered']};{match['team_2_surrendered']};{match['is_team_1_victory_by_kickoff']};{match['is_team_2_victory_by_kickoff']};{match['is_playoff_match']};{match['is_tournament_match']};{season['short_name']};{league['short_name']}\n")
 
 
 def create_configmap():

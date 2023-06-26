@@ -148,6 +148,10 @@ def format_match(match: BBMatch) -> str:
         string += " (Playoffs)"
     if match.is_tournament_match:
         string += " (Tournament)"
+    if match.is_team_1_victory_by_kickoff:
+        string += f" ({team1_name} wins by kickoff decision)"
+    if match.is_team_2_victory_by_kickoff:
+        string += f" ({team2_name} wins by kickoff decision)"
 
     return string
 

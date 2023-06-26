@@ -338,6 +338,8 @@ def export_data():
                     'team_2_touchdowns': match.team_2_touchdown,
                     'team_1_surrendered': match.team_1_surrendered,
                     'team_2_surrendered': match.team_2_surrendered,
+                    'is_team_1_victory_by_kickoff': match.is_team_1_victory_by_kickoff,
+                    'is_team_2_victory_by_kickoff': match.is_team_2_victory_by_kickoff,
                     'team_1_point_modification': match.team_1_point_modification,
                     'team_2_point_modification': match.team_2_point_modification,
                     'is_playoff_match': match.is_playoff_match,

@@ -108,6 +108,7 @@ class BaseMatchForm(FlaskForm):
     team1_points_modification = IntegerField("Team 1 points modification")
     team2_points_modification = IntegerField("Team 2 points modification")
     match_type_select = SelectField("Match type", choices=[(0, "Standard match"), (1, "Playoff match"), (2, "Tournament match")])
+    victory_by_kickoff_select = SelectField("Victory by kickoff", choices=[(0, "No kickoff decision"), (1, "Team 1 won by kickoff"), (2, "Team 2 won by kickoff")])
 
     def __init__(self, app=None, **kwargs):
         super().__init__(**kwargs)

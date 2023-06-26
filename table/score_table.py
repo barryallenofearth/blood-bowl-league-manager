@@ -64,11 +64,18 @@ class RaceScores(BaseScores):
 
 def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_from_team_id_getter) -> dict:
     def modify_team_score(analysis_results: dict, entity_id: int, td_made: int, td_received: int,
-                          points_modification: int, scorings: list):
-        def determine_points(td_diff: int) -> int:
+                          points_modification: int, scorings: list, is_team_1_victory_by_kickoff: bool, is_team_2_victory_by_kickoff: bool):
+        def determine_points(td_diff: int, is_team_1_victory_by_kickoff: bool, is_team_2_victory_by_kickoff: bool) -> int:
             def increment_match_results_count(index: int):
-                analysis_scoring.match_result_counts[len(scorings) - 1 - index] = analysis_scoring.match_result_counts[
-                                                                                      len(scorings) - 1 - index] + 1
+                analysis_scoring.match_result_counts[len(scorings) - 1 - index] = analysis_scoring.match_result_counts[len(scorings) - 1 - index] + 1
+
+            if is_team_1_victory_by_kickoff:
+                increment_match_results_count(len(scorings) - 1)
+                return scorings[-1].points_scored
+
+            if is_team_2_victory_by_kickoff:
+                increment_match_results_count(0)
+                return scorings[0].points_scored
 
             if td_diff <= scorings[0].touchdown_difference:
                 increment_match_results_count(0)
@@ -89,7 +96,7 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
         analysis_scoring.td_received = analysis_scoring.td_received + td_received
         td_diff = td_made - td_received
         analysis_scoring.td_diff = analysis_scoring.td_diff + td_diff
-        analysis_scoring.points = analysis_scoring.points + points_modification + determine_points(td_diff)
+        analysis_scoring.points = analysis_scoring.points + points_modification + determine_points(td_diff, is_team_1_victory_by_kickoff, is_team_2_victory_by_kickoff)
 
     if len(results) == 0:
         return {}
@@ -109,17 +116,15 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
             if match.is_playoff_match:
                 continue
 
-            skip_team_1_result = match.is_tournament_match and results[entity_id_from_team_id_getter(
-                match.team_1_id)].number_of_matches == season_rules.number_of_allowed_matches
-            skip_team_2_result = match.is_tournament_match and results[entity_id_from_team_id_getter(
-                match.team_2_id)].number_of_matches == season_rules.number_of_allowed_matches
+            skip_team_1_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_1_id)].number_of_matches == season_rules.number_of_allowed_matches
+            skip_team_2_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_2_id)].number_of_matches == season_rules.number_of_allowed_matches
 
         if not skip_team_1_result:
             modify_team_score(results, entity_id_from_team_id_getter(match.team_1_id), match.team_1_touchdown,
-                              match.team_2_touchdown, match.team_1_point_modification, scorings)
+                              match.team_2_touchdown, match.team_1_point_modification, scorings, match.is_team_1_victory_by_kickoff, match.is_team_2_victory_by_kickoff)
         if not skip_team_2_result:
             modify_team_score(results, entity_id_from_team_id_getter(match.team_2_id), match.team_2_touchdown,
-                              match.team_1_touchdown, match.team_2_point_modification, scorings)
+                              match.team_1_touchdown, match.team_2_point_modification, scorings, match.is_team_2_victory_by_kickoff, match.is_team_1_victory_by_kickoff)
 
     return results
 

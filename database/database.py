@@ -68,6 +68,8 @@ class BBMatch(db.Model):
     team_2_touchdown = db.Column(db.Integer, nullable=False)
     team_1_surrendered = db.Column(db.Boolean, nullable=True)
     team_2_surrendered = db.Column(db.Boolean, nullable=True)
+    is_team_1_victory_by_kickoff = db.Column(db.Boolean, nullable=True)
+    is_team_2_victory_by_kickoff = db.Column(db.Boolean, nullable=True)
     team_1_point_modification = db.Column(db.Integer, nullable=True)
     team_2_point_modification = db.Column(db.Integer, nullable=True)
     is_playoff_match = db.Column(db.Boolean)

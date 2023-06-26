@@ -291,6 +291,12 @@ def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
         elif match.is_tournament_match:
             match_type_value = 2
 
+        victory_by_kickoff_value = 0
+        if match.is_team_1_victory_by_kickoff:
+            victory_by_kickoff_value = 1
+        elif match.is_team_2_victory_by_kickoff:
+            victory_by_kickoff_value = 2
+
         form = forms.UpdateMatchForm(app=app,
                                      team1=match.team_1_id, team2=match.team_2_id,
                                      team1_td_made=match.team_1_touchdown,
@@ -299,6 +305,7 @@ def match_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
                                      surrendered_select=surrendered_value,
                                      team1_points_modification=match.team_1_point_modification,
                                      team2_points_modification=match.team_2_point_modification,
+                                     victory_by_kickoff_select=victory_by_kickoff_value,
                                      match_type_select=match_type_value)
 
     table = []
@@ -373,6 +380,16 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     elif form.match_type_select.data == "2":
         match.is_playoff_match = False
         match.is_tournament_match = True
+
+    if form.victory_by_kickoff_select.data == "0":
+        match.is_team_1_victory_by_kickoff = False
+        match.is_team_2_victory_by_kickoff = False
+    elif form.victory_by_kickoff_select.data == "1":
+        match.is_team_1_victory_by_kickoff = True
+        match.is_team_2_victory_by_kickoff = False
+    elif form.victory_by_kickoff_select.data == "2":
+        match.is_team_1_victory_by_kickoff = False
+        match.is_team_2_victory_by_kickoff = True
 
     reorganize_match_numbers(match, match_number)
 

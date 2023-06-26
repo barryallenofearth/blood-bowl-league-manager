@@ -136,6 +136,8 @@ def init_database():
             match.team_2_point_modification = match_data["point_modification_team_2"]
             match.team_1_surrendered = match_data["team_1_surrendered"]
             match.team_2_surrendered = match_data["team_2_surrendered"]
+            match.is_team_1_victory_by_kickoff = match_data["is_team_1_victory_by_kickoff"]
+            match.is_team_2_victory_by_kickoff = match_data["is_team_2_victory_by_kickoff"]
             match.is_playoff_match = match_data["is_playoff_match"]
             match.is_tournament_match = match_data["is_tournament_match"]
             db.session.add(match)
