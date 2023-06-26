@@ -2,8 +2,9 @@ import json
 import os
 from json.decoder import JSONDecodeError
 
-from flask import send_from_directory, render_template
+from flask import send_from_directory, render_template, request
 from flask_bootstrap import Bootstrap
+from flask_caching import Cache
 
 import database.database
 from database import bootstrapping
@@ -31,6 +32,12 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
     bootstrapping.init_database()
+
+cache = Cache(config={
+    'CACHE_TYPE': 'SimpleCache',
+    'CACHE_DEFAULT_TIMEOUT': 100000000000000
+})
+cache.init_app(app)
 
 
 class NavProperties:
@@ -79,7 +86,15 @@ def parse_user_input(user_input: str):
         return could_not_be_parsed(user_input)
 
 
+def only_cache_get(*args, **kwargs):
+    if request.method == 'GET':
+        return False
+
+    return True
+
+
 @app.route('/', methods=["GET", "POST"])
+@cache.cached(unless=only_cache_get)
 def home():
     if database.get_selected_league() is None:
         return redirect(url_for("manage", entity_type="league"))
@@ -109,6 +124,7 @@ def home():
 
 
 @app.route("/statistics")
+@cache.cached()
 def statistics_overview():
     stats = statistics.determine_statistics(db)
 
@@ -123,6 +139,7 @@ def statistics_overview():
 
 
 @app.route("/download/<string:entity_type>")
+@cache.cached()
 def download_table(entity_type: str):
     imaging.update_images(entity_type)
 
@@ -145,6 +162,7 @@ def select_league(id: int):
     db.session.add(league)
     db.session.commit()
 
+    cache.clear()
     return redirect(url_for('manage', entity_type="league"))
 
 
@@ -160,6 +178,7 @@ def select_season(id: int):
     db.session.add(season)
     db.session.commit()
 
+    cache.clear()
     return redirect(url_for('manage', entity_type="season"))
 
 
@@ -168,6 +187,9 @@ def manage(entity_type: str):
     entity_id = 0
     if "id" in request.args:
         entity_id = int(request.args.get("id"))
+
+    if request.method == "POST":
+        cache.clear()
 
     kwargs = {}
     if entity_type == League.__tablename__:
@@ -215,6 +237,7 @@ def manage(entity_type: str):
 @app.route("/<string:entity_type>/delete/<int:id>", methods=["POST"])
 def delete(entity_type: str, id: int):
     message = "No matching entity type found"
+    cache.clear()
     if entity_type == League.__tablename__:
         message = delete_entities.league_delete(id)
     elif entity_type == Season.__tablename__:
@@ -241,6 +264,7 @@ def delete(entity_type: str, id: int):
 
 @app.route("/user-input", methods=["POST"])
 def match_result_from_user_inpt():
+    cache.clear()
     user_inputs = request.json["user-inputs"]  # type list
 
     if len(user_inputs) == 0:

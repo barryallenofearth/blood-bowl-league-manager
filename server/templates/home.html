@@ -8,9 +8,7 @@
     let modalPostDeleteDialog = document.getElementById('submitted-user-input-dialog');
 
     function dismissModal() {
-        window.location = '{{ url_for('
-        home
-        ') }}'
+        window.location = "{{ url_for('home') }}"
     }
 
     modalPostDeleteDialog.style.display = 'block';
