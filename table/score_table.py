@@ -171,18 +171,17 @@ def calculate_team_scores():
     return sorted_results
 
 
-def winning_scorings():
+def generate_scorings():
     scorings = []
     for td_diff in range(-1, 2):
         scoring = Scorings()
         scoring.touchdown_difference = td_diff
         scoring.points_scored = td_diff
         scorings.append(scoring)
-
     return scorings
 
 
-def calculate_coaches_scores():
+def calculate_coaches_scores() -> list:
     def coach_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().coach_id
 
@@ -201,7 +200,7 @@ def calculate_coaches_scores():
     coaches = db.session.query(Coach).all()
 
     print("coaches identified by teams")
-    scorings = winning_scorings()
+    scorings = generate_scorings()
     coach_results = {coach.id: CoachScores(coach=coach,
                                            number_of_teams=db.session.query(Team).filter_by(coach_id=coach.id).count(),
                                            number_of_seasons=number_of_seasons(coach.id),
@@ -218,7 +217,7 @@ def calculate_coaches_scores():
     return sorted_results
 
 
-def calculate_races_scores():
+def calculate_races_scores() -> list:
     def race_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().race_id
 
@@ -232,9 +231,10 @@ def calculate_races_scores():
         team_ids = [team.id for team in db.session.query(Team).filter_by(race_id=race_id).all()]
         return db.session.query(BBMatch).filter_by(is_playoff_match=True).filter(or_(BBMatch.team_1_id.in_(team_ids), BBMatch.team_2_id.in_(team_ids))).count()
 
+
     races = db.session.query(Race).all()
 
-    scorings = winning_scorings()
+    scorings = generate_scorings()
     race_results = {
         race.id: RaceScores(race=race, number_of_teams=db.session.query(Team).filter_by(race_id=race.id).count(),
                             number_of_scorings=len(scorings),

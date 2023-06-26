@@ -133,13 +133,12 @@ def statistics_overview():
 
     season = database.get_selected_season()
     season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
-    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
+    scorings = score_table.generate_scorings()[::-1]
     return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results,
                            term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races, scorings=scorings)
 
 
 @app.route("/download/<string:entity_type>")
-@cache.cached()
 def download_table(entity_type: str):
     imaging.update_images(entity_type)
 
