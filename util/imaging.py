@@ -29,7 +29,7 @@ def update_images(entity_type: str):
                 with open(f"{HTML_2_IMAGE.temp_path}/styles.css", "w", encoding="utf-8") as imaging_css_file:
                     imaging_css_file.write(css_file.read().replace("/static/css/Nuffle.ttf", "Nuffle.ttf"))
 
-    def print_png(table_html: str, dimension: str, number_of_entries: int, has_casualties_table=False):
+    def print_png(table_html: str, dimension: str, number_of_entries: int):
         def generate_base_output_name(dimension: str):
             return f"{dimension}_table_{league.short_name}_season_{season.short_name}".replace('.', '_')
 
@@ -37,8 +37,6 @@ def update_images(entity_type: str):
         png_output = f"{base_team_table_name}.png"
 
         height = (number_of_entries + 1) * 31
-        if has_casualties_table:
-            height *= 2
         height += 100
 
         HTML_2_IMAGE.screenshot(html_str=table_html, save_as=png_output, size=(1200, height))
@@ -63,7 +61,7 @@ def update_images(entity_type: str):
         teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results, team_casualties=team_casualties, term_for_coaches=season_rules.term_for_coaches,
                                       term_for_races=season_rules.term_for_races,
                                       **rendering_args)
-        print_png(teams_table, 'teams', len(team_results), True)
+        print_png(teams_table, 'teams', len(team_results) + len(team_casualties))
     elif entity_type == "coaches":
         coach_results = score_table.calculate_coaches_scores()
         coaches_table = render_template("imaging/coaches_table_for_image.html", coach_results=coach_results, term_for_coaches=season_rules.term_for_coaches, **rendering_args)

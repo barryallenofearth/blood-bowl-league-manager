@@ -67,4 +67,7 @@ def calculate_team_casualties():
     teams = db.session.query(Team).filter_by(season_id=season.id).all()
 
     team_casualties = {team.id: TeamCasualties(team=team, number_of_matches=number_of_matches_by_team([team])) for team in teams}
-    return __calculate_scores(team_casualties, season.id, team_id_getter, alphabetic_sorter)
+
+    results = __calculate_scores(team_casualties, season.id, team_id_getter, alphabetic_sorter)
+
+    return [casualty for casualty in results if casualty.casualties > 0]
