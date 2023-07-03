@@ -899,6 +899,10 @@ data:
     33;Necropolis Nightmares;Naggaroth Nightwings;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
     34;Necropolis Nightmares;Lucky Men in Tights;2;4;0;0;False;False;False;False;False;False;S.2;WBBL
     35;Bläckhead Smashazz;Righteous Anger;1;3;0;0;False;False;False;False;False;False;S.2;WBBL
+    36;Middenland Wolves;Helden in Strumpfhosen;2;0;0;0;False;False;None;None;False;False;S.2;WBBL
+    37;Necropolis Nightmares;Mortheim Maniacs;1;1;0;0;False;False;None;None;False;False;S.2;WBBL
+    38;Ancient Conquerors;Altdorf Tigers;1;0;0;0;False;False;None;None;False;False;S.2;WBBL
+    39;Die Hafenmeister;Righteous Anger;1;0;0;0;False;False;None;None;False;False;S.2;WBBL
   additional_statistics.csv: |
     team_name;casualties;season_short_name;league_short_name
     Mighty Moon Moshaz;1;S.2;WBBL
@@ -954,3 +958,9 @@ data:
     BuckelBerg Bombers;5;S.2;WBBL
     Righteous Anger;2;S.2;WBBL
     Bläckhead Smashazz;5;S.2;WBBL
+    Middenland Wolves;3;S.2;WBBL
+    Necropolis Nightmares;2;S.2;WBBL
+    Mortheim Maniacs;1;S.2;WBBL
+    Ancient Conquerors;2;S.2;WBBL
+    Altdorf Tigers;2;S.2;WBBL
+    Die Hafenmeister;4;S.2;WBBL
