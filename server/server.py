@@ -94,7 +94,6 @@ def only_cache_get(*args, **kwargs):
 
 
 @app.route('/', methods=["GET", "POST"])
-@cache.cached(unless=only_cache_get)
 def home():
     if database.get_selected_league() is None:
         return redirect(url_for("manage", entity_type="league"))
@@ -103,24 +102,31 @@ def home():
     if season is None:
         return redirect(url_for("manage", entity_type="season"))
 
-    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
-    team_results = score_table.calculate_team_scores()
-    team_casualties = casualties_table.calculate_team_casualties()
-    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
-
-    stats = statistics.determine_statistics(db)
     form = UserInputForm()
 
-    kwargs = {'team_results': team_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
-              'team_casualties': team_casualties,
-              'term_for_team_names': season_rules.term_for_team_names, 'term_for_coaches': season_rules.term_for_coaches, 'term_for_races': season_rules.term_for_races,
-              'number_of_allowed_matches': season_rules.number_of_allowed_matches, 'number_of_playoff_places': season_rules.number_of_playoff_places,
-              'stats': stats, 'form': form}
+    kwargs = render_start_page(season)
+
+    kwargs['form'] = form
 
     if form.validate_on_submit():
         parsing_response = parse_user_input(form.user_input.data)
         kwargs['parsing_response'] = parsing_response
     return render_template("home.html", **kwargs)
+
+
+@cache.cached(unless=only_cache_get)
+def render_start_page(season):
+    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
+    team_results = score_table.calculate_team_scores()
+    team_casualties = casualties_table.calculate_team_casualties()
+    scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
+    stats = statistics.determine_statistics(db)
+    kwargs = {'team_results': team_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
+              'team_casualties': team_casualties,
+              'term_for_team_names': season_rules.term_for_team_names, 'term_for_coaches': season_rules.term_for_coaches, 'term_for_races': season_rules.term_for_races,
+              'number_of_allowed_matches': season_rules.number_of_allowed_matches, 'number_of_playoff_places': season_rules.number_of_playoff_places,
+              'stats': stats}
+    return kwargs
 
 
 @app.route("/statistics")
