@@ -109,6 +109,7 @@ def home():
     kwargs['form'] = form
 
     if form.validate_on_submit():
+        cache.clear()
         parsing_response = parse_user_input(form.user_input.data)
         kwargs['parsing_response'] = parsing_response
     return render_template("home.html", **kwargs)

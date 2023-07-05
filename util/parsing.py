@@ -95,6 +95,9 @@ def parse_match_result(user_input: str) -> BBMatch:
     bb_match.team_1_point_modification = 0
     bb_match.team_2_point_modification = 0
 
+    bb_match.is_team_1_victory_by_kickoff = False
+    bb_match.is_team_2_victory_by_kickoff = False
+
     return bb_match
 
 
