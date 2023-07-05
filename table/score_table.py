@@ -130,13 +130,14 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
 
 
 def determine_placings(sorted_results: list):
+    if len(sorted_results) == 0:
+        return []
     points_previous = sorted_results[0].points
     td_diff_previous = sorted_results[0].td_diff
     td_made_previous = sorted_results[0].td_made
     place_previous = sorted_results[0].place
     for index in range(1, len(sorted_results)):
-        if points_previous > sorted_results[index].points or td_diff_previous > sorted_results[
-            index].td_diff or td_made_previous > sorted_results[index].td_made:
+        if points_previous > sorted_results[index].points or td_diff_previous > sorted_results[index].td_diff or td_made_previous > sorted_results[index].td_made:
             sorted_results[index].place = place_previous + 1
         else:
             sorted_results[index].place = place_previous

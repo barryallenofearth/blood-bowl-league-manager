@@ -139,7 +139,7 @@ def season_submit(form: BaseSeasonForm, db: SQLAlchemy, entity_id: int):
     db.session.add(season)
     db.session.commit()
 
-    season_rules.season_id = selected_season.id
+    season_rules.season_id = database.get_selected_season().id
     season_rules.team_short_name_length = form.team_short_name_length.data
     season_rules.number_of_allowed_matches = form.number_of_allowed_matches.data
     season_rules.number_of_allowed_matches_vs_same_opponent = form.number_of_allowed_matches_vs_same_opponent.data
