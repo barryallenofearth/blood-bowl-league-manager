@@ -70,4 +70,6 @@ def calculate_team_casualties():
 
     results = __calculate_scores(team_casualties, season.id, team_id_getter, alphabetic_sorter)
 
-    return [casualty for casualty in results if casualty.casualties > 0]
+    if len([casualty for casualty in results if casualty.casualties > 0]) == 0:
+        return []
+    return results
