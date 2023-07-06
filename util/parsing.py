@@ -98,6 +98,17 @@ def parse_match_result(user_input: str) -> BBMatch:
     bb_match.is_team_1_victory_by_kickoff = False
     bb_match.is_team_2_victory_by_kickoff = False
 
+    # update team if disqualified
+    team1 = db.session.query(Team).filter_by(id=bb_match.team_1_id).first()
+    if team1.is_disqualified:
+        team1.is_disqualified = False
+        db.session.add(team1)
+
+    team2 = db.session.query(Team).filter_by(id=bb_match.team_2_id).first()
+    if team2.is_disqualified:
+        team2.is_disqualified = False
+        db.session.add(team2)
+
     return bb_match
 
 

@@ -341,7 +341,6 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
                 .filter_by(season_id=season.id) \
                 .filter(BBMatch.match_number >= bb_match.match_number) \
                 .filter(BBMatch.match_number < match_number) \
-                .order_by(BBMatch.match_number)\
                 .all()
 
             for current_match in all_matches:
@@ -350,7 +349,6 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
 
         if match_number > highest_match_number:
             bb_match.match_number = highest_match_number + 1
-
 
         db.session.commit()
 
@@ -398,8 +396,21 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
         match.is_team_2_victory_by_kickoff = True
 
     match_number = form.match_number.data
-    if match.match_number != match_number:
+    if match.match_number is not None and match.match_number != match_number:
         reorganize_match_numbers(match, match_number)
+    else:
+        match.match_number = match_number
+
+    # update team if disqualified
+    team1 = db.session.query(Team).filter_by(id=match.team_1_id).first()
+    if team1.is_disqualified:
+        team1.is_disqualified = False
+        db.session.add(team1)
+
+    team2 = db.session.query(Team).filter_by(id=match.team_2_id).first()
+    if team2.is_disqualified:
+        team2.is_disqualified = False
+        db.session.add(team2)
 
     return persist_and_redirect(match, BBMatch.__tablename__, db)
 
