@@ -324,26 +324,35 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     def reorganize_match_numbers(bb_match: BBMatch, match_number: int):
         season = database.get_selected_season()
 
-        same_number_match = db.session.query(BBMatch) \
-            .filter_by(season_id=season.id) \
-            .filter_by(match_number=match_number) \
-            .first()
-
-        if same_number_match is not None:
+        # reduced match number
+        highest_match_number = database.highest_match_number()
+        if match_number < bb_match.match_number:
             all_matches = db.session.query(BBMatch) \
                 .filter_by(season_id=season.id) \
+                .filter(BBMatch.match_number < bb_match.match_number) \
                 .filter(BBMatch.match_number >= match_number) \
                 .all()
 
             for current_match in all_matches:
                 current_match.match_number = current_match.match_number + 1
                 db.session.add(current_match)
+        elif match_number > bb_match.match_number:
+            all_matches = db.session.query(BBMatch) \
+                .filter_by(season_id=season.id) \
+                .filter(BBMatch.match_number >= bb_match.match_number) \
+                .filter(BBMatch.match_number < match_number) \
+                .order_by(BBMatch.match_number)\
+                .all()
 
-            db.session.commit()
-        else:
-            highest_number = database.highest_match_number()
-            if highest_number + 1 > match_number:
-                bb_match.match_number = highest_number + 1
+            for current_match in all_matches:
+                current_match.match_number = current_match.match_number - 1
+                db.session.add(current_match)
+
+        if match_number > highest_match_number:
+            bb_match.match_number = highest_match_number + 1
+
+
+        db.session.commit()
 
         match.match_number = match_number
 
@@ -354,9 +363,6 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     match.team_2_id = form.team2.data
     match.team_1_touchdown = form.team1_td_made.data
     match.team_2_touchdown = form.team2_td_made.data
-
-    match_number = form.match_number.data
-    match.match_number = match_number
 
     if form.surrendered_select.data == "0":
         match.team_1_surrendered = False
@@ -391,7 +397,9 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
         match.is_team_1_victory_by_kickoff = False
         match.is_team_2_victory_by_kickoff = True
 
-    reorganize_match_numbers(match, match_number)
+    match_number = form.match_number.data
+    if match.match_number != match_number:
+        reorganize_match_numbers(match, match_number)
 
     return persist_and_redirect(match, BBMatch.__tablename__, db)
 
