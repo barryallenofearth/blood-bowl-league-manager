@@ -255,9 +255,7 @@ def team_submit(form: BaseTeamForm, db: SQLAlchemy, entity_id: int):
     team.short_name = formatting.generate_team_short_name(team.name)
     team.coach_id = form.coach_select.data
     team.race_id = form.race_select.data
-
-    if type(form) == UpdateTeamForm:
-        team.is_disqualified = form.is_disqualified.data
+    team.is_disqualified = form.is_disqualified.data
 
     return persist_and_redirect(team, Team.__tablename__, db)
 

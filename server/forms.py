@@ -77,6 +77,7 @@ class BaseTeamForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired("Please enter a team name.")])
     coach_select = SelectField("Coach", validators=[DataRequired("Please select a coach")])
     race_select = SelectField("Race", validators=[DataRequired("Please select a race")])
+    is_disqualified = BooleanField("Disqualified")
 
     def __init__(self, app=None, **kwargs):
         super().__init__(**kwargs)
@@ -94,7 +95,6 @@ class AddTeamForm(BaseTeamForm):
 
 
 class UpdateTeamForm(BaseTeamForm):
-    is_disqualified = BooleanField("Disqualified")
     submit = SubmitField(label="Update team")
 
 
