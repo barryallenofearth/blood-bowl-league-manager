@@ -1,11 +1,14 @@
 {% import 'fragments/table_macros.html' as table_commons %}
 <table class="bordered">
+    <thead>
     <tr>
         <th></th>
         {% for stat in stats %}
             <th>{{ stat.title }}</th>
         {% endfor %}
     </tr>
+    </thead>
+    <tbody>
     <tr>
         <td>Number of matches</td>
         {% for stat in stats %}
@@ -48,4 +51,5 @@
             <td class="center">{{ stat.number_of_coaches }}</td>
         {% endfor %}
     </tr>
+    </tbody>
 </table>
