@@ -120,12 +120,10 @@ def render_start_page(season):
     team_results = score_table.calculate_team_scores()
     team_casualties = casualties_table.calculate_team_casualties()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
-    stats = statistics.determine_statistics(db)
     kwargs = {'team_results': team_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
               'team_casualties': team_casualties,
               'term_for_team_names': season.term_for_team_names, 'term_for_coaches': season.term_for_coaches, 'term_for_races': season.term_for_races,
-              'number_of_allowed_matches': season.number_of_allowed_matches, 'number_of_playoff_places': season.number_of_playoff_places,
-              'stats': stats}
+              'number_of_allowed_matches': season.number_of_allowed_matches, 'number_of_playoff_places': season.number_of_playoff_places}
     return kwargs
 
 
