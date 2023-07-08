@@ -1,7 +1,7 @@
 import re
 
 from database import database
-from database.database import db, Team, Coach, BBMatch, SeasonRules, Scorings, AdditionalStatistics
+from database.database import db, Team, Coach, BBMatch, Scorings, AdditionalStatistics
 
 
 def generate_scorings_field_value(season_id: int) -> str:
@@ -27,9 +27,8 @@ def generate_team_short_name(team_name: str) -> str:
         return length
 
     season = database.get_selected_season()
-    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
     # name is short enough
-    max_length = season_rules.team_short_name_length
+    max_length = season.team_short_name_length
     if len(team_name) <= max_length:
         return team_name
 

@@ -3,7 +3,7 @@ from collections import defaultdict
 from sqlalchemy import or_
 
 from database import database
-from database.database import db, BBMatch, Team, Season, Coach, Race, Scorings, League, SeasonRules, AdditionalStatistics
+from database.database import db, BBMatch, Team, Season, Coach, Race, Scorings, League, AdditionalStatistics
 from util import formatting
 
 SUCCESSFULLY_DELETED = "successfully deleted"
@@ -35,13 +35,11 @@ def season_delete(id: int):
         error_message += "</li></ul>"
         return error_message
 
-    season_rules = db.session.query(SeasonRules).filter_by(season_id=id).first()
-    for scorings in db.session.query(Scorings).filter_by(season_id=season_rules.id).all():
+    for scorings in db.session.query(Scorings).filter_by(season_id=season.id).all():
         db.session.delete(db.session.query(Scorings).filter_by(id=scorings.id).first())
 
     success_message = f"<p>Season {season.name} ({season.short_name}) successfully deleted.</p>"
 
-    db.session.delete(season_rules)
     db.session.delete(season)
 
     db.session.commit()

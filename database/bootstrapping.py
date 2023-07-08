@@ -3,8 +3,8 @@ import os.path
 import pandas as pd
 
 from database import database
-from database.database import db, SeasonRules, Season, Coach, Race, Team, League, BBMatch, AdditionalStatistics
-from util import formatting, parsing
+from database.database import db, Season, Coach, Race, Team, League, BBMatch, AdditionalStatistics
+from util import formatting
 
 
 def init_database():
@@ -46,11 +46,6 @@ def init_database():
             season.short_name = season_data["short_name"]
             season.is_selected = season_data["is_selected"]
             db.session.add(season)
-            db.session.commit()
-
-            season_rules = SeasonRules()
-            season_rules.season_id = season.id
-            db.session.add(season_rules)
             db.session.commit()
 
             database.persist_scorings(season_data["scorings"].replace("\\n", "\n"), season.id)

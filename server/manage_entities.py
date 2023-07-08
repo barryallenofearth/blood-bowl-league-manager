@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 
 from database import database
-from database.database import League, Season, SeasonRules, Scorings, Coach, Race, Team, BBMatch, AdditionalStatistics
+from database.database import League, Season, Scorings, Coach, Race, Team, BBMatch, AdditionalStatistics
 from server import forms
 from server.forms import UpdateTeamForm, BaseSeasonForm, BaseCoachForm, BaseRaceForm, BaseTeamForm, UpdateAdditionalStatisticsEntryForm, AddAdditionalStatisticsEntryForm
 from util import formatting, parsing
@@ -69,17 +69,14 @@ def league_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     return redirect(url_for("manage", entity_type="league", _anchor=f"row-entity-{league.id}"))
 
 
-def __get_season_and_rules(db: SQLAlchemy, entity_id: int) -> tuple:
+def __get_season(db: SQLAlchemy, entity_id: int) -> Season:
     season: Season
-    season_rules: SeasonRules
     if entity_id == 0:
         season = Season()
-        season_rules = SeasonRules()
     else:
         season = db.session.query(Season).filter_by(id=entity_id).first()
-        season_rules = db.session.query(SeasonRules).filter_by(id=season.id).first()
 
-    return season, season_rules
+    return season
 
 
 def season_get(db: SQLAlchemy, entity_id: int):
@@ -87,10 +84,8 @@ def season_get(db: SQLAlchemy, entity_id: int):
     for season in db.session.query(Season).order_by(Season.short_name).filter_by(league_id=database.get_selected_league().id).all():
         table.append([season.name + (f" (active)" if season.is_selected else ""), season.short_name, season.id])
 
-    season_and_rules = __get_season_and_rules(db, entity_id)
+    season = __get_season(db, entity_id)
 
-    season = season_and_rules[0]
-    season_rules = season_and_rules[1]
 
     if entity_id == 0:
         selected_season = database.get_selected_season()
@@ -98,31 +93,31 @@ def season_get(db: SQLAlchemy, entity_id: int):
             scorings_text_area = Scorings.DEFAULT_SCORINGS_ENTRY
         else:
             scorings_text_area = formatting.generate_scorings_field_value(selected_season.id)
-        form = forms.AddSeasonForm(team_short_name_length=season_rules.team_short_name_length,
-                                   number_of_allowed_matches=season_rules.number_of_allowed_matches,
-                                   number_of_allowed_matches_vs_same_opponent=season_rules.number_of_allowed_matches_vs_same_opponent,
-                                   number_of_playoff_places=season_rules.number_of_playoff_places,
-                                   term_for_team_names=season_rules.term_for_team_names,
-                                   term_for_coaches=season_rules.term_for_coaches,
-                                   term_for_races=season_rules.term_for_races,
+        form = forms.AddSeasonForm(team_short_name_length=season.team_short_name_length,
+                                   number_of_allowed_matches=season.number_of_allowed_matches,
+                                   number_of_allowed_matches_vs_same_opponent=season.number_of_allowed_matches_vs_same_opponent,
+                                   number_of_playoff_places=season.number_of_playoff_places,
+                                   term_for_team_names=season.term_for_team_names,
+                                   term_for_coaches=season.term_for_coaches,
+                                   term_for_races=season.term_for_races,
                                    scorings=scorings_text_area)
     else:
         scorings_text_area = formatting.generate_scorings_field_value(season.id)
         form = forms.UpdateSeasonForm(name=season.name,
                                       short_name=season.short_name,
-                                      team_short_name_length=season_rules.team_short_name_length,
-                                      number_of_allowed_matches=season_rules.number_of_allowed_matches,
-                                      number_of_allowed_matches_vs_same_opponent=season_rules.number_of_allowed_matches_vs_same_opponent,
-                                      number_of_playoff_places=season_rules.number_of_playoff_places,
-                                      term_for_team_names=season_rules.term_for_team_names,
-                                      term_for_coaches=season_rules.term_for_coaches,
-                                      term_for_races=season_rules.term_for_races,
+                                      team_short_name_length=season.team_short_name_length,
+                                      number_of_allowed_matches=season.number_of_allowed_matches,
+                                      number_of_allowed_matches_vs_same_opponent=season.number_of_allowed_matches_vs_same_opponent,
+                                      number_of_playoff_places=season.number_of_playoff_places,
+                                      term_for_team_names=season.term_for_team_names,
+                                      term_for_coaches=season.term_for_coaches,
+                                      term_for_races=season.term_for_races,
                                       scorings=scorings_text_area)
     return {FORM_KEY: form, "title": "Seasons", "title_row": ["Name", "Short name"], "table": table}
 
 
 def season_submit(form: BaseSeasonForm, db: SQLAlchemy, entity_id: int):
-    season, season_rules = __get_season_and_rules(db, entity_id)
+    season = __get_season(db, entity_id)
 
     season.league_id = database.get_selected_league().id
     season.name = form.name.data.strip()
@@ -136,19 +131,15 @@ def season_submit(form: BaseSeasonForm, db: SQLAlchemy, entity_id: int):
             selected_season.is_selected = False
             db.session.add(selected_season)
 
+    season.team_short_name_length = form.team_short_name_length.data
+    season.number_of_allowed_matches = form.number_of_allowed_matches.data
+    season.number_of_allowed_matches_vs_same_opponent = form.number_of_allowed_matches_vs_same_opponent.data
+    season.number_of_playoff_places = form.number_of_playoff_places.data
+    season.term_for_team_names = form.term_for_team_names.data.strip()
+    season.term_for_coaches = form.term_for_coaches.data.strip()
+    season.term_for_races = form.term_for_races.data.strip()
+
     db.session.add(season)
-    db.session.commit()
-
-    season_rules.season_id = database.get_selected_season().id
-    season_rules.team_short_name_length = form.team_short_name_length.data
-    season_rules.number_of_allowed_matches = form.number_of_allowed_matches.data
-    season_rules.number_of_allowed_matches_vs_same_opponent = form.number_of_allowed_matches_vs_same_opponent.data
-    season_rules.number_of_playoff_places = form.number_of_playoff_places.data
-    season_rules.term_for_team_names = form.term_for_team_names.data.strip()
-    season_rules.term_for_coaches = form.term_for_coaches.data.strip()
-    season_rules.term_for_races = form.term_for_races.data.strip()
-
-    db.session.add(season_rules)
     db.session.commit()
 
     database.persist_scorings(form.scorings.data, season.id)
@@ -418,7 +409,8 @@ def __get_additonal_statistics(db: SQLAlchemy, entity_id: int):
 
 def additional_statistics_get(app: Flask, db: SQLAlchemy, entity_id: int) -> dict:
     table = []
-    for additional_statistics in db.session.query(AdditionalStatistics).order_by(AdditionalStatistics.id.desc()).all():
+    season_id = database.get_selected_season().id
+    for additional_statistics in db.session.query(AdditionalStatistics).filter_by(season_id=season_id).order_by(AdditionalStatistics.id.desc()).all():
         team = db.session.query(Team).filter_by(id=additional_statistics.team_id).first()
         table.append([formatting.format_team(team), additional_statistics.casualties, additional_statistics.id])
 

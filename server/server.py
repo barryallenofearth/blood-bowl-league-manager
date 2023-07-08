@@ -117,15 +117,14 @@ def home():
 
 @cache.cached(unless=only_cache_get)
 def render_start_page(season):
-    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
     team_results = score_table.calculate_team_scores()
     team_casualties = casualties_table.calculate_team_casualties()
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
     stats = statistics.determine_statistics(db)
     kwargs = {'team_results': team_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
               'team_casualties': team_casualties,
-              'term_for_team_names': season_rules.term_for_team_names, 'term_for_coaches': season_rules.term_for_coaches, 'term_for_races': season_rules.term_for_races,
-              'number_of_allowed_matches': season_rules.number_of_allowed_matches, 'number_of_playoff_places': season_rules.number_of_playoff_places,
+              'term_for_team_names': season.term_for_team_names, 'term_for_coaches': season.term_for_coaches, 'term_for_races': season.term_for_races,
+              'number_of_allowed_matches': season.number_of_allowed_matches, 'number_of_playoff_places': season.number_of_playoff_places,
               'stats': stats}
     return kwargs
 
@@ -139,10 +138,9 @@ def statistics_overview():
     race_results = score_table.calculate_races_scores()
 
     season = database.get_selected_season()
-    season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
     scorings = score_table.generate_scorings()[::-1]
     return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results,
-                           term_for_coaches=season_rules.term_for_coaches, term_for_races=season_rules.term_for_races, scorings=scorings)
+                           term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings)
 
 
 @app.route("/download/<string:entity_type>")
@@ -302,17 +300,16 @@ def export_data():
                        'seasons': []}
         content['leagues'].append(league_json)
         for season in db.session.query(Season).filter_by(league_id=league.id).all():
-            season_rules = db.session.query(SeasonRules).filter_by(season_id=season.id).first()
             season_json = {'name': season.name,
                            'short_name': season.short_name,
                            'is_selected': season.is_selected,
-                           "team_short_name_length": season_rules.team_short_name_length,
-                           "number_of_allowed_matches": season_rules.number_of_allowed_matches,
-                           "number_of_allowed_matches_vs_same_opponent": season_rules.number_of_allowed_matches_vs_same_opponent,
-                           "number_of_playoff_places": season_rules.number_of_playoff_places,
-                           "term_for_team_names": season_rules.term_for_team_names,
-                           "term_for_coaches": season_rules.term_for_coaches,
-                           "term_for_races": season_rules.term_for_races,
+                           "team_short_name_length": season.team_short_name_length,
+                           "number_of_allowed_matches": season.number_of_allowed_matches,
+                           "number_of_allowed_matches_vs_same_opponent": season.number_of_allowed_matches_vs_same_opponent,
+                           "number_of_playoff_places": season.number_of_playoff_places,
+                           "term_for_team_names": season.term_for_team_names,
+                           "term_for_coaches": season.term_for_coaches,
+                           "term_for_races": season.term_for_races,
                            "scorings": [{'touchdown_difference': scoring.touchdown_difference,
                                          'points_scored': scoring.points_scored} for scoring in db.session.query(Scorings).filter_by(season_id=season.id).all()],
                            'teams': [],

@@ -1,7 +1,7 @@
 from operator import itemgetter
 
 from database import database
-from database.database import db, BBMatch, Team, Race, Coach, Scorings, SeasonRules
+from database.database import db, BBMatch, Team, Race, Coach, Scorings
 from util import formatting
 from sqlalchemy import or_
 
@@ -103,7 +103,6 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
 
     is_teams_table = type(next(iter(results.values()))) == TeamScores
 
-    season_rules = db.session.query(SeasonRules).filter_by(season_id=season_id).first()
     query = db.session.query(BBMatch)
     if season_id != 0:
         query = query.filter_by(season_id=season_id)
@@ -116,8 +115,8 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
             if match.is_playoff_match:
                 continue
 
-            skip_team_1_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_1_id)].number_of_matches == season_rules.number_of_allowed_matches
-            skip_team_2_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_2_id)].number_of_matches == season_rules.number_of_allowed_matches
+            skip_team_1_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_1_id)].number_of_matches == season.number_of_allowed_matches
+            skip_team_2_result = match.is_tournament_match and results[entity_id_from_team_id_getter(match.team_2_id)].number_of_matches == season.number_of_allowed_matches
 
         if not skip_team_1_result:
             modify_team_score(results, entity_id_from_team_id_getter(match.team_1_id), match.team_1_touchdown,

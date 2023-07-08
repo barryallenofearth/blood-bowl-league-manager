@@ -24,9 +24,25 @@ class Season(db.Model):
     name = db.Column(db.String, nullable=False)
     short_name = db.Column(db.String, nullable=False)
     is_selected = db.Column(db.Boolean, nullable=False)
+    # season rules
+    team_short_name_length = db.Column(db.Integer, nullable=True)
+    number_of_allowed_matches = db.Column(db.Integer, nullable=True)
+    number_of_allowed_matches_vs_same_opponent = db.Column(db.Integer, nullable=True)
+    number_of_playoff_places = db.Column(db.Integer, nullable=True)
+    term_for_team_names = db.Column(db.String, nullable=False)
+    term_for_coaches = db.Column(db.String, nullable=False)
+    term_for_races = db.Column(db.String, nullable=False)
 
     def __init__(self):
         self.is_selected = False
+        self.team_short_name_length = 30
+        self.number_of_allowed_matches = 8
+        self.number_of_allowed_matches_vs_same_opponent = 2
+        self.number_of_playoff_places = 8
+        self.term_for_team_names = "Name"
+        self.term_for_coaches = "Trainer"
+        self.term_for_races = "Team"
+
 
 
 class Race(db.Model):
@@ -74,29 +90,6 @@ class BBMatch(db.Model):
     team_2_point_modification = db.Column(db.Integer, nullable=True)
     is_playoff_match = db.Column(db.Boolean)
     is_tournament_match = db.Column(db.Boolean)
-
-
-class SeasonRules(db.Model):
-    __tablename__ = "season_rules"
-
-    id = db.Column(db.Integer, primary_key=True)
-    season_id = db.Column(db.Integer, db.ForeignKey(f'{Season.__tablename__}.id'))
-    team_short_name_length = db.Column(db.Integer, nullable=True)
-    number_of_allowed_matches = db.Column(db.Integer, nullable=True)
-    number_of_allowed_matches_vs_same_opponent = db.Column(db.Integer, nullable=True)
-    number_of_playoff_places = db.Column(db.Integer, nullable=True)
-    term_for_team_names = db.Column(db.String, nullable=False)
-    term_for_coaches = db.Column(db.String, nullable=False)
-    term_for_races = db.Column(db.String, nullable=False)
-
-    def __init__(self):
-        self.team_short_name_length = 30
-        self.number_of_allowed_matches = 8
-        self.number_of_allowed_matches_vs_same_opponent = 2
-        self.number_of_playoff_places = 8
-        self.term_for_team_names = "Name"
-        self.term_for_coaches = "Trainer"
-        self.term_for_races = "Team"
 
 
 class Scorings(db.Model):
