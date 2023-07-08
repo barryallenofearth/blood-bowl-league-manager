@@ -108,7 +108,7 @@ def init_database():
             team.short_name = formatting.generate_team_short_name(team.name)
             team.race_id = race_id_by_name(team_data["race_name"])
             team.coach_id = coach_id_by_name(team_data["coach_first_name"], team_data["coach_last_name"], team_data["coach_display_name"])
-            team.is_disqualified = False
+            team.is_disqualified = team_data["is_disqualified"]
             db.session.add(team)
 
         db.session.commit()

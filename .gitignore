@@ -5,6 +5,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+data/
+k8s/webapp/0-configmap-init-files.yaml
 # C extensions
 *.so
 

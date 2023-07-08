@@ -31,14 +31,14 @@ def create_init_files(database_json: json):
                 for statistic in season['additional_statistics']:
                     additional_statistics_file.write(f"{statistic['team']};{statistic['casualties']};{season['short_name']};{league['short_name']}\n")
     with open(f"{OUTPUT_DIRECTORY}/teams_and_coaches.csv", "w", encoding='utf-8') as teams_and_coaches_file:
-        teams_and_coaches_file.write("name;coach_first_name;coach_last_name;coach_display_name;race_name;season_short_name;league_short_name\n")
+        teams_and_coaches_file.write("name;coach_first_name;coach_last_name;coach_display_name;race_name;is_disqualified;season_short_name;league_short_name\n")
         for league in database_json["leagues"]:
             for season in league['seasons']:
                 for team in season['teams']:
                     coach_display_name = team['coach_display_name']
                     if coach_display_name is None or len(coach_display_name) == 0:
                         coach_display_name = " "
-                    teams_and_coaches_file.write(f"{team['name']};{team['coach_first_name']};{team['coach_last_name']};{coach_display_name};{team['race']};{season['short_name']};{league['short_name']}\n")
+                    teams_and_coaches_file.write(f"{team['name']};{team['coach_first_name']};{team['coach_last_name']};{coach_display_name};{team['race']};{team['is_disqualified']};{season['short_name']};{league['short_name']}\n")
     with open(f"{OUTPUT_DIRECTORY}/matches.csv", "w", encoding='utf-8') as matches:
         matches.write("match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;"
                       "is_team_1_victory_by_kickoff;is_team_2_victory_by_kickoff;is_playoff_match;is_tournament_match;season_short_name;league_short_name\n")

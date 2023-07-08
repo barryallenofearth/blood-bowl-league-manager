@@ -90,6 +90,8 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
                     return scorings[index].points_scored
             raise ValueError(f"No points entry found for points difference {td_diff}")
 
+        if entity_id not in analysis_results:
+            return
         analysis_scoring = analysis_results[entity_id]
         analysis_scoring.number_of_matches = analysis_scoring.number_of_matches + 1
         analysis_scoring.td_made = analysis_scoring.td_made + td_made
@@ -158,7 +160,7 @@ def calculate_team_scores():
     teams = db.session.query(Team).filter_by(season_id=season.id).all()
 
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference).all()
-    team_results = {team.id: TeamScores(team=team, number_of_scorings=len(scorings)) for team in teams}
+    team_results = {team.id: TeamScores(team=team, number_of_scorings=len(scorings)) for team in teams if not team.is_disqualified}
     results = __calculate_scores(team_results, scorings, season.id, team_id_getter)
     sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0],
                             key=lambda result: (
@@ -230,7 +232,6 @@ def calculate_races_scores() -> list:
     def number_of_playoff_matches(race_id: int) -> int:
         team_ids = [team.id for team in db.session.query(Team).filter_by(race_id=race_id).all()]
         return db.session.query(BBMatch).filter_by(is_playoff_match=True).filter(or_(BBMatch.team_1_id.in_(team_ids), BBMatch.team_2_id.in_(team_ids))).count()
-
 
     races = db.session.query(Race).all()
 
