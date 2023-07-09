@@ -30,8 +30,7 @@ def determine_statistics(db: SQLAlchemy) -> list:
             all_matches = all_matches[matches_matcher]
             teams_matcher = [team.season_id in all_seasons_ids for team in all_teams]
             all_teams = all_teams[teams_matcher]
-        else:
-            all_coaches = {f"{coach.first_name} {coach.last_name} ({coach.display_name})" for coach in all_coaches}
+            all_coaches = {db.session.query(Coach).filter_by(id=team.coach_id).first() for team in all_teams}
 
         stats = Statistics()
         if league is None:

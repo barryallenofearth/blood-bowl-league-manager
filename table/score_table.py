@@ -43,6 +43,7 @@ class CoachScores(BaseScores):
         self.number_of_seasons = number_of_seasons
         self.number_of_playoff_matches = number_of_playoff_matches
         self.win_loss_diff = 0
+        self.number_of_matches_per_team = 0
 
     def __repr__(self):
         return f"CoachResults<place: coach:{self.coach}, " + super().__repr__()
@@ -57,6 +58,7 @@ class RaceScores(BaseScores):
         self.number_of_seasons = number_of_seasons
         self.number_of_playoff_matches = number_of_playoff_matches
         self.win_loss_diff = 0
+        self.number_of_matches_per_team = 0
 
     def __repr__(self):
         return f"RaceResults<place: race:{self.race}, " + super().__repr__()
@@ -217,6 +219,8 @@ def calculate_coaches_scores() -> list:
     results = __calculate_scores(coach_results, scorings, 0, coach_id_getter)
     for result in results.values():
         result.win_loss_diff = result.match_result_counts[0] - result.match_result_counts[-1]
+        if result.number_of_teams > 0:
+            result.number_of_matches_per_team = result.number_of_matches / result.number_of_teams
     sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0],
                             key=lambda result: (-result.win_loss_diff, -result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))
     determine_placings(sorted_results)
@@ -251,6 +255,8 @@ def calculate_races_scores() -> list:
 
     for result in results.values():
         result.win_loss_diff = result.match_result_counts[0] - result.match_result_counts[-1]
+        if result.number_of_teams > 0:
+            result.number_of_matches_per_team = result.number_of_matches / result.number_of_teams
 
     sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0],
                             key=lambda result: (-result.win_loss_diff, -result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))

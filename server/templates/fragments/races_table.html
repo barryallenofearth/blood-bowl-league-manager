@@ -8,6 +8,7 @@
         <th>Teams</th>
         <th>Spiele</th>
         <th>Playoff Spiele</th>
+        <th>Spiele/Team</th>
         {% for scoring in scorings %}
             <th>
                 {% if scoring.touchdown_difference > 0 %}
@@ -34,6 +35,7 @@
             <td class="center"><strong>{{ result.number_of_teams }}</strong></td>
             <td class="center"><strong>{{ result.number_of_matches }}</strong></td>
             <td class="center"><strong>{{ result.number_of_playoff_matches }}</strong></td>
+            <td class="center"><strong>{{ "{0:0.2f}".format(result.number_of_matches_per_team) }}</strong></td>
             {% for count in result.match_result_counts %}
                 <td class="center">{{ count }}</td>
             {% endfor %}
