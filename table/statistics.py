@@ -43,7 +43,7 @@ def determine_statistics(db: SQLAlchemy) -> list:
         stats.number_of_non_playoff_matches = len(all_matches[[not match.is_playoff_match for match in all_matches]])
         stats.number_of_seasons = len(all_seasons)
 
-        matches_per_season = defaultdict(lambda: 1)
+        matches_per_season = defaultdict(lambda: 0)
         for match in all_matches:
             if not match.is_playoff_match:
                 matches_per_season[match.season_id] = matches_per_season[match.season_id] + 1

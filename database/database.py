@@ -44,7 +44,6 @@ class Season(db.Model):
         self.term_for_races = "Team"
 
 
-
 class Race(db.Model):
     __tablename__ = "race"
     id = db.Column(db.Integer, primary_key=True)
@@ -113,12 +112,44 @@ class AdditionalStatistics(db.Model):
 
 
 def get_selected_league() -> League:
-    return db.session.query(League).filter_by(is_selected=True).first()
+    selected_league = db.session.query(League).filter_by(is_selected=True).first()
+    if selected_league is not None:
+        return selected_league
+    selected_league = db.session.query(League).order_by(League.id.desc()).first()
+    if selected_league is not None:
+        selected_league.is_selected = True
+        db.session.add(selected_league)
+        db.session.commit()
+
+    return selected_league
 
 
 def get_selected_season() -> Season:
     selected_league = get_selected_league()
-    return db.session.query(Season).filter_by(league_id=selected_league.id).filter_by(is_selected=True).first()
+    selected_season = db.session.query(Season).filter_by(league_id=selected_league.id).filter_by(
+        is_selected=True).first()
+    if selected_season is not None:
+        return selected_season
+
+    selected_season = db.session.query(Season).filter_by(league_id=selected_league.id).order_by(
+        Season.id.desc()).first()
+    if selected_season is not None:
+        selected_season.is_selected = True
+        db.session.add(selected_season)
+        db.session.commit()
+        return selected_season
+
+    selected_season = db.session.query(Season).order_by(Season.id.desc()).first()
+    if selected_season is not None:
+        selected_league = db.session.query(League).filter_by(id=selected_season.league_id).first()
+        selected_league.is_selected = True
+        db.session.add(selected_league)
+
+        selected_season.is_selected = True
+        db.session.add(selected_season)
+        db.session.commit()
+
+    return selected_season
 
 
 def persist_scorings(user_input: str, season_id: int):
@@ -147,7 +178,8 @@ def persist_scorings(user_input: str, season_id: int):
 def highest_match_number() -> int:
     season = get_selected_season()
 
-    highest_number_match = db.session.query(BBMatch).filter_by(season_id=season.id).order_by(BBMatch.match_number.desc()).first()
+    highest_number_match = db.session.query(BBMatch).filter_by(season_id=season.id).order_by(
+        BBMatch.match_number.desc()).first()
     if highest_number_match is None:
         return 0
 

@@ -1,7 +1,7 @@
 from operator import itemgetter
 
 from database import database
-from database.database import db, BBMatch, Team, Race, Coach, Scorings
+from database.database import db, BBMatch, Team, Race, Coach, Scorings, Season
 from util import formatting
 from sqlalchemy import or_
 
@@ -104,6 +104,11 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
         return {}
 
     is_teams_table = type(next(iter(results.values()))) == TeamScores
+
+    if season_id != 0:
+        season = db.session.query(Season).filter_by(id=season_id).first()
+    else:
+        season = db.session.query(Season).first()
 
     query = db.session.query(BBMatch)
     if season_id != 0:
