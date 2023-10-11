@@ -167,4 +167,5 @@ class UserInputForm(FlaskForm):
                                          "i.e.: Wolbecker Wolpertinger: 3 Casualties",
                              render_kw={"placeholder": "Wolbecker Wolpertinger vs. Necropolis Nightmares 2:1 (Playoffs)"},
                              validators=[Regexp(regex=f"({parsing.MATCH_REGEX}|{parsing.CASUALTIES_REGEX})", flags=re.IGNORECASE, message="Please enter a valid match result or casualties entry.")])
+    match_type_select = SelectField("Match type", choices=[(0, "Standard match"), (1, "Playoff match"), (2, "Tournament match")])
     submit = SubmitField(label="Process user input")

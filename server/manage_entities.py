@@ -364,15 +364,7 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
     match.team_1_point_modification = form.team1_points_modification.data
     match.team_2_point_modification = form.team2_points_modification.data
 
-    if form.match_type_select.data == "0":
-        match.is_playoff_match = False
-        match.is_tournament_match = False
-    elif form.match_type_select.data == "1":
-        match.is_playoff_match = True
-        match.is_tournament_match = False
-    elif form.match_type_select.data == "2":
-        match.is_playoff_match = False
-        match.is_tournament_match = True
+    set_match_type(form.match_type_select.data, match)
 
     if form.victory_by_kickoff_select.data == "0":
         match.is_team_1_victory_by_kickoff = False
@@ -402,6 +394,18 @@ def match_submit(form: FlaskForm, db: SQLAlchemy, entity_id: int):
         db.session.add(team2)
 
     return persist_and_redirect(match, BBMatch.__tablename__, db)
+
+
+def set_match_type(match_type, match):
+    if match_type == "0":
+        match.is_playoff_match = False
+        match.is_tournament_match = False
+    elif match_type == "1":
+        match.is_playoff_match = True
+        match.is_tournament_match = False
+    elif match_type == "2":
+        match.is_playoff_match = False
+        match.is_tournament_match = True
 
 
 def __get_additonal_statistics(db: SQLAlchemy, entity_id: int):

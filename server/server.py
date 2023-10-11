@@ -64,13 +64,15 @@ def health():
     return "I am fine"
 
 
-def parse_user_input(user_input: str):
+def parse_user_input(user_input: str, match_type_selector=None):
     def could_not_be_parsed(user_input: str):
         return ParsingResponse(400, 'user input could not be parsed', f"{user_input}", '')
 
     try:
         if parsing.MATCH_RESULT_MATCHER.match(user_input):
             bb_match = parsing.parse_match_result(user_input)
+            if match_type_selector is not None:
+                set_match_type(match_type_selector, bb_match)
             db.session.add(bb_match)
             db.session.commit()
             return ParsingResponse(200, 'match successfully entered', f"{user_input}", f"{formatting.format_match(bb_match)}")
@@ -110,7 +112,7 @@ def home():
 
     if form.validate_on_submit():
         cache.clear()
-        parsing_response = parse_user_input(form.user_input.data)
+        parsing_response = parse_user_input(form.user_input.data, form.match_type_select.data)
         kwargs['parsing_response'] = parsing_response
     return render_template("home.html", **kwargs)
 
