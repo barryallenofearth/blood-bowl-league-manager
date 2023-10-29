@@ -155,7 +155,7 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
     return results
 
 
-def determine_placings(sorted_results: list):
+def determine_placings(sorted_results: list, show_vs_table=False):
     if len(sorted_results) == 0:
         return []
     points_previous = sorted_results[0].points
@@ -163,10 +163,17 @@ def determine_placings(sorted_results: list):
     td_made_previous = sorted_results[0].td_made
     place_previous = sorted_results[0].place
     for index in range(1, len(sorted_results)):
-        if points_previous > sorted_results[index].points or td_diff_previous > sorted_results[index].td_diff or td_made_previous > sorted_results[index].td_made:
-            sorted_results[index].place = place_previous + 1
+        if show_vs_table:
+            if points_previous < sorted_results[index].points or td_diff_previous < sorted_results[index].td_diff or td_made_previous < sorted_results[index].td_made:
+                sorted_results[index].place = place_previous + 1
+            else:
+                sorted_results[index].place = place_previous
+
         else:
-            sorted_results[index].place = place_previous
+            if points_previous > sorted_results[index].points or td_diff_previous > sorted_results[index].td_diff or td_made_previous > sorted_results[index].td_made:
+                sorted_results[index].place = place_previous + 1
+            else:
+                sorted_results[index].place = place_previous
 
         points_previous = sorted_results[index].points
         td_diff_previous = sorted_results[index].td_diff
@@ -250,9 +257,16 @@ def calculate_coaches_scores(coach_id=None, vs_coach_ids=None) -> list[CoachScor
         sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0],
                                 key=lambda result: (-result.win_loss_diff, -result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))
     else:
-        sorted_results = sorted([result for result in results.values() if result.number_of_matches > 0],
+
+        if coach_id is not None and vs_coach_ids is not None:
+            filtered_results = filter(lambda result: result.coach_id != coach_id, results.values())
+        else:
+            filtered_results = results.values()
+
+        sorted_results = sorted([result for result in filtered_results if result.number_of_matches > 0],
                                 key=lambda result: (result.win_loss_diff, result.td_diff, result.td_made, result.number_of_matches, alphabetic_sorter(result)))
-    determine_placings(sorted_results)
+
+    determine_placings(sorted_results, coach_id != 0 and vs_coach_ids and not None)
 
     return sorted_results
 
