@@ -140,7 +140,7 @@ def statistics_overview():
     season = database.get_selected_season()
     scorings = score_table.generate_scorings()[::-1]
     return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results,
-                           term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings)
+                           term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings, show_coaches_stats_link=True)
 
 
 @app.route("/statistics/coach/<int:coach_id>")
