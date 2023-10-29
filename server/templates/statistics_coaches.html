@@ -43,7 +43,56 @@
                 </tbody>
             </table>
         </div>
-{# TODO show versus coaches #}
+
+        <div class="container">
+            <h3>Stats vs Opponents</h3>
+        </div>
+        <div class="container container-table">
+            <table class="bordered">
+                <thead>
+                <tr>
+                    <th>Platz</th>
+                    <th>{{ term_for_coaches }}</th>
+                    <th>Spiele</th>
+                    {% for scoring in scorings %}
+                        <th>
+                            {% if scoring.touchdown_difference > 0 %}
+                                Win{% if scorings|length > 3 %}{{ scoring.touchdown_difference }}{% if loop.index == 1 %}+{% endif %}{% endif %}
+                            {% elif scoring.touchdown_difference == 0 %}
+                                Draw
+                            {% else %}
+                                Loss{% if scorings|length > 3 %}{{ scoring.touchdown_difference*(-1) }}{% if loop.index == scorings|length %}+{% endif %}{% endif %}
+                            {% endif %}
+                        </th>
+                    {% endfor %}
+                    <th>Win/Loss Diff</th>
+                    <th>TD-</th>
+                    <th>TD+</th>
+                    <th>TD Diff</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for result in coach_statistics.vs_coaches_scores %}
+                    <tr>
+                        <td class="center">{{ result.place }}</td>
+                        <td>
+                            <a href="/statistics/coach/{{ result.coach_id }}">
+                                <strong>{{ result.coach }}</strong>
+                            </a>
+                        </td>
+                        <td class="center"><strong>{{ result.number_of_matches }}</strong></td>
+                        {% for count in result.match_result_counts|reverse %}
+                            <td class="center">{{ count }}</td>
+                        {% endfor %}
+                        <td class="center"><strong class="scored-points">{{ -result.win_loss_diff }}</strong></td>
+                        <td class="center"><strong>{{ result.td_made }}</strong></td>
+                        <td class="center">{{ result.td_received }}</td>
+                        <td class="center"><strong>{{ -result.td_diff }}</strong></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <div class="container">
             <h3>Matches</h3>
