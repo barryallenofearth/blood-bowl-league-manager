@@ -30,7 +30,7 @@
     {% for result in coach_results %}
         <tr>
             <td class="center">{{ result.place }}</td>
-            <td><strong>{{ result.coach }}</strong></td>
+            <td><a href="/statistics/coach/{{ result.coach_id }}"><strong>{{ result.coach }}</strong></a></td>
             <td class="center"><strong>{{ result.number_of_seasons }}</strong></td>
             <td class="center"><strong>{{ result.number_of_teams }}</strong></td>
             <td class="center"><strong>{{ result.number_of_matches }}</strong></td>

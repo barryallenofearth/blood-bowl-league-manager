@@ -39,6 +39,7 @@ class CoachScores(BaseScores):
                  number_of_scorings: int, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):
         super().__init__(number_of_scorings, place, number_of_matches, td_received, td_made, td_diff, points)
         self.coach = formatting.coach_table_name(coach.id, season_id=0)
+        self.coach_id = coach.id
         self.number_of_teams = number_of_teams
         self.number_of_seasons = number_of_seasons
         self.number_of_playoff_matches = number_of_playoff_matches
@@ -64,7 +65,7 @@ class RaceScores(BaseScores):
         return f"RaceResults<place: race:{self.race}, " + super().__repr__()
 
 
-def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_from_team_id_getter) -> dict:
+def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_from_team_id_getter) -> dict[int:list]:
     def modify_team_score(analysis_results: dict, entity_id: int, td_made: int, td_received: int,
                           points_modification: int, scorings: list, is_team_1_victory_by_kickoff: bool, is_team_2_victory_by_kickoff: bool):
         def determine_points(td_diff: int, is_team_1_victory_by_kickoff: bool, is_team_2_victory_by_kickoff: bool) -> int:
@@ -156,7 +157,7 @@ def determine_placings(sorted_results: list):
         place_previous = sorted_results[index].place
 
 
-def calculate_team_scores():
+def calculate_team_scores() -> list[TeamScores]:
     def team_id_getter(team_id: int):
         return team_id
 
@@ -190,7 +191,7 @@ def generate_scorings():
     return scorings
 
 
-def calculate_coaches_scores() -> list:
+def calculate_coaches_scores(coach_id=None) -> list[CoachScores]:
     def coach_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().coach_id
 
@@ -206,7 +207,10 @@ def calculate_coaches_scores() -> list:
         return db.session.query(BBMatch).filter_by(is_playoff_match=True).filter(or_(BBMatch.team_1_id.in_(team_ids), BBMatch.team_2_id.in_(team_ids))).count()
 
     print("calculate coaches scores")
-    coaches = db.session.query(Coach).all()
+    if coach_id is None:
+        coaches = db.session.query(Coach).all()
+    else:
+        coaches = db.session.query(Coach).filter_by(id=coach_id).all()
 
     print("coaches identified by teams")
     scorings = generate_scorings()
@@ -228,7 +232,7 @@ def calculate_coaches_scores() -> list:
     return sorted_results
 
 
-def calculate_races_scores() -> list:
+def calculate_races_scores() -> list[RaceScores]:
     def race_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().race_id
 

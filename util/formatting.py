@@ -1,7 +1,8 @@
 import re
 
+import util
 from database import database
-from database.database import db, Team, Coach, BBMatch, Scorings, AdditionalStatistics
+from database.database import db, Team, Coach, BBMatch, Scorings, AdditionalStatistics, Race
 
 
 def generate_scorings_field_value(season_id: int) -> str:
@@ -130,9 +131,19 @@ def coach_table_name(coach_id: int, season_id=-1) -> str:
     return table_name
 
 
-def format_match(match: BBMatch) -> str:
-    team1_name = db.session.query(Team).filter_by(id=match.team_1_id).first().name
-    team2_name = db.session.query(Team).filter_by(id=match.team_2_id).first().name
+def format_match(match: BBMatch, resolve_race_and_id=False) -> str:
+    team1 = db.session.query(Team).filter_by(id=match.team_1_id).first()
+    team2 = db.session.query(Team).filter_by(id=match.team_2_id).first()
+
+    team1_name = team1.name
+    team2_name = team2.name
+    if resolve_race_and_id:
+        coach1_name = util.formatting.format_coach(db.session.query(Coach).filter_by(id=team1.coach_id).first())
+        coach2_name = util.formatting.format_coach(db.session.query(Coach).filter_by(id=team2.coach_id).first())
+        race1_name = db.session.query(Race).filter_by(id=team1.race_id).first().name
+        race2_name = db.session.query(Race).filter_by(id=team2.race_id).first().name
+        team1_name += f" ({race1_name}: {coach1_name})"
+        team2_name += f" ({race2_name}: {coach2_name})"
 
     string = f"Match {match.match_number}: {team1_name} vs. {team2_name} : {match.team_1_touchdown}:{match.team_2_touchdown}"
     if match.team_1_surrendered:

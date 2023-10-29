@@ -143,6 +143,18 @@ def statistics_overview():
                            term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings)
 
 
+@app.route("/statistics/coach/<int:coach_id>")
+@cache.cached()
+def statistics_coach(coach_id: int):
+    coach_results, coach_statistics = statistics.coach_statistics(coach_id, db)
+
+    season = database.get_selected_season()
+    scorings = score_table.generate_scorings()[::-1]
+
+    return render_template("statistics_coaches.html", nav_properties=NavProperties(db), coach_results=coach_results, coach_statistics=coach_statistics,
+                           term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings)
+
+
 @app.route("/download/<string:entity_type>")
 def download_table(entity_type: str):
     imaging.update_images(entity_type)

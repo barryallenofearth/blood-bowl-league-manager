@@ -1,0 +1,77 @@
+{% extends 'layout/base.html' %}
+{% block title %}{{ super() }} | Statistics{% endblock %}
+{% block content %}
+    {{ super() }}
+
+    <div class="container headline-container">
+        <h1>Statistics {{ coach_statistics.coach.first_name }} {{ coach_statistics.coach.last_name }}
+            {% if coach_statistics.coach.display_name %} ({{ coach_statistics.coach.display_name }}){% endif %}
+        </h1>
+    </div>
+    {% if coach_statistics.race_count|length == 0 %}
+        <div class="container">
+            <h2>No teams entered so far</h2>
+        </div>
+    {% else %}
+        <div class="container">
+            <h2>Results</h2>
+        </div>
+        <div class="container container-table">
+            {% include 'fragments/coaches_table.html' %}
+        </div>
+
+        <div class="container">
+            <h3>{{ term_for_races }}s</h3>
+        </div>
+        <div class="container">
+            <table class="bordered">
+                <thead>
+                <tr>
+                    <th>{{ term_for_races }}</th>
+                    <th>Number of teams</th>
+                    <th>Number of Matches</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for race_count in coach_statistics.race_count %}
+                    <tr>
+                        <td>{{ race_count.race.name }}</td>
+                        <td class="center">{{ race_count.team_count }}</td>
+                        <td class="center">{{ race_count.number_of_matches }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{# TODO show versus coaches #}
+
+        <div class="container">
+            <h3>Matches</h3>
+        </div>
+        <div class="container">
+            <table class="bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Match</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set loopCount = 0 %}
+                {% for season_with_match in coach_statistics.seasons_with_matches %}
+                    <tr>
+                        <th colspan="2">{{ season_with_match.season }}</th>
+                    </tr>
+                    {% for match in season_with_match.match_list %}
+                        {% set loopCount = loopCount + 1 %}
+                        <tr>
+                            <td class="center">{{ loop.index }}</td>
+                            <td>{{ match }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

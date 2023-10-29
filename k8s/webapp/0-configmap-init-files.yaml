@@ -12,14 +12,14 @@ data:
     league_short_name;name;short_name;is_selected;scorings
     WBBL;Season 1;S.1;False;-1:0\n0:1\n1:3
     WBBL;Season 2;S.2;False;-1:0\n0:1\n1:3
-    BBLM;Preseason 1;Pre.1;False;-1:0\n0:1\n1:3
     BBLM;Season 1;S.1;False;-2:1\n-1:2\n0:3\n1:4\n2:5
     BBLM;Season 2;S.2;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    BBLM;Preseason 1;Pre.1;False;-1:0\n0:1\n1:3
     BBLM;Season 3;S.3;False;-2:1\n-1:2\n0:3\n1:4\n2:5
-    BBLM;Season 4;S.4;False;-2:1\n-1:2\n0:3\n1:4\n2:5
-    BBLM;Season 6;S.6;False;-2:1\n-1:2\n0:3\n1:4\n2:5
     BBLM;Season 5;S.5;False;-2:1\n-1:2\n0:3\n1:4\n2:5
-    BBLM;Season 7;S.7;True;-2:1\n-1:2\n0:3\n1:4\n2:5
+    BBLM;Season 6;S.6;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    BBLM;Season 7;S.7;False;-2:1\n-1:2\n0:3\n1:4\n2:5
+    BBLM;Season 4;S.4;True;-2:1\n-1:2\n0:3\n1:4\n2:5
   races.csv: |
     name
     Amazonen
@@ -93,7 +93,6 @@ data:
     Squighorn Screamers;Tim;Freund; ;Goblins;False;S.2;WBBL
     The Plague Pit Bloaters;Chris;Pott; ;Nurgle;False;S.2;WBBL
     The Snu Snuugs;Stephan;Waider; ;Halblinge;False;S.2;WBBL
-    The no ones;Philipp;Saatkamp;Fips;Slann;False;S.2;WBBL
     Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.2;WBBL
     Helden in Strumpfhosen;Chris;Pott; ;Elfen Union;False;S.2;WBBL
     Hexoatl Vipers;Max;Pomblitz; ;Echsenmenschen;False;S.2;WBBL
@@ -101,34 +100,15 @@ data:
     Bläckhead Smashazz;Simon;Nosthoff; ;Orks;False;S.2;WBBL
     Altdorf Tigers;Felix;Blankermann; ;Menschen;False;S.2;WBBL
     Beards & Bulls United;Till;Limbrock; ;Chaoszwerge;True;S.2;WBBL
-    Carroburg Cosmopolitans;Bernd;Junker; ;Old World Alliance;True;S.2;WBBL
-    Competitive Math;Sven;Lehmkuhl; ;Khorne;True;S.2;WBBL
     Kara Temple Harpies;Tobias;Stelter; ;Amazonen;True;S.2;WBBL
-    Karak a Karaz Iron Breakers;Faton;Sejdija; ;Zwerge;True;S.2;WBBL
     This is my favourite team on the pitch;Rainer;Gelhaus; ;Khemri;True;S.2;WBBL
     Here Comes The BOOM;Sven;Lehmkuhl; ;Oger;True;S.2;WBBL
-    Bloody Mary;Christian;Stach; ;Echsenmenschen;False;Pre.1;BBLM
-    Blueboy Ravens;Niklas;Nolte; ;Menschen;False;Pre.1;BBLM
-    Bugmans Raufbolde;Marcus;Folz;Lasse;Zwerge;False;Pre.1;BBLM
-    Caledor Dragons;Tobias;Stelter; ;Hochelfen;False;Pre.1;BBLM
-    Daring Devils;Marco;Oberecht;Obi;Orks;False;Pre.1;BBLM
-    Elfheim Ranger;Daniel;Blagojevic; ;Waldelfen;False;Pre.1;BBLM
-    Khrx Seahawks;Ron;Krollzig; ;Amazonen;False;Pre.1;BBLM
-    Knochensammler;Uwe;Wegener; ;Untote;False;Pre.1;BBLM
-    LoneBoneShamblers;Marco;Oberecht;Obi;Untote;False;Pre.1;BBLM
-    Lothern Seaguls;Marco;Oberecht;Obi;Hochelfen;False;Pre.1;BBLM
-    Mountain Devils;Niklas;Nolte; ;Chaoszwerge;False;Pre.1;BBLM
-    Norsca Knights;Timo;Neumann; ;Norse;False;Pre.1;BBLM
-    Norseface MTN Sports Club;Till;Limbrock; ;Norse;False;Pre.1;BBLM
-    Oakland Rams;Ron;Krollzig; ;Waldelfen;False;Pre.1;BBLM
-    OrkLand RaiDaZ;Dirk;Mannweiler;Manni;Orks;False;Pre.1;BBLM
-    Screaming Rats;Hamlet;Abedian; ;Skaven;False;Pre.1;BBLM
-    Slannesh Prayers;Hamlet;Abedian; ;Chaos Chosen;False;Pre.1;BBLM
-    Stumpen Patriots;Jan;Limbrock; ;Zwerge;False;Pre.1;BBLM
-    The 69 Lusty Lickers;Marcel;Lehmkuhl; ;Chaos Chosen;False;Pre.1;BBLM
-    The Amazon All-Stars;Tobias;Stelter; ;Amazonen;False;Pre.1;BBLM
-    VFL Rattenburg;Paul;Langhorst; ;Skaven;False;Pre.1;BBLM
-    Warlocks in Purple;Till;Limbrock; ;Dunkelelfen;False;Pre.1;BBLM
+    Karak a Karaz Iron Breakers;Faton;Sejdija; ;Zwerge;False;S.2;WBBL
+    Competitive Math;Sven;Lehmkuhl; ;Khorne;False;S.2;WBBL
+    Carroburg Cosmopolitans;Bernd;Junker; ;Old World Alliance;False;S.2;WBBL
+    The no One's;Philipp;Saatkamp;Fips;Slann;False;S.2;WBBL
+    Elf Elves;Marco;Oberecht;Obi;Elfen Union;False;S.2;WBBL
+    Norsca Rampagers;Tobias;Stelter; ;Norse;False;S.2;WBBL
     Bloody Mary;Christian;Stach; ;Echsenmenschen;False;S.1;BBLM
     Blueboy Ravens;Niklas;Nolte; ;Menschen;False;S.1;BBLM
     Champions of Death;Tobias;Stelter; ;Untote;False;S.1;BBLM
@@ -166,6 +146,28 @@ data:
     Stumpen Patriots;Jan;Limbrock; ;Zwerge;False;S.2;BBLM
     Underworld Creepers;Tobias;Stelter; ;Underworld;False;S.2;BBLM
     Victorious Secrets;Till;Limbrock; ;Dunkelelfen;False;S.2;BBLM
+    Bloody Mary;Christian;Stach; ;Echsenmenschen;False;Pre.1;BBLM
+    Blueboy Ravens;Niklas;Nolte; ;Menschen;False;Pre.1;BBLM
+    Bugmans Raufbolde;Marcus;Folz;Lasse;Zwerge;False;Pre.1;BBLM
+    Caledor Dragons;Tobias;Stelter; ;Hochelfen;False;Pre.1;BBLM
+    Daring Devils;Marco;Oberecht;Obi;Orks;False;Pre.1;BBLM
+    Elfheim Ranger;Daniel;Blagojevic; ;Waldelfen;False;Pre.1;BBLM
+    Khrx Seahawks;Ron;Krollzig; ;Amazonen;False;Pre.1;BBLM
+    Knochensammler;Uwe;Wegener; ;Untote;False;Pre.1;BBLM
+    LoneBoneShamblers;Marco;Oberecht;Obi;Untote;False;Pre.1;BBLM
+    Lothern Seaguls;Marco;Oberecht;Obi;Hochelfen;False;Pre.1;BBLM
+    Mountain Devils;Niklas;Nolte; ;Chaoszwerge;False;Pre.1;BBLM
+    Norsca Knights;Timo;Neumann; ;Norse;False;Pre.1;BBLM
+    Norseface MTN Sports Club;Till;Limbrock; ;Norse;False;Pre.1;BBLM
+    Oakland Rams;Ron;Krollzig; ;Waldelfen;False;Pre.1;BBLM
+    OrkLand RaiDaZ;Dirk;Mannweiler;Manni;Orks;False;Pre.1;BBLM
+    Screaming Rats;Hamlet;Abedian; ;Skaven;False;Pre.1;BBLM
+    Slannesh Prayers;Hamlet;Abedian; ;Chaos Chosen;False;Pre.1;BBLM
+    Stumpen Patriots;Jan;Limbrock; ;Zwerge;False;Pre.1;BBLM
+    The 69 Lusty Lickers;Marcel;Lehmkuhl; ;Chaos Chosen;False;Pre.1;BBLM
+    The Amazon All-Stars;Tobias;Stelter; ;Amazonen;False;Pre.1;BBLM
+    VFL Rattenburg;Paul;Langhorst; ;Skaven;False;Pre.1;BBLM
+    Warlocks in Purple;Till;Limbrock; ;Dunkelelfen;False;Pre.1;BBLM
     Athelorn Avengers;Tobias;Stelter; ;Waldelfen;False;S.3;BBLM
     Baumberge Miners;Gregor;Saremba; ;Zwerge;False;S.3;BBLM
     Cellardore;Dennis;Karlström; ;Elfen Union;False;S.3;BBLM
@@ -194,6 +196,89 @@ data:
     The Unkillable Colts;Matthias;Huber; ;Untote;False;S.3;BBLM
     Tylos BBC;Timo;Decker; ;Skaven;False;S.3;BBLM
     Wild Boys;Niklas;Nolte; ;Orks;False;S.3;BBLM
+    A Tribute to the Horned Rat;Raphael;Wresch; ;Skaven;False;S.5;BBLM
+    Aasee Geziefer Blau-Gelb;Max;Möllering; ;Underworld;False;S.5;BBLM
+    Aasee Vikings;Gregor;Saremba; ;Norse;False;S.5;BBLM
+    Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;False;S.5;BBLM
+    Athelorn Avengers;Tobias;Stelter; ;Waldelfen;False;S.5;BBLM
+    Big Red Mob;Tim;Leenen; ;Orks;False;S.5;BBLM
+    Bloodrage Warriors;Hamlet;Abedian; ;Chaos Chosen;False;S.5;BBLM
+    Debauchery Fanboys (DFB);Nikolaus;Fischer; ;Chaos Chosen;False;S.5;BBLM
+    Die Kröten;Christian;Stach; ;Slann;False;S.5;BBLM
+    Firnstain Frostwölfe;Carl;Kapinski; ;Norse;False;S.5;BBLM
+    Gievenbecker Giants;Marc;Hansen; ;Zwerge;False;S.5;BBLM
+    Green Gras Cracker's;Marco;Oberecht;Obi;Halblinge;False;S.5;BBLM
+    Hashuts Finest;Timo;Decker; ;Chaoszwerge;False;S.5;BBLM
+    Havixbecker Löwenzähne;Gregor;Saremba; ;Halblinge;False;S.5;BBLM
+    Huatl Hunters;Michael;Evelt; ;Echsenmenschen;False;S.5;BBLM
+    Koppkloppverein Krushia;Carl;Kapinski; ;Orks;False;S.5;BBLM
+    Monasterian Castle Raiders;Max;Möllering; ;Zwerge;False;S.5;BBLM
+    Nagaroths Slaves;Hamlet;Abedian; ;Dunkelelfen;False;S.5;BBLM
+    Nordwalder Tigers;Niklas;Nolte; ;Bretonen;False;S.5;BBLM
+    North Forrest Seahawks;Niklas;Nolte; ;Hochelfen;False;S.5;BBLM
+    Ratatouille;Tobias;Stelter; ;Skaven;False;S.5;BBLM
+    Roxel ReTurners;Sebastian;Sprengel; ;Menschen;False;S.5;BBLM
+    Seaorcs;Rainer;Gelhaus; ;Orks;False;S.5;BBLM
+    Shagrath Scalphunters;Michael;Evelt; ;Dunkelelfen;False;S.5;BBLM
+    Sporting Tafelrunde;Thomas;Ludwig; ;Bretonen;False;S.5;BBLM
+    Stierland Stallions;Bernd;Junker; ;Menschen;False;S.5;BBLM
+    Stumpen Patriots;Jan;Limbrock; ;Zwerge;False;S.5;BBLM
+    Tanzverein Todeswirbel Telgith;Max;Driemer; ;Waldelfen;False;S.5;BBLM
+    Telgith Turnover Tornados;Max;Driemer; ;Zwerge;False;S.5;BBLM
+    Totenhemd Hotspur;Timo;Decker; ;Untote;False;S.5;BBLM
+    Tundra Bay Bombadiers;Ron;Krollzig; ;Goblins;False;S.5;BBLM
+    Turbine Warpstein;Till;Limbrock; ;Underworld;False;S.5;BBLM
+    Warpdust Walkers;Bernd;Junker; ;Skaven;False;S.5;BBLM
+    White Walkers;Christian;Stach; ;Norse;False;S.5;BBLM
+    Wolbecker Wolpertinger;Ron;Krollzig; ;Chaos Renegades;False;S.5;BBLM
+    Erphoplatz Pacters;Till;Limbrock; ;Chaos Renegades;False;S.5;BBLM
+    A Flock of Seagulls;Bernd;Junker; ;Elfen Union;False;S.6;BBLM
+    Aasee Battletoads;Thomas;Ludwig; ;Slann;False;S.6;BBLM
+    Aasee Vikings;Gregor;Saremba; ;Norse;False;S.6;BBLM
+    Boralus Bruisers;Christian;Heeck; ;Chaos Chosen;False;S.6;BBLM
+    Böhmerbach Buntspechte;Max;Driemer; ;Waldelfen;False;S.6;BBLM
+    Dark Stars;Thomas;Ludwig; ;Dunkelelfen;False;S.6;BBLM
+    Das Asoziale Netzwerk;Dominick;B; ;Orks;False;S.6;BBLM
+    Erpho Erazers;Till;Limbrock; ;Orks;False;S.6;BBLM
+    FC Khorne 08;Nikolaus;Fischer; ;Chaos Chosen;False;S.6;BBLM
+    Green Beard Boozers;Carl;Kapinski; ;Zwerge;False;S.6;BBLM
+    Green Jungle Packers;Tobias;Stelter; ;Echsenmenschen;False;S.6;BBLM
+    Katharsis Kattegat;Rainer;Gelhaus; ;Norse;False;S.6;BBLM
+    Khrx Seahawks;Ron;Krollzig; ;Amazonen;False;S.6;BBLM
+    LoneBone Shamblers;Marco;Oberecht;Obi;Untote;False;S.6;BBLM
+    Naggaroth Nightmares;Tobias;Stelter; ;Dunkelelfen;False;S.6;BBLM
+    Red Rambling Ravens;Rainer;Gelhaus; ;Amazonen;False;S.6;BBLM
+    Team Horror;Christian;Stach; ;Nekromanten;False;S.6;BBLM
+    Team Six;Christian;Stach; ;Untote;False;S.6;BBLM
+    Telgoth Slayers;Marc;Jannemann; ;Orks;False;S.6;BBLM
+    The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;False;S.6;BBLM
+    Warpfire Fighters;Benjamin;Roß; ;Skaven;False;S.6;BBLM
+    Red Rage;Bernd;Junker; ;Chaos Renegades;False;S.6;BBLM
+    Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.6;BBLM
+    Horror V2;Christian;Stach; ;Nekromanten;False;S.7;BBLM
+    Aasee Vikings;Gregor;Saremba; ;Norse;False;S.7;BBLM
+    Aqualand Stingrays;Carl;Kapinski; ;Elfen Union;False;S.7;BBLM
+    Asoziales Netzwerk Returns;Dominick;B; ;Orks;False;S.7;BBLM
+    Bloodsports United;Till;Limbrock; ;Khorne-Dämonen;False;S.7;BBLM
+    Doomsday Experience;Michael;Evelt; ;Skaven;False;S.7;BBLM
+    Erpho Raptors;Till;Limbrock; ;Echsenmenschen;False;S.7;BBLM
+    Grimfangberch Greyhogs;Sebastian;Rosentreter; ;Orks;False;S.7;BBLM
+    Hellpit Harbingers;Bernd;Junker; ;Skaven;False;S.7;BBLM
+    Huatl Hunters;Michael;Evelt; ;Echsenmenschen;False;S.7;BBLM
+    Kauket Reteh-qabet;Rainer;Gelhaus; ;Khemri;False;S.7;BBLM
+    Killer Bees;Tobias;Stelter; ;Amazonen;False;S.7;BBLM
+    Mean Greenskinz;Lukas;Ziegert; ;Goblins;False;S.7;BBLM
+    New Norse Giants;Rainer;Gelhaus; ;Norse;False;S.7;BBLM
+    Project G;Christian;Stach; ;Dunkelelfen;False;S.7;BBLM
+    Raffy’s Roxler Ratten;Raphael;Wresch; ;Skaven;False;S.7;BBLM
+    Red Lions;Tobias;Stelter; ;Chaoszwerge;False;S.7;BBLM
+    Runaway Prescriptons;Dominick;B; ;Nurgle;False;S.7;BBLM
+    Stirland Sentinels;Bernd;Junker; ;Menschen;False;S.7;BBLM
+    Telgoth Oak Sticks;Marc;Jannemann; ;Chaoszwerge;False;S.7;BBLM
+    Telgte Troubadours;Max;Driemer; ;Waldelfen;False;S.7;BBLM
+    Telligt Night Hawks;Marc;Jannemann; ;Dunkelelfen;False;S.7;BBLM
+    The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;False;S.7;BBLM
+    Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.7;BBLM
     11xElf;Christian;Stach; ;Waldelfen;False;S.4;BBLM
     BabySaurus2;Christian;Stach; ;Echsenmenschen;False;S.4;BBLM
     Badbulls;Raphael;Wresch; ;Orks;False;S.4;BBLM
@@ -233,89 +318,6 @@ data:
     Warpstone Hunters;Bernd;Junker; ;Skaven;False;S.4;BBLM
     Wolfgangs Wölfe;Tobias;Stelter; ;Nekromanten;False;S.4;BBLM
     Woodies Woodpackers;Dirk;Mannweiler;Manni;Waldelfen;False;S.4;BBLM
-    A Flock of Seagulls;Bernd;Junker; ;Elfen Union;False;S.6;BBLM
-    Aasee Battletoads;Thomas;Ludwig; ;Slann;False;S.6;BBLM
-    Aasee Vikings;Gregor;Saremba; ;Norse;False;S.6;BBLM
-    Boralus Bruisers;Christian;Heeck; ;Chaos Chosen;False;S.6;BBLM
-    Böhmerbach Buntspechte;Max;Driemer; ;Waldelfen;False;S.6;BBLM
-    Dark Stars;Thomas;Ludwig; ;Dunkelelfen;False;S.6;BBLM
-    Das Asoziale Netzwerk;Dominick;B; ;Orks;False;S.6;BBLM
-    Erpho Erazers;Till;Limbrock; ;Orks;False;S.6;BBLM
-    FC Khorne 08;Nikolaus;Fischer; ;Chaos Chosen;False;S.6;BBLM
-    Green Beard Boozers;Carl;Kapinski; ;Zwerge;False;S.6;BBLM
-    Green Jungle Packers;Tobias;Stelter; ;Echsenmenschen;False;S.6;BBLM
-    Katharsis Kattegat;Rainer;Gelhaus; ;Norse;False;S.6;BBLM
-    Khrx Seahawks;Ron;Krollzig; ;Amazonen;False;S.6;BBLM
-    LoneBone Shamblers;Marco;Oberecht;Obi;Untote;False;S.6;BBLM
-    Naggaroth Nightmares;Tobias;Stelter; ;Dunkelelfen;False;S.6;BBLM
-    Red Rambling Ravens;Rainer;Gelhaus; ;Amazonen;False;S.6;BBLM
-    Team Horror;Christian;Stach; ;Nekromanten;False;S.6;BBLM
-    Team Six;Christian;Stach; ;Untote;False;S.6;BBLM
-    Telgoth Slayers;Marc;Jannemann; ;Orks;False;S.6;BBLM
-    The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;False;S.6;BBLM
-    Warpfire Fighters;Benjamin;Roß; ;Skaven;False;S.6;BBLM
-    Red Rage;Bernd;Junker; ;Chaos Renegades;False;S.6;BBLM
-    Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.6;BBLM
-    A Tribute to the Horned Rat;Raphael;Wresch; ;Skaven;False;S.5;BBLM
-    Aasee Geziefer Blau-Gelb;Max;Möllering; ;Underworld;False;S.5;BBLM
-    Aasee Vikings;Gregor;Saremba; ;Norse;False;S.5;BBLM
-    Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;False;S.5;BBLM
-    Athelorn Avengers;Tobias;Stelter; ;Waldelfen;False;S.5;BBLM
-    Big Red Mob;Tim;Leenen; ;Orks;False;S.5;BBLM
-    Bloodrage Warriors;Hamlet;Abedian; ;Chaos Chosen;False;S.5;BBLM
-    Debauchery Fanboys (DFB);Nikolaus;Fischer; ;Chaos Chosen;False;S.5;BBLM
-    Die Kröten;Christian;Stach; ;Slann;False;S.5;BBLM
-    Firnstain Frostwölfe;Carl;Kapinski; ;Norse;False;S.5;BBLM
-    Gievenbecker Giants;Marc;Hansen; ;Zwerge;False;S.5;BBLM
-    Green Gras Cracker's;Marco;Oberecht;Obi;Halblinge;False;S.5;BBLM
-    Hashuts Finest;Timo;Decker; ;Chaoszwerge;False;S.5;BBLM
-    Havixbecker Löwenzähne;Gregor;Saremba; ;Halblinge;False;S.5;BBLM
-    Huatl Hunters;Michael;Evelt; ;Echsenmenschen;False;S.5;BBLM
-    Koppkloppverein Krushia;Carl;Kapinski; ;Orks;False;S.5;BBLM
-    Monasterian Castle Raiders;Max;Möllering; ;Zwerge;False;S.5;BBLM
-    Nagaroths Slaves;Hamlet;Abedian; ;Dunkelelfen;False;S.5;BBLM
-    Nordwalder Tigers;Niklas;Nolte; ;Bretonen;False;S.5;BBLM
-    North Forrest Seahawks;Niklas;Nolte; ;Hochelfen;False;S.5;BBLM
-    Ratatouille;Tobias;Stelter; ;Skaven;False;S.5;BBLM
-    Roxel ReTurners;Sebastian;Sprengel; ;Menschen;False;S.5;BBLM
-    Seaorcs;Rainer;Gelhaus; ;Orks;False;S.5;BBLM
-    Shagrath Scalphunters;Michael;Evelt; ;Dunkelelfen;False;S.5;BBLM
-    Sporting Tafelrunde;Thomas;Ludwig; ;Bretonen;False;S.5;BBLM
-    Stierland Stallions;Bernd;Junker; ;Menschen;False;S.5;BBLM
-    Stumpen Patriots;Jan;Limbrock; ;Zwerge;False;S.5;BBLM
-    Tanzverein Todeswirbel Telgith;Max;Driemer; ;Waldelfen;False;S.5;BBLM
-    Telgith Turnover Tornados;Max;Driemer; ;Zwerge;False;S.5;BBLM
-    Totenhemd Hotspur;Timo;Decker; ;Untote;False;S.5;BBLM
-    Tundra Bay Bombadiers;Ron;Krollzig; ;Goblins;False;S.5;BBLM
-    Turbine Warpstein;Till;Limbrock; ;Underworld;False;S.5;BBLM
-    Warpdust Walkers;Bernd;Junker; ;Skaven;False;S.5;BBLM
-    White Walkers;Christian;Stach; ;Norse;False;S.5;BBLM
-    Wolbecker Wolpertinger;Ron;Krollzig; ;Chaos Renegades;False;S.5;BBLM
-    Erphoplatz Pacters;Till;Limbrock; ;Chaos Renegades;False;S.5;BBLM
-    Horror V2;Christian;Stach; ;Nekromanten;False;S.7;BBLM
-    Aasee Vikings;Gregor;Saremba; ;Norse;False;S.7;BBLM
-    Aqualand Stingrays;Carl;Kapinski; ;Elfen Union;False;S.7;BBLM
-    Asoziales Netzwerk Returns;Dominick;B; ;Orks;False;S.7;BBLM
-    Bloodsports United;Till;Limbrock; ;Khorne-Dämonen;False;S.7;BBLM
-    Doomsday Experience;Michael;Evelt; ;Skaven;False;S.7;BBLM
-    Erpho Raptors;Till;Limbrock; ;Echsenmenschen;False;S.7;BBLM
-    Grimfangberch Greyhogs;Sebastian;Rosentreter; ;Orks;False;S.7;BBLM
-    Hellpit Harbingers;Bernd;Junker; ;Skaven;False;S.7;BBLM
-    Huatl Hunters;Michael;Evelt; ;Echsenmenschen;False;S.7;BBLM
-    Kauket Reteh-qabet;Rainer;Gelhaus; ;Khemri;False;S.7;BBLM
-    Killer Bees;Tobias;Stelter; ;Amazonen;False;S.7;BBLM
-    Mean Greenskinz;Lukas;Ziegert; ;Goblins;False;S.7;BBLM
-    New Norse Giants;Rainer;Gelhaus; ;Norse;False;S.7;BBLM
-    Project G;Christian;Stach; ;Dunkelelfen;False;S.7;BBLM
-    Raffy’s Roxler Ratten;Raphael;Wresch; ;Skaven;False;S.7;BBLM
-    Red Lions;Tobias;Stelter; ;Chaoszwerge;False;S.7;BBLM
-    Runaway Prescriptons;Dominick;B; ;Nurgle;False;S.7;BBLM
-    Stirland Sentinels;Bernd;Junker; ;Menschen;False;S.7;BBLM
-    Telgoth Oak Sticks;Marc;Jannemann; ;Chaoszwerge;False;S.7;BBLM
-    Telgte Troubadours;Max;Driemer; ;Waldelfen;False;S.7;BBLM
-    Telligt Night Hawks;Marc;Jannemann; ;Dunkelelfen;False;S.7;BBLM
-    The Chosen Ones;Lukas;Ziegert; ;Chaos Chosen;False;S.7;BBLM
-    Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.7;BBLM
   matches.csv: |
     match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;is_team_1_victory_by_kickoff;is_team_2_victory_by_kickoff;is_playoff_match;is_tournament_match;season_short_name;league_short_name
     1;Raffy's Roxler Ratten;Asgard Allstars;2;1;0;0;False;False;False;False;False;False;S.1;WBBL
@@ -370,15 +372,15 @@ data:
     51;Raffy's Roxler Ratten;Bay Harbor Butchers;3;1;0;0;False;False;False;False;True;False;S.1;WBBL
     52;Milfheim Mammoths;Die listigen Lustria Lurche;2;1;0;0;False;False;False;False;True;False;S.1;WBBL
     49;Milfheim Mammoths;Kharibdyss Kracher;2;0;0;0;False;False;False;False;True;False;S.1;WBBL
-    53;Milfheim Mammoths;Slanesh Slayers;2;2;2;0;False;False;True;False;True;False;S.1;WBBL
+    53;Milfheim Mammoths;Slanesh Slayers;2;2;0;0;False;False;True;False;True;False;S.1;WBBL
     1;Anaheim Frozen Fingers;Mortheim Maniacs;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
     2;Mighty Moon Moshaz;Big Bad Crocs;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
     3;Anaheim Frozen Fingers;BuckelBerg Bombers;2;2;0;0;False;False;False;False;False;False;S.2;WBBL
     4;Mortheim Maniacs;Lucky Men in Tights;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
     5;Middenland Wolves;Big Bad Crocs;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
     6;Gully Sneakers;Wolbecker Wolpertinger;3;1;0;0;False;False;False;False;False;False;S.2;WBBL
-    7;The no ones;Lucky Men in Tights;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
-    8;Mortheim Maniacs;The no ones;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    7;The no One's;Lucky Men in Tights;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    8;Mortheim Maniacs;The no One's;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
     9;Mighty Moon Moshaz;Middenland Wolves;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
     10;The Plague Pit Bloaters;Middenland Wolves;0;2;0;0;False;False;False;False;False;False;S.2;WBBL
     11;Wolbecker Wolpertinger;Eastend Slowdiver;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
@@ -387,7 +389,7 @@ data:
     14;Naggaroth Nightwings;Mortheim Maniacs;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
     15;Da Red Thunda;Necropolis Nightmares;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
     16;Necropolis Nightmares;Lucky Men in Tights;0;6;0;0;False;False;False;False;False;False;S.2;WBBL
-    17;Die Hafenmeister;The no ones;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    17;Die Hafenmeister;The no One's;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
     18;Lucky Men in Tights;Mortheim Maniacs;2;2;0;0;False;False;False;False;False;False;S.2;WBBL
     19;Mighty Moon Moshaz;Gully Sneakers;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
     20;The Plague Pit Bloaters;Greenboi Packers;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
@@ -413,48 +415,58 @@ data:
     41;Mortheim Maniacs;Hexoatl Vipers;4;0;0;0;False;False;False;False;False;False;S.2;WBBL
     36;Middenland Wolves;Helden in Strumpfhosen;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
     37;Necropolis Nightmares;Mortheim Maniacs;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
-    1;Warlocks in Purple;Knochensammler;1;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    2;Elfheim Ranger;The 69 Lusty Lickers;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    3;LoneBoneShamblers;OrkLand RaiDaZ;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    4;Warlocks in Purple;OrkLand RaiDaZ;3;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    5;LoneBoneShamblers;Warlocks in Purple;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    6;Elfheim Ranger;OrkLand RaiDaZ;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    7;Elfheim Ranger;OrkLand RaiDaZ;1;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    8;Elfheim Ranger;Khrx Seahawks;4;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    9;OrkLand RaiDaZ;VFL Rattenburg;2;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    10;LoneBoneShamblers;Bugmans Raufbolde;1;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    11;OrkLand RaiDaZ;Knochensammler;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    12;Warlocks in Purple;Stumpen Patriots;0;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    13;Warlocks in Purple;Caledor Dragons;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    14;OrkLand RaiDaZ;LoneBoneShamblers;0;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    15;Blueboy Ravens;Warlocks in Purple;3;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    16;Elfheim Ranger;VFL Rattenburg;5;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    17;LoneBoneShamblers;Khrx Seahawks;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    18;VFL Rattenburg;Khrx Seahawks;3;3;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    19;VFL Rattenburg;Khrx Seahawks;3;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    20;Blueboy Ravens;VFL Rattenburg;1;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    21;Blueboy Ravens;VFL Rattenburg;2;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    22;Screaming Rats;LoneBoneShamblers;2;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    23;OrkLand RaiDaZ;VFL Rattenburg;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    24;LoneBoneShamblers;Blueboy Ravens;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    25;LoneBoneShamblers;Blueboy Ravens;1;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    26;VFL Rattenburg;Screaming Rats;3;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    27;VFL Rattenburg;LoneBoneShamblers;4;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    28;Norseface MTN Sports Club;Caledor Dragons;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    29;VFL Rattenburg;Oakland Rams;3;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    30;VFL Rattenburg;Oakland Rams;3;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    31;VFL Rattenburg;Khrx Seahawks;3;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    32;Khrx Seahawks;Bugmans Raufbolde;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    33;Blueboy Ravens;Screaming Rats;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    34;Elfheim Ranger;Blueboy Ravens;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    35;Norsca Knights;Daring Devils;1;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    36;Mountain Devils;Slannesh Prayers;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    37;Norseface MTN Sports Club;Oakland Rams;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    38;Norseface MTN Sports Club;The Amazon All-Stars;1;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    39;The Amazon All-Stars;Slannesh Prayers;1;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    40;Oakland Rams;Lothern Seaguls;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    41;LoneBoneShamblers;Screaming Rats;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
-    42;LoneBoneShamblers;Oakland Rams;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    43;Bläckhead Smashazz;Carroburg Cosmopolitans;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    44;Da Red Thunda;Eastend Slowdiver;0;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    45;Da Red Thunda;Bläckhead Smashazz;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    82;Righteous Anger;The no One's;1;4;0;0;False;False;False;False;False;False;S.2;WBBL
+    47;Naggaroth Nightwings;Righteous Anger;1;2;0;0;False;False;False;False;False;False;S.2;WBBL
+    46;Wolbecker Wolpertinger;Hexoatl Vipers;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    48;Karak a Karaz Iron Breakers;Ancient Conquerors;0;2;0;0;False;False;False;False;False;False;S.2;WBBL
+    49;Anaheim Frozen Fingers;Lucky Men in Tights;1;4;0;0;False;False;False;False;False;False;S.2;WBBL
+    50;Hexoatl Vipers;Da Red Thunda;1;2;0;0;False;False;False;False;False;False;S.2;WBBL
+    51;Bläckhead Smashazz;Karak a Karaz Iron Breakers;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    52;Ancient Conquerors;Helden in Strumpfhosen;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    53;Bläckhead Smashazz;The no One's;1;2;0;0;False;False;False;False;False;False;S.2;WBBL
+    54;Competitive Math;Hexoatl Vipers;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    55;Da Red Thunda;Die Hafenmeister;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    56;Die Hafenmeister;Bläckhead Smashazz;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    57;Da Red Thunda;The no One's;1;3;0;0;False;False;False;False;False;False;S.2;WBBL
+    58;BuckelBerg Bombers;Greenboi Packers;0;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    59;Hexoatl Vipers;Righteous Anger;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    60;Karak a Karaz Iron Breakers;Big Bad Crocs;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    61;Da Red Thunda;Hexoatl Vipers;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    62;Anaheim Frozen Fingers;Carroburg Cosmopolitans;3;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    63;BuckelBerg Bombers;Wolbecker Wolpertinger;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    64;Ancient Conquerors;Big Bad Crocs;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    65;Competitive Math;BuckelBerg Bombers;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    66;Big Bad Crocs;Greenboi Packers;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    67;Anaheim Frozen Fingers;Bläckhead Smashazz;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    68;Bläckhead Smashazz;Carroburg Cosmopolitans;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    69;The no One's;Carroburg Cosmopolitans;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    70;BuckelBerg Bombers;Wolbecker Wolpertinger;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    71;Competitive Math;The no One's;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    72;Die Hafenmeister;Carroburg Cosmopolitans;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    73;Ancient Conquerors;The Plague Pit Bloaters;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    74;The Plague Pit Bloaters;Greenboi Packers;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    75;Lucky Men in Tights;Hexoatl Vipers;4;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    76;Karak a Karaz Iron Breakers;Big Bad Crocs;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    77;The Plague Pit Bloaters;Big Bad Crocs;1;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    78;Carroburg Cosmopolitans;Lucky Men in Tights;2;5;0;0;False;False;False;False;False;False;S.2;WBBL
+    79;The Plague Pit Bloaters;Karak a Karaz Iron Breakers;0;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    80;Greenboi Packers;Ancient Conquerors;0;3;0;0;False;False;False;False;False;False;S.2;WBBL
+    81;Wolbecker Wolpertinger;Hexoatl Vipers;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    83;Gully Sneakers;Elf Elves;2;3;0;0;False;False;False;False;False;False;S.2;WBBL
+    84;Competitive Math;Gully Sneakers;2;1;0;0;False;False;False;False;False;False;S.2;WBBL
+    85;Elf Elves;BuckelBerg Bombers;3;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    87;Altdorf Tigers;Elf Elves;2;2;0;0;False;False;False;False;False;False;S.2;WBBL
+    88;Norsca Rampagers;Elf Elves;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    86;Mighty Moon Moshaz;Norsca Rampagers;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    89;Righteous Anger;Competitive Math;1;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    90;Mighty Moon Moshaz;Karak a Karaz Iron Breakers;2;0;0;0;False;False;False;False;False;False;S.2;WBBL
+    91;Die Hafenmeister;Da Red Thunda;1;0;0;0;False;False;False;False;True;False;S.2;WBBL
+    92;Ancient Conquerors;Mortheim Maniacs;2;0;0;0;False;False;False;False;True;False;S.2;WBBL
+    93;Mighty Moon Moshaz;Lucky Men in Tights;2;1;0;0;False;False;False;False;True;False;S.2;WBBL
+    94;Ancient Conquerors;Die Hafenmeister;2;0;0;0;False;False;False;False;True;False;S.2;WBBL
     1;Khrx Seahawks;LoneBoneShamblers;2;1;0;0;False;False;False;False;False;False;S.1;BBLM
     2;Champions of Death;Screaming Rats;2;0;0;0;False;False;False;False;False;False;S.1;BBLM
     3;Blueboy Ravens;Bloody Mary;3;3;0;0;False;False;False;False;False;False;S.1;BBLM
@@ -565,6 +577,48 @@ data:
     37;Slannchester United;Loren Legends;2;1;0;0;False;False;False;False;True;False;S.2;BBLM
     38;Victorious Secrets;Beards of Destruction;1;0;0;0;False;False;False;False;True;False;S.2;BBLM
     39;Victorious Secrets;Slannchester United;1;0;0;0;False;False;False;False;True;False;S.2;BBLM
+    1;Warlocks in Purple;Knochensammler;1;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    2;Elfheim Ranger;The 69 Lusty Lickers;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    3;LoneBoneShamblers;OrkLand RaiDaZ;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    4;Warlocks in Purple;OrkLand RaiDaZ;3;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    5;LoneBoneShamblers;Warlocks in Purple;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    6;Elfheim Ranger;OrkLand RaiDaZ;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    7;Elfheim Ranger;OrkLand RaiDaZ;1;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    8;Elfheim Ranger;Khrx Seahawks;4;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    9;OrkLand RaiDaZ;VFL Rattenburg;2;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    10;LoneBoneShamblers;Bugmans Raufbolde;1;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    11;OrkLand RaiDaZ;Knochensammler;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    12;Warlocks in Purple;Stumpen Patriots;0;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    13;Warlocks in Purple;Caledor Dragons;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    14;OrkLand RaiDaZ;LoneBoneShamblers;0;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    15;Blueboy Ravens;Warlocks in Purple;3;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    16;Elfheim Ranger;VFL Rattenburg;5;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    17;LoneBoneShamblers;Khrx Seahawks;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    18;VFL Rattenburg;Khrx Seahawks;3;3;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    19;VFL Rattenburg;Khrx Seahawks;3;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    20;Blueboy Ravens;VFL Rattenburg;1;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    21;Blueboy Ravens;VFL Rattenburg;2;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    22;Screaming Rats;LoneBoneShamblers;2;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    23;OrkLand RaiDaZ;VFL Rattenburg;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    24;LoneBoneShamblers;Blueboy Ravens;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    25;LoneBoneShamblers;Blueboy Ravens;1;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    26;VFL Rattenburg;Screaming Rats;3;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    27;VFL Rattenburg;LoneBoneShamblers;4;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    28;Norseface MTN Sports Club;Caledor Dragons;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    29;VFL Rattenburg;Oakland Rams;3;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    30;VFL Rattenburg;Oakland Rams;3;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    31;VFL Rattenburg;Khrx Seahawks;3;2;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    32;Khrx Seahawks;Bugmans Raufbolde;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    33;Blueboy Ravens;Screaming Rats;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    34;Elfheim Ranger;Blueboy Ravens;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    35;Norsca Knights;Daring Devils;1;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    36;Mountain Devils;Slannesh Prayers;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    37;Norseface MTN Sports Club;Oakland Rams;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    38;Norseface MTN Sports Club;The Amazon All-Stars;1;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    39;The Amazon All-Stars;Slannesh Prayers;1;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    40;Oakland Rams;Lothern Seaguls;2;1;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    41;LoneBoneShamblers;Screaming Rats;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
+    42;LoneBoneShamblers;Oakland Rams;2;0;0;0;False;False;False;False;False;False;Pre.1;BBLM
     1;Baumberge Miners;Stasis;2;0;0;0;False;False;False;False;False;False;S.3;BBLM
     2;Wild Boys;The Real Vermins;2;0;0;0;False;False;False;False;False;False;S.3;BBLM
     3;Skavenburg Steelers;Lothern Seaguls;4;4;0;0;False;False;False;False;False;False;S.3;BBLM
@@ -645,6 +699,146 @@ data:
     78;Skeggi Seahawks;Razor Hill Raiders;1;2;0;0;False;False;False;False;True;False;S.3;BBLM
     79;Helheim Valkyries;Baumberge Miners;2;1;0;0;False;False;False;False;True;False;S.3;BBLM
     80;Helheim Valkyries;Razor Hill Raiders;2;0;0;0;False;False;False;False;True;False;S.3;BBLM
+    1;Stierland Stallions;White Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    2;Sporting Tafelrunde;Nordwalder Tigers;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    3;Green Gras Cracker's;Roxel ReTurners;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    4;Athelorn Avengers;Bloodrage Warriors;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    5;Aasee Vikings;Debauchery Fanboys (DFB);1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    6;Firnstain Frostwölfe;Tanzverein Todeswirbel Telgith;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    7;Nordwalder Tigers;Debauchery Fanboys (DFB);2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    8;Green Gras Cracker's;Sporting Tafelrunde;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    9;Amazona Cardinals;Shagrath Scalphunters;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    10;Tanzverein Todeswirbel Telgith;Green Gras Cracker's;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    11;Nordwalder Tigers;Amazona Cardinals;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    12;North Forrest Seahawks;Amazona Cardinals;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    13;Bloodrage Warriors;Green Gras Cracker's;3;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    14;Gievenbecker Giants;Tundra Bay Bombadiers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    15;Green Gras Cracker's;Sporting Tafelrunde;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    16;Firnstain Frostwölfe;Monasterian Castle Raiders;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    17;Nordwalder Tigers;Green Gras Cracker's;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    18;Tanzverein Todeswirbel Telgith;Roxel ReTurners;3;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    19;Stierland Stallions;White Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    20;Erphoplatz Pacters;White Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    21;Amazona Cardinals;Tundra Bay Bombadiers;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    22;Erphoplatz Pacters;Bloodrage Warriors;0;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    23;Nordwalder Tigers;Stierland Stallions;2;2;0;0;False;False;False;False;False;False;S.5;BBLM
+    24;Tanzverein Todeswirbel Telgith;Erphoplatz Pacters;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    25;Athelorn Avengers;Bloodrage Warriors;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    26;Sporting Tafelrunde;Hashuts Finest;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    27;Amazona Cardinals;Sporting Tafelrunde;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    28;Stierland Stallions;Athelorn Avengers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    29;Debauchery Fanboys (DFB);Tanzverein Todeswirbel Telgith;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    30;Stierland Stallions;Amazona Cardinals;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    31;Seaorcs;Hashuts Finest;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    32;Tundra Bay Bombadiers;Debauchery Fanboys (DFB);2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    33;Hashuts Finest;North Forrest Seahawks;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    34;Amazona Cardinals;Tanzverein Todeswirbel Telgith;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    35;Debauchery Fanboys (DFB);Sporting Tafelrunde;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    36;Seaorcs;Huatl Hunters;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    37;Seaorcs;Roxel ReTurners;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    38;Firnstain Frostwölfe;Big Red Mob;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    39;Athelorn Avengers;Stierland Stallions;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    40;Koppkloppverein Krushia;Monasterian Castle Raiders;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    41;Seaorcs;Firnstain Frostwölfe;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    42;Stierland Stallions;Debauchery Fanboys (DFB);1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    43;Firnstain Frostwölfe;Stierland Stallions;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    44;White Walkers;Athelorn Avengers;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    45;Athelorn Avengers;Warpdust Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    46;White Walkers;Debauchery Fanboys (DFB);3;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    47;Nordwalder Tigers;Sporting Tafelrunde;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    48;Debauchery Fanboys (DFB);Wolbecker Wolpertinger;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    49;Amazona Cardinals;Athelorn Avengers;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    50;Seaorcs;White Walkers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    51;White Walkers;Athelorn Avengers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    52;Seaorcs;Shagrath Scalphunters;4;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    53;Seaorcs;Firnstain Frostwölfe;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    54;White Walkers;Warpdust Walkers;4;0;0;0;False;False;False;False;False;False;S.5;BBLM
+    55;Seaorcs;Hashuts Finest;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
+    56;Stierland Stallions;White Walkers;2;1;0;0;False;False;False;False;True;False;S.5;BBLM
+    57;Athelorn Avengers;Tanzverein Todeswirbel Telgith;2;1;0;0;False;False;False;False;True;False;S.5;BBLM
+    58;Nordwalder Tigers;Firnstain Frostwölfe;2;3;0;0;False;False;False;False;True;False;S.5;BBLM
+    59;Seaorcs;Green Gras Cracker's;3;0;0;0;False;False;False;False;True;False;S.5;BBLM
+    60;Stierland Stallions;Athelorn Avengers;0;2;0;0;False;False;False;False;True;False;S.5;BBLM
+    61;Seaorcs;Stierland Stallions;1;0;0;0;False;False;False;False;True;False;S.5;BBLM
+    62;Firnstain Frostwölfe;Seaorcs;2;0;0;0;False;False;False;False;True;False;S.5;BBLM
+    63;Firnstain Frostwölfe;Athelorn Avengers;1;0;0;0;False;False;False;False;True;False;S.5;BBLM
+    1;Red Rage;Team Horror;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    2;Telgoth Slayers;Böhmerbach Buntspechte;2;2;0;0;False;False;False;False;False;False;S.6;BBLM
+    3;Red Rage;Naggaroth Nightmares;2;2;0;0;False;False;False;False;False;False;S.6;BBLM
+    4;Erpho Erazers;Green Beard Boozers;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    5;FC Khorne 08;Telgoth Slayers;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    6;Red Rage;Telgoth Slayers;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    7;Red Rage;Das Asoziale Netzwerk;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    8;Team Six;Dark Stars;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    9;Boralus Bruisers;Naggaroth Nightmares;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    10;FC Khorne 08;Wolbecker Wolpertinger;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    11;Erpho Erazers;Dark Stars;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    12;Team Six;Green Jungle Packers;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    13;Telgoth Slayers;Naggaroth Nightmares;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    14;Das Asoziale Netzwerk;The Chosen Ones;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    15;Green Jungle Packers;FC Khorne 08;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    16;Green Jungle Packers;Telgoth Slayers;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    17;Team Six;Telgoth Slayers;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    18;Green Jungle Packers;Boralus Bruisers;3;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    19;Team Six;Boralus Bruisers;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    20;Boralus Bruisers;The Chosen Ones;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    21;Green Jungle Packers;Das Asoziale Netzwerk;3;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    22;Boralus Bruisers;FC Khorne 08;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    23;The Chosen Ones;Warpfire Fighters;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    24;Green Jungle Packers;The Chosen Ones;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    25;The Chosen Ones;Team Six;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    26;Warpfire Fighters;FC Khorne 08;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    27;Team Six;FC Khorne 08;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    28;The Chosen Ones;Red Rage;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    29;Das Asoziale Netzwerk;Warpfire Fighters;2;2;0;0;False;False;False;False;False;False;S.6;BBLM
+    30;Team Six;Red Rage;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    31;Team Six;Red Rage;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    32;Erpho Erazers;Warpfire Fighters;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    33;Red Rambling Ravens;Boralus Bruisers;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    34;Green Jungle Packers;Warpfire Fighters;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    35;FC Khorne 08;The Chosen Ones;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    36;Red Rage;Warpfire Fighters;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    37;FC Khorne 08;A Flock of Seagulls;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    38;Das Asoziale Netzwerk;Boralus Bruisers;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    39;Green Jungle Packers;A Flock of Seagulls;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
+    40;Boralus Bruisers;A Flock of Seagulls;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    41;Aasee Vikings;Katharsis Kattegat;0;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    42;Das Asoziale Netzwerk;Team Horror;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
+    43;Green Jungle Packers;Erpho Erazers;2;1;0;0;False;False;False;False;True;False;S.6;BBLM
+    44;FC Khorne 08;Boralus Bruisers;0;2;0;0;False;False;False;False;True;False;S.6;BBLM
+    45;Team Six;Das Asoziale Netzwerk;2;0;0;0;False;False;False;False;True;False;S.6;BBLM
+    46;Red Rage;The Chosen Ones;0;2;0;0;False;False;False;False;True;False;S.6;BBLM
+    47;Green Jungle Packers;Boralus Bruisers;1;2;0;0;False;False;False;False;True;False;S.6;BBLM
+    48;Team Six;The Chosen Ones;0;2;0;0;False;False;False;False;True;False;S.6;BBLM
+    49;Boralus Bruisers;The Chosen Ones;1;1;0;0;False;False;True;False;True;False;S.6;BBLM
+    50;Green Jungle Packers;Team Six;2;1;0;0;False;False;False;False;True;False;S.6;BBLM
+    1;Asoziales Netzwerk Returns;The Chosen Ones;0;2;0;0;False;False;False;False;False;False;S.7;BBLM
+    2;Telgte Troubadours;Stirland Sentinels;1;3;0;0;False;False;False;False;False;False;S.7;BBLM
+    3;Killer Bees;Stirland Sentinels;1;1;0;0;False;False;False;False;False;False;S.7;BBLM
+    4;Erpho Raptors;Telgte Troubadours;2;1;0;0;False;False;False;False;False;False;S.7;BBLM
+    5;Killer Bees;Telgte Troubadours;1;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    6;Killer Bees;The Chosen Ones;0;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    7;Kauket Reteh-qabet;Aasee Vikings;3;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    8;Aqualand Stingrays;Doomsday Experience;4;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    9;Kauket Reteh-qabet;Aasee Vikings;0;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    10;Killer Bees;Aqualand Stingrays;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    11;Kauket Reteh-qabet;Telgte Troubadours;1;1;0;0;False;False;False;False;False;False;S.7;BBLM
+    12;Killer Bees;Stirland Sentinels;0;1;0;0;False;False;False;False;False;False;S.7;BBLM
+    13;Telgte Troubadours;Aqualand Stingrays;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    14;Telligt Night Hawks;Raffy’s Roxler Ratten;1;3;0;0;False;False;False;False;False;False;S.7;BBLM
+    15;Stirland Sentinels;Telligt Night Hawks;3;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    16;Stirland Sentinels;Telligt Night Hawks;1;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    17;Hellpit Harbingers;Telligt Night Hawks;1;1;0;0;False;False;False;False;False;False;S.7;BBLM
+    18;Hellpit Harbingers;Raffy’s Roxler Ratten;2;2;0;0;False;False;False;False;False;False;S.7;BBLM
+    19;Raffy’s Roxler Ratten;Stirland Sentinels;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    20;Telligt Night Hawks;Hellpit Harbingers;0;2;0;0;False;False;False;False;False;False;S.7;BBLM
+    21;Telgoth Oak Sticks;Stirland Sentinels;0;2;0;0;False;False;False;False;False;False;S.7;BBLM
+    22;Killer Bees;Hellpit Harbingers;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    23;Telgte Troubadours;Telligt Night Hawks;3;0;0;0;False;False;False;False;False;False;S.7;BBLM
+    24;Stirland Sentinels;Erpho Raptors;2;0;0;0;False;False;False;False;True;False;S.7;BBLM
+    25;Killer Bees;Aqualand Stingrays;2;0;0;0;False;False;False;False;True;False;S.7;BBLM
+    26;Telgte Troubadours;Raffy’s Roxler Ratten;0;2;0;0;False;False;False;False;True;False;S.7;BBLM
+    27;Stirland Sentinels;Raffy’s Roxler Ratten;2;0;0;0;False;False;False;False;True;False;S.7;BBLM
     1;Tlaxtlan Titans;Red Mob;2;0;0;0;False;False;False;False;False;False;S.4;BBLM
     2;Köllefornia Orcstars;Blitzburgh Stealers;2;0;0;0;False;False;False;False;False;False;S.4;BBLM
     3;Sporting Tafelrunde;Lieber Tot Als Zweiter;1;1;0;0;False;False;False;False;False;False;S.4;BBLM
@@ -766,146 +960,6 @@ data:
     119;Köllefornia Orcstars;Mordheim Mutant Ninja Rats;1;2;0;0;False;False;False;False;True;False;S.4;BBLM
     120;Huatl Hunters;Köllefornia Orcstars;2;2;0;0;False;False;True;False;True;False;S.4;BBLM
     121;Havixbeck Deadskins;Mordheim Mutant Ninja Rats;1;2;0;0;False;False;False;False;True;False;S.4;BBLM
-    1;Red Rage;Team Horror;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    2;Telgoth Slayers;Böhmerbach Buntspechte;2;2;0;0;False;False;False;False;False;False;S.6;BBLM
-    3;Red Rage;Naggaroth Nightmares;2;2;0;0;False;False;False;False;False;False;S.6;BBLM
-    4;Erpho Erazers;Green Beard Boozers;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    5;FC Khorne 08;Telgoth Slayers;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    6;Red Rage;Telgoth Slayers;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    7;Red Rage;Das Asoziale Netzwerk;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    8;Team Six;Dark Stars;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    9;Boralus Bruisers;Naggaroth Nightmares;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    10;FC Khorne 08;Wolbecker Wolpertinger;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    11;Erpho Erazers;Dark Stars;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    12;Team Six;Green Jungle Packers;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    13;Telgoth Slayers;Naggaroth Nightmares;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    14;Das Asoziale Netzwerk;The Chosen Ones;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    15;Green Jungle Packers;FC Khorne 08;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    16;Green Jungle Packers;Telgoth Slayers;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    17;Team Six;Telgoth Slayers;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    18;Green Jungle Packers;Boralus Bruisers;3;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    19;Team Six;Boralus Bruisers;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    20;Boralus Bruisers;The Chosen Ones;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    21;Green Jungle Packers;Das Asoziale Netzwerk;3;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    22;Boralus Bruisers;FC Khorne 08;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    23;The Chosen Ones;Warpfire Fighters;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    24;Green Jungle Packers;The Chosen Ones;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    25;The Chosen Ones;Team Six;1;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    26;Warpfire Fighters;FC Khorne 08;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    27;Team Six;FC Khorne 08;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    28;The Chosen Ones;Red Rage;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    29;Das Asoziale Netzwerk;Warpfire Fighters;2;2;0;0;False;False;False;False;False;False;S.6;BBLM
-    30;Team Six;Red Rage;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    31;Team Six;Red Rage;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    32;Erpho Erazers;Warpfire Fighters;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    33;Red Rambling Ravens;Boralus Bruisers;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    34;Green Jungle Packers;Warpfire Fighters;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    35;FC Khorne 08;The Chosen Ones;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    36;Red Rage;Warpfire Fighters;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    37;FC Khorne 08;A Flock of Seagulls;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    38;Das Asoziale Netzwerk;Boralus Bruisers;1;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    39;Green Jungle Packers;A Flock of Seagulls;2;1;0;0;False;False;False;False;False;False;S.6;BBLM
-    40;Boralus Bruisers;A Flock of Seagulls;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    41;Aasee Vikings;Katharsis Kattegat;0;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    42;Das Asoziale Netzwerk;Team Horror;2;0;0;0;False;False;False;False;False;False;S.6;BBLM
-    43;Green Jungle Packers;Erpho Erazers;2;1;0;0;False;False;False;False;True;False;S.6;BBLM
-    44;FC Khorne 08;Boralus Bruisers;0;2;0;0;False;False;False;False;True;False;S.6;BBLM
-    45;Team Six;Das Asoziale Netzwerk;2;0;0;0;False;False;False;False;True;False;S.6;BBLM
-    46;Red Rage;The Chosen Ones;0;2;0;0;False;False;False;False;True;False;S.6;BBLM
-    47;Green Jungle Packers;Boralus Bruisers;1;2;0;0;False;False;False;False;True;False;S.6;BBLM
-    48;Team Six;The Chosen Ones;0;2;0;0;False;False;False;False;True;False;S.6;BBLM
-    49;Boralus Bruisers;The Chosen Ones;1;1;0;0;False;False;True;False;True;False;S.6;BBLM
-    50;Green Jungle Packers;Team Six;2;1;0;0;False;False;False;False;True;False;S.6;BBLM
-    1;Stierland Stallions;White Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    2;Sporting Tafelrunde;Nordwalder Tigers;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    3;Green Gras Cracker's;Roxel ReTurners;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    4;Athelorn Avengers;Bloodrage Warriors;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    5;Aasee Vikings;Debauchery Fanboys (DFB);1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    6;Firnstain Frostwölfe;Tanzverein Todeswirbel Telgith;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    7;Nordwalder Tigers;Debauchery Fanboys (DFB);2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    8;Green Gras Cracker's;Sporting Tafelrunde;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    9;Amazona Cardinals;Shagrath Scalphunters;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    10;Tanzverein Todeswirbel Telgith;Green Gras Cracker's;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    11;Nordwalder Tigers;Amazona Cardinals;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    12;North Forrest Seahawks;Amazona Cardinals;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    13;Bloodrage Warriors;Green Gras Cracker's;3;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    14;Gievenbecker Giants;Tundra Bay Bombadiers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    15;Green Gras Cracker's;Sporting Tafelrunde;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    16;Firnstain Frostwölfe;Monasterian Castle Raiders;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    17;Nordwalder Tigers;Green Gras Cracker's;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    18;Tanzverein Todeswirbel Telgith;Roxel ReTurners;3;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    19;Stierland Stallions;White Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    20;Erphoplatz Pacters;White Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    21;Amazona Cardinals;Tundra Bay Bombadiers;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    22;Erphoplatz Pacters;Bloodrage Warriors;0;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    23;Nordwalder Tigers;Stierland Stallions;2;2;0;0;False;False;False;False;False;False;S.5;BBLM
-    24;Tanzverein Todeswirbel Telgith;Erphoplatz Pacters;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    25;Athelorn Avengers;Bloodrage Warriors;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    26;Sporting Tafelrunde;Hashuts Finest;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    27;Amazona Cardinals;Sporting Tafelrunde;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    28;Stierland Stallions;Athelorn Avengers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    29;Debauchery Fanboys (DFB);Tanzverein Todeswirbel Telgith;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    30;Stierland Stallions;Amazona Cardinals;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    31;Seaorcs;Hashuts Finest;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    32;Tundra Bay Bombadiers;Debauchery Fanboys (DFB);2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    33;Hashuts Finest;North Forrest Seahawks;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    34;Amazona Cardinals;Tanzverein Todeswirbel Telgith;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    35;Debauchery Fanboys (DFB);Sporting Tafelrunde;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    36;Seaorcs;Huatl Hunters;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    37;Seaorcs;Roxel ReTurners;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    38;Firnstain Frostwölfe;Big Red Mob;3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    39;Athelorn Avengers;Stierland Stallions;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    40;Koppkloppverein Krushia;Monasterian Castle Raiders;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    41;Seaorcs;Firnstain Frostwölfe;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    42;Stierland Stallions;Debauchery Fanboys (DFB);1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    43;Firnstain Frostwölfe;Stierland Stallions;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    44;White Walkers;Athelorn Avengers;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    45;Athelorn Avengers;Warpdust Walkers;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    46;White Walkers;Debauchery Fanboys (DFB);3;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    47;Nordwalder Tigers;Sporting Tafelrunde;2;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    48;Debauchery Fanboys (DFB);Wolbecker Wolpertinger;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    49;Amazona Cardinals;Athelorn Avengers;1;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    50;Seaorcs;White Walkers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    51;White Walkers;Athelorn Avengers;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    52;Seaorcs;Shagrath Scalphunters;4;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    53;Seaorcs;Firnstain Frostwölfe;2;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    54;White Walkers;Warpdust Walkers;4;0;0;0;False;False;False;False;False;False;S.5;BBLM
-    55;Seaorcs;Hashuts Finest;1;1;0;0;False;False;False;False;False;False;S.5;BBLM
-    56;Stierland Stallions;White Walkers;2;1;0;0;False;False;False;False;True;False;S.5;BBLM
-    57;Athelorn Avengers;Tanzverein Todeswirbel Telgith;2;1;0;0;False;False;False;False;True;False;S.5;BBLM
-    58;Nordwalder Tigers;Firnstain Frostwölfe;2;3;0;0;False;False;False;False;True;False;S.5;BBLM
-    59;Seaorcs;Green Gras Cracker's;3;0;0;0;False;False;False;False;True;False;S.5;BBLM
-    60;Stierland Stallions;Athelorn Avengers;0;2;0;0;False;False;False;False;True;False;S.5;BBLM
-    61;Seaorcs;Stierland Stallions;1;0;0;0;False;False;False;False;True;False;S.5;BBLM
-    62;Firnstain Frostwölfe;Seaorcs;2;0;0;0;False;False;False;False;True;False;S.5;BBLM
-    63;Firnstain Frostwölfe;Athelorn Avengers;1;0;0;0;False;False;False;False;True;False;S.5;BBLM
-    1;Asoziales Netzwerk Returns;The Chosen Ones;0;2;0;0;False;False;False;False;False;False;S.7;BBLM
-    2;Telgte Troubadours;Stirland Sentinels;1;3;0;0;False;False;False;False;False;False;S.7;BBLM
-    3;Killer Bees;Stirland Sentinels;1;1;0;0;False;False;False;False;False;False;S.7;BBLM
-    4;Erpho Raptors;Telgte Troubadours;2;1;0;0;False;False;False;False;False;False;S.7;BBLM
-    5;Killer Bees;Telgte Troubadours;1;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    6;Killer Bees;The Chosen Ones;0;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    7;Kauket Reteh-qabet;Aasee Vikings;3;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    8;Aqualand Stingrays;Doomsday Experience;4;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    9;Kauket Reteh-qabet;Aasee Vikings;0;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    10;Killer Bees;Aqualand Stingrays;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    11;Kauket Reteh-qabet;Telgte Troubadours;1;1;0;0;False;False;False;False;False;False;S.7;BBLM
-    12;Killer Bees;Stirland Sentinels;0;1;0;0;False;False;False;False;False;False;S.7;BBLM
-    13;Telgte Troubadours;Aqualand Stingrays;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    14;Telligt Night Hawks;Raffy’s Roxler Ratten;1;3;0;0;False;False;False;False;False;False;S.7;BBLM
-    15;Stirland Sentinels;Telligt Night Hawks;3;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    16;Stirland Sentinels;Telligt Night Hawks;1;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    17;Hellpit Harbingers;Telligt Night Hawks;1;1;0;0;False;False;False;False;False;False;S.7;BBLM
-    18;Hellpit Harbingers;Raffy’s Roxler Ratten;2;2;0;0;False;False;False;False;False;False;S.7;BBLM
-    19;Raffy’s Roxler Ratten;Stirland Sentinels;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    20;Telligt Night Hawks;Hellpit Harbingers;0;2;0;0;False;False;False;False;False;False;S.7;BBLM
-    21;Telgoth Oak Sticks;Stirland Sentinels;0;2;0;0;False;False;False;False;False;False;S.7;BBLM
-    22;Killer Bees;Hellpit Harbingers;2;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    23;Telgte Troubadours;Telligt Night Hawks;3;0;0;0;False;False;False;False;False;False;S.7;BBLM
-    24;Stirland Sentinels;Erpho Raptors;2;0;0;0;False;False;False;False;True;False;S.7;BBLM
-    25;Killer Bees;Aqualand Stingrays;2;0;0;0;False;False;False;False;True;False;S.7;BBLM
-    26;Telgte Troubadours;Raffy’s Roxler Ratten;0;2;0;0;False;False;False;False;True;False;S.7;BBLM
-    27;Stirland Sentinels;Raffy’s Roxler Ratten;2;0;0;0;False;False;False;False;True;False;S.7;BBLM
   additional_statistics.csv: |
     team_name;casualties;season_short_name;league_short_name
     Mighty Moon Moshaz;1;S.2;WBBL
@@ -917,7 +971,7 @@ data:
     Big Bad Crocs;2;S.2;WBBL
     Gully Sneakers;2;S.2;WBBL
     Lucky Men in Tights;2;S.2;WBBL
-    The no ones;1;S.2;WBBL
+    The no One's;1;S.2;WBBL
     Mortheim Maniacs;3;S.2;WBBL
     Mighty Moon Moshaz;2;S.2;WBBL
     Middenland Wolves;2;S.2;WBBL
@@ -934,7 +988,7 @@ data:
     Necropolis Nightmares;2;S.2;WBBL
     Lucky Men in Tights;3;S.2;WBBL
     Die Hafenmeister;3;S.2;WBBL
-    The no ones;2;S.2;WBBL
+    The no One's;2;S.2;WBBL
     Mortheim Maniacs;2;S.2;WBBL
     Lucky Men in Tights;1;S.2;WBBL
     Mighty Moon Moshaz;2;S.2;WBBL
@@ -972,3 +1026,70 @@ data:
     Hexoatl Vipers;1;S.2;WBBL
     Da Red Thunda;2;S.2;WBBL
     Squighorn Screamers;1;S.2;WBBL
+    Bläckhead Smashazz;1;S.2;WBBL
+    Da Red Thunda;1;S.2;WBBL
+    Hexoatl Vipers;2;S.2;WBBL
+    Righteous Anger;2;S.2;WBBL
+    Ancient Conquerors;2;S.2;WBBL
+    Lucky Men in Tights;1;S.2;WBBL
+    Hexoatl Vipers;1;S.2;WBBL
+    Da Red Thunda;2;S.2;WBBL
+    Ancient Conquerors;5;S.2;WBBL
+    Helden in Strumpfhosen;2;S.2;WBBL
+    Bläckhead Smashazz;2;S.2;WBBL
+    The no One's;2;S.2;WBBL
+    Competitive Math;1;S.2;WBBL
+    Hexoatl Vipers;2;S.2;WBBL
+    Die Hafenmeister;3;S.2;WBBL
+    Die Hafenmeister;6;S.2;WBBL
+    Da Red Thunda;1;S.2;WBBL
+    The no One's;3;S.2;WBBL
+    BuckelBerg Bombers;1;S.2;WBBL
+    Greenboi Packers;4;S.2;WBBL
+    Hexoatl Vipers;4;S.2;WBBL
+    Righteous Anger;2;S.2;WBBL
+    Karak a Karaz Iron Breakers;4;S.2;WBBL
+    Big Bad Crocs;2;S.2;WBBL
+    Da Red Thunda;2;S.2;WBBL
+    Anaheim Frozen Fingers;3;S.2;WBBL
+    BuckelBerg Bombers;1;S.2;WBBL
+    Competitive Math;1;S.2;WBBL
+    Big Bad Crocs;1;S.2;WBBL
+    Greenboi Packers;1;S.2;WBBL
+    Anaheim Frozen Fingers;2;S.2;WBBL
+    Bläckhead Smashazz;3;S.2;WBBL
+    The no One's;4;S.2;WBBL
+    Carroburg Cosmopolitans;3;S.2;WBBL
+    BuckelBerg Bombers;1;S.2;WBBL
+    Competitive Math;5;S.2;WBBL
+    Die Hafenmeister;4;S.2;WBBL
+    Carroburg Cosmopolitans;1;S.2;WBBL
+    The Plague Pit Bloaters;4;S.2;WBBL
+    Ancient Conquerors;1;S.2;WBBL
+    Greenboi Packers;1;S.2;WBBL
+    The Plague Pit Bloaters;1;S.2;WBBL
+    Hexoatl Vipers;5;S.2;WBBL
+    Karak a Karaz Iron Breakers;4;S.2;WBBL
+    Big Bad Crocs;3;S.2;WBBL
+    The Plague Pit Bloaters;2;S.2;WBBL
+    Carroburg Cosmopolitans;1;S.2;WBBL
+    Karak a Karaz Iron Breakers;5;S.2;WBBL
+    Ancient Conquerors;4;S.2;WBBL
+    Greenboi Packers;2;S.2;WBBL
+    Wolbecker Wolpertinger;2;S.2;WBBL
+    Hexoatl Vipers;3;S.2;WBBL
+    Righteous Anger;1;S.2;WBBL
+    The no One's;1;S.2;WBBL
+    Elf Elves;3;S.2;WBBL
+    Competitive Math;1;S.2;WBBL
+    Gully Sneakers;2;S.2;WBBL
+    Elf Elves;2;S.2;WBBL
+    BuckelBerg Bombers;2;S.2;WBBL
+    Mighty Moon Moshaz;5;S.2;WBBL
+    Altdorf Tigers;1;S.2;WBBL
+    Elf Elves;1;S.2;WBBL
+    Elf Elves;2;S.2;WBBL
+    Righteous Anger;3;S.2;WBBL
+    Competitive Math;3;S.2;WBBL
+    Karak a Karaz Iron Breakers;2;S.2;WBBL
+    Mighty Moon Moshaz;4;S.2;WBBL
