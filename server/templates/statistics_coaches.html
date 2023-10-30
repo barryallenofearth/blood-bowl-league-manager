@@ -4,9 +4,7 @@
     {{ super() }}
 
     <div class="container headline-container">
-        <h1>Statistics {{ coach_statistics.coach.first_name }} {{ coach_statistics.coach.last_name }}
-            {% if coach_statistics.coach.display_name %} ({{ coach_statistics.coach.display_name }}){% endif %}
-        </h1>
+        <h1>Statistics {{ coach_statistics.coach_name }}</h1>
     </div>
     {% if coach_statistics.race_count|length == 0 %}
         <div class="container">
@@ -48,11 +46,13 @@
             <h3>Stats vs Opponents</h3>
         </div>
         <div class="container container-table">
+            <p>Scorings are calculated from the perspective of {{ coach_statistics.coach_name }}.</p>
+            <p>Positive Win/Loss Diff means a positive result for {{ coach_statistics.coach_name }}. The same applies for TD+ and TD Diff.</p>
             <table class="bordered">
                 <thead>
                 <tr>
                     <th>Platz</th>
-                    <th>{{ term_for_coaches }}</th>
+                    <th>Opponent</th>
                     <th>Spiele</th>
                     {% for scoring in scorings %}
                         <th>

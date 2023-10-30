@@ -38,8 +38,8 @@ class CoachStatistics:
         def increase_count(self):
             self.team_count += 1
 
-    def __init__(self, coach: Coach, race_count: list[RaceCountTeam], vs_coaches_scores: list[CoachScores], seasons_with_matches: list[SeasonWithMatch]):
-        self.coach = coach
+    def __init__(self, coach_name: str, race_count: list[RaceCountTeam], vs_coaches_scores: list[CoachScores], seasons_with_matches: list[SeasonWithMatch]):
+        self.coach_name = coach_name
         self.race_count = race_count
         self.vs_coaches_scores = vs_coaches_scores
         self.seasons_with_matches = seasons_with_matches
@@ -182,4 +182,4 @@ def coach_statistics(coach_id: int, db: SQLAlchemy) -> (list, CoachStatistics):
     vs_coach_scores = calculate_vs_coach_scores(matches, coach_id)
     coach_results = calculate_coach_result(matches, seasons, leagues)
 
-    return coaches_scores, CoachStatistics(coach, sorted_races, vs_coach_scores, coach_results)
+    return coaches_scores, CoachStatistics(formatting.coach_table_name(coach.id), sorted_races, vs_coach_scores, coach_results)

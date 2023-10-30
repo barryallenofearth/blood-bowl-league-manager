@@ -264,7 +264,7 @@ def calculate_coaches_scores(coach_id=None, vs_coach_ids=None) -> list[CoachScor
             filtered_results = results.values()
 
         sorted_results = sorted([result for result in filtered_results if result.number_of_matches > 0],
-                                key=lambda result: (result.win_loss_diff, result.td_diff, result.td_made, result.number_of_matches, alphabetic_sorter(result)))
+                                key=lambda result: (result.win_loss_diff, result.td_diff, -result.td_made, -result.number_of_matches, alphabetic_sorter(result)))
 
     determine_placings(sorted_results, coach_id != 0 and vs_coach_ids and not None)
 
