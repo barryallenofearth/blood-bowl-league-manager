@@ -215,7 +215,8 @@ def generate_scorings():
     return scorings
 
 
-def calculate_coaches_scores(coach_id=None, vs_coach_ids=None) -> list[CoachScores]:
+def calculate_coaches_scores(coach_id=None, vs_coach_ids=None, league_id=None) -> list[CoachScores]:
+    # TODO consider league_id
     def coach_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().coach_id
 
@@ -271,7 +272,8 @@ def calculate_coaches_scores(coach_id=None, vs_coach_ids=None) -> list[CoachScor
     return sorted_results
 
 
-def calculate_races_scores() -> list[RaceScores]:
+def calculate_races_scores(league_id=None) -> list[RaceScores]:
+    # TODO consider league_id
     def race_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().race_id
 

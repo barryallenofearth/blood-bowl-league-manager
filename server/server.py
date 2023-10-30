@@ -10,7 +10,7 @@ import database.database
 from database import bootstrapping
 from database.database import db
 from server import delete_entities
-from server.forms import UserInputForm
+from server.forms import UserInputForm, StatisticsForm
 from server.manage_entities import *
 from table import score_table, casualties_table, statistics
 from util import parsing, imaging
@@ -129,18 +129,26 @@ def render_start_page(season):
     return kwargs
 
 
-@app.route("/statistics")
+@app.route("/statistics", methods=["GET", "POST"])
 @cache.cached()
 def statistics_overview():
-    stats = statistics.determine_statistics(db)
+    form = StatisticsForm()
+    if form.validate_on_submit():
+        selected_league_id = form.league.data
 
-    coach_results = score_table.calculate_coaches_scores()
-    race_results = score_table.calculate_races_scores()
+        coach_results = score_table.calculate_coaches_scores(selected_league_id)
+        race_results = score_table.calculate_races_scores(selected_league_id)
+
+    else:
+        coach_results = score_table.calculate_coaches_scores()
+        race_results = score_table.calculate_races_scores()
+    stats = statistics.determine_statistics(db)
 
     season = database.get_selected_season()
     scorings = score_table.generate_scorings()[::-1]
     return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results,
-                           term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings, show_coaches_stats_link=True)
+                           term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings, show_coaches_stats_link=True,
+                           form=form)
 
 
 @app.route("/statistics/coach/<int:coach_id>")

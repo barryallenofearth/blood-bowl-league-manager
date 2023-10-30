@@ -1,13 +1,24 @@
 import re
 
-from flask_wtf import FlaskForm
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, FileField, IntegerField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Regexp
 
 import database.database
-from database.database import db, Coach, Race, Team
+from database.database import db, Coach, Race, Team, League
 from util import formatting, parsing
+
+
+class StatisticsForm(FlaskForm):
+    league = SelectField("League", validators=[DataRequired("Please select a league")])
+    submit = SubmitField(label="Calculate")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.league.choices = [(0, "All seasons")]
+        for league in db.session.query(League).all():
+            self.league.choices.append((league.id, league.name))
 
 
 class BaseLeagueForm(FlaskForm):
