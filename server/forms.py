@@ -20,6 +20,9 @@ class StatisticsForm(FlaskForm):
         for league in db.session.query(League).all():
             self.league.choices.append((league.id, league.name))
 
+        if "league" in kwargs:
+            self.league.data = kwargs["league"]
+
 
 class BaseLeagueForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired("Please enter a league name.")], render_kw={"placeholder": "Westfalia Blood Bowl League"})

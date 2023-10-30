@@ -67,7 +67,7 @@ class RaceScores(BaseScores):
         return f"RaceResults<place: race:{self.race}, " + super().__repr__()
 
 
-def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_from_team_id_getter, coach_id=0, vs_coach_ids=None) -> dict[int:list]:
+def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_from_team_id_getter, coach_id=0, vs_coach_ids=None, league_id=0) -> dict[int:list]:
     def modify_team_score(analysis_results: dict, entity_id: int, td_made: int, td_received: int,
                           points_modification: int, scorings: list, is_team_1_victory_by_kickoff: bool, is_team_2_victory_by_kickoff: bool):
         def determine_points(td_diff: int, is_team_1_victory_by_kickoff: bool, is_team_2_victory_by_kickoff: bool) -> int:
@@ -115,6 +115,11 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
     else:
         season = db.session.query(Season).first()
 
+    if league_id != 0:
+        all_season_ids = [season.id for season in db.session.query(Season).all() if season.league_id == league_id]
+    else:
+        all_season_ids = [season.id for season in db.session.query(Season).all()]
+
     query: Query
     if coach_id == 0 or vs_coach_ids is None:
         if season_id != 0:
@@ -122,7 +127,11 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
         else:
             query = db.session.query(BBMatch)
     else:
-        coaches_teams = db.session.query(Team).filter_by(coach_id=coach_id).all()
+        coaches_teams_query = db.session.query(Team).filter_by(coach_id=coach_id)
+        if league_id != 0:
+            coaches_teams_query = coaches_teams_query.filter(Team.season_id.in_(all_season_ids))
+
+        coaches_teams = coaches_teams_query.all()
 
         team_ids = [team.id for team in coaches_teams]
         vs_coaches_teams = db.session.query(Team).filter(Team.coach_id.in_(vs_coach_ids)).all()
@@ -132,6 +141,9 @@ def __calculate_scores(results: dict, scorings: list, season_id: int, entity_id_
                  .filter(or_(BBMatch.team_1_id.in_(vs_coach_team_ids), BBMatch.team_2_id.in_(vs_coach_team_ids))))
         if season_id != 0:
             query = query.filter_by(season_id=season_id)
+
+    if league_id != 0:
+        query = query.filter(BBMatch.season_id.in_(all_season_ids))
 
     matches = query.order_by(BBMatch.match_number).all()
 
@@ -215,20 +227,27 @@ def generate_scorings():
     return scorings
 
 
-def calculate_coaches_scores(coach_id=None, vs_coach_ids=None, league_id=None) -> list[CoachScores]:
-    # TODO consider league_id
+def calculate_coaches_scores(coach_id=None, vs_coach_ids=None, league_id=0) -> list[CoachScores]:
+    def get_teams(coach_id: int, season_ids=[], league_id=0):
+        query = db.session.query(Team)
+        if coach_id is not None:
+            query = query.filter_by(coach_id=coach_id)
+        if league_id != 0:
+            query = query.filter(Team.season_id.in_(season_ids))
+        return query.all()
+
     def coach_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().coach_id
 
     def alphabetic_sorter(coach_scores: CoachScores):
         return coach_scores.coach
 
-    def number_of_seasons(coach_id: int) -> int:
-        team_ids = [team.id for team in db.session.query(Team).filter_by(coach_id=coach_id).all()]
+    def number_of_seasons(coach_id: int, season_ids=[], league_id=0) -> int:
+        team_ids = [team.id for team in get_teams(coach_id, season_ids, league_id)]
         return len({match.season_id for match in db.session.query(BBMatch).filter(or_(BBMatch.team_1_id.in_(team_ids), BBMatch.team_2_id.in_(team_ids))).all()})
 
-    def number_of_playoff_matches(coach_id: int) -> int:
-        team_ids = [team.id for team in db.session.query(Team).filter_by(coach_id=coach_id).all()]
+    def number_of_playoff_matches(coach_id: int, season_ids=[], league_id=0) -> int:
+        team_ids = [team.id for team in get_teams(coach_id, season_ids, league_id)]
         return db.session.query(BBMatch).filter_by(is_playoff_match=True).filter(or_(BBMatch.team_1_id.in_(team_ids), BBMatch.team_2_id.in_(team_ids))).count()
 
     print("calculate coaches scores")
@@ -241,13 +260,19 @@ def calculate_coaches_scores(coach_id=None, vs_coach_ids=None, league_id=None) -
 
     print("coaches identified by teams")
     scorings = generate_scorings()
+
+    if league_id != 0:
+        all_season_ids = [season.id for season in db.session.query(Season).all() if season.league_id == league_id]
+    else:
+        all_season_ids = [season.id for season in db.session.query(Season).all()]
+
     coach_results = {coach.id: CoachScores(coach=coach,
-                                           number_of_teams=db.session.query(Team).filter_by(coach_id=coach.id).count(),
-                                           number_of_seasons=number_of_seasons(coach.id),
-                                           number_of_playoff_matches=number_of_playoff_matches(coach.id),
+                                           number_of_teams=len(get_teams(coach.id, all_season_ids, league_id)),
+                                           number_of_seasons=number_of_seasons(coach.id, all_season_ids, league_id),
+                                           number_of_playoff_matches=number_of_playoff_matches(coach.id, all_season_ids, league_id),
                                            number_of_scorings=len(scorings))
                      for coach in coaches}
-    results = __calculate_scores(coach_results, scorings, 0, coach_id_getter, coach_id=coach_id, vs_coach_ids=vs_coach_ids)
+    results = __calculate_scores(coach_results, scorings, 0, coach_id_getter, coach_id=coach_id, vs_coach_ids=vs_coach_ids, league_id=league_id)
     for result in results.values():
         result.win_loss_diff = result.match_result_counts[0] - result.match_result_counts[-1]
         result.points = result.win_loss_diff
@@ -272,31 +297,43 @@ def calculate_coaches_scores(coach_id=None, vs_coach_ids=None, league_id=None) -
     return sorted_results
 
 
-def calculate_races_scores(league_id=None) -> list[RaceScores]:
-    # TODO consider league_id
+def calculate_races_scores(league_id=0) -> list[RaceScores]:
+    def get_teams(race_id: int, season_ids=[], league_id=0):
+        query = db.session.query(Team)
+        if race_id is not None:
+            query = query.filter_by(race_id=race_id)
+        if league_id != 0:
+            query = query.filter(Team.season_id.in_(season_ids))
+        return query.all()
+
     def race_id_getter(team_id: int):
         return db.session.query(Team).filter_by(id=team_id).first().race_id
 
     def alphabetic_sorter(race_scores: RaceScores):
         return race_scores.race
 
-    def number_of_seasons(race_id: int) -> int:
-        return len({team.season_id for team in db.session.query(Team).filter_by(race_id=race_id).all()})
+    def number_of_seasons(race_id: int, season_ids=[], league_id=0) -> int:
+        return len({team.season_id for team in get_teams(race_id, season_ids, league_id)})
 
-    def number_of_playoff_matches(race_id: int) -> int:
-        team_ids = [team.id for team in db.session.query(Team).filter_by(race_id=race_id).all()]
+    def number_of_playoff_matches(race_id: int, season_ids=[], league_id=0) -> int:
+        team_ids = [team.id for team in get_teams(race_id, season_ids, league_id)]
         return db.session.query(BBMatch).filter_by(is_playoff_match=True).filter(or_(BBMatch.team_1_id.in_(team_ids), BBMatch.team_2_id.in_(team_ids))).count()
 
     races = db.session.query(Race).all()
+    if league_id != 0:
+        all_season_ids = [season.id for season in db.session.query(Season).all() if season.league_id == league_id]
+    else:
+        all_season_ids = [season.id for season in db.session.query(Season).all()]
 
     scorings = generate_scorings()
     race_results = {
-        race.id: RaceScores(race=race, number_of_teams=db.session.query(Team).filter_by(race_id=race.id).count(),
+        race.id: RaceScores(race=race,
+                            number_of_teams=len(get_teams(race.id, season_ids=all_season_ids, league_id=league_id)),
                             number_of_scorings=len(scorings),
-                            number_of_seasons=number_of_seasons(race.id),
-                            number_of_playoff_matches=number_of_playoff_matches(race.id)) for race in races}
+                            number_of_seasons=number_of_seasons(race.id, season_ids=all_season_ids, league_id=league_id),
+                            number_of_playoff_matches=number_of_playoff_matches(race.id, season_ids=all_season_ids, league_id=league_id)) for race in races}
 
-    results = __calculate_scores(race_results, scorings, 0, race_id_getter)
+    results = __calculate_scores(race_results, scorings, 0, race_id_getter, league_id=league_id)
 
     for result in results.values():
         result.win_loss_diff = result.match_result_counts[0] - result.match_result_counts[-1]

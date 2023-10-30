@@ -1,4 +1,7 @@
 {% import 'fragments/table_macros.html' as table_commons %}
+{% if analyzed_league %}
+    <h3>{{ analyzed_league }}</h3>
+{% endif %}
 <table class="bordered">
     <thead>
     <tr>

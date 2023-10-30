@@ -130,14 +130,19 @@ def render_start_page(season):
 
 
 @app.route("/statistics", methods=["GET", "POST"])
-@cache.cached()
+@cache.cached(unless=only_cache_get)
 def statistics_overview():
     form = StatisticsForm()
+    analyzed_league = "All leagues"
     if form.validate_on_submit():
-        selected_league_id = form.league.data
+        selected_league_id = int(form.league.data)
 
-        coach_results = score_table.calculate_coaches_scores(selected_league_id)
-        race_results = score_table.calculate_races_scores(selected_league_id)
+        coach_results = score_table.calculate_coaches_scores(league_id=selected_league_id)
+        race_results = score_table.calculate_races_scores(league_id=selected_league_id)
+        form = StatisticsForm(league=form.league.data)
+
+        if selected_league_id != 0:
+            analyzed_league = db.session.query(League).filter_by(id=selected_league_id).first().name
 
     else:
         coach_results = score_table.calculate_coaches_scores()
@@ -148,7 +153,7 @@ def statistics_overview():
     scorings = score_table.generate_scorings()[::-1]
     return render_template("statistics.html", nav_properties=NavProperties(db), stats=stats, race_results=race_results, coach_results=coach_results,
                            term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races, scorings=scorings, show_coaches_stats_link=True,
-                           form=form)
+                           form=form, analyzed_league=analyzed_league)
 
 
 @app.route("/statistics/coach/<int:coach_id>")
