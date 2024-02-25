@@ -7,10 +7,10 @@ metadata:
   namespace: blood-bowl-league-manager
 spec:
   ports:
-    - name: http
-      port: 80
+    - name: https
+      port: 443
       protocol: TCP
-      targetPort: http
+      targetPort: https
   selector:
     app: webapp
   type: LoadBalancer

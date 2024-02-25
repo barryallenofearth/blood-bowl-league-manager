@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from json.decoder import JSONDecodeError
 
@@ -286,7 +287,7 @@ def delete(entity_type: str, id: int):
     try:
         return json.dumps(return_json)
     except JSONDecodeError:
-        print(f"original json string could not be converted to true json since it probably contains a ' or a \" in the message part: {return_json}")
+        logging.error(f"original json string could not be converted to true json since it probably contains a ' or a \" in the message part: {return_json}")
         return_json = str({"message": f"The {entity_type} could not be deleted.", "status": 500}).replace("'", '"')
         return json.loads(return_json)
 

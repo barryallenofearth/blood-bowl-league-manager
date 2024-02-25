@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blood-bowl-league-manager
-          image: barryallenofearth/blood-bowl-league-manager:33
+          image: barryallenofearth/blood-bowl-league-manager:34
           env:
             - name: DB_NAME
               valueFrom:
@@ -38,8 +38,8 @@ spec:
               value: postgresql://$(DB_USER):$(DB_PASSWORD)@postgresql:5432/$(DB_NAME)
           resources: { }
           ports:
-            - containerPort: 80
-              name: http
+            - containerPort: 443
+              name: https
           volumeMounts:
             - mountPath: /app/blood-bowl-league-manager/data/leagues.csv
               name: data-files
@@ -64,8 +64,8 @@ spec:
           livenessProbe:
             httpGet:
               path: /health
-              port: 80
-              scheme: HTTP
+              port: 443
+              scheme: HTTPS
             periodSeconds: 60
             timeoutSeconds: 5
             failureThreshold: 3
@@ -73,8 +73,8 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 80
-              scheme: HTTP
+              port: 443
+              scheme: HTTPS
             periodSeconds: 60
             timeoutSeconds: 5
             failureThreshold: 3
@@ -82,8 +82,8 @@ spec:
           startupProbe:
             httpGet:
               path: /
-              port: 80
-              scheme: HTTP
+              port: 443
+              scheme: HTTPS
             periodSeconds: 30
             timeoutSeconds: 30
             failureThreshold: 3

@@ -1,3 +1,4 @@
+import logging
 from operator import itemgetter
 
 from sqlalchemy.orm import Query
@@ -250,7 +251,7 @@ def calculate_coaches_scores(coach_id=None, vs_coach_ids=None, league_id=0) -> l
         team_ids = [team.id for team in get_teams(coach_id, season_ids, league_id)]
         return db.session.query(BBMatch).filter_by(is_playoff_match=True).filter(or_(BBMatch.team_1_id.in_(team_ids), BBMatch.team_2_id.in_(team_ids))).count()
 
-    print("calculate coaches scores")
+    logging.info("calculate coaches scores")
     if coach_id is None and vs_coach_ids is None:
         coaches = db.session.query(Coach).all()
     elif coach_id is not None and vs_coach_ids is not None:
@@ -258,7 +259,7 @@ def calculate_coaches_scores(coach_id=None, vs_coach_ids=None, league_id=0) -> l
     else:
         coaches = db.session.query(Coach).filter_by(id=coach_id).all()
 
-    print("coaches identified by teams")
+    logging.info("coaches identified by teams")
     scorings = generate_scorings()
 
     if league_id != 0:

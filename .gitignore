@@ -140,3 +140,4 @@ fabric.properties
 /server/static/output/
 /server/static/logos/
 /tools/output/
+/certificates/

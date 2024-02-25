@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-blood-bowl-league-manager-certificates
+  namespace: blood-bowl-league-manager
+  labels:
+    volume: blood-bowl-league-manager-certificates
+spec:
+  capacity:
+    storage: 200M
+  volumeMode: Filesystem
+  accessModes:
+   - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /volume1/kubernetes-blood-bowl/certificates
+    server: thevoid

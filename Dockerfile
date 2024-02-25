@@ -23,15 +23,17 @@ ADD util blood-bowl-league-manager/util
 COPY *.py blood-bowl-league-manager/
 
 ENV PYTHONPATH "${PYTHONPATH}:/app"
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /
 
+VOLUME /app/blood-bowl-league-manager/certificates
 VOLUME /app/blood-bowl-league-manager/instance
 VOLUME /app/blood-bowl-league-manager/data
 VOLUME /app/blood-bowl-league-manager/server/static/logos
 
-EXPOSE 80
+EXPOSE 443
 
 WORKDIR /app/blood-bowl-league-manager
 
-CMD ["python", "-m", "waitress","--port=80","main:app"]
+CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:443", "--certfile=/app/blood-bowl-league-manager/certificates/cert.pem", "--keyfile=/app/blood-bowl-league-manager/certificates/key.pem", "main:app"]
