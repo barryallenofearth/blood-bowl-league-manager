@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pv-paypal-blood-bowl-league-manager-certificates-pvc
+  name: nfs-pv-blood-bowl-league-manager-certificates-pvc
   namespace: blood-bowl-league-manager
 spec:
   selector:
