@@ -1,115 +1,117 @@
 {% extends 'bootstrap/base.html' %}
 {% block title %}Blood Bowl{% endblock %}
-{%block styles %}
-{{super()}}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<link rel="stylesheet" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.css">
-<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
-{%endblock %}
-{%block scripts%}
-{{super()}}
-<script>
-    $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
-        if (!$(this).next().hasClass('show')) {
-            $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
-        }
-        var $subMenu = $(this).next('.dropdown-menu');
-        $subMenu.toggleClass('show');
+{% block styles %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico',_external=True) }}">
+    <link rel="stylesheet" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            }
+            var $subMenu = $(this).next('.dropdown-menu');
+            $subMenu.toggleClass('show');
 
 
-        $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
-            $('.dropdown-submenu .show').removeClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-submenu .show').removeClass('show');
+            });
+
+            return false;
         });
 
-        return false;
-    });
-
-</script>
-{%endblock%}
+    </script>
+{% endblock %}
 
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-light sticky-top">
-    <a class="navbar-brand" href="{{ url_for('home') }}"><img
-            src="{{ url_for('static', filename='favicon.ico') }}" width="30" height="30"
-            class="d-inline-block align-top" alt="">
-        {% if nav_properties.selected_league %}
-        {{nav_properties.selected_league.short_name}}{% if nav_properties.selected_season %} | {{nav_properties.selected_season.name}}{%endif%}
-        {% endif %}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {% if nav_properties.selected_season %}
-            <li class="nav-item" id="statistics">
-                <a class="nav-link" href="{{url_for('statistics_overview')}}">
-                    <i class="bi bi-bar-chart-line-fill"></i> Statistics</a>
-            </li>
-            <li class="nav-item" id="matches">
-                <a class="nav-link" href="{{url_for('manage',entity_type='bb_match')}}">
-                    <i class="bi bi-dice-3-fill"></i> Matches</a>
-            </li>
-            <li class="nav-item" id="additional-statistics">
-                <a class="nav-link" href="{{url_for('manage',entity_type='additional_statistics')}}">
-                    <i class="bi bi-table"></i> Additional Statistics</a>
-            </li>
-            <li class="nav-item" id="teams">
-                <a class="nav-link" href="{{url_for('manage',entity_type='team')}}">
-                    <i class="bi bi-people-fill"></i> Teams</a>
-            </li>
-            {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand" href="{{ url_for('home') }}"><img
+                src="{{ url_for('static', filename='favicon.ico') }}" width="30" height="30"
+                class="d-inline-block align-top" alt="">
             {% if nav_properties.selected_league %}
-            <li class="nav-item" id="coaches">
-                <a class="nav-link" href="{{url_for('manage',entity_type='coach')}}">
-                    <i class="bi bi-person-square"></i> Coaches</a>
-            </li>
-            {% endif %}
-            <li class="nav-item" id="races">
-                <a class="nav-link" href="{{url_for('manage',entity_type='race')}}">
-                    <i class="bi bi-robot"></i> Races</a>
-            </li>
-            {% if nav_properties.selected_league %}
-            <li class="nav-item dropdown" id="season-selection">
-                <a class="nav-link dropdown-toggle" role="button"
-                   data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"
-                   href="#">
-                    <i class="bi bi-calendar-week"></i> Seasons </a>
-                <ul class="dropdown-menu">
+                {{ nav_properties.selected_league.short_name }}{% if nav_properties.selected_season %} | {{ nav_properties.selected_season.name }}{% endif %}
+            {% endif %}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                    {% for season in nav_properties.seasons %}
-                    <li><a class="dropdown-item" href="{{url_for('select_season',id=season.id)}}">{{season.name}} | {{season.short_name}}{%if season.is_selected %} (active){% endif %}</a></li>
-                    {% endfor %}
-                    <li>
-                        <div class="dropdown-divider"></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {% if nav_properties.selected_season %}
+                    <li class="nav-item" id="statistics">
+                        <a class="nav-link" href="{{ url_for('statistics_overview') }}">
+                            <i class="bi bi-bar-chart-line-fill"></i> Statistics</a>
                     </li>
-                    <li><a class="dropdown-item"
-                           href="{{url_for('manage',entity_type='season')}}">Manage Seasons</a>
+                    <li class="nav-item" id="matches">
+                        <a class="nav-link" href="{{ url_for('manage',entity_type='bb_match') }}">
+                            <i class="bi bi-dice-3-fill"></i> Matches</a>
                     </li>
-                </ul>
-            </li>
-            {% endif %}
-            <li class="nav-item dropdown" id="league-selection">
-                <a class="nav-link dropdown-toggle" role="button"
-                   data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"
-                   href="#">
-                    <i class="bi bi-person-circle"></i> Leagues </a>
-                <ul class="dropdown-menu">
-                    {% for league in nav_properties.leagues %}
-                    <li><a class="dropdown-item" href="{{url_for('select_league',id=league.id)}}">{{league.name}} | {{league.short_name}}{%if league.is_selected %} (active){% endif %}</a></li>
-                    {% endfor %}
-                    <li>
-                        <div class="dropdown-divider"></div>
+                    <li class="nav-item" id="additional-statistics">
+                        <a class="nav-link" href="{{ url_for('manage',entity_type='additional_statistics') }}">
+                            <i class="bi bi-table"></i> Additional Statistics</a>
                     </li>
-                    <li><a class="dropdown-item"
-                           href="{{url_for('manage',entity_type='league')}}">Manage Leagues</a>
+                    <li class="nav-item" id="teams">
+                        <a class="nav-link" href="{{ url_for('manage',entity_type='team') }}">
+                            <i class="bi bi-people-fill"></i> Teams</a>
                     </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
+                {% endif %}
+                {% if nav_properties.selected_league %}
+                    <li class="nav-item" id="coaches">
+                        <a class="nav-link" href="{{ url_for('manage',entity_type='coach') }}">
+                            <i class="bi bi-person-square"></i> Coaches</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item" id="races">
+                    <a class="nav-link" href="{{ url_for('manage',entity_type='race') }}">
+                        <i class="bi bi-robot"></i> Races</a>
+                </li>
+                {% if nav_properties.selected_league %}
+                    <li class="nav-item dropdown" id="season-selection">
+                        <a class="nav-link dropdown-toggle" role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"
+                           href="#">
+                            <i class="bi bi-calendar-week"></i> Seasons </a>
+                        <ul class="dropdown-menu">
+
+                            {% for season in nav_properties.seasons %}
+                                <li><a class="dropdown-item" href="{{ url_for('select_season',id=season.id) }}">{{ season.name }} |
+                                    {{ season.short_name }}{% if season.is_selected %} (active){% endif %}</a></li>
+                            {% endfor %}
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li><a class="dropdown-item"
+                                   href="{{ url_for('manage',entity_type='season') }}">Manage Seasons</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                <li class="nav-item dropdown" id="league-selection">
+                    <a class="nav-link dropdown-toggle" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"
+                       href="#">
+                        <i class="bi bi-person-circle"></i> Leagues </a>
+                    <ul class="dropdown-menu">
+                        {% for league in nav_properties.leagues %}
+                            <li><a class="dropdown-item" href="{{ url_for('select_league',id=league.id) }}">{{ league.name }} |
+                                {{ league.short_name }}{% if league.is_selected %} (active){% endif %}</a></li>
+                        {% endfor %}
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li><a class="dropdown-item"
+                               href="{{ url_for('manage',entity_type='league') }}">Manage Leagues</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 {% endblock %}
