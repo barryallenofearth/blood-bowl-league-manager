@@ -38,7 +38,8 @@ def create_init_files(database_json: json):
                     coach_display_name = team['coach_display_name']
                     if coach_display_name is None or len(coach_display_name) == 0:
                         coach_display_name = " "
-                    teams_and_coaches_file.write(f"{team['name']};{team['coach_first_name']};{team['coach_last_name']};{coach_display_name};{team['race']};{team['is_disqualified']};{season['short_name']};{league['short_name']}\n")
+                    teams_and_coaches_file.write(
+                        f"{team['name']};{team['coach_first_name']};{team['coach_last_name']};{coach_display_name};{team['race']};{team['is_disqualified']};{season['short_name']};{league['short_name']}\n")
     with open(f"{OUTPUT_DIRECTORY}/matches.csv", "w", encoding='utf-8') as matches:
         matches.write("match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;"
                       "is_team_1_victory_by_kickoff;is_team_2_victory_by_kickoff;is_playoff_match;is_tournament_match;season_short_name;league_short_name\n")
@@ -62,7 +63,7 @@ def create_configmap():
             config_map_output.write(template_content)
 
 
-get_prod_database = requests.request(url="http://192.168.178.183/export", method="GET")
+get_prod_database = requests.request(url="https://192.168.178.183/export", method="GET", verify=False)
 get_prod_database.raise_for_status()
 database_json = get_prod_database.json()
 

@@ -36,7 +36,7 @@
     <tr>
         <td>Average number of matches per season</td>
         {% for stat in stats %}
-            <td class="center">{{ stat.average_number_of_games_per_season }}</td>
+            <td class="center">{{  "%.1f"|format(stat.average_number_of_games_per_season)  }}</td>
         {% endfor %}
     </tr>
     <tr>

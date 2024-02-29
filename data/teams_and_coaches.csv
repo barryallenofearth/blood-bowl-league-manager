@@ -1,58 +1,4 @@
 name;coach_first_name;coach_last_name;coach_display_name;race_name;is_disqualified;season_short_name;league_short_name
-Asgard Allstars;Kevin;Lequen; ;Norse;False;S.1;WBBL
-Barak Varr Blackhawks;Stephan;Waider; ;Zwerge;False;S.1;WBBL
-Bay Harbor Butchers;Raphael;Oppenberg; ;Khorne;False;S.1;WBBL
-BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;False;S.1;WBBL
-Chlamydiaville Clappers;Carl;Henjes; ;Nurgle;False;S.1;WBBL
-Coldblooded Allygators;Jennifer;Schlechter;Jenny;Echsenmenschen;False;S.1;WBBL
-Die listigen Lustria Lurche;Timon;Michler; ;Echsenmenschen;False;S.1;WBBL
-Flying Diggers;Philipp;Saatkamp;Fips;Underworld;False;S.1;WBBL
-Ironfoot Greybeards;Chris;Pott; ;Zwerge;False;S.1;WBBL
-Iskvard Ironfins;Tim;Freund; ;Norse;False;S.1;WBBL
-Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.1;WBBL
-Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;False;S.1;WBBL
-Just here for the Violins;Sven;Lehmkuhl; ;Nekromanten;False;S.1;WBBL
-Kharibdyss Kracher;Philip;Pollmann; ;Dunkelelfen;False;S.1;WBBL
-Lustria Legacy e.V.;André;Gährken; ;Echsenmenschen;False;S.1;WBBL
-Milfheim Mammoths;Felix;Blankermann; ;Norse;False;S.1;WBBL
-Raffy's Roxler Ratten;Raphael;Wresch; ;Skaven;False;S.1;WBBL
-Schrödingers Snotlinge;Berit;Schlüter; ;Snotlinge;False;S.1;WBBL
-Slanesh Slayers;Max;Richter; ;Echsenmenschen;False;S.1;WBBL
-Anaheim Frozen Fingers;André;Gährken; ;Norse;False;S.2;WBBL
-Ancient Conquerors;Raphael;Oppenberg; ;Untote;False;S.2;WBBL
-Big Bad Crocs;Frederik;Trieb; ;Echsenmenschen;False;S.2;WBBL
-BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;False;S.2;WBBL
-Da Red Thunda;André;Gährken; ;Orks;False;S.2;WBBL
-Die Hafenmeister;Max;Richter; ;Zwerge;False;S.2;WBBL
-Eastend Slowdiver;Timo;Decker; ;Chaoszwerge;False;S.2;WBBL
-Greenboi Packers;Kevin;Lequen; ;Schwarzorks;False;S.2;WBBL
-Gully Sneakers;Max;Pomblitz; ;Skaven;False;S.2;WBBL
-Lucky Men in Tights;Sven;Fatum; ;Waldelfen;False;S.2;WBBL
-Middenland Wolves;Faton;Sejdija; ;Imperial Nobility;False;S.2;WBBL
-Mighty Moon Moshaz;Felix;Blankermann; ;Schwarzorks;False;S.2;WBBL
-Mortheim Maniacs;Bernd;Junker; ;Menschen;False;S.2;WBBL
-Naggaroth Nightwings;Tobias;Stelter; ;Dunkelelfen;False;S.2;WBBL
-Necropolis Nightmares;Simon;Nosthoff; ;Nekromanten;False;S.2;WBBL
-Righteous Anger;Sven;Fatum; ;Dunkelelfen;False;S.2;WBBL
-Squighorn Screamers;Tim;Freund; ;Goblins;False;S.2;WBBL
-The Plague Pit Bloaters;Chris;Pott; ;Nurgle;False;S.2;WBBL
-The Snu Snuugs;Stephan;Waider; ;Halblinge;False;S.2;WBBL
-Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.2;WBBL
-Helden in Strumpfhosen;Chris;Pott; ;Elfen Union;False;S.2;WBBL
-Hexoatl Vipers;Max;Pomblitz; ;Echsenmenschen;False;S.2;WBBL
-Blitzburgh Steelers;Patrick;Everding; ;Imperial Nobility;False;S.2;WBBL
-Bläckhead Smashazz;Simon;Nosthoff; ;Orks;False;S.2;WBBL
-Altdorf Tigers;Felix;Blankermann; ;Menschen;False;S.2;WBBL
-Beards & Bulls United;Till;Limbrock; ;Chaoszwerge;True;S.2;WBBL
-Kara Temple Harpies;Tobias;Stelter; ;Amazonen;True;S.2;WBBL
-This is my favourite team on the pitch;Rainer;Gelhaus; ;Khemri;True;S.2;WBBL
-Here Comes The BOOM;Sven;Lehmkuhl; ;Oger;True;S.2;WBBL
-Karak a Karaz Iron Breakers;Faton;Sejdija; ;Zwerge;False;S.2;WBBL
-Competitive Math;Sven;Lehmkuhl; ;Khorne;False;S.2;WBBL
-Carroburg Cosmopolitans;Bernd;Junker; ;Old World Alliance;False;S.2;WBBL
-The no One's;Philipp;Saatkamp;Fips;Slann;False;S.2;WBBL
-Elf Elves;Marco;Oberecht;Obi;Elfen Union;False;S.2;WBBL
-Norsca Rampagers;Tobias;Stelter; ;Norse;False;S.2;WBBL
 Bloody Mary;Christian;Stach; ;Echsenmenschen;False;S.1;BBLM
 Blueboy Ravens;Niklas;Nolte; ;Menschen;False;S.1;BBLM
 Champions of Death;Tobias;Stelter; ;Untote;False;S.1;BBLM
@@ -140,42 +86,6 @@ The Real Vermins;Hamlet;Abedian; ;Skaven;False;S.3;BBLM
 The Unkillable Colts;Matthias;Huber; ;Untote;False;S.3;BBLM
 Tylos BBC;Timo;Decker; ;Skaven;False;S.3;BBLM
 Wild Boys;Niklas;Nolte; ;Orks;False;S.3;BBLM
-A Tribute to the Horned Rat;Raphael;Wresch; ;Skaven;False;S.5;BBLM
-Aasee Geziefer Blau-Gelb;Max;Möllering; ;Underworld;False;S.5;BBLM
-Aasee Vikings;Gregor;Saremba; ;Norse;False;S.5;BBLM
-Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;False;S.5;BBLM
-Athelorn Avengers;Tobias;Stelter; ;Waldelfen;False;S.5;BBLM
-Big Red Mob;Tim;Leenen; ;Orks;False;S.5;BBLM
-Bloodrage Warriors;Hamlet;Abedian; ;Chaos Chosen;False;S.5;BBLM
-Debauchery Fanboys (DFB);Nikolaus;Fischer; ;Chaos Chosen;False;S.5;BBLM
-Die Kröten;Christian;Stach; ;Slann;False;S.5;BBLM
-Firnstain Frostwölfe;Carl;Kapinski; ;Norse;False;S.5;BBLM
-Gievenbecker Giants;Marc;Hansen; ;Zwerge;False;S.5;BBLM
-Green Gras Cracker's;Marco;Oberecht;Obi;Halblinge;False;S.5;BBLM
-Hashuts Finest;Timo;Decker; ;Chaoszwerge;False;S.5;BBLM
-Havixbecker Löwenzähne;Gregor;Saremba; ;Halblinge;False;S.5;BBLM
-Huatl Hunters;Michael;Evelt; ;Echsenmenschen;False;S.5;BBLM
-Koppkloppverein Krushia;Carl;Kapinski; ;Orks;False;S.5;BBLM
-Monasterian Castle Raiders;Max;Möllering; ;Zwerge;False;S.5;BBLM
-Nagaroths Slaves;Hamlet;Abedian; ;Dunkelelfen;False;S.5;BBLM
-Nordwalder Tigers;Niklas;Nolte; ;Bretonen;False;S.5;BBLM
-North Forrest Seahawks;Niklas;Nolte; ;Hochelfen;False;S.5;BBLM
-Ratatouille;Tobias;Stelter; ;Skaven;False;S.5;BBLM
-Roxel ReTurners;Sebastian;Sprengel; ;Menschen;False;S.5;BBLM
-Seaorcs;Rainer;Gelhaus; ;Orks;False;S.5;BBLM
-Shagrath Scalphunters;Michael;Evelt; ;Dunkelelfen;False;S.5;BBLM
-Sporting Tafelrunde;Thomas;Ludwig; ;Bretonen;False;S.5;BBLM
-Stierland Stallions;Bernd;Junker; ;Menschen;False;S.5;BBLM
-Stumpen Patriots;Jan;Limbrock; ;Zwerge;False;S.5;BBLM
-Tanzverein Todeswirbel Telgith;Max;Driemer; ;Waldelfen;False;S.5;BBLM
-Telgith Turnover Tornados;Max;Driemer; ;Zwerge;False;S.5;BBLM
-Totenhemd Hotspur;Timo;Decker; ;Untote;False;S.5;BBLM
-Tundra Bay Bombadiers;Ron;Krollzig; ;Goblins;False;S.5;BBLM
-Turbine Warpstein;Till;Limbrock; ;Underworld;False;S.5;BBLM
-Warpdust Walkers;Bernd;Junker; ;Skaven;False;S.5;BBLM
-White Walkers;Christian;Stach; ;Norse;False;S.5;BBLM
-Wolbecker Wolpertinger;Ron;Krollzig; ;Chaos Renegades;False;S.5;BBLM
-Erphoplatz Pacters;Till;Limbrock; ;Chaos Renegades;False;S.5;BBLM
 A Flock of Seagulls;Bernd;Junker; ;Elfen Union;False;S.6;BBLM
 Aasee Battletoads;Thomas;Ludwig; ;Slann;False;S.6;BBLM
 Aasee Vikings;Gregor;Saremba; ;Norse;False;S.6;BBLM
@@ -262,3 +172,123 @@ Ultrak'Arines;Vanja;Mariani; ;Zwerge;False;S.4;BBLM
 Warpstone Hunters;Bernd;Junker; ;Skaven;False;S.4;BBLM
 Wolfgangs Wölfe;Tobias;Stelter; ;Nekromanten;False;S.4;BBLM
 Woodies Woodpackers;Dirk;Mannweiler;Manni;Waldelfen;False;S.4;BBLM
+A Tribute to the Horned Rat;Raphael;Wresch; ;Skaven;False;S.5;BBLM
+Aasee Geziefer Blau-Gelb;Max;Möllering; ;Underworld;False;S.5;BBLM
+Aasee Vikings;Gregor;Saremba; ;Norse;False;S.5;BBLM
+Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;False;S.5;BBLM
+Athelorn Avengers;Tobias;Stelter; ;Waldelfen;False;S.5;BBLM
+Big Red Mob;Tim;Leenen; ;Orks;False;S.5;BBLM
+Bloodrage Warriors;Hamlet;Abedian; ;Chaos Chosen;False;S.5;BBLM
+Debauchery Fanboys (DFB);Nikolaus;Fischer; ;Chaos Chosen;False;S.5;BBLM
+Die Kröten;Christian;Stach; ;Slann;False;S.5;BBLM
+Firnstain Frostwölfe;Carl;Kapinski; ;Norse;False;S.5;BBLM
+Gievenbecker Giants;Marc;Hansen; ;Zwerge;False;S.5;BBLM
+Green Gras Cracker's;Marco;Oberecht;Obi;Halblinge;False;S.5;BBLM
+Hashuts Finest;Timo;Decker; ;Chaoszwerge;False;S.5;BBLM
+Havixbecker Löwenzähne;Gregor;Saremba; ;Halblinge;False;S.5;BBLM
+Huatl Hunters;Michael;Evelt; ;Echsenmenschen;False;S.5;BBLM
+Koppkloppverein Krushia;Carl;Kapinski; ;Orks;False;S.5;BBLM
+Monasterian Castle Raiders;Max;Möllering; ;Zwerge;False;S.5;BBLM
+Nagaroths Slaves;Hamlet;Abedian; ;Dunkelelfen;False;S.5;BBLM
+Nordwalder Tigers;Niklas;Nolte; ;Bretonen;False;S.5;BBLM
+North Forrest Seahawks;Niklas;Nolte; ;Hochelfen;False;S.5;BBLM
+Ratatouille;Tobias;Stelter; ;Skaven;False;S.5;BBLM
+Roxel ReTurners;Sebastian;Sprengel; ;Menschen;False;S.5;BBLM
+Seaorcs;Rainer;Gelhaus; ;Orks;False;S.5;BBLM
+Shagrath Scalphunters;Michael;Evelt; ;Dunkelelfen;False;S.5;BBLM
+Sporting Tafelrunde;Thomas;Ludwig; ;Bretonen;False;S.5;BBLM
+Stierland Stallions;Bernd;Junker; ;Menschen;False;S.5;BBLM
+Stumpen Patriots;Jan;Limbrock; ;Zwerge;False;S.5;BBLM
+Tanzverein Todeswirbel Telgith;Max;Driemer; ;Waldelfen;False;S.5;BBLM
+Telgith Turnover Tornados;Max;Driemer; ;Zwerge;False;S.5;BBLM
+Totenhemd Hotspur;Timo;Decker; ;Untote;False;S.5;BBLM
+Tundra Bay Bombadiers;Ron;Krollzig; ;Goblins;False;S.5;BBLM
+Turbine Warpstein;Till;Limbrock; ;Underworld;False;S.5;BBLM
+Warpdust Walkers;Bernd;Junker; ;Skaven;False;S.5;BBLM
+White Walkers;Christian;Stach; ;Norse;False;S.5;BBLM
+Wolbecker Wolpertinger;Ron;Krollzig; ;Chaos Renegades;False;S.5;BBLM
+Erphoplatz Pacters;Till;Limbrock; ;Chaos Renegades;False;S.5;BBLM
+Asgard Allstars;Kevin;Lequen; ;Norse;False;S.1;WBBL
+Barak Varr Blackhawks;Stephan;Waider; ;Zwerge;False;S.1;WBBL
+Bay Harbor Butchers;Raphael;Oppenberg; ;Khorne;False;S.1;WBBL
+BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;False;S.1;WBBL
+Chlamydiaville Clappers;Carl;Henjes; ;Nurgle;False;S.1;WBBL
+Coldblooded Allygators;Jennifer;Schlechter;Jenny;Echsenmenschen;False;S.1;WBBL
+Die listigen Lustria Lurche;Timon;Michler; ;Echsenmenschen;False;S.1;WBBL
+Flying Diggers;Philipp;Saatkamp;Fips;Underworld;False;S.1;WBBL
+Ironfoot Greybeards;Chris;Pott; ;Zwerge;False;S.1;WBBL
+Iskvard Ironfins;Tim;Freund; ;Norse;False;S.1;WBBL
+Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.1;WBBL
+Amazona Cardinals;Rainer;Gelhaus; ;Amazonen;False;S.1;WBBL
+Just here for the Violins;Sven;Lehmkuhl; ;Nekromanten;False;S.1;WBBL
+Kharibdyss Kracher;Philip;Pollmann; ;Dunkelelfen;False;S.1;WBBL
+Lustria Legacy e.V.;André;Gährken; ;Echsenmenschen;False;S.1;WBBL
+Milfheim Mammoths;Felix;Blankermann; ;Norse;False;S.1;WBBL
+Raffy's Roxler Ratten;Raphael;Wresch; ;Skaven;False;S.1;WBBL
+Schrödingers Snotlinge;Berit;Schlüter; ;Snotlinge;False;S.1;WBBL
+Slanesh Slayers;Max;Richter; ;Echsenmenschen;False;S.1;WBBL
+Anaheim Frozen Fingers;André;Gährken; ;Norse;False;S.2;WBBL
+Ancient Conquerors;Raphael;Oppenberg; ;Untote;False;S.2;WBBL
+Big Bad Crocs;Frederik;Trieb; ;Echsenmenschen;False;S.2;WBBL
+BuckelBerg Bombers;Johann;Kuhn; ;Schwarzorks;False;S.2;WBBL
+Da Red Thunda;André;Gährken; ;Orks;False;S.2;WBBL
+Die Hafenmeister;Max;Richter; ;Zwerge;False;S.2;WBBL
+Eastend Slowdiver;Timo;Decker; ;Chaoszwerge;False;S.2;WBBL
+Greenboi Packers;Kevin;Lequen; ;Schwarzorks;False;S.2;WBBL
+Gully Sneakers;Max;Pomblitz; ;Skaven;False;S.2;WBBL
+Lucky Men in Tights;Sven;Fatum; ;Waldelfen;False;S.2;WBBL
+Middenland Wolves;Faton;Sejdija; ;Imperial Nobility;False;S.2;WBBL
+Mighty Moon Moshaz;Felix;Blankermann; ;Schwarzorks;False;S.2;WBBL
+Mortheim Maniacs;Bernd;Junker; ;Menschen;False;S.2;WBBL
+Naggaroth Nightwings;Tobias;Stelter; ;Dunkelelfen;False;S.2;WBBL
+Necropolis Nightmares;Simon;Nosthoff; ;Nekromanten;False;S.2;WBBL
+Righteous Anger;Sven;Fatum; ;Dunkelelfen;False;S.2;WBBL
+Squighorn Screamers;Tim;Freund; ;Goblins;False;S.2;WBBL
+The Plague Pit Bloaters;Chris;Pott; ;Nurgle;False;S.2;WBBL
+The Snu Snuugs;Stephan;Waider; ;Halblinge;False;S.2;WBBL
+Wolbecker Wolpertinger;Marco;Oberecht;Obi;Chaos Renegades;False;S.2;WBBL
+Helden in Strumpfhosen;Chris;Pott; ;Elfen Union;False;S.2;WBBL
+Hexoatl Vipers;Max;Pomblitz; ;Echsenmenschen;False;S.2;WBBL
+Blitzburgh Steelers;Patrick;Everding; ;Imperial Nobility;False;S.2;WBBL
+Bläckhead Smashazz;Simon;Nosthoff; ;Orks;False;S.2;WBBL
+Altdorf Tigers;Felix;Blankermann; ;Menschen;False;S.2;WBBL
+Beards & Bulls United;Till;Limbrock; ;Chaoszwerge;True;S.2;WBBL
+Kara Temple Harpies;Tobias;Stelter; ;Amazonen;True;S.2;WBBL
+This is my favourite team on the pitch;Rainer;Gelhaus; ;Khemri;True;S.2;WBBL
+Here Comes The BOOM;Sven;Lehmkuhl; ;Oger;True;S.2;WBBL
+Karak a Karaz Iron Breakers;Faton;Sejdija; ;Zwerge;False;S.2;WBBL
+Competitive Math;Sven;Lehmkuhl; ;Khorne;False;S.2;WBBL
+Carroburg Cosmopolitans;Bernd;Junker; ;Old World Alliance;False;S.2;WBBL
+The no One's;Philipp;Saatkamp;Fips;Slann;False;S.2;WBBL
+Elf Elves;Marco;Oberecht;Obi;Elfen Union;False;S.2;WBBL
+Norsca Rampagers;Tobias;Stelter; ;Norse;False;S.2;WBBL
+Ched Nasad Spiders;Rainer;Gelhaus; ;Dunkelelfen;False;S.3;WBBL
+Lizardmen of Amon Hen;Michael;Evelt; ;Echsenmenschen;False;S.3;WBBL
+Black and Bite;Sven;Lehmkuhl; ;Vampire;False;S.3;WBBL
+The Ratlings;Bernd;Junker; ;Skaven;False;S.3;WBBL
+Warpstone Enjoyer;Chris;Pott; ;Underworld;False;S.3;WBBL
+Da Waaaghbois;Max;Pomblitz; ;Orks;False;S.3;WBBL
+Hillbilly Alligators;Simon;Nosthoff; ;Echsenmenschen;False;S.3;WBBL
+Praag Fiends;Faton;Sejdija; ;Chaos Chosen;False;S.3;WBBL
+Quartered Giants;Jennifer;Schlechter;Jenny;Zwerge;False;S.3;WBBL
+House of Flying Gitz;Tim;Freund; ;Goblins;False;S.3;WBBL
+Reikland Kardinals;Johann;Kuhn; ;Imperial Nobility;False;S.3;WBBL
+Velocity Raptors;Raphael;Oppenberg; ;Echsenmenschen;False;S.3;WBBL
+Halloween Hellraisers;André;Gährken; ;Untote;False;S.3;WBBL
+Elf Elves;Marco;Oberecht;Obi;Elfen Union;False;S.3;WBBL
+Chicxulub Crater Crushers;Bartholomäus;Wieczorek;Barth;Echsenmenschen;False;S.3;WBBL
+Wulfriks Wanderers;Frederik;Trieb; ;Norse;False;S.3;WBBL
+Stern des Nordens;André;Gährken; ;Hochelfen;False;S.3;WBBL
+The no One´s;Philipp;Saatkamp;Fips;Slann;False;S.3;WBBL
+Die Hafenmeister;Max;Richter; ;Zwerge;False;S.3;WBBL
+Masters of the Universe;Tobias;Stelter; ;Untote;False;S.3;WBBL
+Sportfreunde Killer;Max;Richter; ;Skaven;False;S.3;WBBL
+Komodo Dragons;Chris;Pott; ;Echsenmenschen;False;S.3;WBBL
+Drakenhof Gheists;Faton;Sejdija; ;Vampire;False;S.3;WBBL
+Just here for the violins;Sven;Lehmkuhl; ;Nekromanten;False;S.3;WBBL
+Wonder Woman Enterprise;Felix;Blankermann; ;Amazonen;False;S.3;WBBL
+Quetzl Serpents;Max;Pomblitz; ;Amazonen;False;S.3;WBBL
+Lucky Men in Tights;Sven;Fatum; ;Waldelfen;False;S.3;WBBL
+Lothern Guardians;Simon;Nosthoff; ;Hochelfen;False;S.3;WBBL
+Orkland Raiders;Tobias;Stelter; ;Orks;False;S.3;WBBL
+Mortheim Maniacs;Bernd;Junker; ;Menschen;False;S.3;WBBL
