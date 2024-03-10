@@ -14,9 +14,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: dashboard
+                name: kubernetes-dashboard
                 port:
-                  name: http
+                  number: 443
   tls:
     - hosts:
         - thinkcentre-m92p.fritz.box
