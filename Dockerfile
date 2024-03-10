@@ -36,4 +36,5 @@ EXPOSE 80
 
 WORKDIR /app/blood-bowl-league-manager
 
+ENV SCRIPT_NAME=/blood-bowl
 CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:80", "main:app"]

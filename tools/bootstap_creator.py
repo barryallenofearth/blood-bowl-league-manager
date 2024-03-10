@@ -63,7 +63,7 @@ def create_configmap():
             config_map_output.write(template_content)
 
 
-get_prod_database = requests.request(url="https://thinkcentre-m92p.fritz.box/export", method="GET", verify=False)
+get_prod_database = requests.request(url="https://thinkcentre-m92p.fritz.box/blood-bowl/export", method="GET", verify=False)
 get_prod_database.raise_for_status()
 database_json = get_prod_database.json()
 

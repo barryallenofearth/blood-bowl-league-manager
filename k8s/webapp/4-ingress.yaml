@@ -5,10 +5,7 @@ metadata:
   namespace: blood-bowl-league-manager
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  ingressClassName: nginx
   tls:
     - hosts:
         - thinkcentre-m92p.fritz.box
@@ -17,8 +14,8 @@ spec:
   - host: thinkcentre-m92p.fritz.box
     http:
         paths:
-          - path: /blood-bowl(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /blood-bowl
+            pathType: Prefix
             backend:
               service:
                 name: webapp
