@@ -13,4 +13,4 @@ spec:
       targetPort: https
   selector:
     app: webapp
-  type: ClusterIP
+  type: LoadBalancer
