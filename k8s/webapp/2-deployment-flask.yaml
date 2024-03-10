@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blood-bowl-league-manager
-          image: barryallenofearth/blood-bowl-league-manager:42
+          image: barryallenofearth/blood-bowl-league-manager:43
           env:
             - name: DB_NAME
               valueFrom:
@@ -63,7 +63,7 @@ spec:
               mountPath: /app/blood-bowl-league-manager/server/static/logos
           livenessProbe:
             httpGet:
-              path: /blood-bowl/health
+              path: /health
               port: 80
               scheme: HTTP
             periodSeconds: 60
@@ -72,7 +72,7 @@ spec:
             successThreshold: 1
           readinessProbe:
             httpGet:
-              path: /blood-bowl/
+              path: /
               port: 80
               scheme: HTTP
             periodSeconds: 60
@@ -81,7 +81,7 @@ spec:
             successThreshold: 1
           startupProbe:
             httpGet:
-              path: /blood-bowl/
+              path: /
               port: 80
               scheme: HTTP
             periodSeconds: 30
