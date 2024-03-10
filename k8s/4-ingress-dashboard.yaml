@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  name: dashboard
+  namespace: kube-system
+spec:
+  rules:
+  - host: thinkcentre-m92p.fritz.box
+    http:
+      paths:
+      - backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 443
+        path: /
+  tls:
+    - hosts:
+        - thinkcentre-m92p.fritz.box
+      secretName: ingress-cert
