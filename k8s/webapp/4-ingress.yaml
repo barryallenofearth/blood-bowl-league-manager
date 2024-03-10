@@ -11,7 +11,8 @@ spec:
         - thinkcentre-m92p.fritz.box
       secretName: ingress-cert
   rules:
-    - http:
+  - host: thinkcentre-m92p.fritz.box
+    http:
         paths:
           - path: /blood-bowl
             pathType: Prefix
