@@ -5,12 +5,12 @@ metadata:
   namespace: blood-bowl-league-manager
 spec:
   rules:
-  - http:
-      paths:
-      - path: /blood-bowl
-        pathType: Prefix
-        backend:
-          service:
-            name: webapp
-            port:
-              name: https
+    - http:
+        paths:
+          - path: /blood-bowl
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp
+                port:
+                  name: https
