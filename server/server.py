@@ -78,7 +78,7 @@ def parse_user_input(user_input: str, match_type_selector=None):
             db.session.commit()
             return ParsingResponse(200, 'match successfully entered', f"{user_input}", f"{formatting.format_match(bb_match)}")
         elif parsing.CASUALTIES_MATCHER.match(user_input):
-            additional_statistics = parsing.parse_additonal_statistics_input(user_input)
+            additional_statistics = parsing.parse_additional_statistics_input(user_input)
             db.session.add(additional_statistics)
             db.session.commit()
             return ParsingResponse(200, 'casualties entry successfully entered', f"{user_input}", f"{formatting.format_additional_statistics(additional_statistics)}")

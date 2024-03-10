@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blood-bowl
+  namespace: blood-bowl-league-manager
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /blood-bowl
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp
+            port:
+              name: https

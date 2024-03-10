@@ -112,7 +112,7 @@ def parse_match_result(user_input: str) -> BBMatch:
     return bb_match
 
 
-def parse_additonal_statistics_input(user_input: str, season_id=0) -> AdditionalStatistics:
+def parse_additional_statistics_input(user_input: str, season_id=0) -> AdditionalStatistics:
     original_input = user_input
 
     user_input = __clean_up_unwanted_chars(user_input)
