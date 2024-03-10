@@ -34,4 +34,4 @@ setup_log(logging.INFO)
 
 if __name__ == "__main__":
     logging.info("Starting server")
-    app.run(host="0.0.0.0", port=443, ssl_context=("certificates/cert.pem", "certificates/key.pem"))
+    app.run(host="0.0.0.0", port=80)

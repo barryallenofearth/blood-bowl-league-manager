@@ -32,8 +32,9 @@ VOLUME /app/blood-bowl-league-manager/instance
 VOLUME /app/blood-bowl-league-manager/data
 VOLUME /app/blood-bowl-league-manager/server/static/logos
 
-EXPOSE 443
+EXPOSE 80
 
 WORKDIR /app/blood-bowl-league-manager
 
-CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:443", "--certfile=/app/blood-bowl-league-manager/certificates/cert.pem", "--keyfile=/app/blood-bowl-league-manager/certificates/key.pem", "main:app"]
+ENV SCRIPT_NAME=/blood-bowl
+CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:80", "main:app"]

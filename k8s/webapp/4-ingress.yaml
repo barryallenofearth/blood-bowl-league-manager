@@ -4,8 +4,13 @@ metadata:
   name: blood-bowl
   namespace: blood-bowl-league-manager
   annotations:
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - thinkcentre-m92p.fritz.box
+      secretName: ingress-cert
   rules:
     - http:
         paths:
@@ -15,4 +20,4 @@ spec:
               service:
                 name: webapp
                 port:
-                  name: https
+                  name: http
