@@ -57,8 +57,10 @@ def update_images(entity_type: str):
     if entity_type == "teams":
         team_results = score_table.calculate_team_scores()
         team_casualties = casualties_table.calculate_team_casualties()
-        teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results, team_casualties=team_casualties, term_for_coaches=season.term_for_coaches,
-                                      term_for_races=season.term_for_races,
+        total_number_of_casualties = sum([team_casualty.casualties for team_casualty in team_casualties])
+        teams_table = render_template("imaging/teams_table_for_image.html", team_results=team_results, team_casualties=team_casualties,
+                                      total_number_of_casualties=total_number_of_casualties,
+                                      term_for_coaches=season.term_for_coaches, term_for_races=season.term_for_races,
                                       **rendering_args)
         print_png(teams_table, 'teams', len(team_results) + len(team_casualties))
     elif entity_type == "coaches":

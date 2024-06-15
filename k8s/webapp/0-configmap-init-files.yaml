@@ -341,7 +341,6 @@ data:
     Masters of the Universe;Tobias;Stelter; ;Untote;False;S.3;WBBL
     Sportfreunde Killer;Max;Richter; ;Skaven;False;S.3;WBBL
     Komodo Dragons;Chris;Pott; ;Echsenmenschen;False;S.3;WBBL
-    Drakenhof Gheists;Faton;Sejdija; ;Vampire;False;S.3;WBBL
     Just here for the violins;Sven;Lehmkuhl; ;Nekromanten;False;S.3;WBBL
     Wonder Woman Enterprise;Felix;Blankermann; ;Amazonen;False;S.3;WBBL
     Quetzl Serpents;Max;Pomblitz; ;Amazonen;False;S.3;WBBL
@@ -349,6 +348,11 @@ data:
     Lothern Guardians;Simon;Nosthoff; ;Hochelfen;False;S.3;WBBL
     Orkland Raiders;Tobias;Stelter; ;Orks;False;S.3;WBBL
     Mortheim Maniacs;Bernd;Junker; ;Menschen;False;S.3;WBBL
+    Shantychor Ankumersiel;Philipp;Saatkamp;Fips;Vampire;False;S.3;WBBL
+    Zharrduk Oathbreakers;Sven;Fatum; ;Chaoszwerge;False;S.3;WBBL
+    Middenland Wolves;Faton;Sejdija; ;Imperial Nobility;False;S.3;WBBL
+    Gut Smashas;Marco;Oberecht;Obi;Orks;False;S.3;WBBL
+    Bloodbrothers;Felix;Blankermann; ;Khorne;False;S.3;WBBL
   matches.csv: |
     match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_modification_team_2;team_1_surrendered;team_2_surrendered;is_team_1_victory_by_kickoff;is_team_2_victory_by_kickoff;is_playoff_match;is_tournament_match;season_short_name;league_short_name
     1;Khrx Seahawks;LoneBoneShamblers;2;1;0;0;False;False;False;False;False;False;S.1;BBLM
@@ -1031,6 +1035,64 @@ data:
     34;Halloween Hellraisers;Lothern Guardians;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
     35;Elf Elves;The Ratlings;3;1;0;0;False;False;False;False;False;False;S.3;WBBL
     36;Masters of the Universe;Black and Bite;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    37;Warpstone Enjoyer;Wulfriks Wanderers;3;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    38;Praag Fiends;Velocity Raptors;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    39;Quartered Giants;Wulfriks Wanderers;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    40;Warpstone Enjoyer;Velocity Raptors;2;3;0;0;False;False;False;False;False;False;S.3;WBBL
+    41;Wonder Woman Enterprise;Stern des Nordens;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    42;Black and Bite;Hillbilly Alligators;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    43;Chicxulub Crater Crushers;Reikland Kardinals;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    44;Mortheim Maniacs;Hillbilly Alligators;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    45;Halloween Hellraisers;Shantychor Ankumersiel;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    46;Halloween Hellraisers;The Ratlings;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    47;Hillbilly Alligators;Reikland Kardinals;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    48;Warpstone Enjoyer;Praag Fiends;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    49;Black and Bite;Praag Fiends;3;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    50;Die Hafenmeister;The Ratlings;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    51;Halloween Hellraisers;Lucky Men in Tights;2;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    52;Shantychor Ankumersiel;Masters of the Universe;0;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    53;Praag Fiends;Wulfriks Wanderers;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    54;Lucky Men in Tights;Lothern Guardians;1;3;0;0;False;False;False;False;False;False;S.3;WBBL
+    55;Masters of the Universe;Lucky Men in Tights;1;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    56;Da Waaaghbois;Lucky Men in Tights;1;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    57;Black and Bite;Reikland Kardinals;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    58;Elf Elves;Ched Nasad Spiders;0;3;0;0;False;False;False;False;False;False;S.3;WBBL
+    59;Shantychor Ankumersiel;Lothern Guardians;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    60;The Ratlings;Lucky Men in Tights;1;5;0;0;False;False;False;False;False;False;S.3;WBBL
+    61;Lucky Men in Tights;Hillbilly Alligators;3;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    62;Da Waaaghbois;Lothern Guardians;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    63;The no One´s;Elf Elves;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    64;Masters of the Universe;Reikland Kardinals;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    65;Halloween Hellraisers;Lothern Guardians;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    66;Wonder Woman Enterprise;Lothern Guardians;3;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    67;Da Waaaghbois;Reikland Kardinals;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    68;Elf Elves;Lucky Men in Tights;1;4;0;0;False;False;False;False;False;False;S.3;WBBL
+    69;Quartered Giants;Warpstone Enjoyer;0;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    70;Wonder Woman Enterprise;Warpstone Enjoyer;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    71;Praag Fiends;Quartered Giants;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    72;Da Waaaghbois;Halloween Hellraisers;1;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    73;Lothern Guardians;Zharrduk Oathbreakers;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    74;Warpstone Enjoyer;Praag Fiends;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    75;Velocity Raptors;Wulfriks Wanderers;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    76;Praag Fiends;Velocity Raptors;1;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    77;Warpstone Enjoyer;Wulfriks Wanderers;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    78;Warpstone Enjoyer;Velocity Raptors;1;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    79;Black and Bite;Lucky Men in Tights;3;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    80;Shantychor Ankumersiel;Die Hafenmeister;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    81;Black and Bite;Mortheim Maniacs;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    82;Chicxulub Crater Crushers;Wonder Woman Enterprise;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    83;Wonder Woman Enterprise;Gut Smashas;3;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    84;Lucky Men in Tights;Lothern Guardians;2;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    85;Zharrduk Oathbreakers;Die Hafenmeister;1;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    86;Wonder Woman Enterprise;Elf Elves;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    87;The no One´s;Lucky Men in Tights;0;5;0;0;False;False;False;False;False;False;S.3;WBBL
+    88;Stern des Nordens;Reikland Kardinals;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    89;Ched Nasad Spiders;Black and Bite;0;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    90;Shantychor Ankumersiel;Mortheim Maniacs;2;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    91;Shantychor Ankumersiel;Die Hafenmeister;1;2;0;0;False;False;False;False;False;False;S.3;WBBL
+    92;Masters of the Universe;Zharrduk Oathbreakers;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
+    93;Stern des Nordens;Bloodbrothers;3;0;0;0;False;False;False;False;False;False;S.3;WBBL
+    94;Zharrduk Oathbreakers;Gut Smashas;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
   additional_statistics.csv: |
     team_name;casualties;season_short_name;league_short_name
     Mighty Moon Moshaz;1;S.2;WBBL
@@ -1226,3 +1288,91 @@ data:
     Elf Elves;2;S.3;WBBL
     The Ratlings;1;S.3;WBBL
     Masters of the Universe;4;S.3;WBBL
+    Warpstone Enjoyer;5;S.3;WBBL
+    Wulfriks Wanderers;4;S.3;WBBL
+    Praag Fiends;3;S.3;WBBL
+    Velocity Raptors;1;S.3;WBBL
+    Quartered Giants;2;S.3;WBBL
+    Wulfriks Wanderers;2;S.3;WBBL
+    Velocity Raptors;5;S.3;WBBL
+    Wonder Woman Enterprise;1;S.3;WBBL
+    Hillbilly Alligators;2;S.3;WBBL
+    Reikland Kardinals;1;S.3;WBBL
+    Chicxulub Crater Crushers;3;S.3;WBBL
+    Shantychor Ankumersiel;1;S.3;WBBL
+    The Ratlings;2;S.3;WBBL
+    Halloween Hellraisers;3;S.3;WBBL
+    Hillbilly Alligators;1;S.3;WBBL
+    Reikland Kardinals;2;S.3;WBBL
+    Praag Fiends;6;S.3;WBBL
+    Warpstone Enjoyer;3;S.3;WBBL
+    Praag Fiends;4;S.3;WBBL
+    Black and Bite;2;S.3;WBBL
+    Die Hafenmeister;5;S.3;WBBL
+    Halloween Hellraisers;1;S.3;WBBL
+    Lucky Men in Tights;1;S.3;WBBL
+    Masters of the Universe;2;S.3;WBBL
+    Praag Fiends;6;S.3;WBBL
+    Wulfriks Wanderers;2;S.3;WBBL
+    Lucky Men in Tights;1;S.3;WBBL
+    Lothern Guardians;1;S.3;WBBL
+    Masters of the Universe;1;S.3;WBBL
+    Da Waaaghbois;2;S.3;WBBL
+    Lucky Men in Tights;1;S.3;WBBL
+    Black and Bite;1;S.3;WBBL
+    Reikland Kardinals;1;S.3;WBBL
+    Elf Elves;1;S.3;WBBL
+    Shantychor Ankumersiel;1;S.3;WBBL
+    The Ratlings;1;S.3;WBBL
+    Lucky Men in Tights;2;S.3;WBBL
+    Lucky Men in Tights;3;S.3;WBBL
+    Hillbilly Alligators;1;S.3;WBBL
+    Da Waaaghbois;2;S.3;WBBL
+    Lothern Guardians;1;S.3;WBBL
+    Elf Elves;2;S.3;WBBL
+    The no One´s;2;S.3;WBBL
+    Masters of the Universe;1;S.3;WBBL
+    Reikland Kardinals;1;S.3;WBBL
+    Halloween Hellraisers;2;S.3;WBBL
+    Lothern Guardians;1;S.3;WBBL
+    Wonder Woman Enterprise;2;S.3;WBBL
+    Da Waaaghbois;2;S.3;WBBL
+    Reikland Kardinals;1;S.3;WBBL
+    Quartered Giants;3;S.3;WBBL
+    Warpstone Enjoyer;2;S.3;WBBL
+    Wonder Woman Enterprise;2;S.3;WBBL
+    Quartered Giants;1;S.3;WBBL
+    Da Waaaghbois;4;S.3;WBBL
+    Lothern Guardians;1;S.3;WBBL
+    Zharrduk Oathbreakers;2;S.3;WBBL
+    Praag Fiends;3;S.3;WBBL
+    Warpstone Enjoyer;3;S.3;WBBL
+    Wulfriks Wanderers;1;S.3;WBBL
+    Velocity Raptors;2;S.3;WBBL
+    Praag Fiends;3;S.3;WBBL
+    Velocity Raptors;3;S.3;WBBL
+    Warpstone Enjoyer;2;S.3;WBBL
+    Velocity Raptors;3;S.3;WBBL
+    Warpstone Enjoyer;1;S.3;WBBL
+    Die Hafenmeister;2;S.3;WBBL
+    Mortheim Maniacs;1;S.3;WBBL
+    Chicxulub Crater Crushers;3;S.3;WBBL
+    Gut Smashas;3;S.3;WBBL
+    Wonder Woman Enterprise;2;S.3;WBBL
+    Lothern Guardians;2;S.3;WBBL
+    Lucky Men in Tights;1;S.3;WBBL
+    Zharrduk Oathbreakers;2;S.3;WBBL
+    Die Hafenmeister;1;S.3;WBBL
+    Elf Elves;2;S.3;WBBL
+    Lucky Men in Tights;1;S.3;WBBL
+    Wonder Woman Enterprise;4;S.3;WBBL
+    Stern des Nordens;1;S.3;WBBL
+    Reikland Kardinals;1;S.3;WBBL
+    Ched Nasad Spiders;1;S.3;WBBL
+    Black and Bite;3;S.3;WBBL
+    Shantychor Ankumersiel;1;S.3;WBBL
+    Mortheim Maniacs;4;S.3;WBBL
+    Die Hafenmeister;5;S.3;WBBL
+    Masters of the Universe;2;S.3;WBBL
+    Zharrduk Oathbreakers;2;S.3;WBBL
+    Gut Smashas;1;S.3;WBBL

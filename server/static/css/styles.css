@@ -32,15 +32,18 @@ body {
 h1 {
     color: var(--main-headline);
     font-family: 'Nuffle', sans-serif;
+    text-align: center;
 }
 
 h2 {
     font-family: 'Nuffle', sans-serif;
     color: var(--sub-headline);
+    text-align: center;
 }
 
 h3, h4, h5, h6 {
     font-family: 'Nuffle', sans-serif;
+    text-align: center;
 }
 
 .dropdown-menu {

@@ -4,7 +4,7 @@ import numpy as np
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 
-from database.database import BBMatch, Team, Coach, League, Season, Race
+from database.database import BBMatch, Team, Coach, League, Season, Race, AdditionalStatistics
 from table import score_table
 from table.score_table import CoachScores
 from util import formatting
@@ -46,7 +46,7 @@ class CoachStatistics:
 
 
 def determine_statistics(db: SQLAlchemy) -> list:
-    def calculate(all_seasons: list, all_matches: list, all_coaches: list, all_teams: list, league=None) -> Statistics:
+    def calculate(all_seasons: list, all_matches: list, all_coaches: list, all_teams: list, all_additional_statistics: list, league=None) -> Statistics:
         if league is not None:
             seasons_matcher = [season.league_id == league.id for season in all_seasons]
             all_seasons = all_seasons[seasons_matcher]
@@ -56,6 +56,7 @@ def determine_statistics(db: SQLAlchemy) -> list:
             teams_matcher = [team.season_id in all_seasons_ids for team in all_teams]
             all_teams = all_teams[teams_matcher]
             all_coaches = {db.session.query(Coach).filter_by(id=team.coach_id).first() for team in all_teams}
+            all_additional_statistics = [additional_statistics for additional_statistics in all_additional_statistics if additional_statistics.season_id in all_seasons_ids]
 
         stats = Statistics()
         if league is None:
@@ -89,6 +90,7 @@ def determine_statistics(db: SQLAlchemy) -> list:
         stats.average_number_of_games_per_season = np.average([match_count for match_count in matches_per_season.values()])
         stats.number_of_teams = len(all_teams)
         stats.number_of_coaches = len(all_coaches)
+        stats.number_of_casualties = sum([additional_stat.casualties for additional_stat in all_additional_statistics])
 
         return stats
 
@@ -97,10 +99,11 @@ def determine_statistics(db: SQLAlchemy) -> list:
     all_matches = np.array(db.session.query(BBMatch).all())
     all_coaches = np.array(db.session.query(Coach).all())
     all_teams = np.array(db.session.query(Team).all())
+    all_additional_statistics = np.array(db.session.query(AdditionalStatistics).all())
 
-    stats = [calculate(all_seasons, all_matches, all_coaches, all_teams)]
+    stats = [calculate(all_seasons, all_matches, all_coaches, all_teams, all_additional_statistics)]
     for league in all_leagues:
-        stats.append(calculate(all_seasons, all_matches, all_coaches, all_teams, league=league))
+        stats.append(calculate(all_seasons, all_matches, all_coaches, all_teams, all_additional_statistics, league=league))
 
     return stats
 
