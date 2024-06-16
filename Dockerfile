@@ -38,4 +38,5 @@ EXPOSE 80
 WORKDIR /app/blood-bowl-league-manager
 
 ENV SCRIPT_NAME=/blood-bowl
+RUN sed -i "s+/static/css/Nuffle.ttf+$SCRIPT_NAME/static/css/Nuffle.ttf+g" /app/blood-bowl-league-manager/server/static/css/styles.css
 CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:80", "main:app"]

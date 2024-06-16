@@ -27,7 +27,10 @@ def update_images(entity_type: str):
         if not os.path.exists(f"{HTML_2_IMAGE.temp_path}/styles.css"):
             with open(f"{os.getcwd()}/server/static/css/styles.css", encoding="utf-8") as css_file:
                 with open(f"{HTML_2_IMAGE.temp_path}/styles.css", "w", encoding="utf-8") as imaging_css_file:
-                    imaging_css_file.write(css_file.read().replace("/static/css/Nuffle.ttf", "Nuffle.ttf"))
+                    nuffle_path = "/static/css/Nuffle.ttf"
+                    if "SCRIPT_NAME" in os.environ:
+                        nuffle_path = os.environ["SCRIPT_NAME"] + nuffle_path
+                    imaging_css_file.write(css_file.read().replace(nuffle_path, "Nuffle.ttf"))
 
     def print_png(table_html: str, dimension: str, number_of_entries: int):
         def generate_base_output_name(dimension: str):
