@@ -17,6 +17,7 @@ RUN pip3 install -r requirements.txt
 
 ADD database blood-bowl-league-manager/database
 ADD server blood-bowl-league-manager/server
+RUN sed -i 's+/static/css/Nuffle.ttf+/blood-bowl/static/css/Nuffle.ttf+g' /app/blood-bowl-league-manager/server/static/css/styles.css
 ADD table blood-bowl-league-manager/table
 ADD util blood-bowl-league-manager/util
 
