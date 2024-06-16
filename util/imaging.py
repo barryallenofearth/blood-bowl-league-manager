@@ -30,6 +30,7 @@ def update_images(entity_type: str):
                     nuffle_path = "/static/css/Nuffle.ttf"
                     if "SCRIPT_NAME" in os.environ:
                         nuffle_path = os.environ["SCRIPT_NAME"] + nuffle_path
+                    print(f"Nuffle Path: {nuffle_path}")
                     imaging_css_file.write(css_file.read().replace(nuffle_path, "Nuffle.ttf"))
 
     def print_png(table_html: str, dimension: str, number_of_entries: int):
