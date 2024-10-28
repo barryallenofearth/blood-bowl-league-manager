@@ -37,6 +37,14 @@ class TeamScores(BaseScores):
         return f"TeamResults<place: team_short_name:{self.team_short_name}, race:{self.race}, coach:{self.coach}, " + super().__repr__()
 
 
+class SeasonStatistics:
+
+    def __init__(self, number_of_teams: int, number_of_coaches: int, number_of_matches: int):
+        self.number_of_teams = number_of_teams
+        self.number_of_coaches = number_of_coaches
+        self.number_of_matches = number_of_matches
+
+
 class CoachScores(BaseScores):
     def __init__(self, coach: Coach, number_of_teams: int, number_of_seasons: int, number_of_playoff_matches: int,
                  number_of_scorings: int, place=1, number_of_matches=0, td_received=0, td_made=0, td_diff=0, points=0):

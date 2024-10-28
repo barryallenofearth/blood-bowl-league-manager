@@ -14,6 +14,7 @@ from server import delete_entities
 from server.forms import UserInputForm, StatisticsForm
 from server.manage_entities import *
 from table import score_table, casualties_table, statistics
+from table.score_table import SeasonStatistics
 from util import parsing, imaging
 from util.parsing import ParsingResponse
 
@@ -121,12 +122,22 @@ def home():
 @cache.cached(unless=only_cache_get)
 def render_start_page(season):
     team_results = score_table.calculate_team_scores()
+
+    coaches_unique = set()
+    number_of_matches = 0
+    for team_result in team_results:
+        coaches_unique.add(team_result.coach)
+        number_of_matches += team_result.number_of_matches
+
+    season_statistics = SeasonStatistics(len(team_results), len(coaches_unique), int(number_of_matches / 2))
+
     team_casualties = casualties_table.calculate_team_casualties()
     total_number_of_casualties = sum([team_casualty.casualties for team_casualty in team_casualties])
     scorings = db.session.query(Scorings).filter_by(season_id=season.id).order_by(Scorings.touchdown_difference.desc()).all()
     kwargs = {'team_results': team_results, 'scorings': scorings, 'nav_properties': NavProperties(db),
               'team_casualties': team_casualties, 'total_number_of_casualties': total_number_of_casualties,
               'term_for_team_names': season.term_for_team_names, 'term_for_coaches': season.term_for_coaches, 'term_for_races': season.term_for_races,
+              'season_statistics': season_statistics,
               'number_of_allowed_matches': season.number_of_allowed_matches, 'number_of_playoff_places': season.number_of_playoff_places}
     return kwargs
 
