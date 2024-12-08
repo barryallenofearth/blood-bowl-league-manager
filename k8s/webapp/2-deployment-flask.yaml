@@ -20,15 +20,9 @@ spec:
           image: barryallenofearth/blood-bowl-league-manager:50
           env:
             - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: blood-bowl-league-manager-database
-                  key: database
+              value: blood-bowl-league-manager
             - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: blood-bowl-league-manager-database
-                  key: user
+              value: blood-bowl-league-manager-data
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:

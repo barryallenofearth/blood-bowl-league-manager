@@ -1,5 +1,5 @@
 #!/bin/bash
-openssl req -x509 -new -nodes -key ca.key -sha256 -subj "/CN=thinkcentre-m92p.fritz.box" -days 3650 -out ca.crt -extensions san -config <(
+openssl req -x509 -new -nodes -key ca.key -sha256 -subj "/CN=kubernetes-master.fritz.box" -days 3650 -out ca.crt -extensions san -config <(
 echo '[req]';
 echo 'distinguished_name=req';
 echo '[san]';

@@ -7,7 +7,7 @@ metadata:
   namespace: kube-system
 spec:
   rules:
-  - host: thinkcentre-m92p.fritz.box
+  - host: kubernetes-master.fritz.box
     http:
       paths:
           - path: /
@@ -19,5 +19,5 @@ spec:
                   number: 443
   tls:
     - hosts:
-        - thinkcentre-m92p.fritz.box
+        - kubernetes-master.fritz.box
       secretName: ingress-cert

@@ -1,13 +1,8 @@
-FROM python:3.11.3
+FROM python:3.11-slim
 
 WORKDIR /app/
-# Install Chrome WebDriver
 
-RUN apt-get update -y && apt-get install -y chromium
-
-# CHROMIUM default flags for container environnement
-# The --no-sandbox flag is needed by default since we execute chromium in a root environnement
-RUN echo 'export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --no-sandbox"' >> /etc/chromium.d/default-flags
+RUN apt-get update -y
 
 RUN apt-get install -y gcc
 RUN apt-get install -y libpq-dev
@@ -22,7 +17,7 @@ ADD util blood-bowl-league-manager/util
 
 COPY *.py blood-bowl-league-manager/
 
-ENV PYTHONPATH "${PYTHONPATH}:/app"
+ENV PYTHONPATH="${PYTHONPATH}:/app"
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /

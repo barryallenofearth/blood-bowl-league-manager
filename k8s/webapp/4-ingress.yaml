@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - thinkcentre-m92p.fritz.box
+        - kubernetes-master.fritz.box
       secretName: ingress-cert
   rules:
-  - host: thinkcentre-m92p.fritz.box
+  - host: kubernetes-master.fritz.box
     http:
         paths:
           - path: /blood-bowl
