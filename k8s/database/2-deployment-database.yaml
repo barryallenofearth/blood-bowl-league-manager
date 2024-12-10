@@ -20,15 +20,9 @@ spec:
           name: postgresql
           env:
             - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  name: blood-bowl-league-manager-database
-                  key: database
+              value: blood-bowl-league-manager
             - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: blood-bowl-league-manager-database
-                  key: user
+              value: blood-bowl-league-manager-data
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
