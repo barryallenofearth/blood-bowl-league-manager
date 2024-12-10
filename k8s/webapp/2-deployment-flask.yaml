@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blood-bowl-league-manager
-          image: barryallenofearth/blood-bowl-league-manager:51
+          image: barryallenofearth/blood-bowl-league-manager:52
           env:
             - name: DB_NAME
               value: blood-bowl-league-manager
