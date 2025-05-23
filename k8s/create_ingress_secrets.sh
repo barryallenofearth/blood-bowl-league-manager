@@ -3,7 +3,7 @@ openssl req -x509 -new -nodes -key ca.key -sha256 -subj "/CN=kubernetes-master.f
 echo '[req]';
 echo 'distinguished_name=req';
 echo '[san]';
-echo 'subjectAltName=DNS:thinkcentre-m929.fritz.box')
+echo 'subjectAltName=DNS:kubernetes-master.fritz.box')
 
 
 microk8s kubectl create secret generic ingress-cert --from-file=ca.crt=ca.crt --from-file=ca.key=ca.key -n kube-system

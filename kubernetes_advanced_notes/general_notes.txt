@@ -1,0 +1,15 @@
+auf raspberry pi kann man mit zram Ram optimieren
+
+Talos Linux ist ein Betriebssystem explizit für Kubernetes
+https://www.talos.dev/
+Aber kein SSH oder sonst was, sonst nur per API zugriff auf nodes
+
+
+ttl.sh ist eine gute registry für Docker images mit geringer Security Anforderung
+
+serviceAccount an pod spec kann verwendet werden um user mit userroles und privileges einem Pod zuzuweisen, der zum Beispiel pods hochfahren kann oder andere beliebige andere kubernetes operationen auszuführen
+
+
+Sealed secrets zum verwalten von secrets
+https://github.com/bitnami-labs/sealed-secret
+https://github.com/Jaydee94/kubeseal-webgui
