@@ -9,4 +9,6 @@ BBLM;Season 4;S.4;False;-2:1\n-1:2\n0:3\n1:4\n2:5
 BBLM;Season 5;S.5;True;-2:1\n-1:2\n0:3\n1:4\n2:5
 WBBL;Season 1;S.1;False;-1:0\n0:1\n1:3
 WBBL;Season 2;S.2;False;-1:0\n0:1\n1:3
-WBBL;Season 3;S.3;True;-1:0\n0:1\n1:3
+WBBL;Season 3;S.3;False;-1:0\n0:1\n1:3
+WBBL;Season 4;S.4;False;-1:0\n0:1\n1:3
+WBBL;Season 5;S. 5;True;-1:0\n0:1\n1:3
