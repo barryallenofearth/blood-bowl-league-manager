@@ -737,3 +737,86 @@ match_number;team1;team2;td_team_1;td_team_2;point_modification_team_1;point_mod
 92;Masters of the Universe;Zharrduk Oathbreakers;1;1;0;0;False;False;False;False;False;False;S.3;WBBL
 93;Stern des Nordens;Bloodbrothers;3;0;0;0;False;False;False;False;False;False;S.3;WBBL
 94;Zharrduk Oathbreakers;Gut Smashas;1;0;0;0;False;False;False;False;False;False;S.3;WBBL
+95;Wulfriks Wanderers;Velocity Raptors;0;3;0;0;False;False;False;False;False;False;S.3;WBBL
+96;Wonder Woman Enterprise;Hillbilly Alligators;2;1;0;0;False;False;False;False;True;False;S.3;WBBL
+97;Halloween Hellraisers;Warpstone Enjoyer;1;0;0;0;False;False;False;False;True;False;S.3;WBBL
+98;Velocity Raptors;Lucky Men in Tights;1;4;0;0;False;False;False;False;True;False;S.3;WBBL
+99;Black and Bite;Elf Elves;2;0;0;0;False;False;False;False;True;False;S.3;WBBL
+100;Wonder Woman Enterprise;Lucky Men in Tights;2;1;0;0;False;False;False;False;True;False;S.3;WBBL
+101;Black and Bite;Halloween Hellraisers;2;0;0;0;False;False;False;False;True;False;S.3;WBBL
+102;Halloween Hellraisers;Lucky Men in Tights;0;2;0;0;False;False;False;False;True;False;S.3;WBBL
+103;Wonder Woman Enterprise;Black and Bite;2;1;0;0;False;False;False;False;True;False;S.3;WBBL
+1;Zero Fox Given;Gut Smashas;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+2;Münster Undead;Pitbull Stealers;1;2;0;0;False;False;False;False;False;False;S.4;WBBL
+3;Valhalla Ice Warriors;Carroburg Cosmopolitans;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+4;Monasterium Longhorns;Skull Riders MC;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+5;Hashuts Brazen Bulls;Doom and Gloom;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+6;Hashuts Brazen Bulls;Doom and Gloom;0;1;0;0;False;False;False;False;False;False;S.4;WBBL
+7;Monasterium Longhorns;Münster Undead;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+8;Skull Riders MC;Zero Fox Given;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+9;Pitbull Stealers;Bilgewater Loonshiners;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+10;Monasterium Longhorns;Die Physiognomie des Bösen;2;0;0;0;False;False;False;False;False;False;S.4;WBBL
+11;Gut Smashas;Orc Titans;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+12;Orc Titans;Bumbay Buttgrabbaz;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+13;Carroburg Cosmopolitans;Die Physiognomie des Bösen;1;2;0;0;False;False;False;False;False;False;S.4;WBBL
+14;Monasterium Longhorns;Lab Rats;0;1;0;0;False;False;False;False;False;False;S.4;WBBL
+15;Zero Fox Given;Die Physiognomie des Bösen;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+16;Bumbay Buttgrabbaz;Die Sechsen;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+17;Pitbull Stealers;Valhalla Ice Warriors;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+18;Die Physiognomie des Bösen;Pitbull Stealers;0;3;0;0;False;False;False;False;False;False;S.4;WBBL
+19;Naggaroth Nightstabbers;Valhalla Ice Warriors;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+20;Zero Fox Given;Bumbay Buttgrabbaz;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+21;Naggaroth Nightstabbers;Mimigernafords Horde;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+22;Skull Riders MC;Bumbay Buttgrabbaz;0;2;0;0;False;False;False;False;False;False;S.4;WBBL
+23;Bilgewater Loonshiners;Karak Eight Peaks Kroppzeuch;3;0;0;0;False;False;False;False;False;False;S.4;WBBL
+24;Lab Rats;Skull Riders MC;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+25;Naggaroth Nightstabbers;Gut Smashas;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+26;Mimigernafords Horde;Orc Titans;2;0;0;0;False;False;False;False;False;False;S.4;WBBL
+27;Skull Riders MC;Mimigernafords Horde;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+28;Bumbay Buttgrabbaz;Gut Smashas;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+29;Bilgewater Loonshiners;Happy Hungry Hippos;0;1;0;0;False;False;False;False;False;False;S.4;WBBL
+30;Naggaroth Nightstabbers;Münster Vampire;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+31;Monasterium Longhorns;Valhalla Ice Warriors;2;0;0;0;False;False;False;False;False;False;S.4;WBBL
+32;Naggaroth Nightstabbers;Orc Titans;3;0;0;0;False;False;False;False;False;False;S.4;WBBL
+33;Mimigernafords Horde;Carroburg Cosmopolitans;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+34;Skull Riders MC;Orc Titans;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+35;Naggaroth Nightstabbers;Münster Undead;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+36;Happy Hungry Hippos;Zero Fox Given;2;0;0;0;False;False;False;False;False;False;S.4;WBBL
+37;Skull Riders MC;Mortheim Maniacs;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+38;Karak Eight Peaks Kroppzeuch;Happy Hungry Hippos;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+39;Münster Undead;Bumbay Buttgrabbaz;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+40;Monasterium Longhorns;Happy Hungry Hippos;0;1;0;0;False;False;False;False;False;False;S.4;WBBL
+41;Bumbay Buttgrabbaz;Mimigernafords Horde;0;1;0;0;False;False;False;False;False;False;S.4;WBBL
+42;Bumbay Buttgrabbaz;Mortheim Maniacs;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+43;Naggaroth Nightstabbers;Die Physiognomie des Bösen;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+44;Magadan  Raiders;Münster Undead;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+45;Magadan  Raiders;Mortheim Maniacs;2;0;0;0;False;False;False;False;False;False;S.4;WBBL
+46;Magadan  Raiders;Carroburg Cosmopolitans;0;1;0;0;False;False;False;False;False;False;S.4;WBBL
+47;Carroburg Cosmopolitans;Die Physiognomie des Bösen;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+48;Die Physiognomie des Bösen;Valhalla Ice Warriors;1;2;0;0;False;False;False;False;False;False;S.4;WBBL
+49;Münster Undead;Pitbull Stealers;0;2;0;0;False;False;False;False;False;False;S.4;WBBL
+50;Magadan  Raiders;Happy Hungry Hippos;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+51;Monasterium Longhorns;Magadan  Raiders;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+52;Orc Titans;Valhalla Ice Warriors;1;0;0;0;False;False;False;False;False;False;S.4;WBBL
+53;Skull Riders MC;TuS Heringsmoor;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+54;Monasterium Longhorns;Pitbull Stealers;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+55;Orc Titans;Happy Hungry Hippos;1;2;0;0;False;False;False;False;False;False;S.4;WBBL
+56;Carroburg Cosmopolitans;Magadan  Raiders;0;2;0;0;False;False;False;False;False;False;S.4;WBBL
+57;Mimigernafords Horde;Valhalla Ice Warriors;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+58;Magadan  Raiders;Orc Titans;3;0;0;0;False;False;False;False;False;False;S.4;WBBL
+59;BSV Hamm;Pitbull Stealers;1;2;0;0;False;False;False;False;False;False;S.4;WBBL
+60;Die Physiognomie des Bösen;Happy Hungry Hippos;1;1;0;0;False;False;False;False;False;False;S.4;WBBL
+61;Magadan  Raiders;Gorks Saints;2;1;0;0;False;False;False;False;False;False;S.4;WBBL
+62;Naggaroth Nightstabbers;BSV Hamm;2;0;0;0;False;False;False;False;False;False;S.4;WBBL
+63;Magadan  Raiders;Orc Titans;3;0;0;0;False;False;False;False;True;False;S.4;WBBL
+64;Skull Riders MC;Happy Hungry Hippos;1;2;0;0;False;False;False;False;True;False;S.4;WBBL
+65;Naggaroth Nightstabbers;Pitbull Stealers;0;1;0;0;False;False;False;False;True;False;S.4;WBBL
+66;Zero Fox Given;Die Physiognomie des Bösen;2;1;0;0;False;False;False;False;True;False;S.4;WBBL
+67;Pitbull Stealers;Happy Hungry Hippos;1;0;0;0;False;False;False;False;True;False;S.4;WBBL
+68;Magadan  Raiders;Zero Fox Given;3;1;0;0;False;False;False;False;True;False;S.4;WBBL
+69;Zero Fox Given;Happy Hungry Hippos;2;1;0;0;False;False;False;False;True;False;S.4;WBBL
+70;Magadan  Raiders;Pitbull Stealers;0;1;0;0;False;False;False;False;True;False;S.4;WBBL
+1;Knochensack FC;Münster Dark Elf;0;0;0;0;False;False;False;False;False;False;S. 5;WBBL
+2;Sylvanian Spotlight;TuS Heringsmoor;3;0;0;0;False;False;False;False;False;False;S. 5;WBBL
+3;Münster Dark Elf;Mutated Vaultboys 87;1;1;0;0;False;False;False;False;False;False;S. 5;WBBL
+4;Sylvanian Spotlight;Mutated Vaultboys 87;2;0;0;0;False;False;False;False;False;False;S. 5;WBBL
