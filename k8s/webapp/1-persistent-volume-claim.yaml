@@ -8,7 +8,7 @@ spec:
     matchLabels:
       volume: blood-bowl-league-manager-images
   accessModes: [ "ReadWriteMany" ]
-  storageClassName: ""
+  storageClassName: manual
   resources:
     requests:
-      storage: 1.Gi
+      storage: 1Gi
