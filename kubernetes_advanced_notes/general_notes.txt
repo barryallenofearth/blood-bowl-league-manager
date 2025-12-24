@@ -13,3 +13,33 @@ serviceAccount an pod spec kann verwendet werden um user mit userroles und privi
 Sealed secrets zum verwalten von secrets
 https://github.com/bitnami-labs/sealed-secret
 https://github.com/Jaydee94/kubeseal-webgui
+
+
+initContainer könnte geeignet sein um bei  pi-hole initial Sachen anzulegen
+
+
+wireguard ist cool für VPN Ding im Homesetup
+
+LimitRange
+ kann default limits an pods und default resources setzen, ist allerdings nicht sehr flexibel
+
+Taint:
+sag einer Node, dass sie keine Pods mehr annehmen darf oder alle rauswerfen soll
+Effektiver in der Umsetzung per Drain und Uncordone
+
+podAntifinity mit podAffinityTerm und entsprechendem Label Selector, dass auf Labels des Pods selbst verweist, srgt dafür, dass Pods möglichst auf unterschiedlichen Pods verteilt werden kann
+
+
+zotregistry.dev => lokale registry
+
+
+glitchtip => leichtgewichtiges Sentry
+lästiges Helm-Chart
+
+
+ArgoCD zum Managen von deployments?
+
+Grund-Idee ist folgende:
+Woodpacker baut images und aktualisiert manifests mit der entsprechenden Version.
+Neue Manifests werden in 2. Repo gepushed.
+ArgoCD hat Zugriff auf 2. Repo, kann Konfiguration lesen und ermöglicht Synchronisieren auf dem Cluster

@@ -12,9 +12,6 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  mountOptions:
-    - hard
-    - nfsvers=4.1
-  nfs:
-    path: /volume1/kubernetes-blood-bowl/logos
-    server: thevoid
+  storageClassName: manual
+  hostPath:
+    path: /mnt/kube-data/kubernetes-blood-bowl/logos
